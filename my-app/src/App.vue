@@ -1,6 +1,6 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="I've got my development environment all set now!"/>
+  <HelloWorld msg="I've got my development environment all set now! And Hadley added some text."/>
 </template>
 
 <script>
