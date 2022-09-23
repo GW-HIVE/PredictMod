@@ -85,10 +85,10 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'Julia',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Here is my begining'
     }
   }
 }
@@ -108,6 +108,6 @@ li {
   margin: 0 10px;
 }
 a {
-  color: #42b983;
+  color: #6fc2cf9d;
 }
 </style>
