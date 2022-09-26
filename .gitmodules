@@ -1,0 +1,3 @@
+[submodule "luisa-vue3-starter"]
+	path = luisa-vue3-starter
+	url = https://github.com/KlausSchaefers/luisa-vue3-starter.git
