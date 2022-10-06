@@ -1,5 +1,5 @@
 <template>
-  <label class="text-reader">
+  <label class="file-reader">
     <input type="file" @change="loadTextFromFile">
   </label>
 </template>
