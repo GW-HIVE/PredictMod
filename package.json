@@ -4,5 +4,24 @@
     "bulma": "^0.9.4",
     "csv": "^6.2.0",
     "vue-csv-import": "^4.1.2"
-  }
+  },
+  "name": "predictmod",
+  "description": "PredictMod is a web app created to inform physicians' decisions. PredictMod takes metagenomic gastrointestinal (GI) microbiome and electronic health record (EHR) data as input and uses a machine learning algorithm to form predictions of whether the ketogenic diet may be successful.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GW-HIVE/PredictMod.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GW-HIVE/PredictMod/issues"
+  },
+  "homepage": "https://github.com/GW-HIVE/PredictMod#readme"
 }
