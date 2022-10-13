@@ -1,9 +1,0 @@
-<template> 
-    <my-button
-    color="white"
-    background="blue"
-    disabled="true"
-    >
-        color=white
-    </my-button>
-</template>
