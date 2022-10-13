@@ -7,7 +7,9 @@
     </div>
     
     <div class="field">
-        
+        <div class="title">
+            Welcome to PredictMod!
+        </div>
         <div class="file is-boxed is-primary">
             <label class="file-label">
                 
@@ -23,7 +25,7 @@
                         <i class="fas fa-upload"></i>
                     </span>
                     <div class="span file-label">
-                        Choose a file...
+                        Choose a CSV of Metagenomic data to analyze
                     </div>
                 </span>
 
@@ -33,7 +35,7 @@
 
     </div>
     <div class="field">
-        <button class="button is-info">Send</button>
+        <button class="button is-info">Submit</button>
     </div>
 </form>
 </template>

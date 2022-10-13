@@ -30,7 +30,7 @@ app.post("/upload", upload.single("file"), (req, res) => {
     res.json({ file: req.file }); 
 });
 
-app.post("/matlab")
+app.set('title', 'PredictMod')
 
 app.use(function(err, req, res, next) {
     if (err.code === "LIMIT_FILE_TYPES") {
