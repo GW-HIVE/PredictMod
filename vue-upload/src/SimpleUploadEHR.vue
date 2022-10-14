@@ -6,9 +6,8 @@
         <div class="message-body">{{message}}</div>
     </div>
     
-
 <div class="head"> 
-    Choose a CSV of Metagenomic Data to analyze
+    Choose a CSV of EHR data to analyze
     </div>
 
 <div class="field">
