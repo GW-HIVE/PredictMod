@@ -5,8 +5,6 @@
     </div>
   </div>
 
-
-
     <div class="container">
       <div class="title is-centered">
         Welcome to PredictMod!
@@ -15,18 +13,19 @@
   
     <div class="container">
 
-      <simple-upload />
+      <simple-upload-m-g />
       <simple-upload-e-h-r />
+
     </div>
   
 
 </template>
 <script>
-import SimpleUpload from './SimpleUpload.vue';
+import SimpleUploadMG from './SimpleUploadMG.vue';
 import SimpleUploadEHR from './SimpleUploadEHR.vue';
 
 export default {
   name: 'App',
-  components: { SimpleUpload, SimpleUploadEHR }
+  components: { SimpleUploadMG, SimpleUploadEHR }
 }
 </script>

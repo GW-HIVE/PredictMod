@@ -45,7 +45,7 @@
 <script>
 import axios  from 'axios';
 export default {
-    name: "SimpleUpload",
+    name: "SimpleUploadEHR",
     data() {
         return {
             file: "",

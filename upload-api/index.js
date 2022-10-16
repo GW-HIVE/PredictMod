@@ -1,8 +1,8 @@
 const express = require('express');
 const multer = require('multer');
-const matlab = require("node-matlab");
-
+const matlab = require('node-matlab');
 const app = express();
+
 
 
 const fileFilter = function(req, file, cb) {
@@ -17,18 +17,27 @@ const fileFilter = function(req, file, cb) {
     cb(null, true);
 }
 
+
+
+
 const MAX_SIZE = 200000;
 const upload = multer({
     dest: "./uploads/",
     fileFilter,
+
     limits: {
         fileSize: MAX_SIZE
     }
 });
 
+
+
+
+
 app.post("/upload", upload.single("file"), (req, res) => {
-    res.json({ file: req.file }); 
-});
+    res.json({ file: req.file, matlab: matlab.run("Hello.m").then((result) => console.log(result)).catch((error) => console.log(error)) })
+}); 
+
 
 app.set('title', 'PredictMod')
 
@@ -42,6 +51,7 @@ app.use(function(err, req, res, next) {
         res.status(422).json({ error: `Too large. Max size is ${MAX_SIZE / 1000}Kb`});
     }
 })
+
 
 
 
