@@ -21,8 +21,8 @@ const fileFilter = function(req, file, cb) {
 
 
 const MAX_SIZE = 200000;
-const upload = multer({
-    dest: "./uploads/",
+const uploadMG = multer({
+    dest: "./uploads-MG/",
     fileFilter,
 
     limits: {
@@ -32,9 +32,22 @@ const upload = multer({
 
 
 
+const uploadEHR = multer({
+    dest: "./uploads-EHR/",
+    fileFilter,
+
+    limits: {
+        fileSize: MAX_SIZE
+    }
+});
 
 
-app.post("/upload", upload.single("file"), (req, res) => {
+
+app.post("/upload-MG", uploadMG.single("MG"), (req, res) => {
+    res.json({ file: req.file, matlab: matlab.run("Hello.m").then((result) => console.log(result)).catch((error) => console.log(error)) })
+}); 
+
+app.post("/upload-EHR", uploadEHR.single("EHR"), (req, res) => {
     res.json({ file: req.file, matlab: matlab.run("Hello.m").then((result) => console.log(result)).catch((error) => console.log(error)) })
 }); 
 

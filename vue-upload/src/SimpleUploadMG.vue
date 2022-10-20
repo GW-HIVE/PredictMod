@@ -18,7 +18,7 @@
         
         <input 
         type="file"
-        ref="file"
+        ref="MG"
         @change="selectFile"
         class="file-input"
         />
@@ -57,7 +57,7 @@ export default {
 
     methods: {
         selectFile() {
-            const file = this.$refs.file.files[0];
+            const file = this.$refs.MG.files[0];
             const allowedTypes = ["text/csv"];
             const MAX_SIZE = 200000;
             const tooLarge = file.size > MAX_SIZE;
@@ -76,10 +76,10 @@ export default {
 
         async sendFile() {
             const formData = new FormData();
-            formData.append('file', this.file);
+            formData.append('MG', this.file);
             
             try {
-                await axios.post('/upload', formData);
+                await axios.post('/upload-MG', formData);
                 this.message = "File has been uploaded";
                 this.file = ""
                 this.error = false

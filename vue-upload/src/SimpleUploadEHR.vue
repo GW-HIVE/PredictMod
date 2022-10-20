@@ -17,7 +17,7 @@
         
         <input 
         type="file"
-        ref="file"
+        ref="EHR"
         @change="selectFile"
         class="file-input"
         />
@@ -55,9 +55,13 @@ export default {
     },
 
     methods: {
+
+        //method to select file, with allowedTypes restricting filetypes and size before being sent to server
         selectFile() {
-            const file = this.$refs.file.files[0];
-            const allowedTypes = ["text/csv"];
+            const file = this.$refs.EHR.files[0];
+            //allowed filetypes can be changed by adding/removing mimetypes to allowedTypes
+            const allowedTypes = ["text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "application/vnd.ms-excel" ];
+            //can alter max filesize allowed (in b) by changing value MAX_SIZE
             const MAX_SIZE = 200000;
             const tooLarge = file.size > MAX_SIZE;
 
@@ -72,13 +76,13 @@ export default {
                 : "Only .csv files are allowed";
             }
         },
-
+        //will send file to server if no errors come up
         async sendFile() {
             const formData = new FormData();
-            formData.append('file', this.file);
+            formData.append('EHR', this.file);
             
             try {
-                await axios.post('/upload', formData);
+                await axios.post('/upload-EHR', formData);
                 this.message = "File has been uploaded";
                 this.file = ""
                 this.error = false
