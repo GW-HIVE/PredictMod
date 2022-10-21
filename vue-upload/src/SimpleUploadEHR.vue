@@ -1,8 +1,10 @@
 <template>
+<img src=image_url>
 <form @submit.prevent="sendFile" enctype="multipart/form-data">
     <div v-if="message"
         :class="`message ${error ? 'is-danger' : 'is-success'}`"
     >
+
         <div class="message-body">{{message}}</div>
     </div>
     
@@ -32,17 +34,22 @@
         </span>
 
         <span v-if="file" class="file-name">{{file.name}}</span>
+   
     </label>
 </div>
 
     </div>
     <div class="field">
         <button class="button is-info">Submit</button>
+        
     </div>
 </form>
+
+
 </template>
 
 <script>
+
 import axios  from 'axios';
 export default {
     name: "SimpleUploadEHR",
@@ -50,6 +57,8 @@ export default {
         return {
             file: "",
             message: "",
+            image:[],
+            show: false,
             error: false
         }
     },
@@ -80,7 +89,7 @@ export default {
         async sendFile() {
             const formData = new FormData();
             formData.append('EHR', this.file);
-            
+
             try {
                 await axios.post('/upload-EHR', formData);
                 this.message = "File has been uploaded";
@@ -90,8 +99,15 @@ export default {
                 this.message = err.response.data.error;
                 this.error = true;
             }
+        
+        },
+        async getImage() {
+            this.image = './upload-EHR/w10003.png'
+            axios.get(this.image)
+            this.show = true
         }
-    }
+
+    },
 }
 
 
