@@ -1,5 +1,5 @@
 <template>
-<img src=image_url>
+
 <form @submit.prevent="sendFile" enctype="multipart/form-data">
     <div v-if="message"
         :class="`message ${error ? 'is-danger' : 'is-success'}`"
