@@ -1,31 +1,23 @@
 <template>
-  
-  <div class="section">
-    <div class="container">
-    </div>
-  </div>
-
-    <div class="container">
-      <div class="title is-centered">
-        Welcome to PredictMod!
-      </div> 
-      </div>
-  
-    <div class="container">
-
-      <simple-upload-m-g />
-      <simple-upload-e-h-r />
-
-    </div>
-  
-
+  <v-app>
+    <v-main>
+      <HelloWorld/>
+    </v-main>
+  </v-app>
 </template>
+
 <script>
-import SimpleUploadMG from './SimpleUploadMG.vue';
-import SimpleUploadEHR from './SimpleUploadEHR.vue';
+import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
-  components: { SimpleUploadMG, SimpleUploadEHR }
+
+  components: {
+    HelloWorld,
+  },
+
+  data: () => ({
+    //
+  }),
 }
 </script>
