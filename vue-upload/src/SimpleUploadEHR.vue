@@ -14,7 +14,7 @@
 
 <div class="field">
 
-<div class="file is-boxed is-primary">
+<div class="file is-boxed is-primary is-centered">
     <label class="file-label">
         
         <input 
@@ -39,8 +39,8 @@
 </div>
 
     </div>
-    <div class="field">
-        <button class="button is-info">Submit</button>
+    <div class="field"> 
+        <button class="button is-info is-centered">Submit</button>
         
     </div>
 </form>
