@@ -2,17 +2,18 @@
 
 	<v-container>
 		
-		<button class="button is-primary is-boxed" @click="getImage">
-			Toggle Image
+		<button class="button is-primary is-boxed" @click="show = !show">
+			Show Results
 		</button>
-		
-			<v-img v-if="show"
-				justify="center"
-				alignment="center"
-				src="image"
-				max-height="150"
-				max-width="250"
-			></v-img>
+
+		<v-img class="mx-auto" v-if="show"
+			src="./assets/logo.png"
+			alignment="centered"
+			max-height="150"
+			max-width="250"
+		>
+		</v-img>
+
 </v-container>
 
 </template>
@@ -31,7 +32,7 @@ data() {
 	methods: {
 
 //tries to get image from /uploads-EHR folder
-async getImage() {
+async function() {
 	this.image = './uploads-EHR/w10003.png'
 	axios.get(this.image,  )
 	this.show = true

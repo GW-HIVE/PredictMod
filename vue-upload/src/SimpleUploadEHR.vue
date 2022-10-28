@@ -1,20 +1,15 @@
 <template>
 
 <form @submit.prevent="sendFile" enctype="multipart/form-data">
-    <div v-if="message"
-        :class="`message ${error ? 'is-danger' : 'is-success'}`"
-    >
 
-        <div class="message-body">{{message}}</div>
-    </div>
     
-<div class="head"> 
+<div class="head font-weight-bold"> 
     Choose a CSV of EHR data to analyze
     </div>
 
 <div class="field">
 
-<div class="file is-boxed is-primary is-centered">
+<div class="file is-boxed is-primary is-centered" v-if="message ==!'File has been uploaded'">
     <label class="file-label">
         
         <input 
@@ -34,14 +29,34 @@
         </span>
 
         <span v-if="file" class="file-name">{{file.name}}</span>
+        <div v-if="message"
+        :class="`message ${error ? 'is-danger' : 'is-success'}`"
+        >
    
+        <div class="message-body">{{message}}</div>
+        </div>
     </label>
 </div>
 
     </div>
     <div class="field"> 
-        <button class="button is-info is-centered">Submit</button>
+        <button class="button is-info is-centered" v-if="message == !'File has been uploaded'">Submit</button>
         
+    </div>
+    <div class="field">
+        <button class="button is-primary" v-if="message =='File has been uploaded'" @click="show = !show">
+        Show Results
+        </button>
+    </div>
+    <div class="field">
+        <button class="button is-info" v-if="message =='File has been uploaded'" @click="revertFile">
+        Upload a different file
+        </button>
+    </div>
+    <div class="field">
+        <v-card-text class="text-left" v-if="show && message=='File has been uploaded'">
+        Based on the input EHR data, our algorithm predicts the KD would be {{output}} in managing this patient's prediabetes
+        </v-card-text>
     </div>
 </form>
 
@@ -53,6 +68,9 @@
 import axios  from 'axios';
 export default {
     name: "SimpleUploadEHR",
+    props: {
+        output: String
+    },
     data() {
         return {
             file: "",
@@ -60,6 +78,7 @@ export default {
             image:[],
             show: false,
             error: false
+
         }
     },
 
@@ -99,14 +118,10 @@ export default {
                 this.message = err.response.data.error;
                 this.error = true;
             }
-        
         },
-        async getImage() {
-            this.image = './upload-EHR/w10003.png'
-            axios.get(this.image)
-            this.show = true
+        revertFile() {
+            this.message = ""
         }
-
     },
 }
 

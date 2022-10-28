@@ -1,32 +1,49 @@
 <template>
+  <v-container>
+
+    <v-img      
+      src="./assets/HiveIcon.jpg"
+			alignment="centered"
+			max-height="150"
+			max-width="250">
+    </v-img>
+
+    <v-row>
+      <v-col lg="6">
+            <v-card-title class="title font-weight-bold">
+              Welcome to PredictMod!
+              
+            </v-card-title>
+            
+            <v-card-text class="text-left">
+              PredictMod is a functional WebApp built using VueJS and powered by machine learning to help inform physicians' decisions. 
+              PredictMod takes metagenomic microbiome or electronic health record data as 
+              input and outputs a prediction of whether the ketogenic diet would be successful in managing prediabetes.
+            </v-card-text>
+    </v-col>
+    
+</v-row>
+
+    <v-row>
+      <v-col md="3">
+          <SimpleUploadEHR output="successful"/>
+    </v-col>
+      <v-col md="3">
+
+          <SimpleUploadMG output="unsuccessful"/>
+
+    </v-col>
+  </v-row>
   
-  <div class="main">
-    <div class="container">
-    </div>
-  </div>
+  <v-row>
+    <v-col md="6">
+        <DisclaimerShow/>
+    </v-col>
+  </v-row>
 
-    <div class="container">
-      <div class="title">
-        Welcome to PredictMod!
-      </div> 
-      </div>
-  
-    <div class="container">
+    
+</v-container>
 
-      <simple-upload-m-g />
-
-    <div class="container">
-
-    </div>
-
-      <simple-upload-e-h-r />
-
-    <div class="container">
-
-      <ShowImage />
-     </div>
-
-    </div>
 
 
 
@@ -35,11 +52,11 @@
 <script>
 import SimpleUploadMG from './SimpleUploadMG.vue';
 import SimpleUploadEHR from './SimpleUploadEHR.vue';
-import ShowImage from './ShowImage.vue'
+import DisclaimerShow from './DisclaimerShow.vue'
 
 export default {
   name: 'App',
-  components: { SimpleUploadMG, SimpleUploadEHR, ShowImage }
+  components: { SimpleUploadMG, SimpleUploadEHR, DisclaimerShow }
 }
 </script>
 
@@ -51,6 +68,5 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
-
 }
 </style>
