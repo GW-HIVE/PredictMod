@@ -20,7 +20,7 @@ git clone https://github.com/GW-HIVE/PredictMod.git
 ```
 
 #### Installation
-Navigate to the vue-upload directory and use the following command to install the necessary dependancies
+Navigate to the PredictMod directory and use the following command to install the necessary dependancies
 
 ```
 npm install -g
@@ -33,7 +33,7 @@ Navigate to the upload-api directory and execute the following command to start 
 ```
 npm start
 ```
-Navigate to the PredictMod directory and execute the following command to start the app:
+Navigate to the vue-upload directory and execute the following command to start the app:
 ```
 npm run serve
 ```
