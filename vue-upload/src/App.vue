@@ -1,6 +1,5 @@
 <template>
   <v-container>
-
     <v-img      
       src="./assets/HiveIcon.jpg"
 			alignment="centered"
@@ -26,7 +25,7 @@
 
     <v-row>
       <v-col md="3">
-          <SimpleUploadEHR EHRoutput="successful"/>
+          <SimpleUploadEHR/>
     </v-col>
       <v-col md="3">
 
@@ -52,11 +51,12 @@
 <script>
 import SimpleUploadMG from './SimpleUploadMG.vue';
 import SimpleUploadEHR from './SimpleUploadEHR.vue';
-import DisclaimerShow from './DisclaimerShow.vue'
+import DisclaimerShow from './DisclaimerShow.vue';
+
 
 export default {
   name: 'App',
-  components: { SimpleUploadMG, SimpleUploadEHR, DisclaimerShow }
+  components: { SimpleUploadMG, SimpleUploadEHR, DisclaimerShow}
 }
 </script>
 

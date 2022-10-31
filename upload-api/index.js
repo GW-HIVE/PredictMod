@@ -2,7 +2,7 @@ const express = require('express');
 const multer = require('multer');
 const matlab = require('node-matlab');
 const app = express();
-
+const path = require('path')
 
 
 const fileFilter = function(req, file, cb) {
@@ -44,13 +44,21 @@ const uploadEHR = multer({
 
 
 app.post("/upload-MG", uploadMG.single("MG"), (req, res) => {
-    res.json({ file: req.file, matlab: matlab.run("Hello.m").then((result) => console.log(result)).catch((error) => console.log(error)) })
+    res.json({ file: req.file})
 }); 
 
 app.post("/upload-EHR", uploadEHR.single("EHR"), (req, res) => {
-    res.json({ file: req.file, matlab: matlab.run("Hello.m").then((result) => console.log(result)).catch((error) => console.log(error)) })
+    res.json({ file: req.file})
 }); 
 
+
+app.get('/output-EHR', function(req, res) {
+    res.sendFile(path.join(__dirname, '/output-EHR/output.json'));
+  });
+
+app.get('/output-MG', function(req, res) {
+res.sendFile(path.join(__dirname, '/output-MG/output.json'));
+});
 
 app.set('title', 'PredictMod')
 

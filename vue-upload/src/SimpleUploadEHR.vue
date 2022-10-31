@@ -44,7 +44,7 @@
         
     </div>
     <div class="field">
-        <button class="button is-primary" v-if="message =='File has been uploaded'" @click="show = !show && getOutput">
+        <button class="button is-primary" v-if="message =='File has been uploaded'" @click="show = !show">
         Show Results
         </button>
     </div>
@@ -55,8 +55,9 @@
     </div>
     <div class="field">
         <v-card-text class="text-left" v-if="show && message=='File has been uploaded'">
-        Based on the input EHR data, our algorithm predicts that KD would be {{EHRoutput}} in managing this patient's prediabetes
+         <GetEHRoutput/>
         </v-card-text>
+
     </div>
 </form>
 
@@ -66,8 +67,10 @@
 <script>
 
 import axios  from 'axios';
+import GetEHRoutput from './GetEHRoutput.vue'
 export default {
     name: "SimpleUploadEHR",
+    components: {GetEHRoutput},
     props: {
 
     },
@@ -78,7 +81,6 @@ export default {
             image:[],
             show: false,
             error: false,
-            EHRoutput:"SUCESSFUL"
         }
     },
 
@@ -119,16 +121,11 @@ export default {
                 this.error = true;
             }
         },
-        async getOutput() {
-            try {
-                const response = await axios.get('/test');
-                console.log(response.data);
-                this.EHRoutput = response.data
-                }
-            catch(err) {
-                this.message= err.response.data.error;
-                this.error = true;
-            }
+        async created () {
+            // Simple GET request using fetch
+            fetch("/output")
+                .then(response => response.json())
+                .then(data => (this.EHRoutput = data.title));
         },
         
         revertFile() {

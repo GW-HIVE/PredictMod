@@ -53,7 +53,7 @@
     </div>
     <div class="field">
         <v-card-text class="text-left" v-if="show && message=='File has been uploaded'">
-        Based on the input metagenomic data, our algorithm predicts that KD would be {{MGoutput}} in managing this patient's prediabetes
+            <GetMGoutput/>
         </v-card-text>
     </div>
 </form>
@@ -61,8 +61,10 @@
 
 <script>
 import axios  from 'axios';
+import GetMGoutput from './GetMGoutput.vue'
 export default {
     name: "SimpleUploadMG",
+    components: {GetMGoutput},
     props: {
         
     },
