@@ -17,8 +17,12 @@
             <v-card-text class="text-left">
               PredictMod is a functional WebApp built using VueJS and powered by machine learning to help inform physicians' decisions. 
               PredictMod takes metagenomic microbiome or electronic health record data as 
-              input and outputs a prediction of whether the ketogenic diet would be successful in managing prediabetes.
+              input and outputs a prediction of whether the ketogenic diet would be successful in managing prediabetes. For more information, visit the PredictMod GitHub repository with the link below:
+
             </v-card-text>
+            <button class="button is-light">
+            <v-list-item href="https://github.com/GW-HIVE/PredictMod"> PredictMod Repo </v-list-item>
+            </button>
     </v-col>
     
 </v-row>
