@@ -44,7 +44,7 @@
         
     </div>
     <div class="field">
-        <button class="button is-primary" v-if="message =='File has been uploaded'" @click="show = !show">
+        <button class="button is-primary" v-if="message =='File has been uploaded'" @click="show = !show && getOutput">
         Show Results
         </button>
     </div>
@@ -55,7 +55,7 @@
     </div>
     <div class="field">
         <v-card-text class="text-left" v-if="show && message=='File has been uploaded'">
-        Based on the input EHR data, our algorithm predicts the KD would be {{output}} in managing this patient's prediabetes
+        Based on the input EHR data, our algorithm predicts that KD would be {{EHRoutput}} in managing this patient's prediabetes
         </v-card-text>
     </div>
 </form>
@@ -69,7 +69,7 @@ import axios  from 'axios';
 export default {
     name: "SimpleUploadEHR",
     props: {
-        output: String
+
     },
     data() {
         return {
@@ -77,8 +77,8 @@ export default {
             message: "",
             image:[],
             show: false,
-            error: false
-
+            error: false,
+            EHRoutput:"SUCESSFUL"
         }
     },
 
@@ -119,6 +119,18 @@ export default {
                 this.error = true;
             }
         },
+        async getOutput() {
+            try {
+                const response = await axios.get('/test');
+                console.log(response.data);
+                this.EHRoutput = response.data
+                }
+            catch(err) {
+                this.message= err.response.data.error;
+                this.error = true;
+            }
+        },
+        
         revertFile() {
             this.message = ""
         }

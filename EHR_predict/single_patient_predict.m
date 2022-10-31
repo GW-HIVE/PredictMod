@@ -17,11 +17,15 @@ input_dat=data_table.data;
 %input_dat=data_table(x,:);
 [guess]=net123guessfunction(input_dat,net1,net2,net3);
 %%
+diary on
 if guess==1
-    fprintf('Patient is a predicted <strong>responder</strong>\n')
+    fprintf('Patient is a predicted <strong>responder</strong>\n');
 else
-    fprintf('Patient is a predicted <strong>non-responder</strong>\n')
+    fprintf('Patient is a predicted <strong>non-responder</strong>\n');
 end
+
+diary off
+
 %clear data_mat data_table input_dat Synth_table x
 %% net guess function
 function [guess]=net123guessfunction(input_dat,net1,net2,net3)

@@ -1,11 +1,11 @@
 <template>	
 
 	
-		<v-button class="button is-light" @click="show = !show">
+		<button class="button is-light" @click="show = !show">
 			DISCLAIMER
-		</v-button>
+		</button>
 
-		<v-card-text class="text-left is-red" v-if="show"
+		<v-card-text class="text-left" v-if="show"
 		>
 			We make no warranties regarding the 
 			accuracy of the predictions, and disclaim liability 

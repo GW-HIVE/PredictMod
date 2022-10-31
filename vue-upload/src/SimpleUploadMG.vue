@@ -53,7 +53,7 @@
     </div>
     <div class="field">
         <v-card-text class="text-left" v-if="show && message=='File has been uploaded'">
-        Based on the input metagenomic data, our algorithm predicts the KD would be {{MGoutput}} in managing this patient's prediabetes
+        Based on the input metagenomic data, our algorithm predicts that KD would be {{MGoutput}} in managing this patient's prediabetes
         </v-card-text>
     </div>
 </form>
@@ -64,14 +64,15 @@ import axios  from 'axios';
 export default {
     name: "SimpleUploadMG",
     props: {
-        MGoutput: String
+        
     },
     data() {
         return {
             file: "",
             message: "",
             error: false,
-            show: false
+            show: false,
+            MGoutput: "UNSUCCESSFUL"
         }
     },
 

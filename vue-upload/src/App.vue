@@ -26,11 +26,11 @@
 
     <v-row>
       <v-col md="3">
-          <SimpleUploadEHR output="successful"/>
+          <SimpleUploadEHR EHRoutput="successful"/>
     </v-col>
       <v-col md="3">
 
-          <SimpleUploadMG output="unsuccessful"/>
+          <SimpleUploadMG MGoutput="unsuccessful"/>
 
     </v-col>
   </v-row>
