@@ -1,0 +1,5 @@
+figd_bjTHUkd2u5_tukIj8ikNw2-fVhcCltl8sYdzvy8z
+
+The name of the token header is X-Figma-Token.
+
+https://www.figma.com/file/tDAPugfXQaN8OpQUwXxWfo/Version1?node-id=0%3A1
