@@ -3,7 +3,7 @@
 
 
 <div class="head font-weight-bold"> 
-    Choose a CSV of Metagenomic Data to analyze
+    Analyze Metagenomic data
     </div>
 
 <div class="field">
@@ -73,15 +73,14 @@ export default {
             file: "",
             message: "",
             error: false,
-            show: false,
-            MGoutput: "UNSUCCESSFUL"
+            show: false
         }
     },
 
     methods: {
         selectFile() {
             const file = this.$refs.MG.files[0];
-            const allowedTypes = ["text/csv"];
+            const allowedTypes = ["text/csv","application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "application/vnd.ms-excel"];
             const MAX_SIZE = 200000;
             const tooLarge = file.size > MAX_SIZE;
 
@@ -93,7 +92,7 @@ export default {
                 this.error = true;
                 this.message = tooLarge 
                 ? `Too large. Max size is ${MAX_SIZE/1000}kb` 
-                : "Only .csv files are allowed";
+                : "Only .csv, .xls, and .xlsx files are allowed";
             }
         },
 

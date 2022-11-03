@@ -13,30 +13,42 @@
               Welcome to PredictMod!
               
             </v-card-title>
-            
             <v-card-text class="text-left">
-              PredictMod is a functional WebApp built using VueJS and powered by machine learning to help inform physicians' decisions. 
+              PredictMod is a functional web app built using VueJS and powered by machine learning to help inform physicians' decisions. 
               PredictMod takes metagenomic microbiome or electronic health record data as 
-              input and outputs a prediction of whether the ketogenic diet would be successful in managing prediabetes. For more information, visit the PredictMod GitHub repository with the link below:
+              input and outputs a prediction of whether the ketogenic diet would be successful in managing prediabetes. 
 
             </v-card-text>
-            <button class="button is-light">
-            <v-list-item href="https://github.com/GW-HIVE/PredictMod"> PredictMod Repo </v-list-item>
-            </button>
-    </v-col>
+
+
+      </v-col>
     
-</v-row>
+    </v-row>
+    <v-row>
+      <v-col lg="6">
+        <v-card-text class = "text-left">
+          For more information, click the links below to explore the GitHub and SharePoint pages:
+        </v-card-text>
+        <v-btn elevation="0" border>
+          <v-list-item href="https://github.com/GW-HIVE/PredictMod" class="font-weight-bold"> PredictMod Repo </v-list-item>
+        </v-btn>
+
+        <v-btn elevation="0" border>
+          <v-list-item href="https://gwu0.sharepoint.com/sites/PredictMod-GRP" class="font-weight-bold"> SharePoint </v-list-item>
+        </v-btn>
+      </v-col>
+    </v-row>
 
     <v-row>
       <v-col md="3">
           <SimpleUploadEHR/>
-    </v-col>
+      </v-col>
       <v-col md="3">
 
           <SimpleUploadMG MGoutput="unsuccessful"/>
 
-    </v-col>
-  </v-row>
+      </v-col>
+    </v-row>
   
   <v-row>
     <v-col md="6">

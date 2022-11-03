@@ -6,7 +6,7 @@ const path = require('path')
 
 
 const fileFilter = function(req, file, cb) {
-    const allowedTypes = ["text/csv"];
+    const allowedTypes = ["text/csv", "application/vnd.ms-excel", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"];
 
     if (!allowedTypes.includes(file.mimetype)) {
         const error = new Error("Wrong file type");
@@ -52,19 +52,22 @@ app.post("/upload-EHR", uploadEHR.single("EHR"), (req, res) => {
 }); 
 
 
+
 app.get('/output-EHR', function(req, res) {
     res.sendFile(path.join(__dirname, '/output-EHR/output.json'));
   });
 
-app.get('/output-MG', function(req, res) {
-res.sendFile(path.join(__dirname, '/output-MG/output.json'));
-});
+  app.get('/output-MG', function(req, res) {
+    res.sendFile(path.join(__dirname, '/output-MG/output.json'));
+  });
+
+
 
 app.set('title', 'PredictMod')
 
 app.use(function(err, req, res, next) {
     if (err.code === "LIMIT_FILE_TYPES") {
-        res.status(422).json({ error: "Only .csv files are allowed"});
+        res.status(422).json({ error: "Only .csv, .xls, and .xlsx files are allowed"});
         return;
     }
 

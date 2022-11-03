@@ -1,17 +1,23 @@
 <template>
 
+<!--this component was adapted from a Youtube tutorial. 
+    For more information, see parts 1-3 of the following series: 
+    https://www.youtube.com/watch?v=GXe_JpBQLTQ -->
 <form @submit.prevent="sendFile" enctype="multipart/form-data">
 
     
+<!-- header for component --> 
 <div class="head font-weight-bold"> 
-    Choose a CSV of EHR data to analyze
+    Analyze EHR data
     </div>
 
 <div class="field">
 
+<!-- if file has not been uploaded, allow user to select and upload file-->
 <div class="file is-boxed is-primary is-centered" v-if="message ==!'File has been uploaded'">
     <label class="file-label">
         
+        <!--when clicked, allow user to select file. Use REF "EHR" for file from now on. This will be important on server side-->
         <input 
         type="file"
         ref="EHR"
@@ -32,7 +38,7 @@
         <div v-if="message"
         :class="`message ${error ? 'is-danger' : 'is-success'}`"
         >
-   
+        
         <div class="message-body">{{message}}</div>
         </div>
     </label>
@@ -103,7 +109,7 @@ export default {
                 this.error = true;
                 this.message = tooLarge 
                 ? `Too large. Max size is ${MAX_SIZE/1000}kb` 
-                : "Only .csv files are allowed";
+                : "Only .csv, .xls, and .xlsx files are allowed";
             }
         },
         //will send file to server if no errors come up
