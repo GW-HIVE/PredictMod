@@ -1,21 +1,21 @@
 <template>
-  <v-container>
-    <v-img      
-      src="./assets/HiveIcon.jpg"
-			alignment="centered"
-			max-height="150"
-			max-width="250">
+  <v-banner lg="6">
+    <v-img
+      src="./assets/Banner.png">
     </v-img>
+  </v-banner>
+
+  <v-container>
 
     <v-row>
-      <v-col lg="6">
-            <v-card-title class="title font-weight-bold">
+      <v-col>
+            <v-card-title class="title text-left font-weight-bold">
               Welcome to PredictMod!
               
             </v-card-title>
             <v-card-text class="text-left">
               PredictMod is a functional web app built using VueJS and powered by machine learning to help inform physicians' decisions. 
-              PredictMod takes metagenomic microbiome or electronic health record data as 
+              PredictMod takes metagenomic microbiome or electronic health record (EHR) data as 
               input and outputs a prediction of whether the ketogenic diet would be successful in managing prediabetes. 
 
             </v-card-text>
@@ -25,42 +25,48 @@
     
     </v-row>
     <v-row>
-      <v-col lg="6">
+      <v-col>
         <v-card-text class = "text-left">
           For more information, click the links below to explore the GitHub and SharePoint pages:
         </v-card-text>
-        <v-btn elevation="0" border>
-          <v-list-item href="https://github.com/GW-HIVE/PredictMod" class="font-weight-bold"> PredictMod Repo </v-list-item>
-        </v-btn>
-
-        <v-btn elevation="0" border>
-          <v-list-item href="https://gwu0.sharepoint.com/sites/PredictMod-GRP" class="font-weight-bold"> SharePoint </v-list-item>
-        </v-btn>
+        <v-breadcrumbs>
+          <v-breadcrumbs-item href="https://github.com/GW-HIVE/PredictMod"> PredictMod Repo </v-breadcrumbs-item>
+          <v-breadcrumbs-item href="https://gwu0.sharepoint.com/sites/PredictMod-GRP"> SharePoint Page </v-breadcrumbs-item>
+        </v-breadcrumbs>  
       </v-col>
+
     </v-row>
 
+
+
+
+  <v-card>
     <v-row>
-      <v-col md="3">
-          <SimpleUploadEHR/>
-      </v-col>
-      <v-col md="3">
+          <v-col>
+            <SimpleUploadEHR/>
+          </v-col>
+          <v-col>
+            <SimpleUploadMG/>
+          </v-col>
 
-          <SimpleUploadMG MGoutput="unsuccessful"/>
-
-      </v-col>
     </v-row>
   
-  <v-row>
-    <v-col md="6">
-        <DisclaimerShow/>
-    </v-col>
-  </v-row>
 
-    
+    <v-row>
+      <v-col>
+          <DisclaimerShow/>
+      </v-col>
+    </v-row>
+  </v-card>
+
 </v-container>
 
-
-
+<v-footer dark padless>
+  <v-img
+      src="./assets/Footer.png"
+      alignment="centered">
+  </v-img>
+</v-footer>
 
 
 </template>

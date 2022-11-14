@@ -9,7 +9,7 @@
 <!-- header for component --> 
 <div class="head font-weight-bold"> 
     Analyze EHR data
-    </div>
+</div>
 
 <div class="field">
 
@@ -63,7 +63,9 @@
         <v-card-text class="text-left" v-if="show && message=='File has been uploaded'">
          <GetEHRoutput/>
         </v-card-text>
-
+        <v-btn elevation="0" border>
+          <v-list-item href="http://localhost:3344/example-EHR"> Example data </v-list-item>
+        </v-btn>
     </div>
 </form>
 

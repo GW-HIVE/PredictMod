@@ -55,14 +55,19 @@ app.post("/upload-EHR", uploadEHR.single("EHR"), (req, res) => {
 
 app.get('/output-EHR', function(req, res) {
     res.sendFile(path.join(__dirname, '/output-EHR/output.json'));
-  });
+    });
 
-  app.get('/output-MG', function(req, res) {
-    res.sendFile(path.join(__dirname, '/output-MG/output.json'));
-  });
+app.get('/output-MG', function(req, res) {
+    res.sendFile(path.join(__dirname, '/output-MG/output.json'));   
+    });
 
+app.get('/example-MG', function(req, res) {
+    res.sendFile(path.join(__dirname, '/uploads-MG/example_MG_data.csv'));   
+    });
 
-
+app.get('/example-EHR', function(req, res) {
+    res.sendFile(path.join(__dirname, '/uploads-EHR/example_EHR_data.xls'));   
+    });
 app.set('title', 'PredictMod')
 
 app.use(function(err, req, res, next) {
