@@ -1,12 +1,12 @@
 <template>
-  <v-banner lg="6">
+  <v-banner >
     <v-img
       src="./assets/Banner.png">
     </v-img>
   </v-banner>
 
   <v-container>
-
+ 
     <v-row>
       <v-col>
             <v-card-title class="title text-left font-weight-bold">
@@ -17,30 +17,23 @@
               PredictMod is a functional web app built using VueJS and powered by machine learning to help inform physicians' decisions. 
               PredictMod takes metagenomic microbiome or electronic health record (EHR) data as 
               input and outputs a prediction of whether the ketogenic diet would be successful in managing prediabetes. 
-
+              For more information, click the links below to explore the GitHub and SharePoint pages: 
+              <v-breadcrumbs color="blue">
+                <v-breadcrumbs-item href="https://github.com/GW-HIVE/PredictMod"> PredictMod Repo </v-breadcrumbs-item>
+                <v-breadcrumbs-item href="https://gwu0.sharepoint.com/sites/PredictMod-GRP"> SharePoint Page </v-breadcrumbs-item>
+              </v-breadcrumbs> 
             </v-card-text>
 
 
       </v-col>
     
     </v-row>
-    <v-row>
-      <v-col>
-        <v-card-text class = "text-left">
-          For more information, click the links below to explore the GitHub and SharePoint pages:
-        </v-card-text>
-        <v-breadcrumbs>
-          <v-breadcrumbs-item href="https://github.com/GW-HIVE/PredictMod"> PredictMod Repo </v-breadcrumbs-item>
-          <v-breadcrumbs-item href="https://gwu0.sharepoint.com/sites/PredictMod-GRP"> SharePoint Page </v-breadcrumbs-item>
-        </v-breadcrumbs>  
-      </v-col>
-
-    </v-row>
 
 
 
 
-  <v-card>
+
+
     <v-row>
           <v-col>
             <SimpleUploadEHR/>
@@ -57,16 +50,15 @@
           <DisclaimerShow/>
       </v-col>
     </v-row>
-  </v-card>
+
 
 </v-container>
 
-<v-footer dark padless>
   <v-img
       src="./assets/Footer.png"
       alignment="centered">
   </v-img>
-</v-footer>
+
 
 
 </template>
