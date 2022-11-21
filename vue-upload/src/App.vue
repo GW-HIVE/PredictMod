@@ -1,7 +1,17 @@
 <template>
-  <v-banner >
-    <v-img
-      src="./assets/Banner.png">
+  <v-banner
+  single-line
+  class="text-left">
+    <v-img src="./assets/Banner.png">
+      <b-overlay>
+          <v-icon
+            icon="mdi-home"
+            color="white"
+            size="50"
+            @click="home">
+            mdi-home
+          </v-icon>
+      </b-overlay>
     </v-img>
   </v-banner>
 
@@ -54,11 +64,9 @@
 
 </v-container>
 
-  <v-img
-      src="./assets/Footer.png"
-      alignment="centered">
-  </v-img>
-
+<v-img src="./assets/Footer.png">
+  
+</v-img>
 
 
 </template>
@@ -70,6 +78,11 @@ import DisclaimerShow from './DisclaimerShow.vue';
 
 export default {
   name: 'App',
+  data() {
+			return {
+				home: false,
+			}
+    },
   components: { SimpleUploadMG, SimpleUploadEHR, DisclaimerShow}
 }
 </script>

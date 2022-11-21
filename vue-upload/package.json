@@ -13,7 +13,6 @@
     "roboto-fontface": "*",
     "vue": "^3.2.13",
     "vue-json-edit": "^1.1.5",
-    "vuetify": "^3.0.0-beta.0",
     "webfontloader": "^1.0.0"
   },
   "devDependencies": {
