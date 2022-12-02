@@ -3,15 +3,6 @@
   single-line
   class="text-left">
     <v-img src="./assets/Banner.png">
-      <b-overlay>
-          <v-icon
-            icon="mdi-home"
-            color="white"
-            size="50"
-            @click="home">
-            mdi-home
-          </v-icon>
-      </b-overlay>
     </v-img>
   </v-banner>
 

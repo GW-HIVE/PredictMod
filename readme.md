@@ -23,7 +23,7 @@ git clone https://github.com/GW-HIVE/PredictMod.git
 Navigate to the PredictMod directory and use the following command to install the necessary dependancies
 
 ```
-npm install -g
+npm install
 ```
 
 #### Running the app
