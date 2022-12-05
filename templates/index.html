@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>client_server</title>
+</head>
+<body>
+<h1 style="text-align:center;">PredictMod</h1>
+<hr>
+<div style="text-align:center;">
+<div id="me" style="height:200px;width:700px;float:left;">
+    <b>MG</b><br>
+    <form action="/upload/" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p>Files：<input type="file" name="files" id="files"></p>
+    <p><input type="submit" value="confirm and submit"></p>
+    </form>
+</div>
+<div id="me" style="height:200px;width:700px;float:left;">
+    <b>EHR</b><br>
+    <form action="/upload/" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p>Files：<input type="file" name="files" id="files"></p>
+    <p><input type="submit" value="confirm and submit"></p>
+    </form>
+</div>
+</div>
+</body>
+</html>
