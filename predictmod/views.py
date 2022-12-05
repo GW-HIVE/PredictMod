@@ -16,5 +16,9 @@ def index(request):
         for chunk in files.chunks():
             destination.write(chunk)
         destination.close()
-        return HttpResponse("Done!")
+        eng = matlab.engine.start_matlab()
+        eng.cd(r'C:\Users\Julia\PycharmProjects\djangoProject\predictmod', nargout=0)
+        eng.editted_single_predict(nargout=0)
+        result = eng.editted_single_predict()
+        return HttpResponse(result)
 
