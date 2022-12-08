@@ -27,7 +27,7 @@ schema_view = get_schema_view(
       default_version='v1.0',
       description="Test description",
       terms_of_service="https://www.google.com/policies/terms/",
-      contact=openapi.Contact(email="mazumder"),
+      contact=openapi.Contact(email="mazumder_lab@gwu.edu"),
       license=openapi.License(name="MIT License"),
    ),
    public=True,
