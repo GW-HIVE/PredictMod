@@ -1,4 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
+
+from django.conf import settings
+
 import os
 import matlab.engine 
 import matlab
@@ -17,7 +20,7 @@ def index(request):
             destination.write(chunk)
         destination.close()
         eng = matlab.engine.start_matlab()
-        eng.cd(r'C:\Users\Julia\PycharmProjects\djangoProject\predictmod', nargout=0)
+        eng.cd(f'{settings.BASE_DIR}/predictmod/', nargout=0)
         eng.editted_single_predict(nargout=0)
         result = eng.editted_single_predict()
         return HttpResponse(result)
