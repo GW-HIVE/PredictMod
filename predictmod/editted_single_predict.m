@@ -7,8 +7,8 @@ load('Synth_data_trained_net.mat','Synth_table','net1','net2','net3')%loads k_st
 %data_table=readmatrix('myData.xls');
 %data_table=data_table(:,2:end);
 %% in case you want to pick patient
-
-path = 'C:\Users\Julia\PycharmProjects\djangoProject\predictmod\upload\';
+load(MATLAB_FILE)
+path = MATLAB_FILE;
 File = dir(fullfile(path,'*.xls'));
 FileNames = {File.name}'; %change to n lines and 1 column
 length = size(FileNames,1);
