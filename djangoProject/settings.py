@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'predictmod.apps.PredictmodConfig',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
