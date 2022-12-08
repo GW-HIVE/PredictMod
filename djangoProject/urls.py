@@ -17,6 +17,26 @@ from django.contrib import admin
 from django.urls import path
 from predictmod import views
 
+<<<<<<< HEAD
+=======
+from rest_framework import permissions
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+
+schema_view = get_schema_view(
+   openapi.Info(
+      title="Predict Mod",
+      default_version='v1.0',
+      description="Test description",
+      terms_of_service="https://www.google.com/policies/terms/",
+      contact=openapi.Contact(email="mazumder_lab@gwu.edu"),
+      license=openapi.License(name="MIT License"),
+   ),
+   public=True,
+   permission_classes=[permissions.AllowAny],
+)
+
+>>>>>>> 55e1334 (add ddrf-yasg and update requirements.txt)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('index/', views.index),
