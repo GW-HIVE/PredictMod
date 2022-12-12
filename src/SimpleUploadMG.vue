@@ -105,7 +105,7 @@ export default {
             formData.append('MG', this.file);
             
             try {
-                await axios.post('/upload-MG', formData);
+                await axios.post('upload/', formData);
                 this.message = "File has been uploaded";
                 this.file = ""
                 this.error = false

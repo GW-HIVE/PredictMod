@@ -120,7 +120,7 @@ export default {
             formData.append('EHR', this.file);
 
             try {
-                await axios.post('/upload-EHR', formData);
+                await axios.post('upload/', formData);
                 this.message = "File has been uploaded";
                 this.file = ""
                 this.error = false
