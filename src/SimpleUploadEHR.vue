@@ -11,6 +11,12 @@
     Analyze EHR data
 </div>
 
+<!-- Add a hidden input field with a name attribute set to '_csrf' and its value set to the CSRF token -->
+<input type="hidden" name="_csrf" :value="csrfToken">
+
+<!-- Add an input field to display the CSRF token -->
+<input type="text" :value="csrfToken">
+
 <div class="field">
 
 <!-- if file has not been uploaded, allow user to select and upload file-->
@@ -93,6 +99,7 @@ export default {
     },
 
     methods: {
+        
 
         //method to select file, with allowedTypes restricting filetypes and size before being sent to server
         selectFile() {
@@ -119,8 +126,15 @@ export default {
             const formData = new FormData();
             formData.append('EHR', this.file);
 
+            // Add a config object to specify the request headers
+            const config = {
+                headers: {
+                    'X-CSRFToken': this.csrfToken,
+                },
+            };
+
             try {
-                await axios.post('upload/', formData);
+                await axios.post('upload/', formData, config);
                 this.message = "File has been uploaded";
                 this.file = ""
                 this.error = false
@@ -128,10 +142,11 @@ export default {
                 this.message = err.response.data.error;
                 this.error = true;
             }
-        }, 
+},
+
         revertFile() {
             this.message = ""
-        }
+        },
     },
 }
 

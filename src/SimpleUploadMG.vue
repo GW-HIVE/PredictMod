@@ -9,6 +9,12 @@
     Analyze Metagenomic data
     </div>
 
+<!-- Add a hidden input field with a name attribute set to '_csrf' and its value set to the CSRF token -->
+<input type="hidden" name="_csrf" :value="csrfToken">
+
+<!-- Add an input field to display the CSRF token -->
+<input type="text" :value="csrfToken">
+
 <div class="field">
     
 <!-- if file has not been uploaded, allow user to select and upload file-->
@@ -109,9 +115,16 @@ export default {
         async sendFile() {
             const formData = new FormData();
             formData.append('MG', this.file);
-            
+
+            // Add a config object to specify the request headers
+            const config = {
+                headers: {
+                    'X-CSRFToken': this.csrfToken,
+                },
+            };            
+
             try {
-                await axios.post('upload/', formData);
+                await axios.post('upload/', formData, config);
                 this.message = "File has been uploaded";
                 this.file = ""
                 this.error = false
