@@ -128,14 +128,7 @@ export default {
                 this.message = err.response.data.error;
                 this.error = true;
             }
-        },
-        async created () {
-            // Simple GET request using fetch
-            fetch("/output")
-                .then(response => response.json())
-                .then(data => (this.EHRoutput = data.title));
-        },
-        
+        }, 
         revertFile() {
             this.message = ""
         }
