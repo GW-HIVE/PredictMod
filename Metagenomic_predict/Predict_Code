@@ -1,3 +1,0 @@
-mdl= fitctree(data, "Status");
-label = predict(mdl,test); 
-disp(label)
