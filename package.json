@@ -12,6 +12,7 @@
     "axios": "^1.2.0",
     "core-js": "^3.8.3",
     "roboto-fontface": "*",
+    "serve": "^14.2.0",
     "vue": "^3.2.13",
     "vue-json-edit": "^1.1.5",
     "webfontloader": "^1.0.0"
