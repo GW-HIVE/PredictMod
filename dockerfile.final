@@ -1,0 +1,6 @@
+# Build with docker build -t predictmod:v0.1 -f dockerfile.final .
+FROM predictmod:prereqs
+
+COPY . /predictmod
+
+COPY docker-dependencies/httpd.conf /usr/local/apache2/conf/httpd.conf
