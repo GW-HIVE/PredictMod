@@ -2,5 +2,6 @@
 FROM predictmod:prereqs
 
 COPY . /predictmod
+# RUN mkdir /hostfs && chown root:root /hostfs && chmod -R 766 /hostfs
 
 COPY docker-dependencies/httpd.conf /usr/local/apache2/conf/httpd.conf
