@@ -1,0 +1,6 @@
+# NB - The matlab engine is finicky (ie, proprietary code)
+#   and requires manual installation. Don't attempt using the
+#   `-e` flag on pip install!
+# matlabengine
+flask
+
