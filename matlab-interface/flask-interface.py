@@ -6,16 +6,27 @@ import logging
 
 import matlab.engine
 
+MATLAB_SERVER_MODE = os.environ.get("MATLAB_SERVER_MODE", "dev")
+
+if MATLAB_SERVER_MODE == "dev":
+    FLASK_APPLICATION_PATH = os.path.expanduser(
+        "~/gwu-src/predictmod-project/PredictMod/predictmod/"
+    )
+    FILE_HOLDING = os.path.expanduser("~/tmp/")
+else:
+    PREDICTMOD_APPLICATION_PATH = os.path.abspath("/matlab-interface/")
+
+    FILE_HOLDING = os.path.abspath("/tmp")
+
 ALLOWED_EXTENSIONS = {"xlsx", "xls"}
-FILE_HOLDING = os.path.expanduser("~/tmp/")
-MATLAB_FUNCTION_PATH = os.path.expanduser("~/gwu-src/predictmod-project/PredictMod/predictmod/")
+
 
 class MatlabRunner:
     def __init__(self, path):
         eng = matlab.engine.start_matlab()
-        eng.cd(MATLAB_FUNCTION_PATH, nargout=0)
+        eng.cd(FLASK_APPLICATION_PATH, nargout=0)
         # eng.load("Synth_data_trained_net.mat")
-        eng.addpath(MATLAB_FUNCTION_PATH)
+        eng.addpath(FLASK_APPLICATION_PATH)
         eng.cd(path, nargout=0)
         # self.nets = [eng.workspace['net1'], eng.workspace['net2'], eng.workspace['net3']]
         self.engine = eng
@@ -23,20 +34,23 @@ class MatlabRunner:
     def make_prediction(self, filename):
         return self.engine.single_predict(filename)
 
-runner = MatlabRunner(FILE_HOLDING)        
+
+runner = MatlabRunner(FILE_HOLDING)
+
 
 def allowed_filename(filename):
     return filename.split(".")[-1] in ALLOWED_EXTENSIONS
 
-def restarting_the_engine_is_slow(path, file_name):
 
-        eng = matlab.engine.start_matlab()
-        eng.cd(MATLAB_FUNCTION_PATH, nargout=0)
-        # eng.load("Synth_data_trained_net.mat")
-        eng.addpath(MATLAB_FUNCTION_PATH)
-        eng.cd(path, nargout=0)
-        # nets = [eng.workspace['net1'], eng.workspace['net2'], eng.workspace['net3']]
-        return eng.single_predict(file_name)
+def restarting_the_engine_is_slow(path, file_name):
+    eng = matlab.engine.start_matlab()
+    eng.cd(FLASK_APPLICATION_PATH, nargout=0)
+    # eng.load("Synth_data_trained_net.mat")
+    eng.addpath(FLASK_APPLICATION_PATH)
+    eng.cd(path, nargout=0)
+    # nets = [eng.workspace['net1'], eng.workspace['net2'], eng.workspace['net3']]
+    return eng.single_predict(file_name)
+
 
 app = Flask(__name__)
 app.logger.setLevel(logging.DEBUG)
@@ -63,7 +77,7 @@ def request_received():
         # prediction = restarting_the_engine_is_slow(FILE_HOLDING, file.filename)
         func_elapsed = f"{time.time() - func_start:.2f}s"
         func_pred = f"{prediction} - {func_elapsed}"
-        
+
         # app.logger.debug("-" * 80)
         # app.logger.debug(f"---> Runner output: {prediction}")
         # app.logger.debug("-" * 80)
