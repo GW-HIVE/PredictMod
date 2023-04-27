@@ -6,27 +6,27 @@ import logging
 
 import matlab.engine
 
-MATLAB_SERVER_MODE = os.environ.get("MATLAB_SERVER_MODE", "dev")
+OPERATING_MODE = os.environ.get("OPERATING_MODE", "deployed")
 
-if MATLAB_SERVER_MODE == "dev":
-    FLASK_APPLICATION_PATH = os.path.expanduser(
+if OPERATING_MODE == "local":
+    PREDICTMOD_APPLICATION_PATH = os.path.expanduser(
         "~/gwu-src/predictmod-project/PredictMod/predictmod/"
     )
-    FILE_HOLDING = os.path.expanduser("~/tmp/")
 else:
-    PREDICTMOD_APPLICATION_PATH = os.path.abspath("/matlab-interface/")
+    PREDICTMOD_APPLICATION_PATH = os.path.expanduser(
+        "~/gwu-src/PredictMod/predictmod/"
+    )
 
-    FILE_HOLDING = os.path.abspath("/tmp")
-
+FILE_HOLDING = os.path.expanduser("~/tmp/")
 ALLOWED_EXTENSIONS = {"xlsx", "xls"}
 
 
 class MatlabRunner:
     def __init__(self, path):
         eng = matlab.engine.start_matlab()
-        eng.cd(FLASK_APPLICATION_PATH, nargout=0)
+        eng.cd(PREDICTMOD_APPLICATION_PATH, nargout=0)
         # eng.load("Synth_data_trained_net.mat")
-        eng.addpath(FLASK_APPLICATION_PATH)
+        eng.addpath(PREDICTMOD_APPLICATION_PATH)
         eng.cd(path, nargout=0)
         # self.nets = [eng.workspace['net1'], eng.workspace['net2'], eng.workspace['net3']]
         self.engine = eng
@@ -44,9 +44,9 @@ def allowed_filename(filename):
 
 def restarting_the_engine_is_slow(path, file_name):
     eng = matlab.engine.start_matlab()
-    eng.cd(FLASK_APPLICATION_PATH, nargout=0)
+    eng.cd(PREDICTMOD_APPLICATION_PATH, nargout=0)
     # eng.load("Synth_data_trained_net.mat")
-    eng.addpath(FLASK_APPLICATION_PATH)
+    eng.addpath(PREDICTMOD_APPLICATION_PATH)
     eng.cd(path, nargout=0)
     # nets = [eng.workspace['net1'], eng.workspace['net2'], eng.workspace['net3']]
     return eng.single_predict(file_name)
@@ -55,6 +55,26 @@ def restarting_the_engine_is_slow(path, file_name):
 app = Flask(__name__)
 app.logger.setLevel(logging.DEBUG)
 
+FUNCTION_TESTING=False
+
+def outstr(str1, str2=None):
+    if FUNCTION_TESTING:
+        return f"""
+<b>Received response:</b>
+<br>
+Object-oriented result:
+    {str1}
+<br>
+Function-based result:
+    {str2}
+"""
+    else:
+        return f"""
+<b>Received response:</b>
+<br>
+    {str1}
+<br>
+"""
 
 @app.route("/", methods=["POST"])
 def request_received():
@@ -74,23 +94,17 @@ def request_received():
         obj_elapsed = f"{time.time() - obj_start:.2f}s"
         obj_pred = f"{prediction} - {obj_elapsed}"
         func_start = time.time()
-        # prediction = restarting_the_engine_is_slow(FILE_HOLDING, file.filename)
-        func_elapsed = f"{time.time() - func_start:.2f}s"
-        func_pred = f"{prediction} - {func_elapsed}"
+        if FUNCTION_TESTING:
+            prediction = restarting_the_engine_is_slow(FILE_HOLDING, file.filename)
+            func_elapsed = f"{time.time() - func_start:.2f}s"
+            func_pred = f"{prediction} - {func_elapsed}"
+        else:
+            func_pred = None
 
         # app.logger.debug("-" * 80)
         # app.logger.debug(f"---> Runner output: {prediction}")
         # app.logger.debug("-" * 80)
-        outstr = f"""
-<b>Received response:</b>
-<br>
-Object-oriented result:
-    {obj_pred}
-<br>
-Function-based result:
-    {func_pred}
-"""
-        return Response(outstr)
+        return Response(outstr(obj_pred, func_pred))
 
     except Exception as e:
         return Response(f"Got an error!\n\t{e}")
