@@ -19,7 +19,8 @@ logger = logging.getLogger()
 # Create your views here.
 def index(request):
     if request.method == "GET":
-        args = {"PREDICTMOD_INSTANCE": "/gfkb/predictmod/result/"}
+        ### TODO: BUG HERE ###
+        args = {"PREDICTMOD_INSTANCE": "predictmod/upload/"}
         return TemplateResponse(request, "index.html", args)
     if request.method == "POST":
         try:
