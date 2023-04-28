@@ -41,6 +41,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "djangoProject.urls"
 
+CSRF_TRUSTED_ORIGINS = [
+        "https://hivelab.tst.biochemistry.gwu.edu", 
+        "https://hivelab.biochemistry.gwu.edu", 
+        "https://*.127.0.0.1",
+        ]
+
 # html files address config
 TEMPLATES = [
     {
