@@ -4,7 +4,7 @@ function [result] = single_predict(file_name)
     net2 = [];
     net3 = [];
 
-    load /home/pat/gwu-src/predictmod-project/PredictMod/predictmod/Synth_data_trained_net.mat net1 net2 net3;
+    load Synth_data_trained_net.mat net1 net2 net3;
 
     data = readmatrix(file_name); 
     data(1) = [];
