@@ -35,11 +35,15 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    re_path('gfkb/predict.*/admin/', admin.site.urls),
-    re_path('gfkb/predict.*/index/', views.index),
-    re_path('gfkb/predict.*/upload/', views.index),
-    re_path('gfkb/predict.*/', views.index),
-    re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
+    # re_path('gfkb/predict.*/admin/', admin.site.urls),
+    # re_path('gfkb/predict.*/index/', views.index),
+    # re_path('gfkb/predict.*/upload/', views.index),
+    # re_path('gfkb/predict.*/', views.index),
+    path('admin/', admin.site.urls),
+    path('index/', views.index),
+    path('upload/', views.index),
+    path('', views.index),
+    path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     re_path(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     re_path(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 ]
