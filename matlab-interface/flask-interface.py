@@ -6,7 +6,7 @@ import logging
 
 import matlab.engine
 
-OPERATING_MODE = os.environ.get("OPERATING_MODE", "deployed")
+OPERATING_MODE = os.environ.get("OPERATING_MODE", "local")
 
 if OPERATING_MODE == "local":
     PREDICTMOD_APPLICATION_PATH = os.path.expanduser(
@@ -76,7 +76,13 @@ Function-based result:
 <br>
 """
 
-@app.route("/", methods=["POST"])
+@app.route("/mg-upload", methods=["POST"])
+def mg_request():
+    return """
+<h1>Meta-genomic prediction toolchain coming soon!</h1>    
+"""
+
+@app.route("/ehr-upload", methods=["POST"])
 def request_received():
     try:
         if "files" not in request.files:
