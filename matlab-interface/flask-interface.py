@@ -13,9 +13,7 @@ if OPERATING_MODE == "local":
         "~/gwu-src/predictmod-project/PredictMod/predictmod/"
     )
 else:
-    PREDICTMOD_APPLICATION_PATH = os.path.expanduser(
-        "~/gwu-src/PredictMod/predictmod/"
-    )
+    PREDICTMOD_APPLICATION_PATH = os.path.expanduser("~/gwu-src/PredictMod/predictmod/")
 
 FILE_HOLDING = os.path.expanduser("~/tmp/")
 ALLOWED_EXTENSIONS = {"xlsx", "xls"}
@@ -55,7 +53,8 @@ def restarting_the_engine_is_slow(path, file_name):
 app = Flask(__name__)
 app.logger.setLevel(logging.DEBUG)
 
-FUNCTION_TESTING=False
+FUNCTION_TESTING = False
+
 
 def outstr(str1, str2=None):
     if FUNCTION_TESTING:
@@ -76,11 +75,20 @@ Function-based result:
 <br>
 """
 
+
 @app.route("/mg-upload", methods=["POST"])
 def mg_request():
-    return """
-<h1>Meta-genomic prediction toolchain coming soon!</h1>    
-"""
+    output_str = "<h1>Meta-genomic prediction toolchain coming soon!</h1><br>"
+    if "files" not in request.files["files"]:
+        return Response(
+            f"{output_str}  - Error: No file uploaded.",
+        status=400)
+    else:
+        file = request.files["files"]
+        return Response(
+            f"{output_str} - Recieved file {file.name}", status=200
+        )
+
 
 @app.route("/ehr-upload", methods=["POST"])
 def request_received():
