@@ -86,7 +86,7 @@ def mg_request():
     else:
         file = request.files["files"]
         return Response(
-            f"{output_str} - Recieved file {file.name}", status=200
+            f"{output_str} - Recieved file {file.filename}", status=200
         )
 
 
