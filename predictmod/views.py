@@ -20,31 +20,35 @@ logger = logging.getLogger()
 def index(request):
     if request.method == "GET":
         args = {"EHR_UPLOAD": "predictmod/ehr-upload/",
-                "MG_UPLOAD": "predictmod/mg-upload"}
+                "MG_UPLOAD": "predictmod/mg-upload/"}
         return TemplateResponse(request, "index.html", args)
+    else:
+        return HttpResponse(f"Unsupported request type: {request.method}")
+
+def ehr_upload(request):
     if request.method == "POST":
         try:
-            # files = request.FILES.get("files", None)
-            # if not files:
-            #     return HttpResponse("no files for upload!")
-            # try:
-            #     with open(os.path.join("/hostfs", files.name), 'wb+') as fp:
-            #         [fp.write(c) for c in files.chunks()]
-            #     fp.close()
-            # except Exception as e:
-            #     logger.error(f"Caught exception {e}!")
-            #     return HttpResponse(f"User: {getpass.getuser()}")
-            # eng = matlab.engine.start_matlab()
-            # MATLAB_FILE = f'{settings.BASE_DIR}/predictmod/{files.name}'
-            # eng.cd(f'{settings.BASE_DIR}/predictmod/', nargout=0)
-            # eng.editted_single_predict(MATLAB_FILE, nargout=0)
-            # result = eng.editted_single_predict()
             logger.debug("+" * 80)
             logger.debug(f"Request files: {request.FILES}")
+            logger.debug(f"Request site path: {request.path}")
             logger.debug("+" * 80)
             result = requests.post(
-                f"http://host.docker.internal:4243/", files=request.FILES
+                f"http://host.docker.internal:4243/ehr-upload", files=request.FILES
             )
             return HttpResponse(result)
         except Exception as error:
             return HttpResponse(f"Django error:\n\t{error}")
+    else:
+        return HttpResponse(f"Unsupported request type: {request.method}")
+
+def mg_upload(request):
+    if request.method == 'POST':
+        try:
+            result = requests.post(
+                f"http://host.docker.internal:4243/mg-upload", files=request.FILES
+            )
+            return HttpResponse(result)
+        except Exception as error:
+            return HttpResponse(f"Django error:\n\t{error}")
+    else:
+        return HttpResponse(f"Unsupported request type: {request.method}")
