@@ -79,7 +79,7 @@ Function-based result:
 @app.route("/mg-upload", methods=["POST"])
 def mg_request():
     output_str = "<h1>Meta-genomic prediction toolchain coming soon!</h1><br>"
-    if "files" not in request.files["files"]:
+    if "files" not in request.files:
         return Response(
             f"{output_str}  - Error: No file uploaded.",
         status=400)
