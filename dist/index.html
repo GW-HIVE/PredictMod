@@ -1,23 +1,167 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="icon" href="favicon.ico">
-    <title>PredictMod</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css"
-          integrity="sha512-HqxHUkJM0SYcbvxUw5P60SzdOTy/QVwA1JJrvaXJv4q7lmbDZCmZaqz01UPOaQveoxfYRv1tHozWGPMcuTBuvQ=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"/>
-    <script defer="defer" src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
-    <script defer="defer" src="js/chunk-vendors.8b5dbe32.js"></script>
-    <script defer="defer" src="js/app.c93ed4cd.js"></script>
-    <link href="css/chunk-vendors.4d809366.css" rel="stylesheet">
-    <link href="css/app.6fbb0451.css" rel="stylesheet">
-</head>
-<body>
-<noscript><strong>We're sorry but vue-upload doesn't work properly without JavaScript enabled. Please enable it to
-    continue.</strong></noscript>
-<div id="app"></div>
-</body>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PredictMod homepage</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+	<link href="css/QAstyle.css" rel="stylesheet">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">PredictMod</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item"> <a class="nav-link" href="#">Documents&nbsp;</a> </li>
+          <li class="nav-link">News&nbsp;</li>
+          <li class="nav-link"><a href="https://github.com/GW-HIVE/PredictMod">Github&nbsp;</a></li>
+<li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Start to Try&nbsp; &nbsp; </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">EHR</a>
+          <a class="dropdown-item" href="#">Metagenomic</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+        </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
+    <section>
+      <div class="jumbotron text-center mt-2">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <h1>Welcome to PredictMod!</h1>
+              <p>PredictMod is a functional web app built using VueJS and powered by machine learning to help inform physicians' decisions. PredictMod takes metagenomic microbiome or electronic health record (EHR) data as input and outputs a prediction of whether the ketogenic diet would be successful in managing prediabetes.</p>
+<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more »</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-12 text-center">
+            <h1>Usage info</h1>
+            <p>&nbsp;Details</p>
+          </div>
+        </div>
+      </div>
+    </section>
+<section>
+  <div class="container">
+        <div class="row">
+          <div class="col-12 text-center">
+            <h2>Function entrance</h2>
+</div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-12 text-center">
+            <img class="img-fluid" src="images/EHR.png" alt="">
+            <h4>EHR</h4>
+            <h6>info line</h6>
+          </div>
+          <div class="col-md-6 col-12 text-center mt-md-0 mt-2">
+            <img class="img-fluid" src="images/genome-2.jpg" alt="">
+            <h4>Metagenomic&nbsp;</h4>
+            <h6>info line</h6>
+          </div>
+        </div>
+<hr>
+</div>
+    </section>
+    <hr>
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-12 text-center">
+            <h1>Who We Are</h1>
+            <p>More info lines&nbsp;</p>
+            <button type="button" class="btn-dark">Get in touch</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <hr>
+    <div class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 col-12">
+            <h3 class="text-center">DISCLAIMER</h3>
+            <p>&nbsp;We make no warranties regarding the accuracy of the predictions, and disclaim liability for damages resulting from its use. This portal is for educational and informational purposes only and should not be used instead of professional medical advice, treatment, or intervention.</p>
+          </div>
+          <div class="col-md-4 col-12">
+            <h3 class="text-center">GET IN TOUCH</h3>
+            <address class="text-center">
+            <b>George Washington University</b>
+            </address>
+            <address class="text-center">
+            address
+            </address>
+            <address class="text-center">
+            line1
+            </address>
+            <address class="text-center">
+            line2
+            </address>
+            <address class="text-center">
+            email&nbsp;
+            </address>
+          </div>
+          <div class="col-md-4 col-12">
+            <h3 class="text-center">NEWSLETTER</h3>
+            <form>
+              <div class="form-group col-12">
+                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                <button type="submit" class="btn btn-dark mt-2">Subscribe</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+	<button id="qabutton" class="button-1" style="position: fixed; right:100px; bottom: 100px">Q&A</button>
+    <div id="modal">
+      <div id="modal-content">
+        frequent question one:<br>
+		answer one<br>
+		frequent qustion two:<br>
+		answer two<br>
+		frequent question three:<br>
+		answer three<br>
+        <span id="close">&times;</span>
+      </div>
+    </div>
+    <hr>
+    <footer class="text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+<p>Copyright © MyCompany. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/QAscript.js"></script>
+	<script src="js/jquery-3.4.1.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap-4.4.1.js"></script>
+  </body>
 </html>

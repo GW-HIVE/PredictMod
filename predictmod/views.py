@@ -18,6 +18,7 @@ logger = logging.getLogger()
 
 # Create your views here.
 def index(request):
+    request.META["CSRF_COOKIE_USED"] = True
     if request.method == "GET":
         args = {"EHR_UPLOAD": "predictmod/ehr-upload/",
                 "MG_UPLOAD": "predictmod/mg-upload/"}
