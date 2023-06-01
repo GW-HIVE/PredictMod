@@ -1,0 +1,86 @@
+@charset "utf-8";
+/* CSS Document */
+* {
+	padding: 0px;
+	margin: 0px;
+	-moz-user-select: none;
+	-o-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+/*按钮样式*/
+.button-1{
+	background-color: #4CAF50;
+	border: none;
+	color: white;
+	padding: 10px 20px;
+	text-align: center;
+	font-weight: bold;
+	display: inline-block;
+	font-size: 21px;
+	font: Baskerville, "Palatino Linotype", Palatino, "Century Schoolbook L", "Times New Roman", "serif";
+	margin: 4px 2px;
+	cursor: pointer;
+	border-radius: 10px;
+}
+/*伪元素样式规则*/
+.button-1::after{
+	content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    border: 10px solid transparent;
+    border-top-color: #4CAF50;
+    transform: translateX(-20%);
+}
+/* 弹窗背景 */
+#modal {
+	width: 100%;
+	height: 100%;
+	/* 默认隐藏 */
+	display: none;
+	/* 固定定位 */
+	position: fixed;
+	/* 设置在顶层 */
+	z-index: 1000;
+	/* 设置位置 */
+	left: 0;
+	top: 0;
+	overflow: auto;
+	background-color: rgba(0, 0, 0, 0.4);
+}
+/* 弹窗内容 */
+#modal-content {
+	position: relative;
+	top:30px;
+	left:25px;
+	background-color: #BECBB3;
+	margin: 10% auto;
+	border: 1px solid #888;
+	font-weight: 400;
+	font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", Verdana, "sans-serif";
+	width: 1000px;
+	height: 580px;
+	z-index: 1001;
+}
+/* 关闭按钮 */
+#close {
+	position: absolute;
+	right: 30px;
+	top: 10px;
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+/* 设置关闭按钮的鼠标指针 */
+#close:hover,
+#close:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+
