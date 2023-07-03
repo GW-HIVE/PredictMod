@@ -18,6 +18,8 @@ This repository can be cloned directly using the following command:
 ```
 git clone https://github.com/GW-HIVE/PredictMod.git
 ```
+#### Virtual Environment
+Prepare your own virtually environment using the requirement.txt file then activate your environment.
 
 #### Installation
 Navigate to the PredictMod directory and use the following command to install the necessary dependancies
@@ -38,3 +40,11 @@ Navigate to the vue-upload directory and execute the following command to start 
 npm run serve
 ```
 Now a link should appear, which you can follow to see the client side of the app
+
+#### Open the django project
+Navigate to the PredictMod directory and use the following command to start the django program
+
+```
+python manage.py runserver
+```
+Then visit "http://127.0.0.1:8000/upload/" on your browser. The first 2 files in EHR_predict folder are the sample input files.
