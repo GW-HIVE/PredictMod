@@ -6,6 +6,8 @@ env/*
 predictmod/upload*
 .vscode
 
+# Adopt the convention of pickles having a '.pickle' extension
+**/*.pickle
 
 # Created by https://www.toptal.com/developers/gitignore/api/python,node,vue,vuejs,matlab
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,node,vue,vuejs,matlab
