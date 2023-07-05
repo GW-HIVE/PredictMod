@@ -80,14 +80,10 @@ Function-based result:
 def mg_request():
     output_str = "<h1>Meta-genomic prediction toolchain coming soon!</h1><br>"
     if "files" not in request.files:
-        return Response(
-            f"{output_str}  - Error: No file uploaded.",
-        status=400)
+        return Response(f"{output_str}  - Error: No file uploaded.", status=400)
     else:
         file = request.files["files"]
-        return Response(
-            f"{output_str} - Recieved file {file.filename}", status=200
-        )
+        return Response(f"{output_str} - Recieved file {file.filename}", status=200)
 
 
 @app.route("/ehr-upload", methods=["POST"])

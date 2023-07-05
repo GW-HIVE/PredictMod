@@ -24,16 +24,16 @@ from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
 schema_view = get_schema_view(
-   openapi.Info(
-      title="Predict Mod",
-      default_version='v1.0',
-      description="Test description",
-      terms_of_service="https://www.google.com/policies/terms/",
-      contact=openapi.Contact(email="mazumder_lab@gwu.edu"),
-      license=openapi.License(name="MIT License"),
-   ),
-   public=True,
-   permission_classes=[permissions.AllowAny],
+    openapi.Info(
+        title="Predict Mod",
+        default_version="v1.0",
+        description="Test description",
+        terms_of_service="https://www.google.com/policies/terms/",
+        contact=openapi.Contact(email="mazumder_lab@gwu.edu"),
+        license=openapi.License(name="MIT License"),
+    ),
+    public=True,
+    permission_classes=[permissions.AllowAny],
 )
 
 urlpatterns = [
@@ -41,12 +41,22 @@ urlpatterns = [
     # re_path('gfkb/predict.*/index/', views.index),
     # re_path('gfkb/predict.*/upload/', views.index),
     # re_path('gfkb/predict.*/', views.index),
-    path('admin/', admin.site.urls),
-    path('index/', views.index),
-    path('ehr-upload/', views.ehr_upload),
-    path('mg-upload/', views.mg_upload),
-    path('', views.index),
-    path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
-    re_path(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    re_path(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+    path("admin/", admin.site.urls),
+    path("index/", views.index),
+    path("ehr-upload/", views.ehr_upload),
+    path("mg-upload/", views.mg_upload),
+    path("", views.index),
+    path(
+        r"^swagger(?P<format>\.json|\.yaml)$",
+        schema_view.without_ui(cache_timeout=0),
+        name="schema-json",
+    ),
+    re_path(
+        r"^swagger/$",
+        schema_view.with_ui("swagger", cache_timeout=0),
+        name="schema-swagger-ui",
+    ),
+    re_path(
+        r"^redoc/$", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"
+    ),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
