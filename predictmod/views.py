@@ -10,21 +10,30 @@ import os
 import getpass
 import requests
 
-# import matlab.engine
-# import matlab
-
 logger = logging.getLogger()
+
+
+OPERATING_MODE = os.environ.get("OPERATING_MODE", "local")
+
+if OPERATING_MODE == "local":
+    APPLICATION_URLS = {
+        "EHR_UPLOAD": "ehr-upload/",
+        "MG_UPLOAD": "mg-upload/",
+    }
+    FLASK_HOST = "localhost:5000"
+else:
+    APPLICATION_URLS = {
+        "EHR_UPLOAD": "predictmod/ehr-upload/",
+        "MG_UPLOAD": "predictmod/mg-upload/",
+    }
+    FLASK_HOST = "host.docker.internal:4243"
 
 
 # Create your views here.
 def index(request):
-    request.META["CSRF_COOKIE_USED"] = True
+    # TBD: request.META["CSRF_COOKIE_USED"] = True
     if request.method == "GET":
-        args = {
-            "EHR_UPLOAD": "predictmod/ehr-upload/",
-            "MG_UPLOAD": "predictmod/mg-upload/",
-        }
-        return TemplateResponse(request, "index.html", args)
+        return TemplateResponse(request, "index.html", APPLICATION_URLS)
     else:
         return HttpResponse(f"Unsupported request type: {request.method}")
 
@@ -37,7 +46,7 @@ def ehr_upload(request):
             logger.debug(f"Request site path: {request.path}")
             logger.debug("+" * 80)
             result = requests.post(
-                f"http://host.docker.internal:4243/ehr-upload", files=request.FILES
+                f"http://{FLASK_HOST}/ehr-upload", files=request.FILES
             )
             return HttpResponse(result)
         except Exception as error:
@@ -50,7 +59,7 @@ def mg_upload(request):
     if request.method == "POST":
         try:
             result = requests.post(
-                f"http://host.docker.internal:4243/mg-upload", files=request.FILES
+                f"http://{FLASK_HOST}/mg-upload", files=request.FILES
             )
             return HttpResponse(result)
         except Exception as error:
