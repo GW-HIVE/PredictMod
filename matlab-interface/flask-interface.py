@@ -50,7 +50,10 @@ class MetagenomicPredictor:
             return f"Error: Metagenomic predictions have been disabled"
         sample = pd.read_csv(os.path.join(self.working_path, filename))
         sample = sample.drop(["Status"], axis=1)
-        return f"Prediction based on metagenomic profile: {self.tree.predict(sample)}"
+        result = self.tree.predict(sample)
+        if "N" in result:
+            return "Non-responder"
+        return "Responder"
 
 
 class EHRMatlabPredictor:
@@ -148,7 +151,7 @@ def mg_request():
         return Response(f"Got an error!\n\t{e}")
 
     prediction = metagenomic_predictor.make_prediction(file.filename)
-    return Response(metagenomic_outstr(prediction))
+    return Response(prediction)
 
 
 @app.route("/ehr-upload", methods=["POST"])
@@ -173,7 +176,7 @@ def request_received():
         else:
             func_pred = None
 
-        return Response(ehr_outstr(obj_pred, func_pred))
+        return Response(prediction)
 
     except Exception as e:
         return Response(f"Got an error!\n\t{e}")

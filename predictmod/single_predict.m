@@ -21,9 +21,9 @@ function [result] = single_predict(file_name)
     [guess]=net123guessfunction(data,net1,net2,net3);
     %%
     if guess==1
-        result = 'Patient is a predicted <strong>responder</strong>';
+        result = 'Responder';
     else
-        result = 'Patient is a predicted <strong>non-responder</strong>';
+        result = 'Non-responder';
     end
     %fprintf(result);
 
