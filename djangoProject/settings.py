@@ -65,7 +65,7 @@ TEMPLATES = [
     },
 ]
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "dist")]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 WSGI_APPLICATION = "djangoProject.wsgi.application"
 
 
