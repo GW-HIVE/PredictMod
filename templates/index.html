@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -6,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>PredictMod homepage</title>
     <!-- Bootstrap -->
-    <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
-	<link href="css/QAstyle.css" rel="stylesheet">
+    <link href="{% static 'css/bootstrap-4.4.1.css' %}" rel="stylesheet">
+	<link href="{% static 'css/QAstyle.css' %}" rel="stylesheet">
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -75,10 +76,20 @@
             <img class="img-fluid" src="images/EHR.png" alt="">
             <h4>EHR</h4>
             <h6>info line</h6>
+            <form action="{{ MG_UPLOAD }}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <p>Files：<input type="file" name="files" id="files"></p>
+            <p><input type="submit" value="confirm and submit"></p>
+            </form>
           </div>
           <div class="col-md-6 col-12 text-center mt-md-0 mt-2">
             <img class="img-fluid" src="images/genome-2.jpg" alt="">
             <h4>Metagenomic&nbsp;</h4>
+            <form action="{{ EHR_UPLOAD }}" method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              <p>Files：<input type="file" name="files" id="files"></p>
+              <p><input type="submit" value="confirm and submit"></p>
+            </form>
             <h6>info line</h6>
           </div>
         </div>
