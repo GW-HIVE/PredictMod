@@ -43,8 +43,10 @@ urlpatterns = [
     # re_path('gfkb/predict.*/', views.index),
     path("admin/", admin.site.urls),
     path("index/", views.index),
-    path("ehr-upload/", views.ehr_upload),
-    path("mg-upload/", views.mg_upload),
+    path("EHR/", views.ehr),
+    path("MG/", views.metagenomic),
+    path("EHR/ehr-upload/", views.ehr_upload),
+    path("MG/mg-upload/", views.mg_upload),
     path("", views.index),
     path(
         r"^swagger(?P<format>\.json|\.yaml)$",

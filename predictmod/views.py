@@ -33,7 +33,19 @@ else:
 def index(request):
     # TBD: request.META["CSRF_COOKIE_USED"] = True
     if request.method == "GET":
-        return TemplateResponse(request, "index.html", APPLICATION_URLS)
+        return TemplateResponse(request, "index.html")
+    else:
+        return HttpResponse(f"Unsupported request type: {request.method}")
+
+def ehr(request):
+    if request.method == "GET":
+        return TemplateResponse(request, "EHR.html", APPLICATION_URLS)
+    else:
+        return HttpResponse(f"Unsupported request type: {request.method}")
+
+def metagenomic(request):
+    if request.method == "GET":
+        return TemplateResponse(request, "Metagenomic.html", APPLICATION_URLS)
     else:
         return HttpResponse(f"Unsupported request type: {request.method}")
 
@@ -48,7 +60,10 @@ def ehr_upload(request):
             result = requests.post(
                 f"http://{FLASK_HOST}/ehr-upload", files=request.FILES
             )
-            return HttpResponse(result)
+            # ctx = APPLICATION_URLS
+            ctx = {}
+            ctx["ehr_result"] = result.content.decode('utf-8')
+            return TemplateResponse(request, "EHR.html", ctx)
         except Exception as error:
             return HttpResponse(f"Django error:\n\t{error}")
     else:
@@ -61,7 +76,10 @@ def mg_upload(request):
             result = requests.post(
                 f"http://{FLASK_HOST}/mg-upload", files=request.FILES
             )
-            return HttpResponse(result)
+            # ctx = APPLICATION_URLS
+            ctx = {}
+            ctx["mg_result"] = result.content.decode('utf-8')
+            return TemplateResponse(request, "Metagenomic.html", ctx)
         except Exception as error:
             return HttpResponse(f"Django error:\n\t{error}")
     else:
