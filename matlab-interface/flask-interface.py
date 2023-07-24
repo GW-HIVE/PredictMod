@@ -151,7 +151,7 @@ def mg_request():
         return Response(f"Got an error!\n\t{e}")
 
     prediction = metagenomic_predictor.make_prediction(file.filename)
-    return Response(prediction)
+    return Response(metagenomic_outstr(prediction))
 
 
 @app.route("/ehr-upload", methods=["POST"])
@@ -176,7 +176,7 @@ def request_received():
         else:
             func_pred = None
 
-        return Response(prediction)
+        return Response(ehr_outstr(prediction))
 
     except Exception as e:
         return Response(f"Got an error!\n\t{e}")
