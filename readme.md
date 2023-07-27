@@ -52,3 +52,27 @@ Then visit "http://127.0.0.1:8000/upload/" on your browser. The first 2 files in
 ### Description of Main Folders and Content
 
 #### AppView
+
+
+#### EHR_predict
+
+
+#### MG_Python
+
+
+#### Metagenomic_predict
+
+
+#### dist
+
+
+#### djangoProject
+
+
+#### docker-dependencies
+
+
+#### js
+
+
+#### matlab-interface
