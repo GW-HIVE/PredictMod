@@ -51,5 +51,38 @@ Then visit "http://127.0.0.1:8000/upload/" on your browser. The first 2 files in
 
 ## Description of Main Folders and Content
 
+#### Archive
+Holds files that are currently not in use, but may be useful to reference at a later time. 
 
+#### EHR_predict
+Work related to Electronic Health Records (EHR) prediction. 
+
+#### MG_python
+Items required to build the decision tree artifact (ie, train the model).
+
+#### Metagenomic_predict 
+Work related to metgenomics prediction. 
+
+#### dist
+
+
+#### djangoProject
+
+
+#### docker-dependencies
+
+
+#### matlab-interface
+
+
+#### predictmod
+
+
+#### public 
+
+
+#### static
+
+
+#### templates 
 
