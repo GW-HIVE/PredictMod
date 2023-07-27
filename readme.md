@@ -49,30 +49,7 @@ python manage.py runserver
 ```
 Then visit "http://127.0.0.1:8000/upload/" on your browser. The first 2 files in EHR_predict folder are the sample input files.
 
-### Description of Main Folders and Content
-
-#### AppView
+## Description of Main Folders and Content
 
 
-#### EHR_predict
 
-
-#### MG_Python
-
-
-#### Metagenomic_predict
-
-
-#### dist
-
-
-#### djangoProject
-
-
-#### docker-dependencies
-
-
-#### js
-
-
-#### matlab-interface
