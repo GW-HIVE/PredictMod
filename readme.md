@@ -48,3 +48,7 @@ Navigate to the PredictMod directory and use the following command to start the 
 python manage.py runserver
 ```
 Then visit "http://127.0.0.1:8000/upload/" on your browser. The first 2 files in EHR_predict folder are the sample input files.
+
+### Description of Main Folders and Content
+
+#### AppView
