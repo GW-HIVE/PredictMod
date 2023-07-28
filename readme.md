@@ -55,13 +55,13 @@ Then visit "http://127.0.0.1:8000/upload/" on your browser. The first 2 files in
 Holds files that are currently not in use, but may be useful to reference at a later time. 
 
 #### EHR_predict
-Work related to Electronic Health Records (EHR) prediction. 
+Work related to Electronic Health Records (EHR) prediction conducted in MATLAB.  
 
 #### MG_python
-Items required to build the decision tree artifact (ie, train the model).
+Work related to Metagenomics predictions conducted in Python. 
 
 #### Metagenomic_predict 
-Work related to metgenomics prediction. 
+Work related to metgenomics prediction conducted in MATLAB. 
 
 #### dist
 
