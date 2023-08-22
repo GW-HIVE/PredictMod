@@ -3,30 +3,33 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "./js/scripts/vue-warning.sh",
-    "build": "./js/scripts/vue-warning.sh",
-    "lint": "./js/scripts/vue-warning.sh"
+    "dev": "vite",
+    "build": "run-p type-check build-only",
+    "preview": "vite preview",
+    "test:unit": "vitest",
+    "test:e2e": "nightwatch tests/e2e",
+    "build-only": "vite build",
+    "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "format": "prettier --write src/"
   },
   "dependencies": {
     "@mdi/font": "5.9.55",
+    "@vitejs/plugin-vue": "^4.2.3",
     "axios": "^1.2.0",
     "core-js": "^3.8.3",
     "roboto-fontface": "*",
     "serve": "^14.2.0",
     "vue": "^3.2.13",
     "vue-json-edit": "^1.1.5",
+    "vite": "^4.4.9",
     "webfontloader": "^1.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
     "@babel/eslint-parser": "^7.12.16",
-    "@vue/cli-plugin-babel": "~5.0.0",
-    "@vue/cli-plugin-eslint": "~5.0.0",
-    "@vue/cli-service": "~5.0.0",
     "eslint": "^7.32.0",
-    "eslint-plugin-vue": "^8.0.3",
-    "vue-cli-plugin-vuetify": "~2.5.8",
-    "webpack-plugin-vuetify": "^2.0.0-alpha.0"
+    "eslint-plugin-vue": "^8.0.3"
   },
   "eslintConfig": {
     "root": true,
