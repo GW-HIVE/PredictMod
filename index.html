@@ -1,0 +1,50 @@
+<!-- {% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="icon" href="{% static 'favicon.ico' %}">
+    <title>PredictMod</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css"
+          integrity="sha512-HqxHUkJM0SYcbvxUw5P60SzdOTy/QVwA1JJrvaXJv4q7lmbDZCmZaqz01UPOaQveoxfYRv1tHozWGPMcuTBuvQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <script defer="defer" src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+    <script defer="defer" src="{% static 'js/chunk-vendors.8b5dbe32.js' %}"></script>
+    <script defer="defer" src="{% static 'js/app.1f755fdc.js' %}"></script>
+    <link href="{% static 'css/chunk-vendors.4d809366.css' %}" rel="stylesheet">
+    <link href="{% static 'css/app.b2d625b8.css' %}" rel="stylesheet">
+</head>
+<body>
+<noscript><strong>We're sorry but vue-upload doesn't work properly without JavaScript enabled. Please enable it to
+    continue.</strong></noscript>
+<div id="app"></div>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to PredictMod</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <em>PredictMod</em>
+  <p>
+    <router-link to="/">Home</router-link>
+    <router-link to="/about">About</router-link>
+    <router-link to="/faq">FAQ</router-link>
+    <router-link to="/contact">Contact</router-link>
+    </p>    
+    <router-view></router-view>
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
+
