@@ -1,54 +1,30 @@
 {
-  "name": "vue-upload",
-  "version": "0.1.0",
+  "name": "predictmod-js",
+  "version": "0.0.0",
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "run-p type-check build-only",
+    "build": "vite build",
     "preview": "vite preview",
-    "test:unit": "vitest",
-    "test:e2e": "nightwatch tests/e2e",
-    "build-only": "vite build",
-    "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-    "format": "prettier --write src/"
+    "lint": "eslint . --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "@mdi/font": "5.9.55",
-    "@vitejs/plugin-vue": "^4.2.3",
-    "axios": "^1.2.0",
-    "core-js": "^3.8.3",
+    "@mdi/font": "7.0.96",
+    "axios": "^1.4.0",
+    "core-js": "^3.29.0",
+    "pinia": "^2.0.0",
     "roboto-fontface": "*",
-    "serve": "^14.2.0",
-    "vue": "^3.2.13",
-    "vue-json-edit": "^1.1.5",
-    "vite": "^4.4.9",
+    "vue": "^3.2.0",
+    "vue-router": "^4.2.4",
+    "vuetify": "^3.0.0",
     "webfontloader": "^1.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.16",
-    "@babel/eslint-parser": "^7.12.16",
-    "eslint": "^7.32.0",
-    "eslint-plugin-vue": "^8.0.3"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/vue3-essential",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "@babel/eslint-parser"
-    },
-    "rules": {}
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead",
-    "not ie 11"
-  ]
+    "@vitejs/plugin-vue": "^4.0.0",
+    "eslint": "^8.37.0",
+    "eslint-plugin-vue": "^9.3.0",
+    "sass": "^1.60.0",
+    "vite": "^4.2.0",
+    "vite-plugin-vuetify": "^1.0.0"
+  }
 }
