@@ -1,24 +1,108 @@
 <template>
+<v-banner
+  single-line
+  class="text-center"
+  >
+    <v-img
+      src="../assets/MG_Model.jpg"
+      id="intro-img"
+      :height="400" 
+      :cover="true"
+      >
+      <v-card-title class="text-center font-weight-bold text-bottom">
+        <!-- 
+            TODO: Get the text aligned, see e.g. here:
+            https://stackoverflow.com/questions/56703740/how-to-bottom-align-button-in-card-irrespective-of-the-text-in-vuetify 
+        -->
+        Metagenomic Report
+      </v-card-title>
+      <v-card-text class="text-center">
+        The gut microbiome consists of the genetic material of microbial communities found within the human gastrointestinal tract.
+      </v-card-text>
+      <!-- <span class="introduction">PredictMod Test Text</span> -->
+    </v-img>
+  </v-banner>
+
+<v-col>
+  <div class="text-center">
+    <v-row>
+        <v-select
+          v-model="morbidityType"
+          :items="morbidities"
+          label="Select Disease Type">
+        </v-select>
+        <!-- TODO? We can change the button style as below -->
+        <!-- <v-menu :selection="morbidities">
+          <template v-slot:activator="{ props }">
+            <v-btn
+              color="primary"
+              dark
+              v-bind="props">
+            </v-btn>
+          </template>
+          <v-list>
+            <v-list-item
+              v-for="(item, index) in items"
+              :key="index"
+            >
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu> -->
+    </v-row>
+    <v-row>
+        <v-select
+          v-model="interventionType"
+          :items="interventions"
+          label="Select Intervention">
+        </v-select>
+    </v-row>
+    <v-row>
+      <v-container>
+        <v-card-title class="title text-center font-weight-bold" >
+          Upload your data
+        </v-card-title>
+        <v-card-text class="text-center">
+          <em>Make sure your file is in the PredictMod format</em>
+        </v-card-text>
+      </v-container>
+      <v-container>
+        <a href="../assets/w10003.png">
+          <v-btn elevation="0" border @click.prevent="downloadItem(item)">
+              File Download (Not Working!)
+          </v-btn>
+        </a>
+      </v-container>
+    </v-row>
+    <v-row>
+        <!-- 
+            TODO
+            See here for a good example of making the Vue button trigger an
+            upload method, rather than relying on Vuetify's internal 
+            upload fields
+            https://ourcodeworld.com/articles/read/1424/how-to-use-a-button-as-a-file-uploader-with-vuetify-in-vuejs
+         -->
+        <v-file-input
+          label="Upload Sample Data"
+          variant="outlined">
+        </v-file-input>        
+    </v-row>
+  </div>
+</v-col>
 
 <form @submit.prevent="sendFile" enctype="multipart/form-data">
-
-
 <div class="head font-weight-bold"> 
     Analyze Metagenomic data
     </div>
-
 <div class="field">
-
 <div class="file is-boxed is-primary is-centered" v-if="message == !'File has been uploaded'">
     <label class="file-label">
-        
         <input 
         type="file"
         ref="MG"
         @change="selectFile"
         class="file-input"
         />
-
         <span class="file-cta">
             <span class="file-icon">
                 <i class="fas fa-upload"></i>
@@ -27,7 +111,6 @@
                 Choose a file...
             </div>
         </span>
-
         <span v-if="file" class="file-name">{{file.name}}</span>
         <div v-if="message"
         :class="`message ${error ? 'is-danger' : 'is-success'}`"
@@ -37,7 +120,6 @@
     
     </label>
 </div>
-
     </div>
     <div class="field">
         <button class="button is-info is-centered" v-if="message ==!'File has been uploaded'">Submit</button>
@@ -68,7 +150,7 @@ import axios  from 'axios';
 import GetMGoutput from './GetMGoutput.vue'
 export default {
     name: "SimpleUploadMG",
-    components: {GetMGoutput},
+    components: { GetMGoutput },
     props: {
         
     },
@@ -77,7 +159,15 @@ export default {
             file: "",
             message: "",
             error: false,
-            show: false
+            show: false,
+            morbidities: [
+                "Prediabetes",
+            ],
+            morbidityType: "Prediabetes",
+            interventions: [
+                "Lifestyle Change",
+            ],
+            interventionType: "Lifestyle Change",
         }
     },
 
@@ -98,6 +188,13 @@ export default {
                 ? `Too large. Max size is ${MAX_SIZE/1000}kb` 
                 : "Only .csv, .xls, and .xlsx files are allowed";
             }
+        },
+
+        downloadItem () {
+            // Depending on how we proceed, see here for download support:
+            // https://stackoverflow.com/questions/53772331/vue-html-js-how-to-download-a-file-to-browser-using-the-download-tag
+            //
+            console.log("---> File download is not yet supported");
         },
 
         async sendFile() {

@@ -4,7 +4,6 @@
     For more information, see parts 1-3 of the following series: 
     https://www.youtube.com/watch?v=GXe_JpBQLTQ -->
 <form @submit.prevent="sendFile" enctype="multipart/form-data">
-
     
 <!-- header for component --> 
 <div class="head font-weight-bold"> 

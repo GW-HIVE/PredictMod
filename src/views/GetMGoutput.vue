@@ -1,5 +1,5 @@
 <template>
-    <v-card-text>Prediction: {{MGoutput}}</v-card-text>
+    <v-card-text>Prediction: {{ MGoutput }}</v-card-text>
 
   </template>
   

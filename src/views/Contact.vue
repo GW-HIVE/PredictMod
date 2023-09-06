@@ -8,50 +8,44 @@
       :height="400" 
       :cover="true"
       >
+      <v-card-title class="title text-center font-weight-bold">
+        Contact Us
+      </v-card-title>
       <!-- <span class="introduction">PredictMod Test Text</span> -->
     </v-img>
   </v-banner>
 
   <v-container>
- 
+
+
     <v-row>
       <v-col>
-            <v-card-title class="title text-center font-weight-bold">
-              Welcome to PredictMod
-            </v-card-title>
-            <v-card-text class="text-center">
-              Welcome to PredictMod! PredictMod is a machine-learning-based application that predicts 
-              whether a patient will respond to an intervention based on electronic health records (EHR) or metagenomic data.
-              <!-- <v-breadcrumbs color="blue">
-                <v-breadcrumbs-item href="https://github.com/GW-HIVE/PredictMod"> PredictMod Repo </v-breadcrumbs-item>
-                <v-breadcrumbs-item href="https://gwu0.sharepoint.com/sites/PredictMod-GRP"> SharePoint Page </v-breadcrumbs-item>
-              </v-breadcrumbs>  -->
-            </v-card-text>
 
+        <v-card-title class="title text-left font-weight-bold">
+          Send a Message          
+        </v-card-title>
+        <v-card-text class="text-left">
+          We always welcome questions, comments, and suggestions regarding our website. 
+          We will make every effort to respond to you within a reasonable amount of time. 
+          Email us at <a href="mailto:mazumder_lab@gwu.edu">mazumder_lab@gwu.edu</a>.
+        </v-card-text >
+        <v-card-title class="title text-left font-weight-bold">
+          GW Location
+        </v-card-title>
+        <v-card-text class="text-left">
+          The George Washington University
+          School of Medicine and Health Sciences
+          2300 Eye Street N.W.,
+          Washington, DC 20037
+        </v-card-text>
 
       </v-col>
     
     </v-row>
 
-
-
-
-
-
-    <v-row>
-          <v-col>
-            <EHRThumb/>
-          </v-col>
-          <v-col>
-            <MGThumb/>
-          </v-col>
-
-    </v-row>
-  
-
     <v-row>
       <v-col>
-          <DisclaimerShow/>
+        <DisclaimerShow/>
       </v-col>
       <v-col>
         <LicenseShow/>
@@ -70,12 +64,8 @@
 <script>
 import { onMounted, ref } from 'vue';
 
-// import SimpleUploadMG from './SimpleUploadMG.vue';
-// import SimpleUploadEHR from './SimpleUploadEHR.vue';
 import DisclaimerShow from './DisclaimerShow.vue';
 import NotFound from './NotFound.vue';
-import EHRThumb from './EHRThumb.vue';
-import MGThumb from './MGThumb.vue';
 import LicenseShow from './LicenseShow.vue';
 
 export default {
@@ -86,7 +76,7 @@ export default {
 				home: false,
 			}
     },
-  components: { DisclaimerShow, NotFound, EHRThumb, MGThumb, LicenseShow }
+  components: { DisclaimerShow, LicenseShow }
 }
 </script>
 

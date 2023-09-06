@@ -4,14 +4,14 @@
     <v-tabs>
       <v-tab to="/">Home</v-tab>
       <v-tab to="/about">About</v-tab>
-      <v-tab to="/faqs">FAQs</v-tab>
+      <v-tab to="/faq">FAQ</v-tab>
       <v-tab to="/contact">Contact</v-tab>
     </v-tabs>
     <main>
       <router-view />
     </main>
 </template>
-  
+
 <style>
   #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;

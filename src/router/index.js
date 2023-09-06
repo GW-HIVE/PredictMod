@@ -25,15 +25,23 @@ const routes = [
     // Following the example at `https://stackblitz.com/edit/vue3-vite-router-starter?file=src%2Frouter.js`
     // ...
     path: '/about',
-    component: () => import('../views/NotFound.vue'),
+    component: () => import('../views/About.vue'),
   },
   {
-    path: '/faqs',
-    component: () => import('../views/NotFound.vue'),
+    path: '/faq',
+    component: () => import('../views/FAQ.vue'),
   }, {
     path: '/contact',
-    component: () => import('../views/NotFound.vue'),
+    component: () => import('../views/Contact.vue'),
   },
+    {
+      path: '/upload-ehr', 
+      component: () => import('../views/SimpleUploadEHR.vue'),
+    },
+    {
+      path: '/upload-mg', 
+      component: () => import('../views/SimpleUploadMG.vue'),
+    },
 ]
 
 const router = createRouter({
