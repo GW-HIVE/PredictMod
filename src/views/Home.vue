@@ -2,7 +2,7 @@
   <v-banner
   single-line
   class="text-left">
-    <v-img src="../assets/Banner.png">
+    <v-img src="../assets/Welcome_Header.jpg" :height="400" :cover="true">
     </v-img>
   </v-banner>
 
