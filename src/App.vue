@@ -1,10 +1,12 @@
 <template>
-    <nav>
-      <router-link to="/">Home</router-link> | 
-      <router-link to="/about">About</router-link> |
-      <router-link to="/faqs">FAQs</router-link> |
-      <router-link to="/contact">Contact</router-link>
-    </nav>
+    <!-- Vuetify documentation: https://vuetifyjs.com/en/components/tabs/ -->
+    <!-- Also see SO at https://stackoverflow.com/questions/49721710/how-to-use-vuetify-tabs-with-vue-router -->
+    <v-tabs>
+      <v-tab to="/">Home</v-tab>
+      <v-tab to="/about">About</v-tab>
+      <v-tab to="/faqs">FAQs</v-tab>
+      <v-tab to="/contact">Contact</v-tab>
+    </v-tabs>
     <main>
       <router-view />
     </main>
