@@ -1,7 +1,7 @@
 <template>	
 
 	
-		<button class="button is-light" @click="show = !show">
+		<button class="button is-light" @click="show = true">
 			DISCLAIMER
 		</button>
 
