@@ -1,0 +1,147 @@
+<!-- 
+    Adopted liberally from:
+    https://github.com/bezkoder/vuetify-file-upload
+ -->
+<template>
+    <div>
+      <div v-if="currentFile">
+        <div>
+          <v-progress-linear
+            v-model="progress"
+            color="light-blue"
+            height="25"
+            reactive
+          >
+            <strong>{{ progress }} %</strong>
+          </v-progress-linear>
+        </div>
+      </div>
+  
+      <!-- <v-row no-gutters justify="center" align="center"> -->
+        <!-- <v-col cols="8"> -->
+        <!-- <v-col> -->
+            <!-- 
+                See `rules` for filtering on file type. 
+                Not super critical at present. 
+             -->
+          <v-file-input
+            show-size
+            label="Select a PredictMod-formatted xls or xlsx file"
+            type="File"
+            v-model="currentFile"
+          ></v-file-input>
+        <!-- </v-col> -->
+        <!--
+            This appears to break when invoked using Vuetify auto-magic 
+            @change="selectFile($event)" 
+        -->
+            
+        <!-- <v-col cols="4" class="pl-2"> -->
+        <v-col>  
+          <v-btn right color="success" dark small @click="importFile">
+            Upload sample data
+            <!-- <v-icon right dark>mdi-cloud-upload</v-icon> -->
+          </v-btn>
+        </v-col>
+        <v-col>
+          <v-btn right color="success" dark small @click="upload">
+            Submit & Analyze
+          </v-btn>
+        </v-col>
+      <!-- </v-row> -->
+  
+      <v-alert v-if="message" border="left" color="blue-grey" dark>
+        {{ message }}
+      </v-alert>
+  
+    </div>
+  </template>
+  
+  <script>
+  import UploadService from "../services/UploadService";
+  
+  import * as XLSX from 'xlsx';
+
+  export default {
+    name: "upload-files",
+    props: {
+        uploadTargetURL: String,
+    },
+    data() {
+      return {
+        currentFile: null,
+        data: null,
+        progress: 0,
+        message: "",
+      };
+    },
+    methods: {
+        importFile() {
+            if (!this.currentFile) {
+                this.message = "No file chosen"
+            };
+            console.log("---> Now attempting to read file");
+            const reader = new FileReader();
+            reader.readAsArrayBuffer(this.currentFile[0]);
+            console.log("---> Reader has read the file!");
+            reader.onload = (event) => {
+                const rawData = reader.result;
+                const workbook = XLSX.read(rawData);
+                const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+                const arrayedData = XLSX.utils.sheet_to_json(firstSheet, {header: 1});
+                this.data = JSON.stringify(arrayedData);
+                console.log("Now we have data:\n%s", this.data);
+            }
+        },
+    //   selectFile(event) {
+    //     const file = event.target.files[0]
+    //     console.log("EVENT:\n%s", JSON.stringify(file))
+    //     const allowedTypes = ["text/csv","application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "application/vnd.ms-excel"];
+    //     const MAX_SIZE = 200000;
+    //     const tooLarge = file.size > MAX_SIZE;
+    //     if(allowedTypes.includes(file.type) && !tooLarge) {
+    //         this.file = file;
+    //         this.error = false;
+    //         this.message = "";
+    //     } else {
+    //         this.error = true;
+    //         this.message = tooLarge 
+    //         ? `Too large. Max size is ${MAX_SIZE/1000}kb` 
+    //         : "Only .csv, .xls, and .xlsx files are allowed";
+    //     }
+        
+    //     this.progress = 0;
+    //     this.currentFile = file;
+
+    //   },
+  
+      upload() {
+        if (!this.currentFile) {
+          this.message = "Please select a file for upload!";
+          return;
+        }
+        if (!this.data) {
+          this.message = "Please upload a data file!";
+          return;
+        }
+  
+        this.message = "";
+  
+        UploadService.upload(this.data, this.uploadTargetURL, (event) => {
+          this.progress = Math.round((100 * event.loaded) / event.total);
+        })
+          .then((response) => {
+            // this.message = response.data.message;
+            this.message = response.data;
+          })
+          .catch(() => {
+            this.progress = 0;
+            this.message = "Could not upload the file!";
+            // this.currentFile = null;
+            // this.data = null;
+          });
+      },
+    },
+  };
+
+  </script>

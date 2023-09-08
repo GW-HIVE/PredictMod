@@ -82,10 +82,14 @@
             upload fields
             https://ourcodeworld.com/articles/read/1424/how-to-use-a-button-as-a-file-uploader-with-vuetify-in-vuejs
          -->
-        <v-file-input
+          <FileUpload :upload-target-u-r-l="myTargetURL" />
+
+         <!-- Dead code below...? -->
+        <!-- <v-file-input
           label="Upload Sample Data"
-          variant="outlined">
-        </v-file-input>        
+          variant="outlined"
+          >
+        </v-file-input> -->
     </v-row>
   </div>
 </v-col>
@@ -97,12 +101,12 @@
 <div class="field">
 <div class="file is-boxed is-primary is-centered" v-if="message == !'File has been uploaded'">
     <label class="file-label">
-        <input 
+        <input
         type="file"
         ref="MG"
         @change="selectFile"
         class="file-input"
-        />
+        >
         <span class="file-cta">
             <span class="file-icon">
                 <i class="fas fa-upload"></i>
@@ -148,9 +152,11 @@
 <script>
 import axios  from 'axios';
 import GetMGoutput from './GetMGoutput.vue'
+import FileUpload from '../components/FileUpload.vue'
+
 export default {
     name: "SimpleUploadMG",
-    components: { GetMGoutput },
+    components: { GetMGoutput, FileUpload },
     props: {
         
     },
@@ -168,27 +174,37 @@ export default {
                 "Lifestyle Change",
             ],
             interventionType: "Lifestyle Change",
+            myTargetURL: "mg",
         }
     },
+    // This is useful to keep around in case we start needing to pass state around
+    // async created() {
+    //     const labelURL = () => new Promise((resolve, reject) => {
+    //         setTimeout(() => {
+    //           resolve("mg");
+    //         }, 50);
+    //     });
+    //     this.myTargetURL = await labelURL();
+    // },
 
     methods: {
-        selectFile() {
-            const file = this.$refs.MG.files[0];
-            const allowedTypes = ["text/csv","application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "application/vnd.ms-excel"];
-            const MAX_SIZE = 200000;
-            const tooLarge = file.size > MAX_SIZE;
+        // selectFile() {
+        //     const file = this.$refs.MG.files[0];
+        //     const allowedTypes = ["text/csv","application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "application/vnd.ms-excel"];
+        //     const MAX_SIZE = 200000;
+        //     const tooLarge = file.size > MAX_SIZE;
 
-            if(allowedTypes.includes(file.type) && !tooLarge) {
-                this.file = file;
-                this.error = false;
-                this.message = "";
-            } else {
-                this.error = true;
-                this.message = tooLarge 
-                ? `Too large. Max size is ${MAX_SIZE/1000}kb` 
-                : "Only .csv, .xls, and .xlsx files are allowed";
-            }
-        },
+        //     if(allowedTypes.includes(file.type) && !tooLarge) {
+        //         this.file = file;
+        //         this.error = false;
+        //         this.message = "";
+        //     } else {
+        //         this.error = true;
+        //         this.message = tooLarge 
+        //         ? `Too large. Max size is ${MAX_SIZE/1000}kb` 
+        //         : "Only .csv, .xls, and .xlsx files are allowed";
+        //     }
+        // },
 
         downloadItem () {
             // Depending on how we proceed, see here for download support:
@@ -197,23 +213,26 @@ export default {
             console.log("---> File download is not yet supported");
         },
 
-        async sendFile() {
-            const formData = new FormData();
-            formData.append('MG', this.file);
+        // async sendFile() {
             
-            try {
-                await axios.post('/upload-MG', formData);
-                this.message = "File has been uploaded";
-                this.file = ""
-                this.error = false
-            }   catch(err) {
-                this.message = err.response.data.error;
-                this.error = true;
-            }
-        },
-        revertFile() {
-            this.message = ""
-        }
+        //   console.log("---> Sending file!");          
+          
+        //   const formData = new FormData();
+        //   formData.append('MG', this.file);
+
+        //     // try {
+        //     //     await axios.post('/upload-MG', formData);
+        //     //     this.message = "File has been uploaded";
+        //     //     this.file = ""
+        //     //     this.error = false
+        //     // }   catch(err) {
+        //     //     this.message = err.response.data.error;
+        //     //     this.error = true;
+        //     // }
+        // },
+        // revertFile() {
+        //     this.message = ""
+        // }
     }
 }
 
