@@ -28,6 +28,11 @@ Navigate to the PredictMod directory and use the following command to install th
 npm install
 ```
 
+#### "Hidden" Dependencies
+The most current version of the sheetJS (CE) library (currently 0.20.0) should be installed manually, as so:
+`npm i --save https://cdn.sheetjs.com/xlsx-0.20.0/xlsx-0.20.0.tgz`
+See [SheetJS documentation](https://docs.sheetjs.com/docs/getting-started/installation/nodejs) for additional details.
+
 #### Running the app
 
 Navigate to the upload-api directory and execute the following command to start the server:
