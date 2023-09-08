@@ -69,11 +69,12 @@
       <v-container>
         <a href="../assets/w10003.png">
           <v-btn elevation="0" border @click.prevent="downloadItem(item)">
-              File Download (Not Working!)
+              File Download
           </v-btn>
         </a>
       </v-container>
     </v-row>
+    <v-container>
     <v-row>
         <!-- 
             TODO
@@ -91,6 +92,7 @@
           >
         </v-file-input> -->
     </v-row>
+  </v-container>
   </div>
 </v-col>
 

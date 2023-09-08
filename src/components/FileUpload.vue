@@ -3,8 +3,8 @@
     https://github.com/bezkoder/vuetify-file-upload
  -->
 <template>
-    <div>
-      <div v-if="currentFile">
+    <div class="text-center">
+      <div>
         <div>
           <v-progress-linear
             v-model="progress"
@@ -37,7 +37,9 @@
         -->
             
         <!-- <v-col cols="4" class="pl-2"> -->
-        <v-col>  
+        <v-container class="justify-center">
+        <v-row>
+        <v-col class="justify-center">  
           <v-btn right color="success" dark small @click="importFile">
             Upload sample data
             <!-- <v-icon right dark>mdi-cloud-upload</v-icon> -->
@@ -48,9 +50,11 @@
             Submit & Analyze
           </v-btn>
         </v-col>
+      </v-row>
+    </v-container>
       <!-- </v-row> -->
   
-      <v-alert v-if="message" border="left" color="blue-grey" dark>
+      <v-alert v-if="message" color="blue-grey" dark>
         {{ message }}
       </v-alert>
   
@@ -72,7 +76,7 @@
         currentFile: null,
         data: null,
         progress: 0,
-        message: "",
+        message: "Data must be selected before results are available",
       };
     },
     methods: {
@@ -80,17 +84,17 @@
             if (!this.currentFile) {
                 this.message = "No file chosen"
             };
-            console.log("---> Now attempting to read file");
+            // console.log("---> Now attempting to read file");
             const reader = new FileReader();
             reader.readAsArrayBuffer(this.currentFile[0]);
-            console.log("---> Reader has read the file!");
+            // console.log("---> Reader has read the file!");
             reader.onload = (event) => {
                 const rawData = reader.result;
                 const workbook = XLSX.read(rawData);
                 const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
                 const arrayedData = XLSX.utils.sheet_to_json(firstSheet, {header: 1});
                 this.data = JSON.stringify(arrayedData);
-                console.log("Now we have data:\n%s", this.data);
+                // console.log("Now we have data:\n%s", this.data);
             }
         },
   
@@ -103,8 +107,6 @@
           this.message = "Please upload a data file!";
           return;
         }
-  
-        this.message = "";
   
         UploadService.upload(this.data, this.uploadTargetURL, (event) => {
           this.progress = Math.round((100 * event.loaded) / event.total);
