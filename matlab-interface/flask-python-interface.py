@@ -34,15 +34,16 @@ def metagenomic_outstr(str1):
 @cross_origin()
 def mg_request():
     try:
-        app.logger.debug(f"---> Collected request at >>> MG <<<")
-        app.logger.debug(f"---> Method is {request.method}")
+        # XXX
+        # app.logger.debug(f"---> Collected request at >>> MG <<<")
+        # app.logger.debug(f"---> Method is {request.method}")
         json_package = json.loads(request.get_json()['json'])
-        app.logger.debug(f"---> JSON Data:\n{json_package}")
+        # app.logger.debug(f"---> JSON Data:\n{json_package}")
 
         headers, data = json_package[0], json_package[1]
 
-        app.logger.debug(f"---> Headers: {headers}")
-        app.logger.debug(f"---> Data: {data}")
+        # app.logger.debug(f"---> Headers: {headers}")
+        # app.logger.debug(f"---> Data: {data}")
 
     except Exception as e:
         app.logger.debug(f"--->>> Exception!\n{e}")
@@ -55,7 +56,8 @@ def mg_request():
 @cross_origin()
 def request_received():
     try:
-        app.logger.debug(f"---> Collected request at >>> EHR <<<")
+        # XXX
+        # app.logger.debug(f"---> Collected request at >>> EHR <<<")
         json_package = json.loads(request.get_json()['json'])
         # TODO: Next steps!
     except Exception as e:
