@@ -93,27 +93,6 @@
                 console.log("Now we have data:\n%s", this.data);
             }
         },
-    //   selectFile(event) {
-    //     const file = event.target.files[0]
-    //     console.log("EVENT:\n%s", JSON.stringify(file))
-    //     const allowedTypes = ["text/csv","application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "application/vnd.ms-excel"];
-    //     const MAX_SIZE = 200000;
-    //     const tooLarge = file.size > MAX_SIZE;
-    //     if(allowedTypes.includes(file.type) && !tooLarge) {
-    //         this.file = file;
-    //         this.error = false;
-    //         this.message = "";
-    //     } else {
-    //         this.error = true;
-    //         this.message = tooLarge 
-    //         ? `Too large. Max size is ${MAX_SIZE/1000}kb` 
-    //         : "Only .csv, .xls, and .xlsx files are allowed";
-    //     }
-        
-    //     this.progress = 0;
-    //     this.currentFile = file;
-
-    //   },
   
       upload() {
         if (!this.currentFile) {
