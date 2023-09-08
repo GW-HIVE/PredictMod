@@ -135,51 +135,14 @@ export default {
     // },
 
     methods: {
-        // selectFile() {
-        //     const file = this.$refs.MG.files[0];
-        //     const allowedTypes = ["text/csv","application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "application/vnd.ms-excel"];
-        //     const MAX_SIZE = 200000;
-        //     const tooLarge = file.size > MAX_SIZE;
-
-        //     if(allowedTypes.includes(file.type) && !tooLarge) {
-        //         this.file = file;
-        //         this.error = false;
-        //         this.message = "";
-        //     } else {
-        //         this.error = true;
-        //         this.message = tooLarge 
-        //         ? `Too large. Max size is ${MAX_SIZE/1000}kb` 
-        //         : "Only .csv, .xls, and .xlsx files are allowed";
-        //     }
-        // },
 
         downloadItem () {
             // Depending on how we proceed, see here for download support:
             // https://stackoverflow.com/questions/53772331/vue-html-js-how-to-download-a-file-to-browser-using-the-download-tag
             //
+            alert("File download is not yet supported");
             console.log("---> File download is not yet supported");
         },
-
-        // async sendFile() {
-            
-        //   console.log("---> Sending file!");          
-          
-        //   const formData = new FormData();
-        //   formData.append('MG', this.file);
-
-        //     // try {
-        //     //     await axios.post('/upload-MG', formData);
-        //     //     this.message = "File has been uploaded";
-        //     //     this.file = ""
-        //     //     this.error = false
-        //     // }   catch(err) {
-        //     //     this.message = err.response.data.error;
-        //     //     this.error = true;
-        //     // }
-        // },
-        // revertFile() {
-        //     this.message = ""
-        // }
     }
 }
 
