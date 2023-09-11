@@ -1,7 +1,7 @@
 <template>
 
   <v-col>
-    <router-link to="/upload-mg">
+    <router-link to="/mg-home">
   	<v-img
   		src="../assets/MG_Model.jpg"
   		contain
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import SimpleUploadMG from './SimpleUploadMG.vue';
+import MGHome from './MGHome.vue';
 
 export default {
 	data() {
@@ -25,6 +25,6 @@ export default {
 		},
 		methods: {
 		},
-		components: { SimpleUploadMG }
+		components: { MGHome }
 }
 </script>

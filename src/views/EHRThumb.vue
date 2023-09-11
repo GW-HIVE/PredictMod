@@ -1,7 +1,7 @@
 <template>	
 
 	<v-col>
-	  <router-link to="/upload-ehr">
+	  <router-link to="/ehr-home">
 		<v-img
 			src="../assets/EHR_Model.jpg"
 			contain

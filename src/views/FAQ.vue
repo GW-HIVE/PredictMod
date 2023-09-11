@@ -8,9 +8,9 @@
       :height="400" 
       :cover="true"
       >
-      <v-card-text>
+      <v-card-title class="title text-center font-weight-bold">
       Frequently Asked Questions
-      </v-card-text>
+      </v-card-title>
       <!-- <span class="introduction">PredictMod Test Text</span> -->
     </v-img>
   </v-banner>

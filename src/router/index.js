@@ -35,12 +35,12 @@ const routes = [
     component: () => import('../views/Contact.vue'),
   },
     {
-      path: '/upload-ehr', 
-      component: () => import('../views/SimpleUploadEHR.vue'),
+      path: '/ehr-home', 
+      component: () => import('../views/EHRHome.vue'),
     },
     {
-      path: '/upload-mg', 
-      component: () => import('../views/SimpleUploadMG.vue'),
+      path: '/mg-home', 
+      component: () => import('../views/MGHome.vue'),
     },
 ]
 

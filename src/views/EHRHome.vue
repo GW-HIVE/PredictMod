@@ -1,144 +1,162 @@
 <template>
 
-<!--this component was adapted from a Youtube tutorial. 
-    For more information, see parts 1-3 of the following series: 
-    https://www.youtube.com/watch?v=GXe_JpBQLTQ -->
-<form @submit.prevent="sendFile" enctype="multipart/form-data">
-    
-<!-- header for component --> 
-<div class="head font-weight-bold"> 
-    Analyze EHR data
-</div>
+<v-banner
+  single-line
+  class="text-center"
+  >
+    <v-img
+      src="../assets/EHR_Model.jpg"
+      id="intro-img"
+      :height="400" 
+      :cover="true"
+      >
+      <v-card-title class="text-center font-weight-bold text-bottom">
+        <!-- 
+            TODO: Get the text aligned, see e.g. here:
+            https://stackoverflow.com/questions/56703740/how-to-bottom-align-button-in-card-irrespective-of-the-text-in-vuetify 
+        -->
+        Electronic Health Record Report
+      </v-card-title>
+      <v-card-text class="text-center">
+        Electronic Health Records (EHR) contain patient-centered clinical records obtained through regular 
+        medical checkups.
 
-<div class="field">
+      </v-card-text>
+      <!-- <span class="introduction">PredictMod Test Text</span> -->
+    </v-img>
+  </v-banner>
 
-<!-- if file has not been uploaded, allow user to select and upload file-->
-<div class="file is-boxed is-primary is-centered" v-if="message ==!'File has been uploaded'">
-    <label class="file-label">
-        
-        <!--when clicked, allow user to select file. Use REF "EHR" for file from now on. This will be important on server side-->
-        <input 
-        type="file"
-        ref="EHR"
-        @change="selectFile"
-        class="file-input"
-        />
-
-        <span class="file-cta">
-            <span class="file-icon">
-                <i class="fas fa-upload"></i>
-            </span>
-            <div class="span file-label">
-                Choose a file...
-            </div>
-        </span>
-
-        <span v-if="file" class="file-name">{{file.name}}</span>
-        <div v-if="message"
-        :class="`message ${error ? 'is-danger' : 'is-success'}`"
-        >
-        
-        <div class="message-body">{{message}}</div>
-        </div>
-    </label>
-</div>
-
-    </div>
-    <div class="field"> 
-        <button class="button is-info is-centered" v-if="message == !'File has been uploaded'">Submit</button>
-        
-    </div>
-    <div class="field">
-        <button class="button is-primary" v-if="message =='File has been uploaded'" @click="show = !show">
-        Show Results
-        </button>
-    </div>
-    <div class="field">
-        <button class="button is-info" v-if="message =='File has been uploaded'" @click="revertFile">
-        Upload a different file
-        </button>
-    </div>
-    <div class="field">
-        <v-card-text class="text-left" v-if="show && message=='File has been uploaded'">
-         <GetEHRoutput/>
+<v-col>
+  <div class="text-center">
+    <v-row>
+        <v-select
+          v-model="morbidityType"
+          :items="morbidities"
+          label="Select Disease Type">
+        </v-select>
+        <!-- TODO? We can change the button style as below -->
+        <!-- <v-menu :selection="morbidities">
+          <template v-slot:activator="{ props }">
+            <v-btn
+              color="primary"
+              dark
+              v-bind="props">
+            </v-btn>
+          </template>
+          <v-list>
+            <v-list-item
+              v-for="(item, index) in items"
+              :key="index"
+            >
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu> -->
+    </v-row>
+    <v-row>
+        <v-select
+          v-model="interventionType"
+          :items="interventions"
+          label="Select Intervention">
+        </v-select>
+    </v-row>
+    <v-row>
+      <v-container>
+        <v-card-title class="title text-center font-weight-bold" >
+          Upload your data
+        </v-card-title>
+        <v-card-text class="text-center">
+          <em>Make sure your file is in the PredictMod format</em>
         </v-card-text>
-        <v-btn elevation="0" border>
-          <v-list-item href="http://localhost:3344/example-EHR"> Example data </v-list-item>
-        </v-btn>
-    </div>
-</form>
+      </v-container>
+      <v-container>
+        <a>
+          <v-btn elevation="0" border @click.prevent="downloadItem(item)">
+              File Download
+          </v-btn>
+        </a>
+      </v-container>
+    </v-row>
+    <v-container>
+    <v-row>
+        <!-- 
+            TODO
+            See here for a good example of making the Vue button trigger an
+            upload method, rather than relying on Vuetify's internal 
+            upload fields
+            https://ourcodeworld.com/articles/read/1424/how-to-use-a-button-as-a-file-uploader-with-vuetify-in-vuejs
+         -->
+          <FileUpload :upload-target-u-r-l="myTargetURL" />
 
+         <!-- Dead code below...? -->
+        <!-- <v-file-input
+          label="Upload Sample Data"
+          variant="outlined"
+          >
+        </v-file-input> -->
+    </v-row>
+  </v-container>
+  </div>
+</v-col>
 
+  <v-row>
+      <v-col>
+          <DisclaimerShow/>
+      </v-col>
+      <v-col>
+        <LicenseShow/>
+      </v-col>
+  </v-row>
 </template>
 
 <script>
+import FileUpload from '../components/FileUpload.vue'
+import DisclaimerShow from './DisclaimerShow.vue';
+import LicenseShow from './LicenseShow.vue';
 
-import axios  from 'axios';
-import GetEHRoutput from './GetEHRoutput.vue'
 export default {
-    name: "SimpleUploadEHR",
-    components: {GetEHRoutput},
+    name: "Electronic Health Record Analysis Home",
+    components: { FileUpload, DisclaimerShow, LicenseShow },
     props: {
-
+        
     },
     data() {
         return {
             file: "",
             message: "",
-            image:[],
-            show: false,
             error: false,
+            show: false,
+            morbidities: [
+                "Prediabetes",
+            ],
+            morbidityType: "Prediabetes",
+            interventions: [
+                "Lifestyle Change",
+            ],
+            interventionType: "Lifestyle Change",
+            myTargetURL: "ehr",
         }
     },
+    // This is useful to keep around in case we start needing to pass state around
+    // async created() {
+    //     const labelURL = () => new Promise((resolve, reject) => {
+    //         setTimeout(() => {
+    //           resolve("mg");
+    //         }, 50);
+    //     });
+    //     this.myTargetURL = await labelURL();
+    // },
 
     methods: {
 
-        //method to select file, with allowedTypes restricting filetypes and size before being sent to server
-        selectFile() {
-            const file = this.$refs.EHR.files[0];
-            //allowed filetypes can be changed by adding/removing mimetypes to allowedTypes
-            const allowedTypes = ["text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "application/vnd.ms-excel" ];
-            //can alter max filesize allowed (in b) by changing value MAX_SIZE
-            const MAX_SIZE = 200000;
-            const tooLarge = file.size > MAX_SIZE;
-
-            if(allowedTypes.includes(file.type) && !tooLarge) {
-                this.file = file;
-                this.error = false;
-                this.message = "";
-            } else {
-                this.error = true;
-                this.message = tooLarge 
-                ? `Too large. Max size is ${MAX_SIZE/1000}kb` 
-                : "Only .csv, .xls, and .xlsx files are allowed";
-            }
+        downloadItem () {
+            // Depending on how we proceed, see here for download support:
+            // https://stackoverflow.com/questions/53772331/vue-html-js-how-to-download-a-file-to-browser-using-the-download-tag
+            //
+            alert("File download is not yet supported");
+            console.log("---> File download is not yet supported");
         },
-        //will send file to server if no errors come up
-        async sendFile() {
-            const formData = new FormData();
-            formData.append('EHR', this.file);
-
-            try {
-                await axios.post('/upload-EHR', formData);
-                this.message = "File has been uploaded";
-                this.file = ""
-                this.error = false
-            }   catch(err) {
-                this.message = err.response.data.error;
-                this.error = true;
-            }
-        },
-        async created () {
-            // Simple GET request using fetch
-            fetch("/output")
-                .then(response => response.json())
-                .then(data => (this.EHRoutput = data.title));
-        },
-        
-        revertFile() {
-            this.message = ""
-        }
-    },
+    }
 }
 
 

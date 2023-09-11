@@ -23,7 +23,6 @@
     </v-img>
   </v-banner>
 
-<v-col>
   <div class="text-center">
     <v-row>
         <v-select
@@ -67,7 +66,7 @@
         </v-card-text>
       </v-container>
       <v-container>
-        <a href="../assets/w10003.png">
+        <a>
           <v-btn elevation="0" border @click.prevent="downloadItem(item)">
               File Download
           </v-btn>
@@ -76,6 +75,7 @@
     </v-row>
     <v-container>
     <v-row>
+      <v-card-title class="title text-center font-weight-bold" >
         <!-- 
             TODO
             See here for a good example of making the Vue button trigger an
@@ -91,21 +91,30 @@
           variant="outlined"
           >
         </v-file-input> -->
+      </v-card-title>
     </v-row>
   </v-container>
   </div>
-</v-col>
 
+  <v-row>
+      <v-col>
+          <DisclaimerShow/>
+      </v-col>
+      <v-col>
+        <LicenseShow/>
+      </v-col>
+    </v-row>
 </template>
 
 <script>
-import axios  from 'axios';
-import GetMGoutput from './GetMGoutput.vue'
+// import GetMGoutput from './GetMGoutput.vue'
 import FileUpload from '../components/FileUpload.vue'
+import DisclaimerShow from './DisclaimerShow.vue';
+import LicenseShow from './LicenseShow.vue';
 
 export default {
-    name: "SimpleUploadMG",
-    components: { GetMGoutput, FileUpload },
+    name: "Metagenomic Analysis Home",
+    components: { FileUpload, DisclaimerShow, LicenseShow },
     props: {
         
     },
