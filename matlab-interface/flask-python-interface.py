@@ -62,4 +62,4 @@ def request_received():
         # TODO: Next steps!
     except Exception as e:
         return Response(f"Got an error!\n\t{e}")
-    return Response("EHR: : Analysis Loop Completed\n")
+    return Response("EHR: Analysis Loop Completed\n")
