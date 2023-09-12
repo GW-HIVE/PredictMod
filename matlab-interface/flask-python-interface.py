@@ -1,4 +1,4 @@
-from flask import Flask, request, Response
+from flask import Flask, request, Response, send_from_directory
 from flask_cors import CORS, cross_origin
 
 import os
@@ -14,6 +14,8 @@ import io
 app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
+app.config["DOWNLOAD_FOLDER"] = os.path.join(os.path.dirname(app.instance_path), "downloads")
+
 app.logger.setLevel(logging.DEBUG)
 
 def ehr_outstr(str1, str2=None):
@@ -29,6 +31,25 @@ def metagenomic_outstr(str1):
 <b>MG: REMARKS COMPLETE</b>
 """
 
+@app.route("/metagenomic-download", methods=["GET"])
+@cross_origin()
+def mg_download():
+    try:
+        app.logger.debug("MG: Received download request")
+        app.logger.debug(f"MG: Upload dir is {app.config['DOWNLOAD_FOLDER']}")
+        app.logger.debug("")
+        app.logger.debug(f"\tSearching: {os.path.join(app.config['DOWNLOAD_FOLDER'], 'single_patient_data_1.xls')}")
+        app.logger.debug("")
+        
+        return send_from_directory(
+            app.config["DOWNLOAD_FOLDER"], 
+            "single_patient_data_1.xls", 
+            as_attachment=True,
+            mimetype="application/vnd.ms-excel"
+        )
+    except Exception as e:
+        app.logger.debug(f"Exception: {e}")
+        return Response(f"Error! {e}")
 
 @app.route("/mg-upload", methods=["POST"])
 @cross_origin()
