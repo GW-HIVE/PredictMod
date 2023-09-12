@@ -1,16 +1,44 @@
 <template>
-  <v-banner
+  <!-- <v-banner
   single-line
-  class="text-left">
+  class="text-left"> -->
+  <v-card>
     <v-img
       src="../assets/Welcome_Header.jpg"
       id="intro-img"
+      gradient="to bottom, rgba(119, 119, 119, 0.25), rgba(0, 0, 0, 0.75)"
       :height="400" 
       :cover="true"
       >
-      <!-- <span class="introduction">PredictMod Test Text</span> -->
+      <!-- <v-overlay absolute> -->
+      <!-- 
+        See below for the (currently...) most reliable overview of v-img
+        use cases. 
+        https://codingbeautydev.com/blog/vuetify-image/?expand_article=1
+        NB: `:gradient` is broken as of vuetify ^3.0.0, `gradient="xxx"`
+        must be used.
+       -->
+       
+        <div class="d-flex fill-height" style="flex-direction:column">
+          <div class="d-flex fill-height align-center justify-center"> 
+     
+          <v-card flat color="transparent">
+            <v-card-title class="title text-center font-weight-bold">
+              Welcome to PredictMod
+            </v-card-title>
+            <v-card-text class="text-center">
+              Welcome to PredictMod! PredictMod is a machine-learning-based application that predicts 
+              whether a patient will respond to an intervention based on electronic health records (EHR) or metagenomic data.
+            </v-card-text>
+         </v-card>
+       
+          </div>
+        </div> 
+     
+      <!-- </v-overlay> -->
     </v-img>
-  </v-banner>
+  </v-card>
+  <!-- </v-banner> -->
 
   <v-container>
  
@@ -97,10 +125,16 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 0px;
+}
+#intro-img {
+  color: #fcfcfc;
 }
 /* :gradient="linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.75))" */
+/*
+Broken css: 
 #intro-img {
   background-image: linear-gradient(to bottom, rgba(119, 119, 119, 0), rgb(0, 0, 0));
 }
+*/
 </style>

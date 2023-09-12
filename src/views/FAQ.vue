@@ -5,12 +5,19 @@
     <v-img
       src="../assets/Welcome_Header.jpg"
       id="intro-img"
+      gradient="to bottom, rgba(119, 119, 119, 0.25), rgba(0, 0, 0, 0.75)"
       :height="400" 
       :cover="true"
       >
-      <v-card-title class="title text-center font-weight-bold">
-      Frequently Asked Questions
-      </v-card-title>
+      <div class="d-flex fill-height" style="flex-direction:column">
+          <div class="d-flex fill-height align-center justify-center"> 
+            <v-card flat color="transparent">
+              <v-card-title class="title text-center font-weight-bold center">
+              Frequently Asked Questions
+              </v-card-title>
+            </v-card>
+          </div>
+        </div>
       <!-- <span class="introduction">PredictMod Test Text</span> -->
     </v-img>
   </v-banner>

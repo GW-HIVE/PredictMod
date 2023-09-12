@@ -6,19 +6,26 @@
     <v-img
       src="../assets/MG_Model.jpg"
       id="intro-img"
+      gradient="to bottom, rgba(119, 119, 119, 0.25), rgba(0, 0, 0, 0.75)"
       :height="400" 
       :cover="true"
       >
-      <v-card-title class="text-center font-weight-bold text-bottom">
-        <!-- 
-            TODO: Get the text aligned, see e.g. here:
-            https://stackoverflow.com/questions/56703740/how-to-bottom-align-button-in-card-irrespective-of-the-text-in-vuetify 
-        -->
-        Metagenomic Report
-      </v-card-title>
-      <v-card-text class="text-center">
-        The gut microbiome consists of the genetic material of microbial communities found within the human gastrointestinal tract.
-      </v-card-text>
+      <div class="d-flex fill-height" style="flex-direction:column">
+          <div class="d-flex fill-height align-center justify-center"> 
+            <v-card flat color="transparent">
+              <v-card-title class="text-center font-weight-bold text-bottom">
+                <!-- 
+                    TODO: Get the text aligned, see e.g. here:
+                    https://stackoverflow.com/questions/56703740/how-to-bottom-align-button-in-card-irrespective-of-the-text-in-vuetify 
+                -->
+                Metagenomic Report
+              </v-card-title>
+              <v-card-text class="text-center">
+                The gut microbiome consists of the genetic material of microbial communities found within the human gastrointestinal tract.
+              </v-card-text>
+            </v-card>
+          </div>
+        </div>
       <!-- <span class="introduction">PredictMod Test Text</span> -->
     </v-img>
   </v-banner>
@@ -74,7 +81,7 @@
       </v-container>
     </v-row>
     <v-container>
-    <v-row class="title justify-center font-weight-bold">
+    <v-row class="justify-center">
       <v-card-title class="title text-center font-weight-bold" >
         <!-- 
             TODO
@@ -111,6 +118,8 @@
 import FileUpload from '../components/FileUpload.vue'
 import DisclaimerShow from './DisclaimerShow.vue';
 import LicenseShow from './LicenseShow.vue';
+
+import axios, { Axios } from 'axios';
 
 export default {
     name: "Metagenomic Analysis Home",
@@ -151,8 +160,22 @@ export default {
             // Depending on how we proceed, see here for download support:
             // https://stackoverflow.com/questions/53772331/vue-html-js-how-to-download-a-file-to-browser-using-the-download-tag
             //
-            alert("File download is not yet supported");
-            console.log("---> File download is not yet supported");
+            const warning = "File download is currently under construction"
+            alert(warning);
+            console.log(warning);
+            
+            // TODO: This currently returns the (what appears to be...) correct binary information, but
+            // Excel complains that the file is corrupt. :/ 
+
+            // axios.get("http://localhost:5000/metagenomic-download")
+            //   .then(response => {
+            //     const blob = new Blob([response.data], {type: 'application/vnd.ms-excel'});
+            //     const link = document.createElement('a');
+            //     link.href = URL.createObjectURL(blob);
+            //     link.download = 'metagenomic_sample_data.xls';
+            //     link.click();
+            //     URL.revokeObjectURL(link.href);
+            //   }).catch(console.error)
         },
     }
 }

@@ -5,16 +5,23 @@
     <v-img
       src="../assets/Welcome_Header.jpg"
       id="intro-img"
+      gradient="to bottom, rgba(119, 119, 119, 0.25), rgba(0, 0, 0, 0.75)"
       :height="400" 
       :cover="true"
       >
-      <v-card-title class="title text-center font-weight-bold">
-        PredictMod
-      </v-card-title>
-      <v-card-text class="text-center">
-        A Machine Learning-Based Application for Informed Clinical Decision Making
-      </v-card-text>
+      <div class="d-flex fill-height" style="flex-direction:column">
+          <div class="d-flex fill-height align-center justify-center"> 
+            <v-card flat color="transparent">
+            <v-card-title class="title text-center font-weight-bold">
+              PredictMod
+            </v-card-title>
+            <v-card-text class="text-center">
+              A Machine Learning-Based Application for Informed Clinical Decision Making
+            </v-card-text>
+            </v-card>
       <!-- <span class="introduction">PredictMod Test Text</span> -->
+      </div>
+      </div>
     </v-img>
   </v-banner>
 
