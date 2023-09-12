@@ -40,16 +40,16 @@
         <v-container class="justify-center">
         <v-row>
         <v-col class="justify-center">  
-          <v-btn right color="success" dark small @click="importFile">
-            Upload sample data
+          <v-btn right color="success" dark small @click="importFileAndAnalyze">
+            Submit & Analyze
             <!-- <v-icon right dark>mdi-cloud-upload</v-icon> -->
           </v-btn>
         </v-col>
-        <v-col>
+        <!-- <v-col>
           <v-btn right color="success" dark small @click="upload">
             Submit & Analyze
           </v-btn>
-        </v-col>
+        </v-col> -->
       </v-row>
     </v-container>
       <!-- </v-row> -->
@@ -80,10 +80,11 @@
       };
     },
     methods: {
-        importFile() {
+        importFileAndAnalyze() {
             if (!this.currentFile) {
-                this.message = "No file chosen"
-            };
+                this.message = "Please select a file for upload!"
+                return;
+            }
             // console.log("---> Now attempting to read file");
             const reader = new FileReader();
             reader.readAsArrayBuffer(this.currentFile[0]);
@@ -95,6 +96,7 @@
                 const arrayedData = XLSX.utils.sheet_to_json(firstSheet, {header: 1});
                 this.data = JSON.stringify(arrayedData);
                 // console.log("Now we have data:\n%s", this.data);
+                this.upload();
             }
         },
   
