@@ -4,6 +4,7 @@
     <router-link to="/mg-home">
   	<v-img
   		src="../assets/MG_Model.jpg"
+		:aspect-ratio="16 / 9"
   		contain
   	/>
     </router-link>

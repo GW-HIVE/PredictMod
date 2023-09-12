@@ -4,6 +4,7 @@
 	  <router-link to="/ehr-home">
 		<v-img
 			src="../assets/EHR_Model.jpg"
+			:aspect-ratio="16 / 9"
 			contain
 		/>
 	  </router-link>
