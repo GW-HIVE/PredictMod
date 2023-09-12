@@ -78,7 +78,8 @@
       </v-container>
     </v-row>
     <v-container>
-    <v-row>
+    <v-row class="title justify-center font-weight-bold">
+      <v-card-title class="title text-center font-weight-bold" >
         <!-- 
             TODO
             See here for a good example of making the Vue button trigger an
@@ -94,6 +95,7 @@
           variant="outlined"
           >
         </v-file-input> -->
+      </v-card-title>
     </v-row>
   </v-container>
   </div>

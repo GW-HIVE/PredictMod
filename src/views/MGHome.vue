@@ -74,7 +74,7 @@
       </v-container>
     </v-row>
     <v-container>
-    <v-row>
+    <v-row class="title justify-center font-weight-bold">
       <v-card-title class="title text-center font-weight-bold" >
         <!-- 
             TODO
