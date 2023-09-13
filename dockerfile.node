@@ -1,0 +1,10 @@
+# docker build -t predictmod:v0.3.1-node -f dockerfile.node .
+FROM node:18
+
+COPY . /predictmod
+
+EXPOSE 4242
+
+WORKDIR /predictmod
+
+CMD ["node", "server.js"]
