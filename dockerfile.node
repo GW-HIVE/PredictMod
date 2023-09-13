@@ -1,9 +1,9 @@
-# docker build -t predictmod:v0.3.1-node -f dockerfile.node .
+# docker build -t predictmod:v0.3.1-node-tst -f dockerfile.node .
 FROM node:18
 
 COPY . /predictmod
 
-EXPOSE 4242
+EXPOSE 4244
 
 WORKDIR /predictmod
 
