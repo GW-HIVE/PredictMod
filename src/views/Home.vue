@@ -42,29 +42,6 @@
 
   <v-container>
  
-    <v-row>
-      <v-col>
-            <v-card-title class="title text-center font-weight-bold">
-              Welcome to PredictMod
-            </v-card-title>
-            <v-card-text class="text-center">
-              Welcome to PredictMod! PredictMod is a machine-learning-based application that predicts 
-              whether a patient will respond to an intervention based on electronic health records (EHR) or metagenomic data.
-              <!-- <v-breadcrumbs color="blue">
-                <v-breadcrumbs-item href="https://github.com/GW-HIVE/PredictMod"> PredictMod Repo </v-breadcrumbs-item>
-                <v-breadcrumbs-item href="https://gwu0.sharepoint.com/sites/PredictMod-GRP"> SharePoint Page </v-breadcrumbs-item>
-              </v-breadcrumbs>  -->
-            </v-card-text>
-
-
-      </v-col>
-    
-    </v-row>
-
-
-
-
-
 
     <v-row>
           <v-col>
