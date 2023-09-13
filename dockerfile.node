@@ -7,4 +7,6 @@ EXPOSE 4244
 
 WORKDIR /predictmod
 
+RUN npm install && npm install vite-node
+
 CMD ["node", "server.js"]
