@@ -9,4 +9,4 @@ WORKDIR /predictmod
 
 RUN npm install && npm install vite-node
 
-CMD ["node", "server.js"]
+CMD ["npx", "vite-node", "vite_server.js"]
