@@ -3,4 +3,8 @@
 #   `-e` flag on pip install!
 # matlabengine
 flask
-
+flask-cors
+numpy
+pandas
+scikit-learn
+gunicorn
