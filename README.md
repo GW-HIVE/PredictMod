@@ -1,57 +1,93 @@
-# essentials
+# PredictMod
+## Introduction
+PredictMod is a web app created to inform physicians' decisions. PredictMod takes metagenomic gastrointestinal (GI) microbiome and electronic health record (EHR) data as input and uses a machine learning algorithm to form predictions of whether the ketogenic diet may be successful. 
 
-## Project setup
+The PredictMod web app was designed using Figma and implemented using VueJS. For more information on these, see the links below:
+
+[VueJS Repository](https://github.com/vuejs/core)
+
+[VueJS Tutorial](https://code.visualstudio.com/docs/nodejs/vuejs-tutorial)
+
+[Figma About Page](https://www.figma.com/about/)
+
+
+## Setup
+#### Cloning the repository
+This repository can be cloned directly using the following command: 
 
 ```
-# yarn
-yarn
+git clone https://github.com/GW-HIVE/PredictMod.git
+```
+#### Virtual Environment
+Prepare your own virtually environment using the requirement.txt file then activate your environment.
 
-# npm
+#### Installation
+Navigate to the PredictMod directory and use the following command to install the necessary dependancies
+
+```
 npm install
-
-# pnpm
-pnpm install
 ```
 
-### Compiles and hot-reloads for development
+#### "Hidden" Dependencies
+The most current version of the sheetJS (CE) library (currently 0.20.0) should be installed manually, as so:
+`npm i --save https://cdn.sheetjs.com/xlsx-0.20.0/xlsx-0.20.0.tgz`
+See [SheetJS documentation](https://docs.sheetjs.com/docs/getting-started/installation/nodejs) for additional details.
+
+#### Running the app
+
+Navigate to the upload-api directory and execute the following command to start the server:
 
 ```
-# yarn
-yarn dev
-
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
+npm start
 ```
-
-### Compiles and minifies for production
-
+Navigate to the vue-upload directory and execute the following command to start the app:
 ```
-# yarn
-yarn build
-
-# npm
-npm run build
-
-# pnpm
-pnpm build
+npm run serve
 ```
+Now a link should appear, which you can follow to see the client side of the app
 
-### Lints and fixes files
+#### Open the django project
+Navigate to the PredictMod directory and use the following command to start the django program
 
 ```
-# yarn
-yarn lint
-
-# npm
-npm run lint
-
-# pnpm
-pnpm lint
+python manage.py runserver
 ```
+Then visit "http://127.0.0.1:8000/upload/" on your browser. The first 2 files in EHR_predict folder are the sample input files.
 
-### Customize configuration
+## Description of Main Folders and Content
 
-See [Configuration Reference](https://vitejs.dev/config/).
+#### Archive
+Holds files that are currently not in use, but may be useful to reference at a later time. 
+
+#### EHR_predict
+Work related to Electronic Health Records (EHR) prediction conducted in MATLAB.  
+
+#### MG_python
+Work related to Metagenomics predictions conducted in Python. 
+
+#### Metagenomic_predict 
+Work related to metgenomics prediction conducted in MATLAB. 
+
+#### dist
+
+
+#### djangoProject
+
+
+#### docker-dependencies
+
+
+#### matlab-interface
+
+
+#### predictmod
+
+
+#### public 
+
+
+#### static
+
+
+#### templates 
+
