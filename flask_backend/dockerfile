@@ -1,9 +1,9 @@
-# docker build -t predictmod:v0.3.1-flask-tst -f dockerfile.flask .
+# docker build -t predictmod:v0.3.1-flask-tst .
 FROM python:3.10-slim-buster
 
-COPY . /predictmod
+COPY . /backend
 
-WORKDIR /predictmod/matlab-interface
+WORKDIR /backend
 
 RUN pip3 install -r requirements.txt
 
