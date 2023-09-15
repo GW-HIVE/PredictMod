@@ -9,7 +9,7 @@ import logging
 
 import json
 
-FLASK_HOST = "localhost:4245"
+FLASK_HOST = "predict-backend:4245"
 
 logger = logging.getLogger()
 
