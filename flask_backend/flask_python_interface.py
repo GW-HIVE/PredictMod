@@ -69,13 +69,17 @@ def mg_request():
         # XXX
         # app.logger.debug(f"---> Collected request at >>> MG <<<")
         # app.logger.debug(f"---> Method is {request.method}")
-        raw_data = json.loads(request.get_json()['json'])
+
+        raw_data = request.get_json()
+
+        # app.logger.debug(raw_data)
+
         headers, data = raw_data[0], np.array([raw_data[1]])
         df = pd.DataFrame(data, columns=headers)
         df = df.drop(["Status"], axis=1)
         # app.logger.debug(f"---> JSON Data:\n{df}")
 
-        return metagenomic_predictor.make_prediction(df)
+        return Response(metagenomic_predictor.make_prediction(df))
 
     except Exception as e:
         app.logger.debug(f"--->>> Exception!\n{e}")
@@ -86,12 +90,13 @@ def mg_request():
 
 @app.route("/ehr-upload", methods=["POST"])
 @cross_origin()
-def request_received():
+def ehr_request():
     try:
         # XXX
         # app.logger.debug(f"---> Collected request at >>> EHR <<<")
-        json_package = json.loads(request.get_json()['json'])
+        raw_data = request.get_json()
         # TODO: Next steps!
+        return Response("EHR: Python Analysis Loop Complete")
     except Exception as e:
         return Response(f"Got an error!\n\t{e}")
     return Response("EHR: Python (Shim) Analysis Loop Completed\n")
