@@ -1,10 +1,20 @@
 import axiosUtility from "./AxiosUtils";
+import Cookies from "js-cookie";
 
 class UploadFilesService {
   upload(json, target, onUploadProgress) {
     const formData = new FormData();
 
-    const urlDest = "/".concat(target, "-upload")
+    const urlDest = "/".concat(target, "-upload/");
+
+    // const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').ariaValueMax();
+    const csrftoken = Cookies.get('csrftoken');
+    // console.log("Got a Cookie: %s", JSON.stringify(csrftoken));
+    const headers = {
+      "Content-type": "application/json",
+      "X-CSRFToken": csrftoken,
+      // "X-CSRFToken": document.querySelector('[name=csrfmiddlewaretoken]').value(),
+    }
 
     // XXX
     // console.log("---> Uploading file to %s", urlDest);
@@ -14,7 +24,7 @@ class UploadFilesService {
 
     formData.append("json", json);
 
-    return axiosUtility.post(urlDest, formData, {
+    return axiosUtility.post(urlDest, formData, headers, {
       onUploadProgress
     });
   }
