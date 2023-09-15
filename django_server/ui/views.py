@@ -27,9 +27,10 @@ def ui(request):
 def ehr_upload(request):
     if request.method == "POST":
         try:
-            data = json.loads(request.readlines()[3].decode('utf-8'))
+            raw_data = json.loads(json.loads(request.readlines()[0].decode('utf-8'))['json'])
+            # logger.debug(f"EHR Request:\n{raw_data}")
             result = requests.post(
-                f"http://{FLASK_HOST}/ehr-upload", json=data
+                f"http://{FLASK_HOST}/ehr-upload", json=raw_data
             )
             return HttpResponse(result)
         except Exception as error:
@@ -43,13 +44,13 @@ def ehr_upload(request):
 def mg_upload(request):
     if request.method == "POST":
         try:
-            data = json.loads(request.readlines()[3].decode('utf-8'))
+            raw_data = json.loads(json.loads(request.readlines()[0].decode('utf-8'))['json'])
             # XXX
             # logger.debug('-'*40)
-            # logger.debug(f"Data 3 Type: {type(data)}")
+            # logger.debug(f"Request:\n{type(raw_data)}")
             # logger.debug('-'*40)
             result = requests.post(
-                f"http://{FLASK_HOST}/mg-upload", json=data
+                f"http://{FLASK_HOST}/mg-upload", json=raw_data
             )
             return HttpResponse(result)
         except Exception as error:
