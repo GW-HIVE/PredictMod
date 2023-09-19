@@ -104,6 +104,9 @@ Work related to metgenomics prediction conducted in MATLAB.
 #### MG_python
 Work related to Metagenomics predictions conducted in Python. 
 
+#### EHR_python
+Work related to EHR predictions conducted in Python. 
+
 #### scripts
 Convenience scripts to compile/transpile the frontend and to launch the application.
 
