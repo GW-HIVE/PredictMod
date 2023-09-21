@@ -13,13 +13,6 @@ FLASK_HOST = "predict-backend:4245"
 
 logger = logging.getLogger()
 
-# Create your views here.
-def index(request):
-    return HttpResponse("Away we go ... again")
-
-def ui(request):
-    return render(request, "ui/index.html")
-
 # XXX
 # @ensure_csrf_cookie
 # @requires_csrf_token
