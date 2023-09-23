@@ -13,6 +13,11 @@ FLASK_HOST = "predict-backend:4245"
 
 logger = logging.getLogger()
 
+# XXX - Sanity check
+@csrf_exempt
+def ping(request):
+    return HttpResponse("PONG\n")
+
 # XXX
 # @ensure_csrf_cookie
 # @requires_csrf_token
