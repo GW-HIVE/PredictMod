@@ -1,12 +1,16 @@
 # docker build -t predictmod:v0.3.1-frontend .
 FROM python:3.10-slim-buster
 
-COPY . /server
 
+ARG DEBIAN_FRONTEND=noninteractive
+RUN mkdir -p /var/log/gunicorn/ && \
+    mkdir -p /var/run/gunicorn/ && \
+    apt update && \
+    apt install -y python3-dev
+
+COPY ./ /server
 WORKDIR /server
 
 RUN pip3 install -r requirements.txt
 
-EXPOSE 8000
-
-CMD ["gunicorn", "--bind", "0.0.0.0:4244", "server.wsgi"]
+CMD ["gunicorn", "-c", "gunicorn_conf.py"]
