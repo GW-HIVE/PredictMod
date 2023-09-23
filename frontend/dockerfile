@@ -1,0 +1,17 @@
+# docker build -t predictmod:v0.3.1-frontend .
+FROM python:3.10-slim-buster
+
+
+ARG DEBIAN_FRONTEND=noninteractive
+RUN mkdir -p /var/www/html/static/ && \
+    apt update && \
+    apt install -y nginx curl iputils-ping
+
+COPY ./static/ /var/www/html/static/
+COPY ./default /etc/nginx/sites-available/default
+
+RUN cd /var/www/html/ && \
+    mv ./static/index.html . && \
+    cd -
+
+CMD ["nginx", "-g", "daemon off;"]
