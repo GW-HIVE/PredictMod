@@ -3,7 +3,7 @@ set -e
 
 pushd ../vuetify_app
 npm run build
-cd ../django_server
+cd ../frontend
 rm -rf static/*
 cp -r ../vuetify_app/dist/* static/
 popd
