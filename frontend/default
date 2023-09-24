@@ -45,6 +45,8 @@ server {
 
 	server_name _;
 
+	# add_header 'Access-Control-Allow-Origin' '*';
+
 	location / {
 		# First attempt to serve request as file, then
 		# as directory, then fall back to displaying a 404.
@@ -61,6 +63,18 @@ server {
 
 	location /ehr-upload {
 		proxy_pass http://middleware:8000/ehr-upload;
+		proxy_set_header Host $host;
+	}
+
+	location /mg-sample {
+		add_header 'Access-Control-Allow-Origin' '*';
+		proxy_pass http://middleware:8000/mg-sample/;
+		proxy_set_header Host $host;
+	}
+
+	location /ehr-sample {
+		# add_header 'Access-Control-Allow-Origin' 'http://middleware' 'always';
+		proxy_pass http://middleware:8000/ehr-sample/;
 		proxy_set_header Host $host;
 	}
 
