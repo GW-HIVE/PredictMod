@@ -115,7 +115,8 @@
 
 <script>
 // import GetMGoutput from './GetMGoutput.vue'
-import FileUpload from '../components/FileUpload.vue'
+import FileUpload from '../components/FileUpload.vue';
+import DownloadService from '../services/DownloadService';
 import DisclaimerShow from './DisclaimerShow.vue';
 import LicenseShow from './LicenseShow.vue';
 
@@ -160,10 +161,13 @@ export default {
             // Depending on how we proceed, see here for download support:
             // https://stackoverflow.com/questions/53772331/vue-html-js-how-to-download-a-file-to-browser-using-the-download-tag
             //
-            const warning = "File download is currently under construction"
-            alert(warning);
+            // const warning = "Now rooting around through the backend"
+            const warning = "Download service is not yet supported"
             console.log(warning);
-            
+            alert(warning);
+
+            // return DownloadService.download(this.myTargetURL);
+
             // TODO: This currently returns the (what appears to be...) correct binary information, but
             // Excel complains that the file is corrupt. :/ 
 
