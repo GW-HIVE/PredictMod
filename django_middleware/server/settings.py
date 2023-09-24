@@ -33,6 +33,12 @@ ALLOWED_HOSTS = [
     "localhost"
 ]
 
+CORS_ALLOWED_ORIGINS = [
+    "localhost",
+    "127.0.0.1",
+    "predict",
+]
+
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
