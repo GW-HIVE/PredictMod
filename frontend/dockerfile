@@ -7,11 +7,11 @@ RUN mkdir -p /var/www/html/static/ && \
     apt update && \
     apt install -y nginx curl iputils-ping
 
-COPY ./static/ /var/www/html/static/
+COPY ./static/ /var/www/html/predictmod-beta/
 COPY ./default /etc/nginx/sites-available/default
 
-RUN cd /var/www/html/ && \
-    mv ./static/index.html . && \
-    cd -
+# RUN cd /var/www/html/ && \
+#     mv ./predictmod-beta/index.html . && \
+#     cd -
 
 CMD ["nginx", "-g", "daemon off;"]

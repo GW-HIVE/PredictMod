@@ -38,7 +38,7 @@ server {
 	#
 	# include snippets/snakeoil.conf;
 
-	root /var/www/html;
+	root /var/www/html/predictmod-beta;
 
 	# Add index.php to the list if you are using PHP
 	index index.html index.htm index.nginx-debian.html;
@@ -57,11 +57,13 @@ server {
 	# https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/Docker-Nginx-reverse-proxy-setup-example
 
 	location /mg-upload {
+		add_header 'Access-Control-Allow-Origin' '*';
 		proxy_pass http://middleware:8000/mg-upload;
 		proxy_set_header Host $host;
 	}
 
 	location /ehr-upload {
+		add_header 'Access-Control-Allow-Origin' '*';
 		proxy_pass http://middleware:8000/ehr-upload;
 		proxy_set_header Host $host;
 	}
