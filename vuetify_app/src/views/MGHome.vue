@@ -161,12 +161,14 @@ export default {
             // Depending on how we proceed, see here for download support:
             // https://stackoverflow.com/questions/53772331/vue-html-js-how-to-download-a-file-to-browser-using-the-download-tag
             //
-            // const warning = "Now rooting around through the backend"
-            const warning = "Download service is not yet supported"
+            const warning = "This service is still under development"
+            // const warning = "Download service is not yet supported"
             console.log(warning);
             alert(warning);
 
-            // return DownloadService.download(this.myTargetURL);
+            return DownloadService.download(this.myTargetURL);
+
+            // XXX
 
             // TODO: This currently returns the (what appears to be...) correct binary information, but
             // Excel complains that the file is corrupt. :/ 
