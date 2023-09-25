@@ -2,10 +2,10 @@
     <!-- Vuetify documentation: https://vuetifyjs.com/en/components/tabs/ -->
     <!-- Also see SO at https://stackoverflow.com/questions/49721710/how-to-use-vuetify-tabs-with-vue-router -->
     <v-tabs>
-      <v-tab to="/">Home</v-tab>
-      <v-tab to="/about">About</v-tab>
-      <v-tab to="/faq">FAQ</v-tab>
-      <v-tab to="/contact">Contact</v-tab>
+      <v-tab to="/predictmod-beta/">Home</v-tab>
+      <v-tab to="/predictmod-beta/about">About</v-tab>
+      <v-tab to="/predictmod-beta/faq">FAQ</v-tab>
+      <v-tab to="/predictmod-beta/contact">Contact</v-tab>
     </v-tabs>
     <main>
       <router-view />

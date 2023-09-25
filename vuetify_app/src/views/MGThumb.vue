@@ -1,7 +1,7 @@
 <template>
 
   <v-col>
-    <router-link to="/mg-home">
+    <router-link to="/predictmod-beta/mg-home">
   	<v-img
   		src="../assets/MG_Model.jpg"
 		:aspect-ratio="16 / 9"
