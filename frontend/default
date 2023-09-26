@@ -45,38 +45,39 @@ server {
 
 	server_name _;
 
-	# add_header 'Access-Control-Allow-Origin' '*';
+	add_header 'Access-Control-Allow-Origin' '*';
 
 	location / {
+		add_header 'Access-Control-Allow-Origin' '*';
 		# First attempt to serve request as file, then
 		# as directory, then fall back to displaying a 404.
-		try_files $uri $uri/ =500;
+		try_files $uri $uri/ =404;
 	}
 
 	# Glory be! 
 	# https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/Docker-Nginx-reverse-proxy-setup-example
 
-	location /mg-upload {
+	location /predictmod-beta/mg-upload {
 		add_header 'Access-Control-Allow-Origin' '*';
 		proxy_pass http://middleware:8000/mg-upload;
 		proxy_set_header Host $host;
 	}
 
-	location /ehr-upload {
+	location /predictmod-beta/ehr-upload {
 		add_header 'Access-Control-Allow-Origin' '*';
 		proxy_pass http://middleware:8000/ehr-upload;
 		proxy_set_header Host $host;
 	}
 
-	location /mg-sample {
+	location /predictmod-beta/mg-sample {
 		add_header 'Access-Control-Allow-Origin' '*';
-		proxy_pass http://middleware:8000/mg-sample/;
+		proxy_pass http://middleware:8000/mg-sample;
 		proxy_set_header Host $host;
 	}
 
-	location /ehr-sample {
+	location /predictmod-beta/ehr-sample {
 		# add_header 'Access-Control-Allow-Origin' 'http://middleware' 'always';
-		proxy_pass http://middleware:8000/ehr-sample/;
+		proxy_pass http://middleware:8000/ehr-sample;
 		proxy_set_header Host $host;
 	}
 
