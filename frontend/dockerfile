@@ -3,11 +3,11 @@ FROM python:3.10-slim-buster
 
 
 ARG DEBIAN_FRONTEND=noninteractive
-RUN mkdir -p /var/www/html/predictmod-beta/ && \
+RUN mkdir -p /var/www/html/predictmod/ && \
     apt update && \
     apt install -y nginx curl iputils-ping
 
-COPY ./static/ /var/www/html/predictmod-beta/
+COPY ./static/ /var/www/html/predictmod/
 COPY ./default /etc/nginx/sites-available/default
 
 # RUN cd /var/www/html/ && \
