@@ -25,7 +25,8 @@ class DownloadFilesService {
 
     // formData.append("json", json);
 
-    const downloadTarget = `http://localhost:4244/predictmod-beta${urlDest}`;
+    const downloadTarget = `http://hivelab.tst.biochemistry.gwu.edu/predictmod-beta${urlDest}`;
+    // const downloadTarget = `http://localhost:4244/predictmod-beta${urlDest}`;
 
     console.log(`Now downloading from ${downloadTarget}`);
 
