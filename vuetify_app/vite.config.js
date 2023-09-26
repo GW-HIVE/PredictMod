@@ -29,7 +29,7 @@ export default defineConfig({
       },
     },
   },
-  base: '/predictmod-beta',
+  base: '/predictmod',
   define: { 'process.env': {} },
   resolve: {
     alias: {
