@@ -75,7 +75,7 @@
       <v-container>
         <a>
           <v-btn elevation="0" border @click.prevent="downloadItem(item)">
-              File Download
+              Download Example File
           </v-btn>
         </a>
       </v-container>
@@ -166,8 +166,20 @@ export default {
             console.log(warning);
             alert(warning);
 
-            return DownloadService.download(this.myTargetURL);
+            // TODO: Enable downloads
+            // const data = DownloadService.download(this.myTargetURL);
 
+            // const csv = '';
+            // data.array.forEach((row) => {
+            //   csv += row.join(',');
+            //   csv += "\n";
+            // });
+
+            // const anchor = document.createAttribute('a');
+            // anchor.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+            // anchor.target = '_blank';
+            // anchor.download = 'metagenomic_example_data.csv';
+            // anchor.click();
             // XXX
 
             // TODO: This currently returns the (what appears to be...) correct binary information, but

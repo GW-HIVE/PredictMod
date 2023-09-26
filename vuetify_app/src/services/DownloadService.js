@@ -25,14 +25,15 @@ class DownloadFilesService {
 
     // formData.append("json", json);
 
-    const downloadTarget = `http://middleware:8000${urlDest}`;
+    const downloadTarget = `http://localhost:4244/predictmod-beta${urlDest}`;
 
     console.log(`Now downloading from ${downloadTarget}`);
 
     axios.get(downloadTarget)
       .then(response => {
-        console.log(response);
-        return response;
+        const data = response.data;
+        console.log(data);
+        return data;
       })
       .catch(error => {
         console.log("---> ERROR!:\n\t%s", JSON.stringify(error));
