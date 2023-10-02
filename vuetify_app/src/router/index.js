@@ -5,7 +5,7 @@ import Home from '../views/Home.vue';
 
 const routes = [
   {
-    path: '/',
+    path: '/predictmod',
     component: Home,
   },
   {
@@ -24,27 +24,28 @@ const routes = [
     // ],
     // Following the example at `https://stackblitz.com/edit/vue3-vite-router-starter?file=src%2Frouter.js`
     // ...
-    path: '/about',
+    path: '/predictmod/about',
     component: () => import('../views/About.vue'),
   },
   {
-    path: '/faq',
+    path: '/predictmod/faq',
     component: () => import('../views/FAQ.vue'),
   }, {
-    path: '/contact',
+    path: '/predictmod/contact',
     component: () => import('../views/Contact.vue'),
   },
     {
-      path: '/ehr-home', 
+      path: '/predictmod/ehr-home', 
       component: () => import('../views/EHRHome.vue'),
     },
     {
-      path: '/mg-home', 
+      path: '/predictmod/mg-home', 
       component: () => import('../views/MGHome.vue'),
     },
 ]
 
 const router = createRouter({
+  base: 'predictmod',
   history: createWebHistory(process.env.BASE_URL),
   routes,
 })

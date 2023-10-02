@@ -11,14 +11,36 @@ import json
 
 FLASK_HOST = "predict-backend:4245"
 
+MG_EXAMPLE = "./ui/assets/unknown_response.csv"
+EHR_EXAMPLE = "./ui/assets/single_patient_data_1.xls"
+
 logger = logging.getLogger()
 
-# Create your views here.
-def index(request):
-    return HttpResponse("Away we go ... again")
+# XXX - Sanity check
+@csrf_exempt
+def ping(request):
+    return HttpResponse("PONG\n")
 
-def ui(request):
-    return render(request, "ui/index.html")
+import os
+
+@csrf_exempt
+def mg_sample(request):
+    # See SO: https://stackoverflow.com/a/36394206
+    logger.debug("="*40)
+    logger.debug(f"\tATTEMPTING DOWNLOAD!!")
+    logger.debug("="*40)
+    with open(MG_EXAMPLE, "r") as fp:
+        response = HttpResponse(fp.read(), content_type="text/csv")
+        response['Content-Disposition'] = "inline; filename=metagenomic_example_data.csv"
+        return response
+
+@csrf_exempt
+def ehr_sample(request):
+    # See SO: https://stackoverflow.com/a/36394206
+    with open(EHR_EXAMPLE, "rb") as fp:
+        response = HttpResponse(fp.read(), content_type="application/vnd.ms-excel")
+        response['Content-Disposition'] = "inline; filename=ehr_example_data.xls"
+        return response
 
 # XXX
 # @ensure_csrf_cookie

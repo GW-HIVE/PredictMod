@@ -75,7 +75,7 @@
       <v-container>
         <a>
           <v-btn elevation="0" border @click.prevent="downloadItem(item)">
-              File Download
+              Download Example File
           </v-btn>
         </a>
       </v-container>
@@ -115,7 +115,8 @@
 
 <script>
 // import GetMGoutput from './GetMGoutput.vue'
-import FileUpload from '../components/FileUpload.vue'
+import FileUpload from '../components/FileUpload.vue';
+import DownloadService from '../services/DownloadService';
 import DisclaimerShow from './DisclaimerShow.vue';
 import LicenseShow from './LicenseShow.vue';
 
@@ -160,10 +161,27 @@ export default {
             // Depending on how we proceed, see here for download support:
             // https://stackoverflow.com/questions/53772331/vue-html-js-how-to-download-a-file-to-browser-using-the-download-tag
             //
-            const warning = "File download is currently under construction"
-            alert(warning);
+            const warning = "This service is still under development"
+            // const warning = "Download service is not yet supported"
             console.log(warning);
-            
+            alert(warning);
+
+            // TODO: Enable downloads
+            // const data = DownloadService.download(this.myTargetURL);
+
+            // const csv = '';
+            // data.array.forEach((row) => {
+            //   csv += row.join(',');
+            //   csv += "\n";
+            // });
+
+            // const anchor = document.createAttribute('a');
+            // anchor.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+            // anchor.target = '_blank';
+            // anchor.download = 'metagenomic_example_data.csv';
+            // anchor.click();
+            // XXX
+
             // TODO: This currently returns the (what appears to be...) correct binary information, but
             // Excel complains that the file is corrupt. :/ 
 
