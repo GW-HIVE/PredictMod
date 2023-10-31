@@ -42,6 +42,10 @@ const routes = [
       path: '/predictmod/mg-home', 
       component: () => import('../views/MGHome.vue'),
     },
+    {
+      path: '/predictmod/login', 
+      component: () => import('../views/Login.vue'),
+    },
 ]
 
 const router = createRouter({
