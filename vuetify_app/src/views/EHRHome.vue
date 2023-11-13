@@ -141,8 +141,10 @@ export default {
             morbidityType: "Prediabetes",
             interventions: [
                 "Lifestyle Change",
+                "Keto Diet",
+                "Diabetes Managed by Diet",
             ],
-            interventionType: "Lifestyle Change",
+            interventionType: "Intervention Type",
             myTargetURL: "ehr",
         }
     },
