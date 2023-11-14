@@ -103,3 +103,10 @@ print(classification_report(y_test, RF.predict(X_test)))
 with open("mdclone_DTC.pickle", "wb") as fp:
     pickle.dump(DTC, fp)
 fp.close()
+#Open pickle and make a prediction using DTC
+with open("mdclone_DTC.pickle", "rb") as fp:
+    DTC = pickle.load(fp)
+fp.close()
+sample = pd.read_csv("MDClone_unknown1.csv")
+prediction = DTC.predict(sample)
+print(f"Prediction based on EHR data: {prediction}")
