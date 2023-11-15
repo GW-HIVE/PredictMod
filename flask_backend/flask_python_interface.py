@@ -105,9 +105,8 @@ def ehr_request():
         raw_data = request.get_json()
         headers, data = raw_data[0], np.array([raw_data[1]])
         df = pd.DataFrame(data, columns=headers)
-        df = df.drop(["Status"], axis=1)
 
-        return Response(metagenomic_predictor.make_prediction(df))
+        return Response(ehr_predictor.make_prediction(df))
 
     except Exception as e:
         app.logger.debug(f"--->>> Exception!\n{e}")
