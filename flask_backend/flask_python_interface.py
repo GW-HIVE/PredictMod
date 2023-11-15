@@ -13,7 +13,7 @@ import io
 
 class MGTreeHandler:
     def __init__(self):
-        with open("pickled_tree.pickle", "rb") as fp:
+        with open("mdclone_DTC.pickle", "rb") as fp:
             self.pickled_tree = pickle.load(fp)
         fp.close()
 
