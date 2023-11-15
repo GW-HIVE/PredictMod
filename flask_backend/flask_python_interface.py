@@ -13,15 +13,27 @@ import io
 
 class MGTreeHandler:
     def __init__(self):
-        with open("mdclone_DTC.pickle", "rb") as fp:
+        with open("pickled_mg_tree.pickle", "rb") as fp:
             self.pickled_tree = pickle.load(fp)
         fp.close()
 
     def make_prediction(self, data):
         prediction = self.pickled_tree.predict(data)[0]
         if prediction == 'R':
-            return "This patient is expected to respond to the intervention"
-        return "This patient is not expected to respond to the intervention"
+            return "This patient is expected to respond to the intervention based on Metagenomic input"
+        return "This patient is not expected to respond to the intervention based on Metagenomic input"
+
+class EHRTreeHandler:
+    def __init__(self):
+        with open("pickled_ehr_tree.pickle", "rb") as fp:
+            self.pickled_tree = pickle.load(fp)
+        fp.close()
+
+    def make_prediction(self, data):
+        prediction = self.pickled_tree.predict(data)[0]
+        if prediction == 'R':
+            return "This patient is expected to respond to the intervention based on EHR input"
+        return "This patient is not expected to respond to the intervention based on EHR input"
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -31,6 +43,7 @@ app.config["DOWNLOAD_FOLDER"] = os.path.join(os.path.dirname(app.instance_path),
 app.logger.setLevel(logging.DEBUG)
 
 metagenomic_predictor = MGTreeHandler()
+ehr_predictor = EHRTreeHandler()
 
 @app.route("/metagenomic-download", methods=["GET"])
 @cross_origin()
@@ -85,18 +98,17 @@ def mg_request():
         app.logger.debug(f"--->>> Exception!\n{e}")
         return Response(f"Got an error!\n\t{e}")
 
-    return Response("Metagenomic Analysis: Analysis Loop Completed\n")
-
-
 @app.route("/ehr-upload", methods=["POST"])
 @cross_origin()
 def ehr_request():
     try:
-        # XXX
-        # app.logger.debug(f"---> Collected request at >>> EHR <<<")
         raw_data = request.get_json()
-        # TODO: Next steps!
-        return Response("EHR: Python Analysis Loop Complete")
+        headers, data = raw_data[0], np.array([raw_data[1]])
+        df = pd.DataFrame(data, columns=headers)
+        df = df.drop(["Status"], axis=1)
+
+        return Response(metagenomic_predictor.make_prediction(df))
+
     except Exception as e:
+        app.logger.debug(f"--->>> Exception!\n{e}")
         return Response(f"Got an error!\n\t{e}")
-    return Response("EHR: Python (Shim) Analysis Loop Completed\n")
