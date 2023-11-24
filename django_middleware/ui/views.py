@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template.response import TemplateResponse
 from django.views.decorators.csrf import requires_csrf_token, ensure_csrf_cookie, csrf_exempt
+from django.contrib.auth.decorators import login_required
+from django.conf import settings
 
 import requests
 
@@ -9,7 +11,7 @@ import logging
 
 import json
 
-FLASK_HOST = "predict-backend:4245"
+FLASK_BACKEND = settings.FLASK_BACKEND
 
 MG_EXAMPLE = "./ui/assets/unknown_response.csv"
 EHR_EXAMPLE = "./ui/assets/single_patient_data_1.xls"
@@ -19,9 +21,8 @@ logger = logging.getLogger()
 # XXX - Sanity check
 @csrf_exempt
 def ping(request):
+    logger.debug("---> MAIN APP: Received PING")
     return HttpResponse("PONG\n")
-
-import os
 
 @csrf_exempt
 def mg_sample(request):
@@ -47,12 +48,15 @@ def ehr_sample(request):
 # @requires_csrf_token
 @csrf_exempt
 def ehr_upload(request):
+    if not request.user.is_authenticated:
+        return HttpResponse("Must be logged in for analysis", status=200)
     if request.method == "POST":
         try:
-            raw_data = json.loads(json.loads(request.readlines()[0].decode('utf-8'))['json'])
+            lines = request.readlines()
+            raw_data = json.loads(lines[3].decode('utf-8'))
             # logger.debug(f"EHR Request:\n{raw_data}")
             result = requests.post(
-                f"http://{FLASK_HOST}/ehr-upload", json=raw_data
+                f"{FLASK_BACKEND}/ehr-upload", json=raw_data
             )
             return HttpResponse(result)
         except Exception as error:
@@ -64,19 +68,22 @@ def ehr_upload(request):
 # @requires_csrf_token
 @csrf_exempt
 def mg_upload(request):
+    if not request.user.is_authenticated:
+        return HttpResponse("Must be logged in for analysis!", status=200)
     if request.method == "POST":
         try:
-            raw_data = json.loads(json.loads(request.readlines()[0].decode('utf-8'))['json'])
+            lines = request.readlines()
+            raw_data = json.loads(lines[3].decode('utf-8'))
             # XXX
             # logger.debug('-'*40)
             # logger.debug(f"Request:\n{type(raw_data)}")
             # logger.debug('-'*40)
             result = requests.post(
-                f"http://{FLASK_HOST}/mg-upload", json=raw_data
+                f"{FLASK_BACKEND}/mg-upload", json=raw_data
             )
             return HttpResponse(result)
         except Exception as error:
             return HttpResponse(f"Django error:\n\t{error}")
     else:
-        return HttpResponse(f"Unsupported request type: {request.method}")
+        return HttpResponse(f"Unsupported request type: {request.method}", status=500)
 
