@@ -1,15 +1,20 @@
-import { createApp } from 'vue'
-// import VueRouter from 'vue-router'
-import App from './App.vue'
-import vuetify from './plugins/vuetify'
-import { loadFonts } from './plugins/webfontloader'
+import { createApp } from 'vue';
+import App from './App.vue';
+import vuetify from './plugins/vuetify';
+import { loadFonts } from './plugins/webfontloader';
+
+import { createPinia } from 'pinia';
 
 import 'vite/modulepreload-polyfill'
 
 import router from './router'
 
+const pinia = createPinia();
+
 loadFonts()
 
+console.log("===> Process ENV: %s", JSON.stringify(import.meta.env));
+console.log("=>>> PROD?%s \nDEV? %s\nMODE? %s", import.meta.env.PROD, import.meta.env.DEV, import.meta.env.MODE);
 // S/O to the rescue: https://stackoverflow.com/a/74861436
 router.onError((error, to) => {
     console.log('---> Router captured error!');
@@ -23,4 +28,5 @@ router.onError((error, to) => {
 createApp(App)
 .use(vuetify)
 .use(router)
+.use(pinia)
 .mount('#app')

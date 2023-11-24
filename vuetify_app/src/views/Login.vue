@@ -25,34 +25,53 @@
   <v-container>
 
 
-    <v-row>
+    <v-row class="justify-center">
       <v-col>
 
         <v-card-title class="title text-center font-weight-bold">
           Login or register for access to PredictMod          
         </v-card-title>
-        <v-card-text class="text-center">
-            We endeavor to enable user login shortly!
-        </v-card-text >
+
+        <!-- <form @submit.prevent="login"> -->
+        <form>
+          <v-row>
+            <v-text-field label="Email" v-model="email"></v-text-field>
+            <!-- <input type="text" v-model="email" /> -->
+          </v-row>
+          <v-row>
+            <v-text-field label="Password" type="password" v-model="password"></v-text-field>
+            <!-- <v-text-field label="Password" v-model="password"></v-text-field> -->
+            <!-- <input type="password" v-model="password" /> -->
+          </v-row>
+          <v-row>
+          <v-btn type="submit" @click.prevent="login()">Login</v-btn>
+          <v-btn type="submit" @click.prevent="logout()">Logout</v-btn>
+          <v-btn type="submit" @click.prevent="checkUser()">Who Am I?!</v-btn>
+          <v-btn type="submit" @click.prevent="getSession()">Session info</v-btn>
+          <v-btn type="submit" @click.prevent="showCSRFCookie()">Show CSRF Token</v-btn>
+          <!-- <v-btn type="submit" @click.prevent="tbdAlert()">Register</v-btn> -->
+        </v-row>
+        </form>
+
       </v-col>
     
     </v-row>
-
+<!-- 
     <v-container>
     <v-row class="justify-center">
       <v-card-title class="title text-center font-weight-bold" >
         <v-btn @click.prevent="tbdAlert()">
           Login
-          <!-- Unclear if this is needed in v-btn: href="/predictmod/admin/login/" -->
+          // Original comment: Unclear if this is needed in v-btn: href="/predictmod/admin/login/"
         </v-btn>
         <v-btn @click.prevent="tbdAlert()">
-          <!-- Unclear if this is needed in v-btn: href="/predictmod/admin/register/" -->
+          // Original comment: Unclear if this is needed in v-btn: href="/predictmod/admin/register/"
           Register
         </v-btn>
       </v-card-title>
     </v-row>
     </v-container>
-    
+     -->
     <v-row>
       <v-col>
         <DisclaimerShow/>
@@ -78,24 +97,50 @@ import DisclaimerShow from './DisclaimerShow.vue';
 import NotFound from './NotFound.vue';
 import LicenseShow from './LicenseShow.vue';
 
+import { useUserStore } from '@/store/user';
+
 export default {
 
   name: 'Home',
+  setup() {
+    const userStore = useUserStore();
+    return { userStore };
+  },
   data() {
 			return {
 				home: false,
+        email: "",
+        password: "",
 			}
     },
+  mounted() {
+    this.resolveTargetURL();
+    this.getCSRF();
+  },
   components: { DisclaimerShow, LicenseShow },
   methods:
     {
-      tbdAlert () {
-            // Depending on how we proceed, see here for download support:
-            // https://stackoverflow.com/questions/53772331/vue-html-js-how-to-download-a-file-to-browser-using-the-download-tag
-            //
-            alert("Login facilities are under development");
-            console.log("---> Login facilities are under development");
-        },
+      resolveTargetURL() {
+        this.userStore.resolveMiddleware();
+      },
+      getCSRF() {
+        this.userStore.getCSRF();
+      },
+      login() {
+        this.userStore.login(this.email, this.password);
+      },
+      logout() {
+        this.userStore.logout();
+      },
+      checkUser() {
+        this.userStore.checkUser();
+      },
+      getSession() {
+        this.userStore.getSession();
+      },
+      showCSRFCookie() {
+        this.userStore.showCSRFCookie();
+      }
     }
 }
 </script>
