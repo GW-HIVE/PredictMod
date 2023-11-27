@@ -1,4 +1,4 @@
-# This is heading
+# EHR Synthetic Data README
 
 Synthetic Electronic Health Record (EHR) generation utilizing Generative Adversial Network (GAN)
 
