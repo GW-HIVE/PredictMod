@@ -12,9 +12,14 @@ function compile_activity() {
     pushd ../vuetify_app
     rm -rf dist/*
     npm run $1
+    cd ../django_middleware
+    rm -rf static/*
+    python manage.py collectstatic --noinput
     cd ../frontend
     rm -rf static/*
+    mkdir static/static/
     cp -r ../vuetify_app/dist/* static/
+    cp -r ../django_middleware/static/admin/ static/static/
     popd
 }
 

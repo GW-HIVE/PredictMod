@@ -174,11 +174,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-    BASE_DIR / "static/assets",
-]
-MEDIA_ROOT = "assets/"
+STATIC_ROOT = BASE_DIR / STATIC_URL
+# STATICFILES_DIRS = [
+#     BASE_DIR / "static",
+#     BASE_DIR / "static/assets",
+# ]
+MEDIA_ROOT = "static/assets/"
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
