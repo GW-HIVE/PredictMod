@@ -5,7 +5,7 @@ export const useUserStore = defineStore("user", {
     user: null,
     token: null,
     isAuthenticated: false,
-    targetURL: '/predictmod/users',
+    targetURL: import.meta.env.DEV ? import.meta.env.VITE_DEV_MIDDLEWARE_BASE + '/users' : '/predictmod/users',
   }),
 
   actions: {
