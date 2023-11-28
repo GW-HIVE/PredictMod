@@ -17,4 +17,5 @@ capture_output = True
 # PID file so you can easily fetch process ID
 pidfile = "/var/run/gunicorn/dev.pid"
 # Daemonize the Gunicorn process (detach & enter background)
+# ...don't do this if running in Docker!
 daemon = False

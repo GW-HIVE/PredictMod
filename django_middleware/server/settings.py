@@ -43,6 +43,7 @@ ALLOWED_HOSTS = [
 CORS_ALLOWED_ORIGINS = [
     "http://middleware",
     "http://localhost:3000",
+    # "http://localhost:4242",
     "http://127.0.0.1",
     "http://predict",
 ]
@@ -56,7 +57,7 @@ SESSION_COOKIE_SAMESITE = 'Strict'
 # Production values
 # CSRF_COOKIE_HTTPONLY = True
 # SESSION_COOKIE_HTTPONLY = True
-CSRF_TRUSTED_ORIGINS = ['http://localhost:3000']
+CSRF_TRUSTED_ORIGINS = ['http://localhost:3000', 'http://localhost:4242']
 
 if DEBUG:
     LOGGING = {
@@ -87,7 +88,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
-    'rest_framework',
     'ui.apps.UiConfig',
     'users.apps.UsersConfig',
 ]
@@ -122,15 +122,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'server.wsgi.application'
-
-REST_FRAMEWORK = {
-    'DEFAULT_RENDERER_CLASSES': [
-        'rest_framework.renderers.JSONRenderer',
-    ],
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.SessionAuthentication',
-    ],
-}
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases

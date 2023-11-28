@@ -38,7 +38,7 @@ server {
 	#
 	# include snippets/snakeoil.conf;
 
-	root /var/www/html/predictmod;
+	root /var/www/html/;
 
 	# Add index.php to the list if you are using PHP
 	index index.html index.htm index.nginx-debian.html;
@@ -47,7 +47,8 @@ server {
 
 	add_header 'Access-Control-Allow-Origin' '*';
 
-	location / {
+	location /predictmod {
+		# include /etc/nginx/mime.types;
 		add_header 'Access-Control-Allow-Origin' '*';
 		# First attempt to serve request as file, then
 		# as directory, then fall back to displaying a 404.
@@ -57,51 +58,69 @@ server {
 	# Glory be! 
 	# https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/Docker-Nginx-reverse-proxy-setup-example
 
-	location /predictmod/mg-upload {
+	location /predictmod/api/ping {
 		add_header 'Access-Control-Allow-Origin' '*';
-		proxy_pass http://middleware:8000/mg-upload;
+		proxy_set_header Host $host;
+		proxy_pass http://middleware:8000/predictmod/api/ping;
+	}
+	
+	location /predictmod/api/mg-upload {
+		add_header 'Access-Control-Allow-Origin' '*';
+		proxy_set_header Host $host;
+		proxy_pass http://middleware:8000/predictmod/api/mg-upload;
+	}
+	
+	location /predictmod/api/ehr-upload {
+		add_header 'Access-Control-Allow-Origin' '*';
+		proxy_pass http://middleware:8000/predictmod/api/ehr-upload;
 		proxy_set_header Host $host;
 	}
 
-	location /predictmod/ehr-upload {
+	location /predictmod/api/mg-sample {
 		add_header 'Access-Control-Allow-Origin' '*';
-		proxy_pass http://middleware:8000/ehr-upload;
+		proxy_pass http://middleware:8000/predictmod/api/mg-sample;
 		proxy_set_header Host $host;
 	}
 
-	location /predictmod/mg-sample {
-		add_header 'Access-Control-Allow-Origin' '*';
-		proxy_pass http://middleware:8000/mg-sample;
-		proxy_set_header Host $host;
-	}
-
-	location /predictmod/ehr-sample {
+	location /predictmod/api/ehr-sample {
 		# add_header 'Access-Control-Allow-Origin' 'http://middleware' 'always';
-		proxy_pass http://middleware:8000/ehr-sample;
+		proxy_pass http://middleware:8000/predictmod/api/ehr-sample;
 		proxy_set_header Host $host;
 	}
 
-	location /mg-upload {
+	location /predictmod/users/csrf {
 		add_header 'Access-Control-Allow-Origin' '*';
-		proxy_pass http://middleware:8000/mg-upload;
+		proxy_pass http://middleware:8000/predictmod/users/csrf;
 		proxy_set_header Host $host;
 	}
 
-	location /ehr-upload {
+	location /predictmod/users/login {
 		add_header 'Access-Control-Allow-Origin' '*';
-		proxy_pass http://middleware:8000/ehr-upload;
+		proxy_pass http://middleware:8000/predictmod/users/login;
 		proxy_set_header Host $host;
 	}
 
-	location /mg-sample {
+	location /predictmod/users/logout {
 		add_header 'Access-Control-Allow-Origin' '*';
-		proxy_pass http://middleware:8000/mg-sample;
+		proxy_pass http://middleware:8000/predictmod/users/logout;
 		proxy_set_header Host $host;
 	}
 
-	location /ehr-sample {
-		# add_header 'Access-Control-Allow-Origin' 'http://middleware' 'always';
-		proxy_pass http://middleware:8000/ehr-sample;
+	location /predictmod/users/session {
+		add_header 'Access-Control-Allow-Origin' '*';
+		proxy_pass http://middleware:8000/predictmod/users/session;
+		proxy_set_header Host $host;
+	}
+
+	location /predictmod/users/whoami {
+		add_header 'Access-Control-Allow-Origin' '*';
+		proxy_pass http://middleware:8000/predictmod/users/whoami;
+		proxy_set_header Host $host;
+	}
+
+	location /predictmod/admin {
+		add_header 'Access-Control-Allow-Origin' '*';
+		proxy_pass http://middleware:8000/predictmod/admin;
 		proxy_set_header Host $host;
 	}
 

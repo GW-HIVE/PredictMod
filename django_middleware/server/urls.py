@@ -19,10 +19,9 @@ from django.urls import include, path
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('predictmod/admin/', admin.site.urls),
     path('predictmod/users/', include("users.urls")),
-    path("", include("ui.urls")),
+    path("predictmod/api/", include("ui.urls")),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
