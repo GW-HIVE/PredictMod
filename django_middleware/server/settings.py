@@ -57,7 +57,12 @@ SESSION_COOKIE_SAMESITE = 'Strict'
 # Production values
 # CSRF_COOKIE_HTTPONLY = True
 # SESSION_COOKIE_HTTPONLY = True
-CSRF_TRUSTED_ORIGINS = ['http://localhost:3000', 'http://localhost:4242']
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:3000',
+    'http://localhost:4242',
+    'https://hivelab.tst.biochemistry.gwu.edu',
+    'https://hivelab.biochemistry.gwu.edu'
+    ]
 
 if DEBUG:
     LOGGING = {
