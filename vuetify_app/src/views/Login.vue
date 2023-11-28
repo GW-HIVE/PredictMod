@@ -29,7 +29,7 @@
       <v-col>
 
         <v-card-title class="title text-center font-weight-bold">
-          Login or register for access to PredictMod          
+          Login for access to PredictMod
         </v-card-title>
 
         <!-- <form @submit.prevent="login"> -->
