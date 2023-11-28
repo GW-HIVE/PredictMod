@@ -12,9 +12,10 @@ import router from './router'
 const pinia = createPinia();
 
 loadFonts()
+// XXX
+// console.log("===> Process ENV: %s", JSON.stringify(import.meta.env));
+// console.log("=>>> PROD?%s \nDEV? %s\nMODE? %s", import.meta.env.PROD, import.meta.env.DEV, import.meta.env.MODE);
 
-console.log("===> Process ENV: %s", JSON.stringify(import.meta.env));
-console.log("=>>> PROD?%s \nDEV? %s\nMODE? %s", import.meta.env.PROD, import.meta.env.DEV, import.meta.env.MODE);
 // S/O to the rescue: https://stackoverflow.com/a/74861436
 router.onError((error, to) => {
     console.log('---> Router captured error!');

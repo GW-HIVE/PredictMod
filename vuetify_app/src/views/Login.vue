@@ -46,10 +46,12 @@
           <v-row>
           <v-btn type="submit" @click.prevent="login()">Login</v-btn>
           <v-btn type="submit" @click.prevent="logout()">Logout</v-btn>
-          <v-btn type="submit" @click.prevent="checkUser()">Who Am I?!</v-btn>
+          <v-btn type="submit" @click.prevent="checkUser()">Who Am I</v-btn>
+            <!--
           <v-btn type="submit" @click.prevent="getSession()">Session info</v-btn>
           <v-btn type="submit" @click.prevent="showCSRFCookie()">Show CSRF Token</v-btn>
-          <!-- <v-btn type="submit" @click.prevent="tbdAlert()">Register</v-btn> -->
+          <v-btn type="submit" @click.prevent="tbdAlert()">Register</v-btn>
+          -->
         </v-row>
         </form>
 
@@ -114,15 +116,15 @@ export default {
 			}
     },
   mounted() {
-    this.resolveTargetURL();
+    // this.resolveTargetURL();
     this.getCSRF();
   },
   components: { DisclaimerShow, LicenseShow },
   methods:
     {
-      resolveTargetURL() {
-        this.userStore.resolveMiddleware();
-      },
+      // resolveTargetURL() {
+      //   this.userStore.resolveMiddleware();
+      // },
       getCSRF() {
         this.userStore.getCSRF();
       },

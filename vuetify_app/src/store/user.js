@@ -5,26 +5,10 @@ export const useUserStore = defineStore("user", {
     user: null,
     token: null,
     isAuthenticated: false,
-    targetURL: null,
+    targetURL: '/predictmod/users',
   }),
 
   actions: {
-    resolveMiddleware() {
-
-      const MODE = import.meta.env.MODE
-
-      if (MODE === 'development') {
-        this.targetURL = import.meta.env.VITE_DEV_MIDDLEWARE_URL;
-        // console.log(`---> Selecting DEV URL`);
-      } else if (MODE === 'production') {
-        this.targetURL = import.meta.env.VITE_PROD_MIDDLEWARE_URL;
-        // console.log(`---> Selecting PROD URL`)
-      } else {
-        // TODO: Error handling.
-      }
-      // MIDDLEWARE_URL = process.env[MODE]['MIDDLEWARE_URL']
-      // console.log("---> Resolved: %s", this.targetURL);
-    },
     async getCSRF() {
       // TODO: It would be better to not hit this API all the time...
       if (this.token !== null) {
@@ -32,7 +16,7 @@ export const useUserStore = defineStore("user", {
       };
       // console.log("---> Getting CSRF token");
       // console.log("---> Found MIDDLEWARE URL: %s", this.targetURL);
-      const res = await fetch(`${this.targetURL}/users/csrf/`, {
+      const res = await fetch(`${this.targetURL}/csrf/`, {
         // credentials: "same-origin",
       })
       const response = await res.json();
@@ -45,7 +29,7 @@ export const useUserStore = defineStore("user", {
     async login(email, password) {
       // console.log("---> Attempting to log in with credentials %s (%s)", email, password);
       // console.log("== CSRF Token is %s", this.token);
-      const res = await fetch(`${this.targetURL}/users/login/`, {
+      const res = await fetch(`${this.targetURL}/login/`, {
         method: "POST",
         // credentials: "same-origin",
         credentials: "include",
@@ -58,11 +42,11 @@ export const useUserStore = defineStore("user", {
       });
       const user = await res.json();
       this.user = user['user'];
-      console.log("===> Recieved user info: %s", this.user);
+      // console.log("===> Recieved user info: %s", this.user);
     },
     async logout() {
-      console.log('->>> Attempting to log out!');
-      const res = await fetch(`${this.targetURL}/users/logout/`, {
+      // console.log('->>> Attempting to log out!');
+      const res = await fetch(`${this.targetURL}/logout/`, {
         // method: "POST",  
         credentials: "include",
         // credentials: "same-origin",
@@ -73,12 +57,12 @@ export const useUserStore = defineStore("user", {
         },
       })
       const response = await res.json();
-      console.log("->>> Got response: %s", JSON.stringify(response));
+      // console.log("->>> Got response: %s", JSON.stringify(response));
     },
     async checkUser() {
-      console.log("---> Checking user @WhoAmI <---");
+      // console.log("---> Checking user @WhoAmI <---");
       console.log("=>>> User record: %s", this.user);
-      const res = await fetch(`${this.targetURL}/users/whoami/`, {
+      const res = await fetch(`${this.targetURL}/whoami/`, {
         // credentials: "same-origin",
         credentials: "include",
         headers: {
@@ -92,7 +76,7 @@ export const useUserStore = defineStore("user", {
     async getSession() {
       // console.log("---> Getting session <---");
       // console.log("=>>> User record: %s", this.user);
-      const res = await fetch(`${this.targetURL}/users/session/`, {
+      const res = await fetch(`${this.targetURL}/session/`, {
         // credentials: "same-origin",
         credentials: "include",
         headers: {
