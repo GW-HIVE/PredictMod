@@ -1,9 +1,3 @@
-from django.http import JsonResponse
-from django.middleware.csrf import get_token
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.views import APIView
-
 import json
 
 from django.contrib.auth import authenticate, login, logout
