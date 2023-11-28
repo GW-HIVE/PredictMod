@@ -57,13 +57,16 @@
       <v-alert v-if="message" color="blue-grey" dark>
         {{ message }}
       </v-alert>
-  
+      <v-row>
+        <BarChart v-if="showChart" /> 
+      </v-row>
     </div>
   </template>
   
   <script>
   import UploadService from "../services/UploadService";
-  
+  import BarChart from "../components/Chart.vue";
+
   import * as XLSX from 'xlsx';
 
   export default {
@@ -71,12 +74,14 @@
     props: {
         uploadTargetURL: String,
     },
+    components: { BarChart },
     data() {
       return {
         currentFile: null,
         data: null,
         progress: 0,
         message: "Data must be selected before results are available",
+        showChart: false,
       };
     },
     methods: {
@@ -116,6 +121,7 @@
           .then((response) => {
             // this.message = response.data.message;
             this.message = response.data;
+            this.showChart = true;
           })
           .catch(() => {
             this.progress = 0;
