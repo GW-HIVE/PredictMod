@@ -31,7 +31,9 @@ case $BUILD_ENV in
     compile_activity build
     ;;
     'docker-dev')
-    compile_activity docker-dev
+    # TODO: Does docker actually build anything differently?
+    # compile_activity docker-dev
+    compile_activity build
     ;;
     *)
     echo Please update your "env.sh" file appropriately.
