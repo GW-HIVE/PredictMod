@@ -7,6 +7,19 @@ const routes = [
   {
     path: '/predictmod',
     component: Home,
+    // XXX - Looks the below code chunk is automatically handled by
+    //       this version (4.0.0 as of Jan 2024) of the Vue Router
+    //       when nginx passes the $uri argument
+    // beforeEnter: (to, from, next) => {
+    //   const { uri } = to.query;
+    //   console.log("===> Found URI: %s", uri);
+    //   if (uri != null && uri != '/predictmod') {
+    //     next(false);
+    //     router.push(uri);
+    //   } else {
+    //     next();
+    //   }
+    // }
   },
   {
     // TBD: How does the default View work? Poses an interesting question
@@ -49,8 +62,14 @@ const routes = [
 ]
 
 const router = createRouter({
-  base: 'predictmod',
+  base: '/predictmod',
   history: createWebHistory(process.env.BASE_URL),
+  // TODO: Might log useful information in the future(?)
+  // watch: {
+  //   '$route' (to, from) {
+  //     console.log('Route changed from ' + from.path + ' to ' + to.path);
+  //   },
+  // },
   routes,
 })
 
