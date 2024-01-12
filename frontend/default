@@ -50,9 +50,8 @@ server {
 	location /predictmod {
 		# include /etc/nginx/mime.types;
 		add_header 'Access-Control-Allow-Origin' '*';
-		# First attempt to serve request as file, then
-		# as directory, then fall back to displaying a 404.
-		try_files $uri $uri/ =404;
+		# Allow Vue router to handle any 404s, rather than nginx
+		try_files $uri $uri/ /predictmod/index.html?uri=$uri;
 	}
 
 	# Glory be! 
