@@ -73,11 +73,12 @@
         </v-card-text>
       </v-container>
       <v-container>
-        <a>
+        <FileDownload :download-target-u-r-l="myTargetURL" />
+        <!-- <a>
           <v-btn elevation="0" border @click.prevent="downloadItem(item)">
               Download Example File
           </v-btn>
-        </a>
+        </a> -->
       </v-container>
     </v-row>
     <v-container>
@@ -116,7 +117,7 @@
 <script>
 // import GetMGoutput from './GetMGoutput.vue'
 import FileUpload from '../components/FileUpload.vue';
-import DownloadService from '../services/DownloadService';
+import FileDownload from '@/components/FileDownload.vue';
 import DisclaimerShow from './DisclaimerShow.vue';
 import LicenseShow from './LicenseShow.vue';
 
@@ -124,7 +125,7 @@ import axios, { Axios } from 'axios';
 
 export default {
     name: "Metagenomic Analysis Home",
-    components: { FileUpload, DisclaimerShow, LicenseShow },
+    components: { FileUpload, FileDownload, DisclaimerShow, LicenseShow },
     props: {
         
     },
