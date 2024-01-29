@@ -34,6 +34,8 @@ case $BUILD_ENV in
     # TODO: Does docker actually build anything differently?
     # compile_activity docker-dev
     compile_activity build
+    # echo "Cowardly refusing to build via npm in docker-dev mode. Pleae use 'npm run dev'. Exiting."
+    # exit 0 
     ;;
     *)
     echo Please update your "env.sh" file appropriately.

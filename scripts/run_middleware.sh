@@ -15,7 +15,7 @@ case $BUILD_ENV in
     docker run -d --restart=always --network predictmod  --name middleware predictmod:v0.3.1-middleware
     ;;
     'docker-dev')
-    docker run -d --restart=always -p 8000:8000 --network predictmod  --name middleware predictmod:v0.3.1-middleware
+    docker run -d --restart=always -p 8000:8000 --name middleware predictmod:v0.3.1-middleware
     ;;
     *)
     echo Please update your "env.sh" file appropriately.
