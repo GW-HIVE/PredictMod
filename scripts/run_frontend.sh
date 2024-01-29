@@ -17,6 +17,8 @@ case $BUILD_ENV in
     docker run -d -p 4244:80 --restart=always --network predictmod  --name predict-prod predictmod-prod:v0.3.1-frontend
     ;;
     'docker-dev')
+    # echo "Frontend development should really be happening through 'npm run dev'. Exiting."
+    # exit 0 
     docker run -d -p 4242:80 --restart=always --network predictmod  --name predict-prod predictmod-prod:v0.3.1-frontend
     ;;
     *)

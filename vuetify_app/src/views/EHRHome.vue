@@ -78,9 +78,10 @@
       </v-container>
       <v-container>
         <a>
-          <v-btn elevation="0" border @click.prevent="downloadItem(item)">
+          <FileDownload :download-target-u-r-l="myTargetURL" />
+          <!-- <v-btn elevation="0" border @click.prevent="downloadItem(item)">
               File Download
-          </v-btn>
+          </v-btn> -->
         </a>
       </v-container>
     </v-row>
@@ -119,13 +120,14 @@
 </template>
 
 <script>
-import FileUpload from '../components/FileUpload.vue'
+import FileUpload from '../components/FileUpload.vue';
+import FileDownload from '@/components/FileDownload.vue';
 import DisclaimerShow from './DisclaimerShow.vue';
 import LicenseShow from './LicenseShow.vue';
 
 export default {
     name: "Electronic Health Record Analysis Home",
-    components: { FileUpload, DisclaimerShow, LicenseShow },
+    components: { FileUpload, FileDownload, DisclaimerShow, LicenseShow },
     props: {
         
     },

@@ -43,7 +43,7 @@ ALLOWED_HOSTS = [
 CORS_ALLOWED_ORIGINS = [
     "http://middleware",
     "http://localhost:3000",
-    # "http://localhost:4242",
+    "http://localhost:4242",
     "http://127.0.0.1",
     "http://predict",
 ]

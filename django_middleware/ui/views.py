@@ -1,20 +1,26 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.template.response import TemplateResponse
 from django.views.decorators.csrf import requires_csrf_token, ensure_csrf_cookie, csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 
-import requests
 
-import logging
 
 import json
+import logging
+import os
+import pandas
+import requests
 
 FLASK_BACKEND = settings.FLASK_BACKEND
 
-MG_EXAMPLE = "./ui/assets/unknown_response.csv"
-EHR_EXAMPLE = "./ui/assets/single_patient_data_1.xls"
+MG_EXAMPLE = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), "assets/mg_sample_data.xlsx")
+)
+EHR_EXAMPLE = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), "assets/ehr_sample_data.csv")
+)
 
 logger = logging.getLogger()
 
@@ -30,18 +36,14 @@ def mg_sample(request):
     logger.debug("="*40)
     logger.debug(f"\tATTEMPTING DOWNLOAD!!")
     logger.debug("="*40)
-    with open(MG_EXAMPLE, "r") as fp:
-        response = HttpResponse(fp.read(), content_type="text/csv")
-        response['Content-Disposition'] = "inline; filename=metagenomic_example_data.csv"
-        return response
+    mg_df = pandas.read_excel(MG_EXAMPLE)
+    return JsonResponse(mg_df.to_json(orient="records"), safe=False)
 
 @csrf_exempt
 def ehr_sample(request):
-    # See SO: https://stackoverflow.com/a/36394206
-    with open(EHR_EXAMPLE, "rb") as fp:
-        response = HttpResponse(fp.read(), content_type="application/vnd.ms-excel")
-        response['Content-Disposition'] = "inline; filename=ehr_example_data.xls"
-        return response
+    # See also SO: https://stackoverflow.com/a/36394206
+    ehr_df = pandas.read_csv(EHR_EXAMPLE)
+    return JsonResponse(ehr_df.to_json(orient="records"), safe=False)
 
 # XXX
 # @ensure_csrf_cookie
