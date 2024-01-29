@@ -1,4 +1,6 @@
 Django
 django-cors-headers
+openpyxl
+pandas
 gunicorn
 requests
