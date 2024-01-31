@@ -76,6 +76,14 @@ server {
 		proxy_pass $originaddr$uri;
 	}
 
+	# ===== XXX ===== Support for "admin" endpoint
+	location /predictmod/admin {
+		resolver 127.0.0.11;
+		set $originaddr http://middleware:8000;
+		add_header 'Access-Control-Allow-Origin' '*';
+		proxy_set_header Host $host;
+		proxy_pass $originaddr$uri;
+	}
 	# ================ XXX =====================
 
 	# location /predictmod/api/ping {
