@@ -24,11 +24,11 @@
      
           <v-card flat color="transparent">
             <v-card-title class="title text-center font-weight-bold">
-              Welcome to PredictMod
+              Welcome to PredictMod (BETA)
             </v-card-title>
             <v-card-text class="text-center">
-              Welcome to PredictMod! PredictMod is a machine-learning-based application that predicts 
-              whether a patient will respond to an intervention based on electronic health records (EHR) or metagenomic data.
+              Welcome to PredictMod! PredictMod is a machine-learning-based platform that predicts whether 
+	      a patient will respond to an intervention based on electronic health records (EHR) or -omic data.
             </v-card-text>
          </v-card>
        
