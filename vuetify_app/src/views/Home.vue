@@ -24,7 +24,7 @@
      
           <v-card flat color="transparent">
             <v-card-title class="title text-center font-weight-bold">
-              Welcome to PredictMod (BETA)
+              Welcome to PredictMod (beta)
             </v-card-title>
             <v-card-text class="text-center">
               Welcome to PredictMod! PredictMod is a machine-learning-based platform that predicts whether 
