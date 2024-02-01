@@ -24,7 +24,7 @@
      
           <v-card flat color="transparent">
             <v-card-title class="title text-center font-weight-bold">
-              Welcome to PredictMod (beta)
+              Welcome to PredictMod <font size="-1">BETA</font>
             </v-card-title>
             <v-card-text class="text-center">
               Welcome to PredictMod! PredictMod is a machine-learning-based platform that predicts whether 
@@ -33,7 +33,7 @@
          </v-card>
        
           </div>
-        </div> 
+        </div>
      
       <!-- </v-overlay> -->
     </v-img>
