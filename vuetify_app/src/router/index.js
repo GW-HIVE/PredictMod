@@ -56,6 +56,10 @@ const routes = [
       component: () => import('../views/MGHome.vue'),
     },
     {
+      path: '/predictmod/omics-home', 
+      component: () => import('../views/OmicsHome.vue'),
+    },
+    {
       path: '/predictmod/login', 
       component: () => import('../views/Login.vue'),
     },

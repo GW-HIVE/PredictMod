@@ -44,12 +44,15 @@
  
 
     <v-row>
-          <v-col>
-            <EHRThumb/>
-          </v-col>
-          <v-col>
-            <MGThumb/>
-          </v-col>
+      <v-col>
+        <OmicsThumb/>
+      </v-col>
+      <v-col>
+        <EHRThumb/>
+      </v-col>
+      <v-col>
+        <MGThumb/>
+      </v-col>
 
     </v-row>
   
@@ -79,6 +82,7 @@ import { onMounted, ref } from 'vue';
 // import SimpleUploadEHR from './SimpleUploadEHR.vue';
 import DisclaimerShow from './DisclaimerShow.vue';
 import NotFound from './NotFound.vue';
+import OmicsThumb from './OmicsThumb.vue';
 import EHRThumb from './EHRThumb.vue';
 import MGThumb from './MGThumb.vue';
 import LicenseShow from './LicenseShow.vue';
@@ -91,7 +95,7 @@ export default {
 				home: false,
 			}
     },
-  components: { DisclaimerShow, NotFound, EHRThumb, MGThumb, LicenseShow }
+  components: { DisclaimerShow, NotFound, OmicsThumb, EHRThumb, MGThumb, LicenseShow }
 }
 </script>
 
