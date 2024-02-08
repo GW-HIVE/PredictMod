@@ -64,6 +64,14 @@ const routes = [
       component: () => import('../views/Login.vue'),
     },
     {
+      path: '/predictmod/query-builder', 
+      component: () => import('../views/NotFound.vue'),
+    },
+    {
+      path: '/predictmod/try-it', 
+      component: () => import('../views/TryItOut.vue'),
+    },
+    {
       path: '/:pathMatch(.*)*',
       component: () => import('../views/NotFound.vue'),
     },

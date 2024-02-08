@@ -6,6 +6,8 @@
       <v-tab to="/predictmod/about">About</v-tab>
       <v-tab to="/predictmod/faq">FAQ</v-tab>
       <v-tab to="/predictmod/contact">Contact</v-tab>
+      <v-tab to="/predictmod/query-builder">Query Builder</v-tab>
+      <v-tab to="/predictmod/try-it">Try It Out</v-tab>
       <v-tab to="/predictmod/login">Login</v-tab>
     </v-tabs>
     <main>

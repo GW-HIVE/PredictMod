@@ -1,7 +1,4 @@
 <template>
-  <!-- <v-banner
-  single-line
-  class="text-left"> -->
   <v-card>
     <v-img
       src="../assets/Welcome_Header.jpg"
@@ -10,14 +7,6 @@
       :height="400" 
       :cover="true"
       >
-      <!-- <v-overlay absolute> -->
-      <!-- 
-        See below for the (currently...) most reliable overview of v-img
-        use cases. 
-        https://codingbeautydev.com/blog/vuetify-image/?expand_article=1
-        NB: `:gradient` is broken as of vuetify ^3.0.0, `gradient="xxx"`
-        must be used.
-       -->
        
         <div class="d-flex fill-height" style="flex-direction:column">
           <div class="d-flex fill-height align-center justify-center"> 
@@ -35,26 +24,39 @@
           </div>
         </div>
      
-      <!-- </v-overlay> -->
     </v-img>
   </v-card>
-  <!-- </v-banner> -->
 
   <v-container>
  
 
-    <v-row>
+    <!-- <v-row> -->
       <v-col>
-        <OmicsThumb/>
-      </v-col>
-      <v-col>
-        <EHRThumb/>
-      </v-col>
-      <v-col>
-        <MGThumb/>
+        <v-card flat color="transparent">
+          <v-card-title class="title text-center font-weight-bold">
+            Guest User
+          </v-card-title>
+          <v-card-text class="text-center">
+            Run a sample query to see how the PredictMod tool works
+          </v-card-text>
+        </v-card>
+        <router-link to="/predictmod/try-it">
+              <v-btn color="primary">Get Started</v-btn>
+        </router-link>
+        <v-card flat color="transparent">
+          <v-card-title class="title text-center font-weight-bold">
+            Registered User
+          </v-card-title>
+          <v-card-text class="text-center">
+            Login to buildyour own query and run predictions with single-patient data
+          </v-card-text>
+        </v-card>
+        <router-link to="/predictmod/login">
+              <v-btn color="primary">Login</v-btn>
+        </router-link>
       </v-col>
 
-    </v-row>
+    <!-- </v-row> -->
   
 
     <v-row>
@@ -69,11 +71,6 @@
 
 </v-container>
 
-<!-- <v-img src="../assets/Footer.png">
-  
-</v-img> -->
-
-
 </template>
 <script>
 import { onMounted, ref } from 'vue';
@@ -82,9 +79,6 @@ import { onMounted, ref } from 'vue';
 // import SimpleUploadEHR from './SimpleUploadEHR.vue';
 import DisclaimerShow from './DisclaimerShow.vue';
 import NotFound from './NotFound.vue';
-import OmicsThumb from './OmicsThumb.vue';
-import EHRThumb from './EHRThumb.vue';
-import MGThumb from './MGThumb.vue';
 import LicenseShow from './LicenseShow.vue';
 
 export default {
@@ -95,7 +89,7 @@ export default {
 				home: false,
 			}
     },
-  components: { DisclaimerShow, NotFound, OmicsThumb, EHRThumb, MGThumb, LicenseShow }
+  components: { DisclaimerShow, NotFound, LicenseShow }
 }
 </script>
 
