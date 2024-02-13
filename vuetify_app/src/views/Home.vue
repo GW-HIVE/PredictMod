@@ -34,17 +34,6 @@
       <v-col>
         <v-card flat color="transparent">
           <v-card-title class="title text-center font-weight-bold">
-            Guest User
-          </v-card-title>
-          <v-card-text class="text-center">
-            Run a sample query to see how the PredictMod tool works
-          </v-card-text>
-        </v-card>
-        <router-link to="/predictmod/try-it">
-              <v-btn color="primary">Get Started</v-btn>
-        </router-link>
-        <v-card flat color="transparent">
-          <v-card-title class="title text-center font-weight-bold">
             Registered User
           </v-card-title>
           <v-card-text class="text-center">
@@ -53,6 +42,28 @@
         </v-card>
         <router-link to="/predictmod/login">
               <v-btn color="primary">Login</v-btn>
+        </router-link>
+        <v-card flat color="transparent">
+          <v-card-title class="title text-center font-weight-bold">
+            Explore our models?
+          </v-card-title>
+          <v-card-text class="text-center">
+            Review, interact and learn about the PredictMod model collection.
+          </v-card-text>
+        </v-card>
+        <router-link to="/predictmod/explore">
+              <v-btn color="primary">Explore</v-btn>
+        </router-link>
+        <v-card flat color="transparent">
+          <v-card-title class="title text-center font-weight-bold">
+            Guest User
+          </v-card-title>
+          <v-card-text class="text-center">
+            Run a sample query to see how the PredictMod tool works
+          </v-card-text>
+        </v-card>
+        <router-link to="/predictmod/try-it">
+              <v-btn color="primary">Get Started</v-btn>
         </router-link>
       </v-col>
 
