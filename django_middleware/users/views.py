@@ -93,6 +93,21 @@ def login_view(request):
 
     return JsonResponse({'user': user.get_username()})
 
+@csrf_exempt
+def create_user_view(request):
+    logger.debug(f"---> Got user creation request")
+    body = json.loads(request.body)
+    logger.debug("===== BODY =====")
+    logger.debug(body)
+    logger.debug("================")
+    first_name = body.get('first_name', None)
+    last_name = body.get('last_name', None)
+    userPass = body.get('password', None)
+    userMail = body.get('email', None)
+    logger.debug(f"---> Got `create user` request with Name {first_name} {last_name} Password {userPass} Email {userMail}")
+
+    
+
 
 def logout_view(request):
     logger.debug(f"---> Caught request! Body: {request.body}")
