@@ -22,21 +22,6 @@ const routes = [
     // }
   },
   {
-    // TBD: How does the default View work? Poses an interesting question
-    // path: '/about',
-    // component: () => import('@/layouts/default/Default.vue'),
-    // children: [
-    //   {
-    //     path: '',
-    //     name: 'Home',
-    //     // route level code-splitting
-    //     // this generates a separate chunk (about.[hash].js) for this route
-    //     // which is lazy-loaded when the route is visited.
-    //     component: () => import(/* webpackChunkName: "home" */ '@/views/Home.vue'),
-    //   },
-    // ],
-    // Following the example at `https://stackblitz.com/edit/vue3-vite-router-starter?file=src%2Frouter.js`
-    // ...
     path: '/predictmod/about',
     component: () => import('../views/About.vue'),
   },
@@ -58,6 +43,10 @@ const routes = [
     {
       path: '/predictmod/omics-home', 
       component: () => import('../views/OmicsHome.vue'),
+    },
+    {
+      path: '/predictmod/users',
+      component: () => import('@/views/Users.vue'),
     },
     {
       path: '/predictmod/login', 
