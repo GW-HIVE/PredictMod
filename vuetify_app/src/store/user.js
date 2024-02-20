@@ -1,5 +1,7 @@
 import { defineStore } from "pinia";
 
+import { fetchWrapper } from "@/helpers/fetch-wrapper";
+
 export const useUserStore = defineStore("user", {
   state: () => ({
     user: null,
@@ -12,18 +14,14 @@ export const useUserStore = defineStore("user", {
     async getCSRF() {
       // TODO: It would be better to not hit this API all the time...
       if (this.token !== null) {
+        console.log("===> Already have CSRF: %s", this.token);
         return;
       };
       // console.log("---> Getting CSRF token");
       // console.log("---> Found MIDDLEWARE URL: %s", this.targetURL);
-      const res = await fetch(`${this.targetURL}/csrf/`, {
-        // credentials: "same-origin",
-      })
-      const response = await res.json();
-      const csrfToken = response['X-CSRFToken'];
-      // const csrfToken = res.headers.get('X-CSRFToken');
+      const res = await fetchWrapper.get(`${this.targetURL}/csrf/`)
+      const csrfToken = res['X-CSRFToken'];
       // console.log("---> Got CSRF Token: %s", csrfToken);
-      // console.log("---> (Response was %s)", JSON.stringify(response));
       this.token = csrfToken;
     },
     async login(email, password) {
@@ -39,10 +37,10 @@ export const useUserStore = defineStore("user", {
           "X-CSRFToken": this.token,
         },
         body: JSON.stringify({ email, password }),
-      });
+    });
       const user = await res.json();
       this.user = user['user'];
-      // console.log("===> Recieved user info: %s", this.user);
+      console.log("===> Recieved user info: %s", JSON.stringify(user));
     },
     async logout() {
       // console.log('->>> Attempting to log out!');
@@ -57,7 +55,7 @@ export const useUserStore = defineStore("user", {
         },
       })
       const response = await res.json();
-      // console.log("->>> Got response: %s", JSON.stringify(response));
+      console.log("->>> Got response: %s", JSON.stringify(response));
     },
     async checkUser() {
       // console.log("---> Checking user @WhoAmI <---");
@@ -74,8 +72,8 @@ export const useUserStore = defineStore("user", {
       console.log("---> WhoAmI reported: %s", JSON.stringify(response));
     },
     async getSession() {
-      // console.log("---> Getting session <---");
-      // console.log("=>>> User record: %s", this.user);
+      console.log("---> Getting session <---");
+      console.log("=>>> User record: %s", this.user);
       const res = await fetch(`${this.targetURL}/session/`, {
         // credentials: "same-origin",
         credentials: "include",
@@ -85,11 +83,34 @@ export const useUserStore = defineStore("user", {
         },
       })
       const response = res.json();
-      // console.log("---> Got session info: %s", JSON.stringify(response));
+      console.log("---> Got session info: %s", JSON.stringify(response));
     },
     showCSRFCookie() {
       console.log("->>> %s", JSON.stringify(this.token));
       console.log("->>> Current user? %s", JSON.stringify(this.user));
+    },
+    async createUser(email, password, firstName, lastName) {
+      console.log("--> Attempting to register user with credentials:\nUser %s Password: %s\n Name: %s %s", email, password, firstName, lastName);
+      const res = await fetch(`${this.targetURL}/create-user/`, {
+        method: "POST",
+        // credentials: "same-origin",
+        // credentials: "include",
+        // mode: "cross-origin",
+        // headers: {
+        //   "Accept": "application/json",
+          // "csrfmiddlewaretoken": this.token,
+        //   "X-CSRFToken": this.token,
+        // },
+        body: JSON.stringify(
+          {
+            "first_name": firstName,
+            "last_name": lastName,
+            "email": email,
+            "password": password,
+            // "csrfmiddlewaretoken": this.token,
+          }
+        )
+      })
     }
   },
 });
