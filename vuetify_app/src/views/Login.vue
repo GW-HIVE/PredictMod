@@ -27,37 +27,90 @@
 
     <v-row class="justify-center">
       <v-col>
+        <v-flex style="width:30%">
+        <!-- <v-card> -->
+          <v-card-title class="title text-center font-weight-bold">
+            Login
+          </v-card-title>
 
+          <!-- <form @submit.prevent="login"> -->
+          <!-- <form> -->
+          <v-col>
+            <v-row>
+              <v-spacer></v-spacer>
+              <v-text-field label="Email" v-model="email" style="width:50%"></v-text-field>
+              <v-spacer></v-spacer>
+              <!-- <input type="text" v-model="email" /> -->
+            </v-row>
+            <v-row>
+              <v-spacer></v-spacer>
+              <v-text-field label="Password" type="password" v-model="password" style="width:50%"></v-text-field>
+              <v-spacer></v-spacer>
+              <!-- <v-text-field label="Password" v-model="password"></v-text-field> -->
+              <!-- <input type="password" v-model="password" /> -->
+            </v-row>
+          <!-- </form> -->
+        </v-col>
+        <v-col>
+          <v-row class="justify-center">
+            <v-btn type="submit" @click.prevent="login()">Login</v-btn>
+            <v-btn type="submit" @click.prevent="logout()">Logout</v-btn>
+          </v-row>
+        </v-col>
+        <!-- </v-card> -->
+      </v-flex>
+      </v-col>
+      <v-col>
+        <!-- <v-card class=""> -->
         <v-card-title class="title text-center font-weight-bold">
-          Login for access to PredictMod
+            Register
         </v-card-title>
 
         <!-- <form @submit.prevent="login"> -->
-        <form>
-          <v-row>
-            <v-text-field label="Email" v-model="email"></v-text-field>
+        <!-- <form> -->
+          <v-col>
+            <v-row>
+            <v-spacer></v-spacer>
+            <v-text-field label="First Name" v-model="firstName" style="width:40%"></v-text-field>
+            <v-spacer></v-spacer>
+            <v-text-field label="Last Name" v-model="lastName"  style="width:40%"></v-text-field>
+            <v-spacer></v-spacer>
+            </v-row>
+            <v-row>
+              <v-spacer></v-spacer>
+            <v-text-field label="Email Address" v-model="newEmail" style="width:40%"></v-text-field>
+              <v-spacer></v-spacer>
+            <v-text-field label="Confirm Email" v-model="newEmailConfirmation" style="width:40%"></v-text-field>
+              <v-spacer></v-spacer>
+            </v-row>
+          </v-col>
+          <v-col>
+            <v-row>
+              <v-spacer></v-spacer>
+              <v-text-field label="Password" type="password" v-model="newPassword" style="width:40%"></v-text-field>
+              <v-spacer></v-spacer>
+              <v-text-field label="Confirm Password" type="password" v-model="newPasswordConfirmation" style="width:40%"></v-text-field>
+              <v-spacer></v-spacer>
             <!-- <input type="text" v-model="email" /> -->
           </v-row>
-          <v-row>
-            <v-text-field label="Password" type="password" v-model="password"></v-text-field>
-            <!-- <v-text-field label="Password" v-model="password"></v-text-field> -->
-            <!-- <input type="password" v-model="password" /> -->
+          </v-col>
+          <v-row class="justify-center">
+            <v-btn type="submit" @click.prevent="createUser()">Create an Account</v-btn>
           </v-row>
-          <v-row>
-          <v-btn type="submit" @click.prevent="login()">Login</v-btn>
-          <v-btn type="submit" @click.prevent="logout()">Logout</v-btn>
-          <v-btn type="submit" @click.prevent="checkUser()">Who Am I</v-btn>
-            <!--
-          <v-btn type="submit" @click.prevent="getSession()">Session info</v-btn>
-          <v-btn type="submit" @click.prevent="showCSRFCookie()">Show CSRF Token</v-btn>
-          <v-btn type="submit" @click.prevent="tbdAlert()">Register</v-btn>
-          -->
-        </v-row>
-        </form>
-
+        <!-- </form> -->
+        <!-- </v-card> -->
       </v-col>
-    
     </v-row>
+    <v-col>
+    <v-card-title class="title text-center font-weight-bold">Administrivia</v-card-title>
+    <v-row class="justify-center">
+      <v-col>
+        <v-btn type="submit" @click.prevent="getSession()">Session info</v-btn>
+        <v-btn type="submit" @click.prevent="showCSRFCookie()">Show CSRF Token</v-btn>
+        <v-btn type="submit" @click.prevent="checkUser()">Who Am I</v-btn>
+      </v-col>
+    </v-row>
+  </v-col>
 <!-- 
     <v-container>
     <v-row class="justify-center">
@@ -113,6 +166,12 @@ export default {
 				home: false,
         email: "",
         password: "",
+        firstName: "",
+        lastName: "",
+        newEmail: "",
+        newEmailConfirmation: "",
+        newPassword: "",
+        newPasswordConfirmation: "",
 			}
     },
   mounted() {
@@ -142,6 +201,9 @@ export default {
       },
       showCSRFCookie() {
         this.userStore.showCSRFCookie();
+      },
+      createUser() {
+        this.userStore.createUser(this.newEmail, this.newPassword, this.firstName, this.lastName);
       }
     }
 }
