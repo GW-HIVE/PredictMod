@@ -1,19 +1,39 @@
 <template>
     <!-- Vuetify documentation: https://vuetifyjs.com/en/components/tabs/ -->
     <!-- Also see SO at https://stackoverflow.com/questions/49721710/how-to-use-vuetify-tabs-with-vue-router -->
-    <v-tabs>
-      <v-tab to="/predictmod/">Home</v-tab>
-      <v-tab to="/predictmod/about">About</v-tab>
-      <v-tab to="/predictmod/faq">FAQ</v-tab>
-      <v-tab to="/predictmod/contact">Contact</v-tab>
-      <v-tab to="/predictmod/query-builder">Query Builder</v-tab>
-      <v-tab to="/predictmod/try-it">Try It Out</v-tab>
-      <v-tab to="/predictmod/login">Login</v-tab>
-    </v-tabs>
+      <v-tabs>
+        <v-tab to="/predictmod/">Home</v-tab>
+        <v-tab to="/predictmod/about">About</v-tab>
+        <v-tab to="/predictmod/faq">FAQ</v-tab>
+        <v-tab to="/predictmod/contact">Contact</v-tab>
+        <v-tab to="/predictmod/query-builder">Query Builder</v-tab>
+        <v-tab to="/predictmod/try-it">Try It Out</v-tab>
+        <v-tab to="/predictmod/login">Login</v-tab>
+      </v-tabs>
     <main>
       <router-view />
     </main>
 </template>
+
+<script>
+import { onMounted } from 'vue';
+import { useUserStore } from './store/user';
+import { useAppStore } from '@/store/app';
+
+
+export default {
+    setup() {
+      const user = useUserStore();
+      const appStore = useAppStore();
+      return { user, appStore };
+    },
+    mounted() {
+      this.user.getCSRF();
+      this.appStore.reportState();
+    }
+
+}
+</script>
 
 <style>
   #app {
