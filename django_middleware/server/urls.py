@@ -20,7 +20,7 @@ from django.urls import include, path
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
-    path("predictmod/users/", include("users.urls")),
+    path("predictmod/", include("users.urls")),
     path("predictmod/api/", include("ui.urls")),
 ]
 

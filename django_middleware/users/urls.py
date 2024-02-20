@@ -1,12 +1,28 @@
-from django.urls import path
+from django.urls import path, include
+from django.contrib.auth.models import User
+from rest_framework import routers, serializers, viewsets
 
 # from . import views
 
+
+# Serializers define the API representation.
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = User
+        fields = ["url", "first_name", "last_name", "email", "is_staff"]
+
+
+# ViewSets define the view behavior.
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+# Routers provide an easy way of automatically determining the URL conf.
+router = routers.DefaultRouter()
+router.register(r"users", UserViewSet)
+
 urlpatterns = [
-    path("csrf/", views.get_csrf, name="api-csrf"),
-    path("create-user/", views.create_user_view, name="create-user"),
-    path("login/", views.login_view, name="api-login"),
-    path("logout/", views.logout_view, name="api-logout"),
-    path("session/", views.session_view, name="api-session"),
-    path("whoami/", views.whoami_view, name="api-whoami"),
+    path("", include(router.urls)),
+    # path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
 ]
