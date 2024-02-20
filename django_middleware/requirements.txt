@@ -1,3 +1,4 @@
+black
 Django
 django-cors-headers
 django-filter
