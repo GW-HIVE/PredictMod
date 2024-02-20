@@ -27,9 +27,9 @@ class DownloadFilesService {
 
     // formData.append("json", json);
 
-    const downloadTarget = `https://hivelab.tst.biochemistry.gwu.edu/predictmod/api${urlDest}`;
+    // const downloadTarget = `https://hivelab.tst.biochemistry.gwu.edu/predictmod/api${urlDest}`;
     // const downloadTarget = `http://hivelab.biochemistry.gwu.edu/predictmod/api${urlDest}`;
-    // const downloadTarget = `http://localhost:8000/predictmod/api${urlDest}`;
+    const downloadTarget = `http://localhost:8000/predictmod/api${urlDest}`;
 
     console.log(`Now downloading from ${downloadTarget}`);
 
