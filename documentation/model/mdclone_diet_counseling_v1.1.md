@@ -2,7 +2,7 @@
 The following information provided in this document details our process for data preprocessing, algorithm selection, hyperparameters, model evaluation, and quality control. Additionally, the goal of this document is to highlight source code associated with each iteration of the MDClone model.
 
 **Data Source**  
-MDClone (https://www.mdclone.com) is a synthetic patient data platform that has a collaboration with the Veterans Administration (VA) to generate synthetic patients that exhibit similar statistics to US veterans. This allows for data transfer internally and externally without the compromise of any personal patient information. MDClone provides the ability to connect several health service entities to consolidate patient data into a single platform which provides less gaps in documented visits and care. 
+MDClone (https://www.mdclone.com) is a synthetic patient data platform that has a collaboration with the Veterans Affairs to generate synthetic patients that exhibit similar statistics to US veterans. This allows for data transfer internally and externally without the compromise of any personal patient information. MDClone provides the ability to connect several health service entities to consolidate patient data into a single platform which provides less gaps in documented visits and care. 
 
 The training dataset included 19,842 patients and 19 variables.
 
