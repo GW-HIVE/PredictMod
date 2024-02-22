@@ -1,6 +1,6 @@
 # PredictMod
 ## Introduction
-PredictMod is a web app created to inform physicians' decisions. PredictMod takes metagenomic gastrointestinal (GI) microbiome and electronic health record (EHR) data as input and uses a machine learning algorithm to form predictions of whether the ketogenic diet may be successful. 
+Our goal is to provide clinicians with a powerful decision making tool that enhances clinical understanding of patient-level data. The PredictMod platform utilizes machine learning tools and complex datasets based on electronic health records, gut microbiome, and -omics data to forecast patient outcomes, often in response to treatment for a particular condition. While our primary condition of interest is Prediabetes, the tool is designed to be used for a variety of conditions, interventions, and data types.
 
 The PredictMod web app was designed using Figma and implemented using a JavaScript Vue/Vuetify/Vite framework. For more information on these, see the links below:
 
@@ -90,22 +90,38 @@ Now a link should appear, which you can follow to see the client side of the app
 #### Archive
 Holds files that are currently not in use, but may be useful to reference at a later time. 
 
-#### django_server
-Contains all resources related to running the Django webserver middleware.
+#### BCOs
+Contains EHR & MG BioCompute Object json files.
+
+#### EHR_Synthetic_data
+Contains files related to the Synthea_Exercise_v1.1 model.
+
 #### EHR_predict
 Work related to Electronic Health Records (EHR) prediction.
 
-#### flask-backend
-Contains all resources required to run the Flask webserver and analysis backend.
-
-#### Metagenomic_predict 
-Work related to metgenomics prediction conducted in MATLAB. 
+#### EHR_python
+Work related to EHR predictions conducted in Python. 
 
 #### MG_python
 Work related to Metagenomics predictions conducted in Python. 
 
-#### EHR_python
-Work related to EHR predictions conducted in Python. 
+#### Metagenomic_predict 
+Work related to metgenomics prediction conducted in MATLAB. 
+
+#### data_dictionary_mapping
+Contains current and previous data dictionary and mapping document versions.
+
+#### django_middleware
+Contains all resources related to running the Django webserver middleware.
+
+#### documentation 
+Model-specific documentation as well as UI content. 
+
+#### flask-backend
+Contains all resources required to run the Flask webserver and analysis backend.
+
+#### frontend 
+Work related to PredictMod UI. 
 
 #### scripts
 Convenience scripts to compile/transpile the frontend and to launch the application.
