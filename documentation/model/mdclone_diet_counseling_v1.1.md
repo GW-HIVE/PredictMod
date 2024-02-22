@@ -10,4 +10,4 @@ The training dataset included 19,842 patients and 19 variables.
 A responder status is based on a resulting weight at least 5% lower than their starting weight. The resulting weight is the lowest weight collected within a 6-month timeframe, following the start of the intervention. A nonresponder status is based on less than 5% weight loss, or any amount of weight gain as the lowest weight collected within the 6-month timeframe.
 
 **Algorithm & Model Performance**  
-A Decision Tree Classifier (DTC) was used, as it performed the best when compared to other algorithms, with 97% accuracy. 
+A Decision Tree Classifier (DTC) was used, as it performed the best when compared to other algorithms, with 65% accuracy. 
