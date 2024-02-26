@@ -1,0 +1,203 @@
+{
+  "object_id": "https://biocomputeobject.org/BCO_000393/DRAFT",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/2791object.json",
+  "etag": "2d81fbb6090b906e44146b47fb2e0cb4c68a5115",
+  "provenance_domain": {
+    "name": "ehr_model",
+    "version": "v1.0",
+    "license": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "created": "2023-11-16T14:42:18",
+    "modified": "2023-11-20T17:00:11",
+    "contributors": [
+      {
+        "name": "Urnisha Bhuiyan",
+        "affiliation": "GW HIVE Lab ",
+        "email": "sbhuiyan28@email.gwu.edu",
+        "contribution": [
+          "authoredBy"
+        ]
+      },
+      {
+        "name": "Lori Krammer",
+        "affiliation": "GW HIVE Lab",
+        "email": "lorikrammer@email.gwu.edu ",
+        "contribution": [
+          "authoredBy"
+        ]
+      },
+      {
+        "name": "Abel Argaw",
+        "affiliation": "GW HIVE/VA",
+        "email": "abel.argaw@email.gwu.edu ",
+        "contribution": [
+          "authoredBy"
+        ]
+      }
+    ],
+    "review": [
+      {
+        "status": "in-review",
+        "reviewer_comment": "NA",
+        "date": "2023-12-14T15:00:00.000Z",
+        "reviewer": {
+          "name": "John David",
+          "affiliation": "VMI",
+          "email": "davidja@vmi.edu ",
+          "contribution": [
+            "curatedBy"
+          ]
+        }
+      },
+      {
+        "status": "in-review",
+        "reviewer_comment": "NA",
+        "date": "2023-12-14T15:00:00.000Z",
+        "reviewer": {
+          "name": "Atin Basuchoudhary",
+          "affiliation": "VMI",
+          "contribution": [
+            "curatedBy"
+          ]
+        }
+      }
+    ]
+  },
+  "usability_domain": [
+    "The objective of this model is to predict response to a low carbohydrate diet for the treatment of pre-diabetes. Response is measured by ones ability to reduce body fat percentage by greater than or equal to 5 pounds within a 5 month timeframe. This model will serve as one of several predictive tools for the precision medicine application, PredictMod, that aims to identify response to treatments prior to their administration. "
+  ],
+  "description_domain": {
+    "pipeline_steps": [
+      {
+        "step_number": "1",
+        "name": "MDClone",
+        "description": "In this step, the MDClone dataset was extracted with the following inclusion criteria: age >/= 18, condition = pre-diabetes, and intervention = low carbohydrate diet. The dataset also indicates which individuals were labeled responder (R) or non-responder (NR) based on criteria: improvement in weight reduction of </=5 lbs (R) or weight reduction of > 5lbs or no weight reduction (NR). An initial 19 variables were extracted from MDClone which include: sex, ethnicity, race, age, fasting glucose, heart rate, hematocrit, BUN, calcium, chloride, CO2, BMI, end weight, starting weight, diastolic blood pressure, systolic blood pressure, triglycerides, LDL, and hemoglobin. ",
+        "version": "v1.0"
+      },
+      {
+        "step_number": "2",
+        "name": "Visual Studio Code",
+        "description": "The dataset was uploaded into VS Code for preprocessing and algorithm selection. ",
+        "version": "1.63.2"
+      },
+      {
+        "step_number": "3",
+        "name": "Python",
+        "description": "The dataset was preprocessed using Python. The electronic health record (EHR) variables that needed conversion where: sex, ethnicity, and race. These variables had values listed as strings and were converted to integers for improved machine readability. ",
+        "version": "3.9.5"
+      },
+      {
+        "step_number": "4",
+        "name": "sklearn ",
+        "description": "The cleaned dataset was then run through three separate algorithms to determine model performance. These three included a decision tree classifier, random forest classifier, and support vector machine through the sklearn package. ",
+        "version": "1.0.2"
+      },
+      {
+        "step_number": "5",
+        "name": "pickle ",
+        "description": "Once the models were generated from each algorithm type, the models were stored within a pickle for easier implementation into the PredictMod server. ",
+        "version": ""
+      }
+    ]
+  },
+  "parametric_domain": [
+    {
+      "step": "3",
+      "param": "test_size",
+      "value": "0.25"
+    },
+    {
+      "step": "3",
+      "param": "random_state",
+      "value": "123"
+    }
+  ],
+  "io_domain": {
+    "input_subdomain": [
+      {
+        "uri": {
+          "filename": "MDclone_v0.1.csv",
+          "uri": "www.MDClone.com"
+        }
+      }
+    ],
+    "output_subdomain": [
+      {
+        "mediatype": "pickle",
+        "uri": {
+          "filename": "MDClone.DTC.pickle",
+          "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/EHR_python/MDClone.EHR.py",
+          "access_time": "2023-11-20T05:00:00.000Z"
+        }
+      }
+    ]
+  },
+  "execution_domain": {
+    "script": [
+      {
+        "filename": "",
+        "uri": {
+          "filename": "MDClone Query Document",
+          "uri": "www.MDClone.com"
+        },
+        "access_time": "",
+        "sha1_checksum": ""
+      },
+      {
+        "filename": "",
+        "uri": {
+          "filename": "MDClone_EHR.py",
+          "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/EHR_python/MDClone.EHR.py"
+        },
+        "access_time": "",
+        "sha1_checksum": ""
+      }
+    ],
+    "script_driver": "",
+    "software_prerequisites": [
+      {
+        "name": "Visual Studio Code",
+        "version": "1.63.2",
+        "uri": {
+          "filename": "",
+          "uri": " https://code.visualstudio.com/",
+          "access_time": "",
+          "sha1_checksum": ""
+        }
+      },
+      {
+        "name": "Python ",
+        "version": "3.9.5",
+        "uri": {
+          "filename": "",
+          "uri": "https://www.python.org/downloads/",
+          "access_time": "",
+          "sha1_checksum": ""
+        }
+      },
+      {
+        "name": "pandas",
+        "version": "1.4.1",
+        "uri": {
+          "filename": "",
+          "uri": "pip install pandas",
+          "access_time": "",
+          "sha1_checksum": ""
+        }
+      },
+      {
+        "name": "sklearn",
+        "version": "1.0.2",
+        "uri": {
+          "filename": "",
+          "uri": "pip install sklearn",
+          "access_time": "",
+          "sha1_checksum": ""
+        }
+      }
+    ],
+    "external_data_endpoints": [],
+    "environment_variables": {}
+  },
+  "extension_domain": [],
+  "error_domain": {}
+}
