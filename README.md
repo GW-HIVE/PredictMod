@@ -90,27 +90,6 @@ Now a link should appear, which you can follow to see the client side of the app
 #### Archive
 Holds files that are currently not in use, but may be useful to reference at a later time. 
 
-#### BCOs
-Contains EHR & MG BioCompute Object json files.
-
-#### EHR_Synthetic_data
-Contains files related to the Synthea_Exercise_v1.1 model.
-
-#### EHR_predict
-Work related to Electronic Health Records (EHR) prediction.
-
-#### EHR_python
-Work related to EHR predictions conducted in Python. 
-
-#### MG_python
-Work related to Metagenomics predictions conducted in Python. 
-
-#### Metagenomic_predict 
-Work related to metgenomics prediction conducted in MATLAB. 
-
-#### data_dictionary_mapping
-Contains current and previous data dictionary and mapping document versions.
-
 #### django_middleware
 Contains all resources related to running the Django webserver middleware.
 
@@ -122,6 +101,9 @@ Contains all resources required to run the Flask webserver and analysis backend.
 
 #### frontend 
 Work related to PredictMod UI. 
+
+#### models 
+Documentation, scripts, BCOs, and datasets for all models. 
 
 #### scripts
 Convenience scripts to compile/transpile the frontend and to launch the application.
