@@ -30,7 +30,7 @@
 
     <v-row>
       <v-col>
-        <QueryBuilder />
+        <QueryCard />
       </v-col>
     
     </v-row>
@@ -56,7 +56,7 @@
 <script>
 import { onMounted, ref } from 'vue';
 
-import QueryBuilder from '@/components/QueryBuilder.vue';
+import QueryCard from '@/components/QueryCard.vue';
 import DisclaimerShow from './DisclaimerShow.vue';
 import LicenseShow from './LicenseShow.vue';
 
@@ -66,8 +66,9 @@ export default {
   data() {
 			return {
 				home: false,
+        
 			}
     },
-  components: { QueryBuilder, DisclaimerShow, LicenseShow }
+  components: { QueryCard, DisclaimerShow, LicenseShow }
 }
 </script>
