@@ -45,7 +45,7 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 CORS_EXPOSE_HEADERS = ["Content-Type", "X-CSRFToken"]
-CORS_ALLOW_HEADERS = ["X-CSRFToken"]
+CORS_ALLOW_HEADERS = ["X-CSRFToken", "Content-Type"]
 CORS_ALLOW_CREDENTIALS = True
 
 CSRF_COOKIE_SAMESITE = "Strict"
@@ -59,6 +59,8 @@ CSRF_TRUSTED_ORIGINS = [
     "https://hivelab.tst.biochemistry.gwu.edu",
     "https://hivelab.biochemistry.gwu.edu",
 ]
+
+LOGIN_URL = None
 
 if DEBUG:
     LOGGING = {
@@ -106,9 +108,14 @@ MIDDLEWARE = [
 ]
 
 REST_FRAMEWORK = {
+    "DEFAULT_RENDERER_CLASSES": [
+        "rest_framework.renderers.JSONRenderer",
+    ],
     "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly"
-    ]
+        # "rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly",
+        # "rest_framework.authentication.BasicAuthentication",
+        # "rest_framework.authentication.SessionAuthentication",
+    ],
 }
 
 ROOT_URLCONF = "server.urls"
