@@ -1,97 +1,66 @@
 <template>
-                <v-dialog 
-                width="512"
-                >
-    <template v-slot:activator="{ props }">
-                </template>
+  <v-btn @click="dialog = true">
+    Update User Profile
+  </v-btn>
+                <v-dialog width="512" v-model="dialog">
                 <v-card>
                     <v-card-title>
-                        <span class="text-h5">New User Profile</span>
+                        <span class="text-h5">Update User Profile</span>
                     </v-card-title>
                 <v-card-text>
                     <v-container>
                         <v-row>
-                            <v-col
-                cols="12"
-                sm="6"
-                md="4"
-              >
+              <v-col>
                 <v-text-field
-                  label="Legal first name*"
-                  required
+                  label="First name"
+                  v-model="firstName"
                 ></v-text-field>
               </v-col>
-              <v-col
-                cols="12"
-                sm="6"
-                md="4"
-              >
+              <v-col>
                 <v-text-field
-                  label="Legal middle name"
-                  hint="example of helper text only on focus"
+                  label="Last name"
+                  v-model="lastName"
                 ></v-text-field>
               </v-col>
-              <v-col
-                cols="12"
-                sm="6"
-                md="4"
-              >
-                <v-text-field
-                  label="Legal last name*"
-                  hint="example of persistent helper text"
-                  persistent-hint
-                  required
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12">
-                <v-text-field
+              </v-row>
+              <v-row>
+              <v-text-field
                   label="Email*"
                   required
+                  v-model="email"
                 ></v-text-field>
-              </v-col>
-              <v-col cols="12">
+              </v-row>
+              <v-row>
                 <v-text-field
                   label="Password*"
                   type="password"
                   required
+                  v-model="password"
                 ></v-text-field>
-              </v-col>
-              <v-col
-                cols="12"
-                sm="6"
-              >
-                <v-select
-                  :items="['0-17', '18-29', '30-54', '54+']"
-                  label="Age*"
-                  required
-                ></v-select>
-              </v-col>
-              <v-col
-                cols="12"
-                sm="6"
-              >
-                <v-autocomplete
-                  :items="['Skiing', 'Ice hockey', 'Soccer', 'Basketball', 'Hockey', 'Reading', 'Writing', 'Coding', 'Basejump']"
-                  label="Interests"
-                  multiple
-                ></v-autocomplete>
-              </v-col>
-                        </v-row>
+              </v-row>
                     </v-container>
+          <v-container class="center">
+           <v-row :v-if="myError">
+              <p color="#ff0000">
+                {{ myError }}
+              </p>
+          </v-row>
+          </v-container>
+
                 </v-card-text>
                 <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
             color="blue-darken-1"
             variant="text"
-            @click="dialog = false"
+            @click="clearState()"
           >
-            Close
+            Cancel
           </v-btn>
           <v-btn
             color="blue-darken-1"
             variant="text"
-            @click="dialog = false"
+            @click="submit()"
           >
             Save
                     </v-btn>
@@ -101,12 +70,49 @@
 </template>
 
 <script>
+import { mapWritableState } from 'pinia';
+import { useUserStore } from '@/store/user';
 
 export default {
     name: 'UpdateUser',
     data: () => ({
-        dialog: true,
-    })
+        dialog: false,
+        firstName: "",
+        lastName: "",
+        password: "",
+        email: "",
+        error: useUserStore().error,
+    }),
+    props: {
+      userID: Number,
+    },
+    setup() {
+      const userStore = useUserStore();
+      return { userStore };
+    },
+    computed: {
+      ...mapWritableState(useUserStore, {
+        myError: "error"
+      })
+    },
+    methods: {
+      async submit() {
+        const success = await this.userStore.updateProfile(
+          this.userID, this.firstName, this.lastName, this.password, this.email
+          );
+        if (success) {
+          this.clearState();
+        }
+      },
+      clearState() {
+        this.firstName = "",
+        this.lastName = "",
+        this.password = "",
+        this.email = "",
+        this.error = null;
+        this.dialog = false;
+      },
+    }
 }
 
 </script>
