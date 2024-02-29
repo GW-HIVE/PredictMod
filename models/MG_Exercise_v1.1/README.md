@@ -9,3 +9,13 @@ The volunteers of this study were separated into a sedentary and an exercise gro
 
 **Algorithm & Model Performance**  
 A decision tree classifier (DTC) was chosen as the algorithm to be trained with metagenomic data given the dataset consisted of 200+ features. DTCs are particularly good at determining which features are most helpful to make accurate predictions and are likely to forgo features that may not aid in prediction accuracy. This is opposed to an algorithm such as linear regression, that may require use of all provided features to make predictions. This can often lead to a lower accuracy and model confusion; therefore, a DTC was implemented for generating predictions off of metagenomic data. The DTC was able to perform at 90% accuracy with a 0.9 area under the curve (AUC) with a dataset containing 20 responders and 20 non-responders.
+
+### MG Python Predict - Workflow
+The python prediction module has been separated to allow creation & training of the decision tree, followed by "pickling" (ie, storing long term or "preserving" the tree). The pickle is then read & restored to a python object in a separate script, which uses the tree to perform prediction. The workflow is as follows:
+1. Create a tree: `python create_tree.py`
+2. Use the tree to perform a prediction: `python use_tree.py`
+
+Use/updates by the PredictMod interface requires manually copying the pickled object to the `matlab-interface` directory. 
+
+# NB
+In general, binary objects (including Excel files, pdfs, etc.) should not be stored in GitHub. In line with that, the pickle must be created locally using `create_tree.py`. The `.gitignore` file has been updated to ignore `*.pickle` files, generally.

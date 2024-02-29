@@ -20,7 +20,7 @@ The following tables should be displayed on the landing page of PredictMod's UI.
 | Release Date   |      |   12.11.2023 |  
 | Data Type      |      |          EHR |  
 | Patients       |      |       19,842 |  
-| Genomes        |      |           19 |  
+| Variables      |      |           19 |  
 | Model Type     |      |      XGBoost |  
 | Accuracy       |      |          67% |
 |                |      |              |
@@ -28,7 +28,7 @@ The following tables should be displayed on the landing page of PredictMod's UI.
 | Release Date   |      |   02.29.2024 |  
 | Data Type      |      |          EHR |  
 | Patients       |      |          308 |  
-| Genomes        |      |           26 |  
+| Variables      |      |           26 |  
 | Model Type     |      |          SVM |  
 | Accuracy       |      |          65% |
 
