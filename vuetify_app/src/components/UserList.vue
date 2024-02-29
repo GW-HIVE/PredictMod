@@ -1,15 +1,5 @@
 <template>
 
-<v-container class="text-center center">
-    <v-col class="text-center center">
-        <v-row class="text-center center">
-            <v-btn @click.prevent()>
-                New User?
-            </v-btn>
-        </v-row>
-    </v-col>
-</v-container>
-
 <v-table>
     <thead>
         <tr>
@@ -36,19 +26,13 @@
             <td>{{ user.last_name }}</td>
             <td><a :href="user.url">{{ user.email }}</a></td>
             <td>
-                <v-btn @click.stop="showUpdatePassword=true">
-                    Update Password
-                    <UpdatePassword v-model="showUpdatePassword" />
-                </v-btn>
+                <UpdatePassword :userID="user.id"/>
             </td>
             <td>
-                <v-btn @click.stop="showUpdateUser=true">
-                    Update User
-                    <UpdateUser v-model="showUpdateUser" />
-                </v-btn>
+                <UpdateUser :userID="user.id" />
             </td>
             <td>
-                <v-btn @click.prevent()>Delete User</v-btn>
+                <DeleteUser :userID="user.id" />
             </td>
         </tr>
     </tbody>
@@ -58,18 +42,26 @@
 
 <script>
 
+import { useUserStore } from '@/store/user';
+
 import UpdateUser from '@/components/UpdateUser.vue';
 import UpdatePassword from '@/components/UpdatePassword.vue';
+import DeleteUser from '@/components/DeleterUser.vue';
 
 export default {
     name: 'UserList',
     data: () => ({
         showUpdateUser: false,
         showUpdatePassword: false,
+        showDeleteUser: false,
     }),
     props: {
         userList: Array,
     },
-    components: { UpdatePassword, UpdateUser }
+    setup() {
+      const userStore = useUserStore();
+      return { userStore };
+    },
+    components: { UpdatePassword, UpdateUser, DeleteUser }
 }
 </script>
