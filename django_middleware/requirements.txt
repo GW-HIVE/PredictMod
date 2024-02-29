@@ -1,5 +1,9 @@
+black
 Django
 django-cors-headers
+django-filter
+django-guardian
+djangorestframework
 openpyxl
 pandas
 gunicorn

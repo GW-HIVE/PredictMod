@@ -27,37 +27,91 @@
 
     <v-row class="justify-center">
       <v-col>
+        <!-- <v-card> -->
+          <v-card-title class="title text-center font-weight-bold">
+            Login
+          </v-card-title>
 
+          <!-- <form @submit.prevent="login"> -->
+          <!-- <form> -->
+          <v-col>
+            <v-row>
+              <v-spacer></v-spacer>
+              <v-text-field label="Email" v-model="email" style="width:50%"></v-text-field>
+              <v-spacer></v-spacer>
+              <!-- <input type="text" v-model="email" /> -->
+            </v-row>
+            <v-row>
+              <v-spacer></v-spacer>
+              <v-text-field label="Password" type="password" v-model="password" style="width:50%"></v-text-field>
+              <v-spacer></v-spacer>
+              <!-- <v-text-field label="Password" v-model="password"></v-text-field> -->
+              <!-- <input type="password" v-model="password" /> -->
+            </v-row>
+            <v-row :v-if="loginError">
+            <p style="color:#FF0000">
+              {{ loginError }}
+            </p>
+          </v-row>
+          <!-- </form> -->
+        </v-col>
+        <v-col>
+          <v-row class="justify-center">
+            <v-btn type="submit" @click.prevent="login()" :disabled="loggedIn">{{ loggedIn ? `${this.userStore.user}` : "Login"}}</v-btn>
+            <v-btn type="submit" @click.prevent="logout()">Logout</v-btn>
+          </v-row>
+        </v-col>
+        <!-- </v-card> -->
+      </v-col>
+      <v-col>
+        <!-- <v-card class=""> -->
         <v-card-title class="title text-center font-weight-bold">
-          Login for access to PredictMod
+            Register
         </v-card-title>
 
         <!-- <form @submit.prevent="login"> -->
-        <form>
-          <v-row>
-            <v-text-field label="Email" v-model="email"></v-text-field>
+        <!-- <form> -->
+          <v-col>
+            <v-row>
+            <v-spacer></v-spacer>
+            <v-text-field label="First Name" v-model="firstName" style="width:40%"></v-text-field>
+            <v-spacer></v-spacer>
+            <v-text-field label="Last Name" v-model="lastName"  style="width:40%"></v-text-field>
+            <v-spacer></v-spacer>
+            </v-row>
+            <v-row>
+              <v-spacer></v-spacer>
+            <v-text-field label="Email Address" v-model="newEmail" style="width:40%"></v-text-field>
+              <v-spacer></v-spacer>
+            <v-text-field label="Confirm Email" v-model="newEmailConfirmation" style="width:40%"></v-text-field>
+              <v-spacer></v-spacer>
+            </v-row>
+          </v-col>
+          <v-col>
+            <v-row>
+              <v-spacer></v-spacer>
+              <v-text-field label="Password" type="password" v-model="newPassword" style="width:40%"></v-text-field>
+              <v-spacer></v-spacer>
+              <v-text-field label="Confirm Password" type="password" v-model="newPasswordConfirmation" style="width:40%"></v-text-field>
+              <v-spacer></v-spacer>
             <!-- <input type="text" v-model="email" /> -->
           </v-row>
-          <v-row>
-            <v-text-field label="Password" type="password" v-model="password"></v-text-field>
-            <!-- <v-text-field label="Password" v-model="password"></v-text-field> -->
-            <!-- <input type="password" v-model="password" /> -->
+          </v-col>
+          <v-row :v-if="userError" v-for="err in userError">
+            <p style="color:#FF0000">
+              {{ err }}
+            </p>
           </v-row>
-          <v-row>
-          <v-btn type="submit" @click.prevent="login()">Login</v-btn>
-          <v-btn type="submit" @click.prevent="logout()">Logout</v-btn>
-          <v-btn type="submit" @click.prevent="checkUser()">Who Am I</v-btn>
-            <!--
-          <v-btn type="submit" @click.prevent="getSession()">Session info</v-btn>
-          <v-btn type="submit" @click.prevent="showCSRFCookie()">Show CSRF Token</v-btn>
-          <v-btn type="submit" @click.prevent="tbdAlert()">Register</v-btn>
-          -->
-        </v-row>
-        </form>
-
+          <v-row class="justify-center">
+            <v-btn type="submit" @click.prevent="createUser()">Create an Account</v-btn>
+          </v-row>
+        <!-- </form> -->
+        <!-- </v-card> -->
       </v-col>
-    
     </v-row>
+  <v-spacer>
+    <AdminDashboard v-if="showAdmin" />
+  </v-spacer>
 <!-- 
     <v-container>
     <v-row class="justify-center">
@@ -95,6 +149,7 @@
 <script>
 import { onMounted, ref } from 'vue';
 
+import AdminDashboard from '@/components/AdminDashboard.vue';
 import DisclaimerShow from './DisclaimerShow.vue';
 import NotFound from './NotFound.vue';
 import LicenseShow from './LicenseShow.vue';
@@ -113,36 +168,114 @@ export default {
 				home: false,
         email: "",
         password: "",
+        firstName: "",
+        lastName: "",
+        newEmail: "",
+        newEmailConfirmation: "",
+        newPassword: "",
+        newPasswordConfirmation: "",
+        loginError: "",
+        userError: [],
+        loggedIn: false,
+        showAdmin: false,
 			}
     },
   mounted() {
-    // this.resolveTargetURL();
-    this.getCSRF();
+    this.userStore.clearError();
+    this.userStore.checkUser();
+    if (this.userStore.isAdmin) {
+      this.showAdmin = true;
+    }
+    if (this.userStore.user)  {
+      this.loggedIn = true;
+    }
   },
-  components: { DisclaimerShow, LicenseShow },
+  components: { AdminDashboard, DisclaimerShow, LicenseShow },
   methods:
     {
-      // resolveTargetURL() {
-      //   this.userStore.resolveMiddleware();
-      // },
-      getCSRF() {
-        this.userStore.getCSRF();
+      clearState() {
+        this.email = "";
+        this.password = "";
+        this.newEmail = "";
+        this.newEmailConfirmation = "",
+        this.newPassword = "";
+        this.newPasswordConfirmation = "",
+        this.firstName = "";
+        this.lastName = "",
+        this.loginError = "";
+        this.userError = [];
+        this.userStore.clearError();
       },
-      login() {
-        this.userStore.login(this.email, this.password);
+      async login() {
+        const success = await this.userStore.login(this.email, this.password);
+        if (success) {
+          console.log("Login confirmed ---> (Success was %s)", success);
+          this.clearState();
+          if (this.userStore.isAdmin) {
+            this.showAdmin = true;
+          }
+          if (this.userStore.user !== "") {
+            this.loggedIn = true;
+          }
+        } else {
+          console.log("Error in login!");
+          this.loginError = this.userStore.error;
+          this.userStore.clearError();
+        }
       },
-      logout() {
-        this.userStore.logout();
+      async logout() {
+        const success = await this.userStore.logout();
+        if (success) {
+          this.userStore.clearError();
+          this.showAdmin = false;
+          this.loggedIn = false;
+        } else {
+          console.log("Error on logout!")
+        }
       },
-      checkUser() {
-        this.userStore.checkUser();
+
+      async createUser() {
+        this.userError = [];
+        console.log(
+          "New Email: %s\nConfirmation: %s\nNPass: %s\nConfirm Pass: %s",
+          this.newEmail,
+          this.newEmailConfirmation,
+          this.newPassword,
+          this.newPasswordConfirmation
+        );
+        console.log("Bools: %s // %s", 
+        this.newEmail != this.newEmailConfirmation,
+        this.newPassword != this.newPasswordConfirmation
+        )
+
+        if (this.newEmail != this.newEmailConfirmation) {
+          this.userError.push("New email doesn't match");
+        }
+        if (this.newPassword != this.newPasswordConfirmation) {
+          this.userError.push("\nNew passwords don't match\n");
+        }
+        if (this.userError.length > 0) {
+          return;
+        }
+        const success = await this.userStore.createUser(
+          this.newEmail, this.newPassword, this.firstName, this.lastName
+        );
+        if (success) {
+          this.clearState();
+          if (this.userStore.isAdmin) {
+            this.showAdmin = true;
+          }
+          if (this.userStore.user !== "") {
+            this.loggedIn = true;
+          }
+          return;
+        } else {
+          console.log("Error - Handling error on unsuccessful creation");
+          this.userError.push(this.userStore.error);
+          this.userStore.clearError();
+        }
       },
-      getSession() {
-        this.userStore.getSession();
-      },
-      showCSRFCookie() {
-        this.userStore.showCSRFCookie();
-      }
+
     }
 }
 </script>

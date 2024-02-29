@@ -23,7 +23,9 @@ router.onError((error, to) => {
         error.message.includes('Failed to fetch dynamically imported module') || 
         error.message.includes('Importing a module script failed')) {
             window.location = to.fullPath;
-        }
+    } else {
+        console.log('--> Error was %s', error);
+    }
 })
 
 createApp(App)
