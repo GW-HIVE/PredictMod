@@ -8,7 +8,8 @@
         <v-tab to="/predictmod/contact">Contact</v-tab>
         <v-tab to="/predictmod/query-builder">Query Builder</v-tab>
         <v-tab to="/predictmod/try-it">Try It Out</v-tab>
-        <v-tab to="/predictmod/login">Login</v-tab>
+        <v-tab to="/predictmod/users">User Admin</v-tab>
+        <v-tab to="/predictmod/login">{{ this.userStore.user ? `User: ${this.userStore.user}` : "Login" }}</v-tab>
       </v-tabs>
     <main>
       <router-view />
@@ -23,12 +24,13 @@ import { useAppStore } from '@/store/app';
 
 export default {
     setup() {
-      const user = useUserStore();
+      const userStore = useUserStore();
       const appStore = useAppStore();
-      return { user, appStore };
+      return { userStore, appStore };
     },
     mounted() {
-      this.user.getCSRF();
+      // We must double-check user state on events like reload/refresh
+      this.userStore.checkUser();
       this.appStore.reportState();
     }
 
