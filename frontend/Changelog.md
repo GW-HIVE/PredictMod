@@ -1,4 +1,6 @@
 # Frontend Changelog
+[v1.3.1]([https://www.figma.com/file/5W1FLFF4GhQo5PJEcmTmlO/v1.0_6month?type=design&node-id=0%3A1&mode=design&t=zUwlLr1i385ye0Au-1](https://www.figma.com/file/wJYjkCxl8Cph6z5zoqqXM8/v1.3.1?type=design&node-id=0%3A1&mode=design&t=th3zI3BbiKJyrObK-1))
+- Updated 'help' page design
 
 [v1.4](https://www.figma.com/file/5W1FLFF4GhQo5PJEcmTmlO/v1.0_6month?type=design&node-id=0%3A1&mode=design&t=zUwlLr1i385ye0Au-1)
 - Updated frontend design through v1.4, with approval as of 12 Feb 2024
