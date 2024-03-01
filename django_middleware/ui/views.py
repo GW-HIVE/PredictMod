@@ -53,43 +53,61 @@ def ehr_sample(request):
 
 
 # XXX
-# @ensure_csrf_cookie
 # @requires_csrf_token
-@csrf_exempt
+# @ensure_csrf_cookie
 def ehr_upload(request):
     if not request.user.is_authenticated:
-        return HttpResponse("Must be logged in for analysis", status=200)
+        return JsonResponse({"error": "Must be logged in for analysis"}, status=200)
     if request.method == "POST":
+        logger.debug("===> Found an uploaded EHR POST call")
         try:
-            lines = request.readlines()
-            raw_data = json.loads(lines[3].decode("utf-8"))
-            # logger.debug(f"EHR Request:\n{raw_data}")
-            result = requests.post(f"{FLASK_BACKEND}/ehr-upload", json=raw_data)
-            return HttpResponse(result)
+            data = json.loads(request.body)
+            # raw_data = json.loads(lines[3].decode("utf-8"))
+            logger.debug(f"EHR Request:\n{data}")
+            result = requests.post(f"{FLASK_BACKEND}/ehr-upload", json=data)
+            result = json.loads(result._content.decode("utf-8"))
+            return JsonResponse(result, status=200, safe=False)
+        except ConnectionRefusedError:
+            return JsonResponse(
+                {"error": f"Flask error: Is the Flask server running?"},
+                status=404,
+                safe=False,
+            )
         except Exception as error:
-            return HttpResponse(f"Django error:\n\t{error}")
+            return JsonResponse(
+                {"error": f"Django error: {error}"}, status=500, safe=False
+            )
     else:
-        return HttpResponse(f"Unsupported request type: {request.method}")
+        return JsonResponse(
+            {"error": f"Unsupported request type: {request.method}"},
+            status=400,
+            safe=False,
+        )
 
 
 # XXX
 # @ensure_csrf_cookie
 # @requires_csrf_token
-@csrf_exempt
 def mg_upload(request):
     if not request.user.is_authenticated:
         return HttpResponse("Must be logged in for analysis!", status=200)
     if request.method == "POST":
         try:
-            lines = request.readlines()
-            raw_data = json.loads(lines[3].decode("utf-8"))
+            data = json.loads(request.body)
             # XXX
             # logger.debug('-'*40)
             # logger.debug(f"Request:\n{type(raw_data)}")
             # logger.debug('-'*40)
-            result = requests.post(f"{FLASK_BACKEND}/mg-upload", json=raw_data)
-            return HttpResponse(result)
+            result = requests.post(f"{FLASK_BACKEND}/mg-upload", json=data)
+            result = json.loads(result._content.decode("utf-8"))
+            return JsonResponse({"result": result}, status=200, safe=False)
         except Exception as error:
-            return HttpResponse(f"Django error:\n\t{error}")
+            return JsonResponse(
+                {"error": f"Django error:\n\t{error}"}, status=400, safe=False
+            )
     else:
-        return HttpResponse(f"Unsupported request type: {request.method}", status=500)
+        return JsonResponse(
+            {"error": f"Unsupported request type: {request.method}"},
+            status=500,
+            safe=False,
+        )
