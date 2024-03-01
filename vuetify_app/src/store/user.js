@@ -37,7 +37,8 @@ export const useUserStore = defineStore("user", {
 
       if (response.created || response.update) {
         console.log("Found a user creation / update");
-        return false;
+        // No updates, but operation was successful
+        return true;
       };
       
       if (response.admin) {
