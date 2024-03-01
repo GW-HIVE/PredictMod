@@ -24,21 +24,21 @@
         -->
             
         <!-- <v-col cols="4" class="pl-2"> -->
-        <v-container class="justify-center">
-        <v-row>
-        <v-col class="justify-center">  
-          <v-btn right color="success" dark small @click.prevent="download">
+        <!-- <v-container class="justify-center"> -->
+        <!-- <v-row> -->
+        <!-- <v-col class="justify-center">   -->
+          <v-btn color="primary" small @click.prevent="download">
             Download example data file
             <!-- <v-icon right dark>mdi-cloud-upload</v-icon> -->
           </v-btn>
-        </v-col>
+        <!-- </v-col> -->
         <!-- <v-col>
           <v-btn right color="success" dark small @click="upload">
             Submit & Analyze
           </v-btn>
         </v-col> -->
-      </v-row>
-    </v-container>
+      <!-- </v-row> -->
+    <!-- </v-container> -->
       <!-- </v-row> -->
   
       <v-alert v-if="message" color="blue-grey" dark>

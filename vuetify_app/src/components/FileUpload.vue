@@ -20,7 +20,7 @@
       <!-- <v-row no-gutters justify="center" align="center"> -->
         <!-- <v-col cols="8"> -->
         <!-- <v-col> -->
-            <!-- 
+            <!--
                 See `rules` for filtering on file type. 
                 Not super critical at present. 
              -->
@@ -40,7 +40,11 @@
         <v-container class="justify-center">
         <v-row>
         <v-col class="justify-center">  
-          <v-btn right color="success" dark small @click="importFileAndAnalyze">
+          <v-btn 
+            color="primary"
+            :key="uploadSuccess" 
+            @click="importFileAndAnalyze" 
+            v-if="!uploadSuccess">
             Submit & Analyze
             <!-- <v-icon right dark>mdi-cloud-upload</v-icon> -->
           </v-btn>
@@ -53,19 +57,20 @@
       </v-row>
     </v-container>
       <!-- </v-row> -->
-  
-      <v-alert v-if="message" color="blue-grey" dark>
+      <v-container>
+      <v-alert v-if="message" color="blue-grey" class="pa-5" dark>
         {{ message }}
       </v-alert>
-      <v-row>
-        <BarChart v-if="showChart" /> 
+      <v-row class="pa-5">
+        <Chart v-if="showChart" /> 
       </v-row>
+    </v-container>
     </div>
   </template>
   
   <script>
-  import UploadService from "../services/UploadService";
-  import BarChart from "../components/Chart.vue";
+  import UploadService from "@/services/UploadService";
+  import Chart from "@/components/Chart.vue";
 
   import * as XLSX from 'xlsx';
 
@@ -74,7 +79,7 @@
     props: {
         uploadTargetURL: String,
     },
-    components: { BarChart },
+    components: { Chart },
     data() {
       return {
         currentFile: null,
@@ -82,6 +87,7 @@
         progress: 0,
         message: "Data must be selected before results are available",
         showChart: false,
+        uploadSuccess: false,
       };
     },
     methods: {
@@ -101,7 +107,7 @@
                 const arrayedData = XLSX.utils.sheet_to_json(firstSheet, {header: 1});
                 this.data = JSON.stringify(arrayedData);
                 // console.log("Now we have data:\n%s", this.data);
-                this.upload();
+                this.uploadSuccess = this.upload();
             }
         },
   
@@ -120,14 +126,16 @@
         })
           .then((response) => {
             // this.message = response.data.message;
-            this.message = response.data;
+            this.message = response.result ? response.result : response.error;
             this.showChart = true;
+            return true;
           })
           .catch(() => {
             this.progress = 0;
             this.message = "Could not upload the file!";
             // this.currentFile = null;
             // this.data = null;
+            return false;
           });
       },
     },
