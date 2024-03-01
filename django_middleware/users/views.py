@@ -48,9 +48,9 @@ class CreateUser(APIView):
             user = User.objects.filter(email=new_info["email"]).first()
             if user.is_superuser:
                 return JsonResponse(
-                    {"username": user.get_username(), "admin": True}, status=200
+                    {"created": user.get_username(), "admin": True}, status=200
                 )
-            return JsonResponse({"username": user.get_username()}, status=200)
+            return JsonResponse({"created": user.get_username()}, status=200)
         else:
             if "email" in new_user.errors.keys():
                 return JsonResponse({"error": new_user.errors["email"][0]}, status=401)
@@ -126,10 +126,10 @@ class UpdateUser(APIView):
                 user.set_password(password)
         if user.is_superuser:
             return JsonResponse(
-                {"username": user.get_username(), "admin": True}, status=200
+                {"update": user.get_username(), "admin": True}, status=200
             )
 
-        return JsonResponse({"username": user.get_username()}, status=200)
+        return JsonResponse({"update": user.get_username()}, status=200)
 
 
 class UserListView(APIView):
