@@ -54,11 +54,7 @@ const routes = [
     },
     {
       path: '/predictmod/query-builder', 
-      component: () => import('../views/NotFound.vue'),
-    },
-    {
-      path: '/predictmod/try-it', 
-      component: () => import('../views/TryItOut.vue'),
+      component: () => import('../views/QueryBuilder.vue'),
     },
     {
       path: '/:pathMatch(.*)*',
