@@ -46,6 +46,9 @@ class CreateUser(APIView):
             new_user.save()
 
             user = User.objects.filter(email=new_info["email"]).first()
+            # Correct the DRFs broken password ingestion
+            user.set_password(new_info["password"])
+            user.save()
             if user.is_superuser:
                 return JsonResponse(
                     {"created": user.get_username(), "admin": True}, status=200
