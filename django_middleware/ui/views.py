@@ -100,7 +100,7 @@ def mg_upload(request):
             # logger.debug('-'*40)
             result = requests.post(f"{FLASK_BACKEND}/mg-upload", json=data)
             result = json.loads(result._content.decode("utf-8"))
-            return JsonResponse({"result": result}, status=200, safe=False)
+            return JsonResponse(result, status=200, safe=False)
         except Exception as error:
             return JsonResponse(
                 {"error": f"Django error:\n\t{error}"}, status=400, safe=False
