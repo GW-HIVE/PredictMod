@@ -49,7 +49,8 @@ EHR model predicting 5% reduction in weight following a semaglutide intervention
 * Intervention: Semaglutide
 * Data Type: EHR
 
-**MDClone_Exercise_v1.0:**   EHR model predicting 5% reduction in weight following an exercise intervention. Based on synthetic veteran patient data from MDClone.  
+**MDClone_Exercise_v1.0:**   
+EHR model predicting 5% reduction in weight following an exercise intervention. Based on synthetic veteran patient data from MDClone.  
 * Condition: Prediabetes
 * Intervention: Exercise
 * Data Type: EHR
