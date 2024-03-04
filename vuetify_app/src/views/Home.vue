@@ -113,7 +113,7 @@
         </v-col>
         <v-col cols="6" class="text-center">
           <b>v1.1</b><br>
-          11 December 2023<br>
+          11 Dec 2023<br>
           EHR<br>
           19,842<br>
           19<br>
