@@ -53,6 +53,10 @@ const routes = [
       component: () => import('../views/Login.vue'),
     },
     {
+      path: '/predictmod/help', 
+      component: () => import('../views/Help.vue'),
+    },
+    {
       path: '/predictmod/query-builder', 
       component: () => import('../views/QueryBuilder.vue'),
     },

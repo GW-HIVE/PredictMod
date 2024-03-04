@@ -13,10 +13,10 @@
           <div class="d-flex fill-height align-center justify-center"> 
             <v-card flat color="transparent">
             <v-card-title class="title text-center font-weight-bold">
-              PredictMod
+              <h1>PredictMod</h1>
             </v-card-title>
             <v-card-text class="text-center">
-              A Machine Learning-Based Application for Informed Clinical Decision Making
+            <h4>A Machine Learning-Based Application for Informed Clinical Decision Making</h4>
             </v-card-text>
             </v-card>
       <!-- <span class="introduction">PredictMod Test Text</span> -->
@@ -35,18 +35,22 @@
           About PredictMod
         </v-card-title>
         <v-card-text class="text-left">
-          PredictMod is an application designed to predict the outcome of an intervention prior to
-          a patient initiating treatment. This application prototype employs machine learning algorithms 
-          to predict whether a patient with pre-diabetes is likely to respond favorably to a diet 
-          intervention and not progress to diabetes at the end of the study period. 
+          Our goal is to provide clinicians with a powerful decision making tool that enhances clinical 
+          understanding of patient-level data. The PredictMod platform utilizes machine learning 
+          tools and complex datasets based on electronic health records, gut microbiome, and -omics 
+          data to forecast patient outcomes, often in response to treatment for a particular condition. 
+          While our primary condition of interest is Prediabetes, the tool is designed to be used for a 
+          variety of conditions, interventions, and data types.
         </v-card-text >
         <v-card-title class="title text-left font-weight-bold">
           About HIVE Lab
         </v-card-title>
         <v-card-text class="text-left">
-          HIVE Lab is involved in developing bioinformatics tools and resources, such as standards 
-          for bioinformatics communication, knowledgebases for glycoinformatics 
-          and infectious diseases, cancer research, and microbiome analysis.
+          The HIVE Lab group is involved in developing the High-performance Integrated Virtual Environment (HIVE) 
+          which aims to integrate various high throughput data analysis tools for bioinformatics. In 
+          addition to the HIVE platform, the lab is involved in developing bioinformatics tools and resources, 
+          such as standards for bioinformatics communication, knowledgebases for glycoinformatics and 
+          infectious diseases, cancer research, and microbiome analysis.
         </v-card-text>
         <a href='https://hivelab.biochemistry.gwu.edu'>
           <v-img src='../assets/HIVELab_Logo.png' height="15%" width="15%" inline />

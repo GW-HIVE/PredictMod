@@ -1,10 +1,13 @@
 <template>	
 
 	
-		<button class="button is-light" @click="show = true">
+		<!-- <button class="button is-light" @click="show = true">
 			DISCLAIMER
-		</button>
+		</button> -->
 
+		<v-card-title>
+			<h3>DISCLAIMER</h3>
+		</v-card-title>
 		<v-card-text class="text-center" v-if="show"
 		>
 		We make no guarantees on the accuracy of the predictions, and disclaim liability from 

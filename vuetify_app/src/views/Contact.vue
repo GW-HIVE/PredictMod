@@ -13,7 +13,7 @@
           <div class="d-flex fill-height align-center justify-center"> 
             <v-card flat color="transparent">
       <v-card-title class="title text-center font-weight-bold">
-        Contact Us
+        <h1>Contact Us</h1>
       </v-card-title>
       </v-card>
       </div>
@@ -40,10 +40,10 @@
           GW Location
         </v-card-title>
         <v-card-text class="text-left">
-          The George Washington University
-          School of Medicine and Health Sciences
-          2300 Eye Street N.W.,
-          Washington, DC 20037
+          The George Washington University<br>
+          School of Medicine and Health Sciences<br>
+          2300 Eye Street N.W.,<br>
+          Washington, DC 20037<br>
         </v-card-text>
 
       </v-col>

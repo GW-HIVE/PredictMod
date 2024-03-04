@@ -13,7 +13,7 @@
           <div class="d-flex fill-height align-center justify-center"> 
             <v-card flat color="transparent">
             <v-card-title class="title text-center font-weight-bold">
-              Run a Sample Prediction
+              <h1>Run a Sample Prediction</h1>
             </v-card-title>
             <!-- <v-card-text class="text-center">
               A Machine Learning-Based Application for Informed Clinical Decision Making
