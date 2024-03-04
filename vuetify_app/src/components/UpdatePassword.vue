@@ -96,7 +96,7 @@ export default {
     methods: {
       async submit() {
         const success = await this.userStore.updatePassword(
-          this.userID, this.newPassword, this.oldPassword
+          this.userID, this.oldPassword, this.newPassword
         );
         console.log("Success?: %s", success);
         if (success) {
