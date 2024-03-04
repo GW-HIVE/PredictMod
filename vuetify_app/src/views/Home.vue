@@ -1,5 +1,7 @@
 <template>
-  <v-card>
+  <v-banner
+    single-line
+  >
     <v-img
       src="../assets/Welcome_Header.jpg"
       id="intro-img"
@@ -33,7 +35,7 @@
     </v-img>
 
 
-  </v-card>
+  </v-banner>
 
 
   <v-container>
