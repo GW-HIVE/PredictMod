@@ -19,13 +19,22 @@
               <h4>Welcome to PredictMod! PredictMod is a machine-learning-based platform that predicts whether 
 	      a patient will respond to an intervention based on electronic health records (EHR) or -omic data.</h4>
             </v-card-text>
+            <v-card-actions class="justify-center">
+        <router-link to="/predictmod/help">
+              <v-btn variant="tonal" color="#efefef">
+        Learn More
+        </v-btn>
+        </router-link>
+        </v-card-actions>
          </v-card>
-       
           </div>
         </div>
-     
+
     </v-img>
+
+
   </v-card>
+
 
   <v-container>
  
@@ -56,17 +65,17 @@
               <v-btn color="primary">Try it out</v-btn>
         </router-link>
         
-        <v-card flat color="transparent">
+        <!-- <v-card flat color="transparent">
           <v-card-title class="title text-center font-weight-bold">
             Explore our models?
           </v-card-title>
           <v-card-text class="text-center">
             Review, interact and learn about the PredictMod model collection.
           </v-card-text>
-        </v-card>
+        </v-card> -->
 
         <!-- <router-link to="/predictmod/explore"> -->
-              <v-btn color="primary" @click="alertTBD(source=`Exploration`)">Explore</v-btn>
+              <!-- <v-btn color="primary" @click="alertTBD(source=`Exploration`)">Explore</v-btn> -->
         <!-- </router-link> -->
         
 
