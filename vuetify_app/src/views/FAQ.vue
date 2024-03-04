@@ -26,35 +26,91 @@
  
     <v-row>
       <v-col>
-        
+        <!-- <v-card variant="flat"> -->
         <v-card-title class="title text-left font-weight-bold">
-          How can I upload clinical reports to PredictMod?
+          How can I run a prediction using my single-patient data file?
         </v-card-title>
         <v-card-text class="text-left">
-          Upon selecting the EHR or Metagenomic data model, you will be directed to the upload screen. 
-          On this screen, there is a downloadable template wherein each column name corresponds to a 
-          specific data field (for EHR) or bacteria strain (for Metagenomic). Additionally, there’s a 
-          provided sample file containing test data which can be uploaded to experiment using PredictMod.
-          For additional help with uploading and formatting data, please contact our team.
-        </v-card-text >
-        <v-card-title class="title text-left font-weight-bold">
-          What are the possible outcomes from running PredictMod?
-        </v-card-title>
-        <v-card-text class="text-left">
-          PredictMod will provide a prediction categorized as either “Responder” or “Non-Responder”. A “Responder” prediction 
-          indicates that, according to the patient’s Electronic Health Record (EHR) or Metagenomic data, there is a higher 
-          likelihood of a positive response to the specified intervention. Conversely, a “Non-Responder” prediction 
-          suggests that, based on the analyzed data, the patient’s positive response to the intervention is unlikely, and 
-          there is a potential for the disease to continue progressing.
-        </v-card-text>
-        <v-card-title class="title text-left font-weight-bold">
-          Will the system store patient data?
-        </v-card-title>
-        <v-card-text class="text-left">
-          PredictMod will use uploaded patient data to make a one-time prediction. The data will not be saved in the system.
-        </v-card-text>
+          Use the query builder to select the desired condition, intervention, and data type 
+          associated with your patient data. File upload templates vary by model. Reference 
+          our example files to ensure your data meets our formatting requirements. 
+          Select ‘Run Analysis’ to view the results. 
 
-      </v-col>
+          <br><br>For additional assistance with uploading and formatting data, please contact our team.
+
+        </v-card-text >
+        <!-- </v-card> -->
+        <!-- <v-card variant="flat"> -->
+          <v-card-title class="title text-left font-weight-bold">
+            Will the system store patient data?
+          </v-card-title>
+          <v-card-text class="text-left">
+            The data will not be saved in the system. PredictMod will use uploaded patient data to make a one-time prediction.
+          </v-card-text>
+          <!-- </v-card> -->
+        <!-- <v-card variant="flat"> -->
+          <v-card-title class="title text-left font-weight-bold">
+            What are the possible prediction outcomes?
+          </v-card-title>
+          <v-card-text class="text-left">
+            PredictMod will provide a prediction categorized as either Responder or Non-Responder. 
+            The outcomes associated with the response status vary for each model, 
+            though a Responder result is generally associated with a positive health outcome, 
+            and the Non-Responder result is generally associated with a negative health outcome. 
+
+            <br><br>For additional information, please review the model information below.
+          </v-card-text>
+          <!-- </v-card> -->
+      <!-- <v-card variant="flat"> -->
+        <v-card-title class="title text-left font-weight-bold">
+          What data types are included in the PredictMod query selection?
+        </v-card-title>
+        <v-card-text class="text-left">
+          The current data types are metagenomic (MG) and electronic health record (EHR). We also have a glycomics data type coming soon.
+
+          <br><br>MG data consist of the microbial composition of the gut microbiome typically displayed as a percent of abundance. 
+          This data is typically used within a research context to profile healthy gut microbiomes and to identify 
+          differential abundances and their associations to disease. Our MG Model is trained on publicly available data. 
+          The reference genomes used for this model are recorded in the <a href="https://hive.biochemistry.gwu.edu/gfkb" >Gut Feeling Knowledge Base (GFKB).</a> 
+          Please use this list as a reference. Organisms not referenced in the GFKB can still be included in the input
+           and receive an accurate model prediction. If you have any questions about this, please don’t hesitate to contact our team. 
+
+           <br><br>EHR consists of real-time patient-centered records that are utilized by physicians to streamline their workflow. 
+          It provides physicians the ability to view important medical details about their patients in order to 
+          provide improved patient care that is both efficient and safe. Our EHR models are trained on data from the MDClone and Epic Cosmos.
+        </v-card-text>
+      <!-- </v-card> -->
+      <!-- <v-card variant="flat"> -->
+        <v-card-title class="title text-left font-weight-bold">
+          What conditions are included in the PredictMod query selection?
+        </v-card-title>
+        <v-card-text class="text-left">
+          The current condition of interest is Prediabetes. We also have an Epilepsy model coming soon.
+
+          <br><br>Prediabetes is a precursor to Type 2 Diabetes Mellitus (T2DM), where blood sugars are higher than normal, 
+          but not high enough to be considered T2DM. Prediction outcomes are based on a 5% reduction 
+          in weight, HOMA-IR, or a diagnosis of T2DM.
+        </v-card-text>
+      <!-- </v-card> -->
+      <!-- <v-card variant="flat"> -->
+        <v-card-title class="title text-left font-weight-bold">
+          What interventions are included in the PredictMod query selection?
+        </v-card-title>
+        <v-card-text class="text-left">
+          The current interventions are exercise, ketogenic diet, and dietary counseling. 
+          
+          <br><br>We also have a Semaglutide intervention coming soon.
+        </v-card-text>
+      <!-- </v-card> -->
+      <!-- <v-card>
+        <v-card-title class="title text-left font-weight-bold">
+
+        </v-card-title>
+        <v-card-text class="text-left">
+
+        </v-card-text>
+      </v-card> -->
+      </v-col> 
     
     </v-row>
 
