@@ -13,7 +13,7 @@
           <div class="d-flex fill-height align-center justify-center"> 
             <v-card flat color="transparent">
               <v-card-title class="title text-center font-weight-bold center">
-              Frequently Asked Questions
+              <h1>Frequently Asked Questions</h1>
               </v-card-title>
             </v-card>
           </div>

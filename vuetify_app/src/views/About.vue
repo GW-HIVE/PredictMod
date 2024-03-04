@@ -13,10 +13,10 @@
           <div class="d-flex fill-height align-center justify-center"> 
             <v-card flat color="transparent">
             <v-card-title class="title text-center font-weight-bold">
-              PredictMod
+              <h1>PredictMod</h1>
             </v-card-title>
             <v-card-text class="text-center">
-              A Machine Learning-Based Application for Informed Clinical Decision Making
+            <h4>A Machine Learning-Based Application for Informed Clinical Decision Making</h4>
             </v-card-text>
             </v-card>
       <!-- <span class="introduction">PredictMod Test Text</span> -->

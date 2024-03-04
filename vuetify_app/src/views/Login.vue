@@ -13,7 +13,7 @@
           <div class="d-flex fill-height align-center justify-center"> 
             <v-card flat color="transparent">
       <v-card-title class="title text-center font-weight-bold">
-        Clinician and Researcher Access
+        <h1>Clinician and Researcher Access</h1>
       </v-card-title>
       </v-card>
       </div>

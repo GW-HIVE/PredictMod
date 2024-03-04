@@ -1,9 +1,13 @@
 <template>	
 
 	
-		<button class="button is-light" @click="show = true">
+		<!-- <button class="button is-light" @click="show = true">
 			LICENSE
-		</button>
+		</button> -->
+
+		<v-card-title>
+			<h3>LICENSE</h3>
+		</v-card-title>
 
 		<v-card-text class="text-center" v-if="show"
 		>
