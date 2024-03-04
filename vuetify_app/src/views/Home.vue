@@ -41,8 +41,8 @@
   <v-container>
  
 
-    <!-- <v-row> -->
-      <v-col>
+    <v-row no-gutters>
+      <v-col cols="7">
         <v-card flat color="transparent">
           <v-card-title class="title text-center font-weight-bold">
             Registered User
@@ -55,7 +55,7 @@
               <v-btn color="primary">Login</v-btn>
         </router-link>
 
-        <v-card flat color="transparent">
+        <v-card flat color="transparent"> 
           <v-card-title class="title text-center font-weight-bold">
             Guest User
           </v-card-title>
@@ -66,22 +66,109 @@
         <router-link to="/predictmod/query-builder">
               <v-btn color="primary">Try it out</v-btn>
         </router-link>
-        
-        <!-- <v-card flat color="transparent">
-          <v-card-title class="title text-center font-weight-bold">
-            Explore our models?
-          </v-card-title>
-          <v-card-text class="text-center">
-            Review, interact and learn about the PredictMod model collection.
-          </v-card-text>
-        </v-card> -->
-
-        <!-- <router-link to="/predictmod/explore"> -->
-              <!-- <v-btn color="primary" @click="alertTBD(source=`Exploration`)">Explore</v-btn> -->
-        <!-- </router-link> -->
-        
-
       </v-col>
+    <v-col cols="5">
+      <v-card outlined>
+        <v-card-title class="title text-center font-weight-bold">
+          <h3>Version</h3>
+        </v-card-title>
+        <v-card-text class="text-center">
+          User Interface v1.2 (29 Feb 2024)
+        </v-card-text>
+      </v-card>
+      <v-card outlined>
+        <v-card-title class="title text-center font-weight-bold">
+          <h3>Model Statistics</h3>
+        </v-card-title>
+        <v-card-text>
+        <v-row>
+        <v-col cols="6" class="text-left">
+          <b>MG_Exercise</b><br>
+          Release Date<br>
+          Data Type<br>
+          Patients<br>
+          Genomes<br>
+          Model Type<br>
+          Accuracy (Validation)<br>
+        </v-col>
+        <v-col cols="6" class="text-center">
+          <b>v1.1</b><br>
+          31 May 2023<br>
+          Metagenomic<br>
+          40<br>
+          281<br>
+          Decision Tree Classifier (DTC)<br>
+          89%<br>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="6" class="text-left ma=2 pa=2">
+          <b>MDClone_Diet_Counseling</b><br>
+          Release Date<br>
+          Data Type<br>
+          Patients<br>
+          Data Features<br>
+          Model Type<br>
+          Accuracy (Validation)<br>
+        </v-col>
+        <v-col cols="6" class="text-center">
+          <b>v1.1</b><br>
+          11 December 2023<br>
+          EHR<br>
+          19,842<br>
+          19<br>
+          Decision Tree Classifier (DTC)<br>
+          97%<br>
+        </v-col>
+      </v-row>
+      </v-card-text>
+      </v-card>
+      <v-card outlined>
+        <v-card-title class="title text-center font-weight-bold">
+          <h3>Anticipated Future Models</h3>
+        </v-card-title>
+        <v-card-text class="text-center">
+          <v-row>
+          <v-col cols="6" class="text-left">
+            <b>Model Name</b><br>
+            PredictMod_EHR_Keto<br>
+            Glycomics_PreDM<br>
+            Glycoproteomics_RC<br>
+            Epilepsy_Keto<br>
+            Synthea_Exercise<br>
+            MDClone_Diet_Counseling<br>
+            MDClone_Semaglutide<br>
+            MDClone_Exercise<br>
+          </v-col>
+          <v-col cols="2" class="text-center">
+            <b>Version</b><br>
+            1.0<br>
+            1.0<br>
+            1.0<br>
+            1.0<br>
+            1.1<br>
+            1.2<br>
+            1.0<br>
+            1.0<br>
+          </v-col>
+          <v-col cols="4" class="text-center">
+            <b>Data Type</b><br>
+            EHR<br>
+            Glycomic<br>
+            Glycoproteomic<br>
+            Metagenomic<br>
+            EHR<br>
+            EHR<br>
+            EHR<br>
+            EHR<br>
+          </v-col>
+        </v-row>
+        </v-card-text>
+      </v-card>
+    </v-col>
+  </v-row>
+        
+
 
     <!-- </v-row> -->
   
