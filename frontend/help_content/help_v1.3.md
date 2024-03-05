@@ -121,6 +121,8 @@ Once a correctly-formatting file has been uploaded, select ‘Run Prediction’ 
 #### Data visualization examples and interpretations
 The primary data visualization tools are a decision tree and a SHAP force plot.
 
+Shapley Value originates from game theory and involves the fair distribution of reward based on the degree of contribution of each player. This can be utilized in precision medicine to identify the key “players” or features that contribute to a given prediction. The SHAP (SHapley Additive exPlanations) Force Plot leverages this ideology to provide Explainable AI with respect to the single patient predictions made by PredictMod. Each plot for a given prediction not only indicates the most influential features but highlights whether that feature pushes the prediction higher (in red) or lower (in blue). The consideration of the features and their values leads to a score, where higher scores indicate a prediction of 1, or NR and lower scores a prediction of 0, or R. SHAP Froce Plots also indicate the degree of feature impact based on proximity to the boundary line where the red and blue bars meet. The closer to the dividing boundary, the more impact that feature had on the patient’s prediction.
+
 ### Run another prediction
 Selecting 'Run Another Prediction' will return you to the query builder page, where you can complete steps 1 through 4 to run a new prediction. As a reminder, no patient data is stored in the PredictMod server, so running another prediction will erase any currently displayed results.
 
