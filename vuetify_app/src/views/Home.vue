@@ -66,6 +66,11 @@
         <router-link to="/predictmod/query-builder">
               <v-btn color="primary">Try it out</v-btn>
         </router-link>
+        <v-row>
+        <router-link to="/predictmod/testing">
+          <v-btn>Testing Space</v-btn>
+        </router-link>
+      </v-row>
       </v-col>
     <v-col cols="5">
       <v-card outlined>
