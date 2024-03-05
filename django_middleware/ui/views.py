@@ -35,6 +35,25 @@ def ping(request):
     return HttpResponse("PONG\n")
 
 
+# Development
+@csrf_exempt
+def live_data(request):
+    logger.debug("===> Serving data request <===")
+    data = [
+        {"name": "Factor 1", "value": 42},
+        {"name": "Factor 2", "value": 25},
+        {"name": "Factor 3", "value": -12},
+    ]
+    return JsonResponse(data=data, safe=False)
+
+
+@csrf_exempt
+def png_response(request):
+    logger.debug("===> Serving data request <===")
+    data = {"Factor 1": 42, "Factor 2": 25, "Factor 3": -12}
+    return JsonResponse(data=data, safe=False)
+
+
 @csrf_exempt
 def mg_sample(request):
     # See SO: https://stackoverflow.com/a/36394206
