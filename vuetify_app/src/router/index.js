@@ -75,6 +75,14 @@ const router = createRouter({
   //     console.log('Route changed from ' + from.path + ' to ' + to.path);
   //   },
   // },
+  scrollBehavior(to, from, savedPosition) {
+    if (to.hash) {
+      return {
+        el: to.hash,
+        behavior: 'smooth',
+      }
+    }
+  },
   routes,
 })
 
