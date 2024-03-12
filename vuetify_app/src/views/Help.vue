@@ -184,19 +184,21 @@
             Coming soon: Upload a Model
           </v-card-title>
           <v-card-text>
-          <router-link to="/predictmod/not-found">
-            Uploading your machine-learning model
+          <router-link to="/predictmod/help#coming-soon">
+            Uploading your machine-learning model<br>
           </router-link>
           <router-link to="/predictmod/not-found">
-            Model review & verification process
+            Model review & verification process<br>
           </router-link>
           <router-link to="/predictmod/not-found">
-            Model Upload FAQs
+            Model Upload FAQs<br>
           </router-link>
         </v-card-text>
         </v-card>
       </v-col>
     </v-row>
+
+    <HelpContent />
 
     <v-row>
       <v-col>
@@ -217,7 +219,7 @@
 
 </template>
 <script>
-import { onMounted, ref } from 'vue';
+import HelpContent from '@/components/HelpContent.vue';
 
 import DisclaimerShow from './DisclaimerShow.vue';
 import NotFound from './NotFound.vue';
@@ -229,8 +231,13 @@ export default {
   data() {
 			return {
 				home: false,
+        text: `
+# YO {#anchor1}
+## YOYO {#anchor2}
+### YOYOYO {#anchor3}
+`
 			}
     },
-  components: { DisclaimerShow, LicenseShow }
+  components: { HelpContent, DisclaimerShow, LicenseShow }
 }
 </script>
