@@ -126,7 +126,7 @@ Shapley Value originates from game theory and involves the fair distribution of 
 ### Run another prediction
 Selecting 'Run Another Prediction' will return you to the query builder page, where you can complete steps 1 through 4 to run a new prediction. As a reminder, no patient data is stored in the PredictMod server, so running another prediction will erase any currently displayed results.
 
-## Coming Soon: Upload a Model
+## <a id="coming-soon">Coming Soon: Upload a Model</a>
 Uploading your machine-learning model
 Model review & verification process
 Model upload FAQs
