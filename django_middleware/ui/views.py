@@ -27,6 +27,20 @@ EHR_EXAMPLE = os.path.abspath(
 
 logger = logging.getLogger()
 
+DOWNLOAD_ENDPOINTS = {
+    "metagenomic",
+    "ehr-mdclone",
+}
+
+UPLOAD_ENPOINTS = {
+    "metagenomic",
+    "ehr-mdclone",
+}
+
+
+def binary_response_to_json(response):
+    return json.loads(response.content.decode("utf-8"))
+
 
 # XXX - Sanity check
 @csrf_exempt
@@ -36,6 +50,17 @@ def ping(request):
 
 
 # Development
+def queries(request):
+    if request.method != "GET":
+        return JsonResponse({"error": f"Invalid method {request.METHOD}"})
+    logger.debug("---> Received query")
+    query = request.GET.get("q", None)
+    logger.debug(f"Found query: {query}")
+    result = requests.get(f"{FLASK_BACKEND}/query?query={query}")
+
+    return JsonResponse(json.loads(result.content.decode("utf-8")), safe=False)
+
+
 @csrf_exempt
 def live_data(request):
     logger.debug("===> Serving data request <===")
@@ -47,6 +72,7 @@ def live_data(request):
     return JsonResponse(data=data, safe=False)
 
 
+# /Development
 @csrf_exempt
 def png_response(request):
     logger.debug("===> Serving data request <===")
@@ -54,6 +80,17 @@ def png_response(request):
     return JsonResponse(data=data, safe=False)
 
 
+# TODO
+# @csrf_exempt
+# def download_sample(request):
+#     sample_type = request.GET.get("sample-type", None)
+#     if sample_type is not None:
+#         if sample_type not in DOWNLOAD_ENDPOINTS:
+#             return JsonResponse({'error': 'bad sample type'}, status=404)
+#         response = requests.get(f"{FLASK_BACKEND}/download?q={sample_type}")
+
+
+# XXX
 @csrf_exempt
 def mg_sample(request):
     # See SO: https://stackoverflow.com/a/36394206
@@ -69,6 +106,35 @@ def ehr_sample(request):
     # See also SO: https://stackoverflow.com/a/36394206
     ehr_df = pandas.read_csv(EHR_EXAMPLE)
     return JsonResponse(ehr_df.to_json(orient="records"), safe=False)
+
+
+def file_upload(request):
+    if request.method == "POST":
+
+        try:
+            target = request.POST.get("target", None)
+            if not target or target not in UPLOAD_ENPOINTS:
+                return JsonResponse(
+                    {"error": f"Invalid upload target {target}"}, status=404
+                )
+            data = json.loads(request.body)
+            response = requests.post(f"{FLASK_BACKEND}/upload?q={target}", json=data)
+        except ConnectionRefusedError:
+            return JsonResponse(
+                {"error": f"Flask error: Is the Flask server running?"},
+                status=404,
+                safe=False,
+            )
+        except Exception as error:
+            return JsonResponse(
+                {"error": f"Django error: {error}"}, status=500, safe=False
+            )
+    else:
+        return JsonResponse(
+            {"error": f"Unsupported request type: {request.method}"},
+            status=400,
+            safe=False,
+        )
 
 
 # XXX

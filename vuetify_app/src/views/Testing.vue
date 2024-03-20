@@ -25,8 +25,12 @@
     </v-img>
   </v-banner>
 
-  <v-container>
+  <!-- XXX Dummy Data -->
+  <!-- <v-container>
     <LiveChartTest />
+  </v-container> -->
+  <v-container>
+    <FlaskRoundtrip />
   </v-container>
 
   <v-container>
@@ -61,6 +65,7 @@
 import { onMounted, ref } from 'vue';
 
 import LiveChartTest from '@/components/LiveChartTest.vue';
+import FlaskRoundtrip from '@/components/FlaskRoundtrip.vue';
 import DisclaimerShow from './DisclaimerShow.vue';
 import LicenseShow from './LicenseShow.vue';
 
@@ -72,6 +77,6 @@ export default {
 				home: false,
 			}
     },
-  components: { LiveChartTest, DisclaimerShow, LicenseShow }
+  components: { FlaskRoundtrip, LiveChartTest, DisclaimerShow, LicenseShow }
 }
 </script>
