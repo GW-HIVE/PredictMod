@@ -42,13 +42,27 @@ app = Flask(__name__)
 cors = CORS(app)
 app.config["CORS_HEADERS"] = "Content-Type"
 app.config["DOWNLOAD_FOLDER"] = os.path.join(
-    os.path.dirname(app.instance_path), "downloads"
+    os.path.dirname(app.instance_path), "models"
 )
 
 app.logger.setLevel(logging.DEBUG)
 
 metagenomic_predictor = MGTreeHandler()
 ehr_predictor = EHRTreeHandler()
+
+
+@app.route("/query", methods=["GET"])
+def query():
+    query = request.args.get("query", None)
+    app.logger.debug(f"Found request arg: {query}")
+    data = None
+    if query == "model-test":
+        data = [
+            {"name": "Factor 1", "value": 42},
+            {"name": "Factor 2", "value": 25},
+            {"name": "Factor 3", "value": -12},
+        ]
+    return jsonify(data)
 
 
 @app.route("/metagenomic-download", methods=["GET"])
@@ -82,6 +96,24 @@ def ping():
     except Exception as e:
         app.logger.debug(f"---> Exception!!\n{e}")
         return Response(f"ERROR: {e}")
+
+
+@app.route("/upload", methods=["POST"])
+def upload():
+    target = request.args.get("q", None)
+    if target == "metagenomic":
+        raw_data = request.get_json()
+        headers, data = raw_data[0], np.array([raw_data[1]])
+        df = pd.DataFrame(data, columns=headers)
+        df = df.drop(["Status"], axis=1)
+        return jsonify({"result": metagenomic_predictor.make_prediction(df)})
+    elif target == "ehr-mdclone":
+        raw_data = request.get_json()
+        headers, data = raw_data[0], np.array([raw_data[1]])
+        df = pd.DataFrame(data, columns=headers)
+        return jsonify({"result": ehr_predictor.make_prediction(df)})
+    else:
+        return jsonify({"error": "Illegal upload target error"}, status=404)
 
 
 @app.route("/mg-upload", methods=["POST"])
