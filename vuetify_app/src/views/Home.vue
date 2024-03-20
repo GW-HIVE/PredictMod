@@ -89,7 +89,6 @@
           Patients<br>
           Genomes<br>
           Model Type<br>
-          Accuracy (Validation)<br>
         </v-col>
         <v-col cols="6" class="text-center">
           <b>v1.1</b><br>
@@ -98,7 +97,6 @@
           40<br>
           281<br>
           Decision Tree Classifier (DTC)<br>
-          89%<br>
         </v-col>
       </v-row>
       <v-row>
@@ -109,7 +107,6 @@
           Patients<br>
           Data Features<br>
           Model Type<br>
-          Accuracy (Validation)<br>
         </v-col>
         <v-col cols="6" class="text-center">
           <b>v1.1</b><br>
@@ -118,7 +115,6 @@
           19,842<br>
           19<br>
           Decision Tree Classifier (DTC)<br>
-          97%<br>
         </v-col>
       </v-row>
       </v-card-text>
