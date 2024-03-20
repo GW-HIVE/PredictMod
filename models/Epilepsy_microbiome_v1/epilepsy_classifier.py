@@ -7,7 +7,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
 # Load your data
-file_path = "C:\\Users\\17038\\a_Fall_2023\\Work\\Epilepsy_Classifier\\epilepsy_data_500.xlsx"
+file_path = "epilepsy_data_500.xlsx"
 
 df = pd.read_excel(file_path)
 
