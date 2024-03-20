@@ -1,13 +1,16 @@
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score
+import joblib
 import pandas as pd
 import numpy as np
 def run_training():
-    train_data = pd.read_excel("C:\\Users\\17038\\a_Fall_2023\\work\\Classifier\\data.xlsx")
-    train_labels = pd.read_excel("C:\\Users\\17038\\a_Fall_2023\\work\\Classifier\\label.xlsx")
-    # test_data = pd.read_excel("C:\\Users\\17038\\a_Fall_2023\\work\\Classifier\\sample_synthetic_EHR_data_1000patients.xlsx")
-    test_data = pd.read_excel("C:\\Users\\17038\\a_Fall_2023\\work\\Classifier\\single_patient_input.xlsx")
+    train_data = pd.read_excel("C:\\Users\\17038\\a_Fall_2023\\work\\Diabetes_EHR_v1\\data.xlsx")
+    train_labels = pd.read_excel("C:\\Users\\17038\\a_Fall_2023\\work\\Diabetes_EHR_v1\\label.xlsx")
+    test_data = pd.read_excel("C:\\Users\\17038\\a_Fall_2023\\work\\Diabetes_EHR_v1\\single_patient_input.xlsx")
+    train_data = pd.read_excel("data.xlsx")
+    train_labels = pd.read_excel("label.xlsx")
+    test_data = pd.read_excel("single_patient_input.xlsx")
     test_data = test_data.to_numpy()
     test_data = test_data[:,0:]
     X_train = train_data.to_numpy()
@@ -36,7 +39,7 @@ if __name__ == "__main__":
     # Load your trained classifier, scaler, and label_encoder
 
     # Get user input for the file path
-    file_path = input('Enter the file path for single patient input (e.g., C:\\Users\\17038\\a_Fall_2023\\work\\Classifier\\single_patient_input.xlsx): ')
+    file_path = input('Enter the file path for single patient input (e.g., C:\\Users\\17038\\a_Fall_2023\\work\\Diabetes_EHR_v1\\single_patient_input.xlsx): ')
 
     # Read the Excel file
     try:
@@ -51,6 +54,7 @@ if __name__ == "__main__":
     # Process single patient input
     [X_train,Y_train] = run_training()
     [classifier,acc,classifier_type_string] = train(X_train,Y_train)
+    joblib.dump(classifier, 'Diabetes_classifier.pkl')
 
     patient_data = test_data.to_numpy()
     reshaped_patient = patient_data.reshape((1, 6))
