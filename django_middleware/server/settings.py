@@ -36,6 +36,8 @@ FLASK_BACKEND = config[DJANGO_MODE]["BackendBaseURL"]
 
 ALLOWED_HOSTS = ["middleware", "127.0.0.1", "localhost"]
 
+APPEND_SLASH = False
+
 CORS_ALLOWED_ORIGINS = [
     "http://middleware",
     "http://localhost:3000",
