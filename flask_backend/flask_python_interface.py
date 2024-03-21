@@ -101,13 +101,13 @@ def ping():
 @app.route("/upload", methods=["POST"])
 def upload():
     target = request.args.get("q", None)
-    if target == "metagenomic":
+    if target == "mg":
         raw_data = request.get_json()
         headers, data = raw_data[0], np.array([raw_data[1]])
         df = pd.DataFrame(data, columns=headers)
         df = df.drop(["Status"], axis=1)
         return jsonify({"result": metagenomic_predictor.make_prediction(df)})
-    elif target == "ehr-mdclone":
+    elif target == "ehr":
         raw_data = request.get_json()
         headers, data = raw_data[0], np.array([raw_data[1]])
         df = pd.DataFrame(data, columns=headers)
