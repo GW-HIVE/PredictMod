@@ -7,9 +7,9 @@ class UploadFilesService {
     const userStore = useUserStore();
     const baseURL = import.meta.env.DEV ? import.meta.env.VITE_DEV_MIDDLEWARE_BASE + '/api': "/predictmod/api";
     // const formData = new FormData();
-
-    const urlDest = "/".concat(target, "-upload/");
-    const fullURL = baseURL.concat(urlDest);
+    console.log("...Uploading?")
+    // const urlDest = "/".concat(target, "-upload/");
+    const fullURL = baseURL + `/upload/?q=${target}`;
     // const headers = {
     //   "Content-type": "application/json",
     //   "X-CSRFToken": userStore.token,
@@ -17,7 +17,7 @@ class UploadFilesService {
     // }
 
     // XXX
-    // console.log("---> Uploading file to %s", urlDest);
+    console.log("---> Uploading file to %s", fullURL);
     // console.log("---> File contents:\n%s", json);
     // console.log("---> File TYPE:\n%s", typeof(json));
     // console.log("XLS? >>>\n%s", JSON.stringify(xlsFile));
