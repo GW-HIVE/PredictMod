@@ -4,7 +4,8 @@
 # matlabengine
 flask
 flask-cors
+gunicorn
 numpy
 pandas
-scikit-learn==1.3
-gunicorn
+scikit-learn
+shap
