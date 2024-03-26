@@ -9,7 +9,7 @@ import pickle
 
 import numpy as np
 import pandas as pd
-import io
+import shap
 
 
 class MGTreeHandler:
@@ -25,17 +25,31 @@ class MGTreeHandler:
         return "This patient is not expected to respond to the intervention based on Metagenomic input"
 
 
-class EHRTreeHandler:
+class MDClone_EHRTreeHandler:
     def __init__(self):
-        with open("pickled_ehr_tree.pickle", "rb") as fp:
-            self.pickled_tree = pickle.load(fp)
+        with open(
+            "./models/MDClone_Diet_Counseling_v1.1/MDClone_DTCv1.1.pickle", "rb"
+        ) as fp:
+            pickled_tree = pickle.load(fp)
         fp.close()
+        self.pickled_tree = pickled_tree
+        self.explainer = shap.Explainer(pickled_tree)
 
     def make_prediction(self, data):
         prediction = self.pickled_tree.predict(data)[0]
+        shap_values = self.explainer(data, check_additivity=False)
+        fp = shap.force_plot(
+            self.explainer.expected_value[0], shap_values[0], data.iloc[0]
+        )
         if prediction == "R":
-            return "This patient is expected to respond to the intervention based on EHR input"
-        return "This patient is not expected to respond to the intervention based on EHR input"
+            return {
+                "result": "This patient is expected to respond to the intervention based on EHR input",
+                "plot": json.dumps(fp.data),
+            }
+        return {
+            "result": "This patient is not expected to respond to the intervention based on EHR input",
+            "plot": json.dumps(fp.data),
+        }
 
 
 app = Flask(__name__)
@@ -48,7 +62,7 @@ app.config["DOWNLOAD_FOLDER"] = os.path.join(
 app.logger.setLevel(logging.DEBUG)
 
 metagenomic_predictor = MGTreeHandler()
-ehr_predictor = EHRTreeHandler()
+mdclone_ehr_predictor = MDClone_EHRTreeHandler()
 
 
 @app.route("/query", methods=["GET"])
@@ -111,7 +125,7 @@ def upload():
         raw_data = request.get_json()
         headers, data = raw_data[0], np.array([raw_data[1]])
         df = pd.DataFrame(data, columns=headers)
-        return jsonify({"result": ehr_predictor.make_prediction(df)})
+        return jsonify({"result": mdclone_ehr_predictor.make_prediction(df)})
     else:
         return jsonify({"error": "Illegal upload target error"}, status=404)
 
@@ -149,7 +163,7 @@ def ehr_request():
         headers, data = raw_data[0], np.array([raw_data[1]])
         df = pd.DataFrame(data, columns=headers)
 
-        return jsonify({"result": ehr_predictor.make_prediction(df)})
+        return jsonify({"result": mdclone_ehr_predictor.make_prediction(df)})
 
     except Exception as e:
         app.logger.debug(f"--->>> Exception!\n{e}")
