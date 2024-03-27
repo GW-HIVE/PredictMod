@@ -28,7 +28,7 @@ class MGTreeHandler:
 class MDClone_EHRTreeHandler:
     def __init__(self):
         with open(
-            "./models/MDClone_Diet_Counseling_v1.1/MDClone_DTCv1.1.pickle", "rb"
+            "./models/MDClone_Diet_Counseling_v1.1/MDClone_DTCv1.2.pickle", "rb"
         ) as fp:
             pickled_tree = pickle.load(fp)
         fp.close()
@@ -37,17 +37,13 @@ class MDClone_EHRTreeHandler:
 
     def make_prediction(self, data):
         prediction = self.pickled_tree.predict(data)[0]
-        shap_values = self.explainer(data, check_additivity=False)
+        shap_values = self.explainer.shap_values(data)
         fp = shap.force_plot(
             self.explainer.expected_value[0], shap_values[0], data.iloc[0]
         )
-        if prediction == "R":
-            return {
-                "result": "This patient is expected to respond to the intervention based on EHR input",
-                "plot": json.dumps(fp.data),
-            }
+        result = "expected" if prediction == "R" else "not expected"
         return {
-            "result": "This patient is not expected to respond to the intervention based on EHR input",
+            "result": f"This patient is {result} to respond to the intervention based on EHR input",
             "plot": json.dumps(fp.data),
         }
 
@@ -125,7 +121,7 @@ def upload():
         raw_data = request.get_json()
         headers, data = raw_data[0], np.array([raw_data[1]])
         df = pd.DataFrame(data, columns=headers)
-        return jsonify({"result": mdclone_ehr_predictor.make_prediction(df)})
+        return jsonify(mdclone_ehr_predictor.make_prediction(df))
     else:
         return jsonify({"error": "Illegal upload target error"}, status=404)
 
@@ -147,7 +143,7 @@ def mg_request():
         df = df.drop(["Status"], axis=1)
         # app.logger.debug(f"---> JSON Data:\n{df}")
 
-        return jsonify({"result": metagenomic_predictor.make_prediction(df)})
+        return jsonify(metagenomic_predictor.make_prediction(df))
 
     except Exception as e:
         app.logger.debug(f"--->>> Exception!\n{e}")
