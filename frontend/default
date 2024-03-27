@@ -64,7 +64,7 @@ server {
 		set $originaddr http://middleware:8000;
 		add_header 'Access-Control-Allow-Origin' '*';
 		proxy_set_header Host $host;
-		proxy_pass $originaddr$uri;
+		proxy_pass $originaddr$uri?$args;
 	}
 	
 	# ===== XXX ===== Support for "users" endpoint
