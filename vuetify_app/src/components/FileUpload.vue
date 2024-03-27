@@ -153,7 +153,7 @@ import UploadService from "@/services/UploadService";
             }
             else if (response.image) {
               this.imageData = "data:image/png; base64, " + response.image;
-              console.log("Image data is now: %s", this.imageData)
+              // console.log("Image data is now: %s", this.imageData)
             }
             else {
               this.standIn = true;

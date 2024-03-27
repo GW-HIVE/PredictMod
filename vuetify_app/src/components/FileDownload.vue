@@ -41,12 +41,12 @@
     <!-- </v-container> -->
       <!-- </v-row> -->
   
-      <v-alert v-if="message" color="blue-grey" dark>
+      <!-- <v-alert v-if="message" color="blue-grey" dark>
         {{ message }}
-      </v-alert>
-      <v-row>
+      </v-alert> -->
+      <!-- <v-row>
         <BarChart v-if="showChart" /> 
-      </v-row>
+      </v-row> -->
     </div>
   </template>
   
@@ -73,7 +73,7 @@
       download() {
         const response = DownloadService.download(this.downloadTargetURL, () => {
         })
-        console.log('---> FileDownload, got\n%s', JSON.stringify(response));
+        // console.log('---> FileDownload, got\n%s', JSON.stringify(response));
           // .then((response) => {
           //   // this.message = response.data.message;
           //   console.log('---> FileDownload, got\n%s', JSON.stringify(response));
