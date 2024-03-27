@@ -209,7 +209,7 @@ export default {
       async login() {
         const success = await this.userStore.login(this.email, this.password);
         if (success) {
-          console.log("Login confirmed ---> (Success was %s)", success);
+          // console.log("Login confirmed ---> (Success was %s)", success);
           this.clearState();
           if (this.userStore.isAdmin) {
             this.showAdmin = true;
@@ -218,7 +218,7 @@ export default {
             this.loggedIn = true;
           }
         } else {
-          console.log("Error in login!");
+          // console.log("Error in login!");
           this.loginError = this.userStore.error;
           this.userStore.clearError();
         }
@@ -230,23 +230,24 @@ export default {
           this.showAdmin = false;
           this.loggedIn = false;
         } else {
-          console.log("Error on logout!")
+          // Error handling logic
+          // console.log("Error on logout!")
         }
       },
 
       async createUser() {
         this.userError = [];
-        console.log(
-          "New Email: %s\nConfirmation: %s\nNPass: %s\nConfirm Pass: %s",
-          this.newEmail,
-          this.newEmailConfirmation,
-          this.newPassword,
-          this.newPasswordConfirmation
-        );
-        console.log("Bools: %s // %s", 
-        this.newEmail != this.newEmailConfirmation,
-        this.newPassword != this.newPasswordConfirmation
-        )
+        // console.log(
+        //   "New Email: %s\nConfirmation: %s\nNPass: %s\nConfirm Pass: %s",
+        //   this.newEmail,
+        //   this.newEmailConfirmation,
+        //   this.newPassword,
+        //   this.newPasswordConfirmation
+        // );
+        // console.log("Bools: %s // %s", 
+        // this.newEmail != this.newEmailConfirmation,
+        // this.newPassword != this.newPasswordConfirmation
+        // )
 
         if (this.newEmail != this.newEmailConfirmation) {
           this.userError.push("New email doesn't match");
@@ -270,7 +271,7 @@ export default {
           }
           return;
         } else {
-          console.log("Error - Handling error on unsuccessful creation");
+          // console.log("Error - Handling error on unsuccessful creation");
           this.userError.push(this.userStore.error);
           this.userStore.clearError();
         }
