@@ -46,8 +46,8 @@ export default {
       credentials: 'include',
     })
     const userList = await request.json();
-    console.log('---> Got user list: %s', JSON.stringify(userList));
-    console.log('---> User list type: %s', typeof(userList));
+    // console.log('---> Got user list: %s', JSON.stringify(userList));
+    // console.log('---> User list type: %s', typeof(userList));
     if ("error" in userList) {
       alert(userList["error"]);
       return;
