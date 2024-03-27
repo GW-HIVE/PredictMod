@@ -41,7 +41,7 @@ export default {
 			}
     },
   async mounted() {
-    const request = await fetch('http://localhost:8000/predictmod/api/users/', {
+    const request = await fetch('/predictmod/api/users/', {
       'Accept': 'application/json',
       credentials: 'include',
     })
