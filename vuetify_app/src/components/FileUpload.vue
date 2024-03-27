@@ -62,8 +62,19 @@
         {{ message }}
       </v-alert>
       <v-row class="pa-5" v-if="showChart">
-        <StandinChart v-if="!chartData" />
-        <SHAPForcePlot v-if="chartData" :chart-data="chartData" :key="counterToken"/> 
+        <StandinChart v-if="standIn" />
+        <SHAPForcePlot 
+          v-if="chartData" 
+          :chart-data="chartData" 
+          :key="counterToken"
+        />
+        <v-img 
+          v-if="imageData" 
+          :src="imageData"
+          :height="600"
+          :width="1000"
+          height
+        />
         <v-btn @click="forceRedraw()">Redraw!</v-btn>
       </v-row>
     </v-container>
@@ -88,6 +99,8 @@ import UploadService from "@/services/UploadService";
         currentFile: null,
         data: null,
         chartData: null,
+        imageData: null,
+        standIn: false,
         progress: 0,
         message: "Data must be selected before results are available",
         showChart: false,
@@ -137,6 +150,13 @@ import UploadService from "@/services/UploadService";
             this.message = response.result ? response.result : response.error;
             if (response.plot) {
               this.chartData = JSON.parse(response.plot);
+            }
+            else if (response.image) {
+              this.imageData = "data:image/png; base64, " + response.image;
+              console.log("Image data is now: %s", this.imageData)
+            }
+            else {
+              this.standIn = true;
             }
             this.showChart = true;
             return true;
