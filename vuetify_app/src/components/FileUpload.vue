@@ -75,7 +75,7 @@
           :width="1000"
           height
         />
-        <v-btn @click="forceRedraw()">Redraw!</v-btn>
+        <!-- <v-btn @click="forceRedraw()">Redraw!</v-btn> -->
       </v-row>
     </v-container>
     </div>
