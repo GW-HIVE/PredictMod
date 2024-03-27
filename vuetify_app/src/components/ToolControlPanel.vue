@@ -3,9 +3,11 @@
 <v-btn type="submit" @click="alertTBD(source=`Review`)">
     Review Available Models
 </v-btn>
-<v-btn type="submit" @click="alertTBD(source=`Learning`)">
-    Learn More
-</v-btn>
+<router-link :to="modelAnchor">
+    <v-btn>
+        Learn More
+    </v-btn>
+</router-link>
     <FileDownload :download-target-u-r-l="targetURL" />
 </v-row>
 <!-- <v-btn type="submit" @click="alertTBD(source=`Download`)">
@@ -22,6 +24,7 @@
         Example Analysis
     </v-btn>
 </v-row>
+
 <!-- 
     <v-row>
     <v-btn color="primary" @click="alertTBD(source=`Analysis`)">
@@ -52,11 +55,12 @@ export default {
     props: {
         selections: Object,
         targetURL: String,
+        modelAnchor: String,
     },
     methods: {
         alertTBD(source) {
             alert(source + " functionality is under construction");
-        }
+        },
     },
     components: { FileDownload, FileUpload },
 

@@ -77,6 +77,7 @@
       <ToolControlPanel
         :selections="selections" 
         :target-u-r-l="myTargetURL" 
+        :model-anchor="modelAnchor"
       />
     </v-row>
     </v-container>
@@ -120,6 +121,7 @@ export default {
         dataTypeRelay: {},
         selections: {},
         myTargetURL: "",
+        modelAnchor: "",
         conditions: [
           {
             name: "Prediabetes",
@@ -212,9 +214,23 @@ export default {
           console.log("Confirmed data type: %s", selection);
           this.selections['DataType'] = selection;
           this.myTargetURL = this.urlTargets[this.selections['Condition']][selection]
+          this.setTargetAnchor();
           console.log("Now targeting download/upload URLs of", this.myTargetURL);
           this.inputTypeSet = true;
         }
+    },
+    setTargetAnchor() {
+      const baseString = "/predictmod/help#current-models"
+      switch (this.myTargetURL) {
+          case "mg":
+              this.modelAnchor = baseString + "-mg-exercise";
+              break;
+          case "ehr":
+              this.modelAnchor = baseString + "-ehr-diet-counseling";
+              break;
+          default:
+              this.modelAnchor = "/predictmod/NotFound";
+      }
     },
     resetState() {
         this.conditionSet = false;
@@ -225,6 +241,7 @@ export default {
         this.dataTypeRelay = {};
         this.selections = {};
         this.myTargetURL = "";
+        this.modelAnchor = "";
     },
   },
   components: { QueryCard, ToolControlPanel, DisclaimerShow, LicenseShow }
