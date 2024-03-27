@@ -1,0 +1,11 @@
+# docker build -t predictmod:middleware-base -f dockerfile.base .
+FROM python:3.10-slim-buster
+
+COPY ./requirements.txt /
+
+ARG DEBIAN_FRONTEND=noninteractive
+RUN mkdir -p /var/log/gunicorn/ && \
+    mkdir -p /var/run/gunicorn/ && \
+    apt update && \
+    apt install -y python3-dev curl && \
+    pip3 install -r requirements.txt

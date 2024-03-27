@@ -5,5 +5,5 @@ docker rm middleware
 docker rmi predictmod:v0.3.1-middleware
 
 pushd ../django_middleware
-docker build -t predictmod:v0.3.1-middleware .
+docker build -t predictmod:v0.3.1-middleware -f dockerfile .
 popd
