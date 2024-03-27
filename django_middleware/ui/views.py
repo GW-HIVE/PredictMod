@@ -22,7 +22,7 @@ MG_EXAMPLE = os.path.abspath(
     os.path.join(os.path.dirname(__file__), "assets/mg_sample_data.xlsx")
 )
 EHR_EXAMPLE = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), "assets/ehr_sample_data.csv")
+    os.path.join(os.path.dirname(__file__), "assets/MDClone_unknown3.csv")
 )
 
 logger = logging.getLogger()
@@ -91,7 +91,7 @@ def file_download(request):
             df = pandas.read_excel(MG_EXAMPLE)
             return JsonResponse(df.to_json(orient="records"), safe=False)
         elif sample_type == "ehr":
-            df = pandas.read_excel(MG_EXAMPLE)
+            df = pandas.read_csv(EHR_EXAMPLE)
             return JsonResponse(df.to_json(orient="records"), safe=False)
         else:
             return JsonResponse(
