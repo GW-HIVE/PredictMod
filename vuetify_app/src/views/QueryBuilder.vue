@@ -59,6 +59,14 @@
       </v-col>
     </v-row>
 
+    <!-- <v-btn
+      elevation="2"
+      fab
+      @click="resetState()"
+    >
+      Reset Query
+    </v-btn> -->
+
     <v-container v-if="conditionSet && interventionSet && inputTypeSet">
       <v-row class="justify-center pa-2">
       <br>
@@ -207,6 +215,16 @@ export default {
           console.log("Now targeting download/upload URLs of", this.myTargetURL);
           this.inputTypeSet = true;
         }
+    },
+    resetState() {
+        this.conditionSet = false;
+        this.interventionSet = false;
+        this.inputTypeSet = false;
+				this.home = false;
+        this.interventionRelay = {};
+        this.dataTypeRelay = {};
+        this.selections = {};
+        this.myTargetURL = "";
     },
   },
   components: { QueryCard, ToolControlPanel, DisclaimerShow, LicenseShow }
