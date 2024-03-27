@@ -95,9 +95,9 @@ def file_download(request):
             return JsonResponse(df.to_json(orient="records"), safe=False)
         else:
             return JsonResponse(
-                {"error": f"bad sample type: {sample_type}"}, status=404
+                {"error": f"bad sample type: {sample_type}"}, status=500
             )
-    return JsonResponse({"error": f"Unknown sample type: {sample_type}"}, status=404)
+    return JsonResponse({"error": f"Unknown sample type: {sample_type}"}, status=500)
 
 
 # # XXX
