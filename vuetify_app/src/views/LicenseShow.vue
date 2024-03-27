@@ -4,7 +4,8 @@
 		<!-- <button class="button is-light" @click="show = true">
 			LICENSE
 		</button> -->
-
+		<v-card variant="tonal">
+		<!-- Also, variant "outlined" -->
 		<v-card-title>
 			<h3>LICENSE</h3>
 		</v-card-title>
@@ -15,7 +16,7 @@
 		license to all our database sets. This means that you are free to copy, distribute, 
 		display and make commercial use of these databases in all legislations, provided you give us credit.
 		</v-card-text>
-
+	</v-card>
 
 </template>
 

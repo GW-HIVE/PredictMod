@@ -4,7 +4,7 @@
 		<!-- <button class="button is-light" @click="show = true">
 			DISCLAIMER
 		</button> -->
-
+		<v-card variant="tonal">
 		<v-card-title>
 			<h3>DISCLAIMER</h3>
 		</v-card-title>
@@ -15,7 +15,7 @@
 		purposes only, and should not be used instead of medical advice, treatment, or intervention.
 
 		</v-card-text>
-
+	</v-card>
 
 </template>
 
