@@ -128,7 +128,7 @@ def file_upload(request):
                     {"error": f"Invalid upload target {target}"}, status=404
                 )
             data = json.loads(request.body)
-            logger.debug(f"---> Request received data: {data}")
+            # logger.debug(f"---> Request received data: {data}")
             response = requests.post(f"{FLASK_BACKEND}/upload?q={target}", json=data)
             response = json.loads(response._content.decode("utf-8"))
             return JsonResponse(response, status=200, safe=False)
