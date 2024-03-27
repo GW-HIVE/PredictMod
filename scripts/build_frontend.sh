@@ -5,5 +5,5 @@ docker rm predict-prod
 docker rmi predictmod-prod:v0.3.1-frontend
 
 pushd ../frontend
-docker build -t predictmod-prod:v0.3.1-frontend .
+docker build -t predictmod-prod:v0.3.1-frontend -f dockerfile .
 popd

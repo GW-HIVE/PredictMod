@@ -1,0 +1,8 @@
+# docker build -t predictmod:frontend-base -f dockerfile.base .
+FROM python:3.10-slim-buster
+
+
+ARG DEBIAN_FRONTEND=noninteractive
+RUN mkdir -p /var/www/html/predictmod/ && \
+    apt update && \
+    apt install -y nginx curl iputils-ping
