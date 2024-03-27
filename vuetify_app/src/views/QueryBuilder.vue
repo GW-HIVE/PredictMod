@@ -193,7 +193,7 @@ export default {
   methods: {
     confirmCondition(selection) {
       if (!this.conditionSet) {
-        console.log("Handling message from query: %s", selection);
+        // console.log("Handling message from query: %s", selection);
         this.interventionRelay = this.interventions[selection];
         this.dataTypeRelay = this.dataInputTypes[selection];
         this.selections['Condition'] = selection;
@@ -204,18 +204,18 @@ export default {
     },
     confirmIntervention(selection) {
       if (!this.interventionSet){
-        console.log("Confirmed intervention: %s", selection);
+        // console.log("Confirmed intervention: %s", selection);
         this.selections['Intervention'] = selection;
         this.interventionSet = true;
       }
     },
     confirmDataType(selection) {
       if (!this.inputTypeSet){
-          console.log("Confirmed data type: %s", selection);
+          // console.log("Confirmed data type: %s", selection);
           this.selections['DataType'] = selection;
           this.myTargetURL = this.urlTargets[this.selections['Condition']][selection]
           this.setTargetAnchor();
-          console.log("Now targeting download/upload URLs of", this.myTargetURL);
+          // console.log("Now targeting download/upload URLs of", this.myTargetURL);
           this.inputTypeSet = true;
         }
     },

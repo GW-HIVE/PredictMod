@@ -105,7 +105,7 @@ export default {
     methods: {
       updateState() {
         if (!this.selected) {
-        console.log("Toggling my state!");
+        // console.log("Toggling my state!");
         this.$emit('clicked', this.select);
         this.selected = true;
       }

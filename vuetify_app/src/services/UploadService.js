@@ -7,7 +7,7 @@ class UploadFilesService {
     const userStore = useUserStore();
     const baseURL = import.meta.env.DEV ? import.meta.env.VITE_DEV_MIDDLEWARE_BASE + '/api': "/predictmod/api";
     // const formData = new FormData();
-    console.log("...Uploading?")
+    // console.log("...Uploading?")
     // const urlDest = "/".concat(target, "-upload/");
     const fullURL = baseURL + `/upload/?q=${target}`;
     // const headers = {
@@ -17,7 +17,7 @@ class UploadFilesService {
     // }
 
     // XXX
-    console.log("---> Uploading file to %s", fullURL);
+    // console.log("---> Uploading file to %s", fullURL);
     // console.log("---> File contents:\n%s", json);
     // console.log("---> File TYPE:\n%s", typeof(json));
     // console.log("XLS? >>>\n%s", JSON.stringify(xlsFile));
@@ -40,7 +40,7 @@ class UploadFilesService {
 
     const response = await res.json();
   
-    console.log("---> Got response %s", JSON.stringify(response));
+    // console.log("---> Got response %s", JSON.stringify(response));
 
     return response;
 
