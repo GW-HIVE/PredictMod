@@ -2,19 +2,24 @@
     <h3>
         Live SHAP Data
     </h3>
-    <div id="SHAPPlot">
-
+    <div class="container">
+      <v-row>
+        <svg width="600" height="400"></svg>
+      </v-row>
     </div>
+    <v-btn @click="rerender()">
+      Rerender
+    </v-btn>
 </template>
 
 <script>
-// import { select } from "d3-selection";
-// import { scaleLinear } from "d3-scale";
-// import { format } from "d3-format";
-// import { axisBottom } from "d3-axis";
-// import { line } from "d3-shape";
-// import { hsl } from "d3-color";
-import * as d3 from d3;
+import { select } from "d3-selection";
+import { scaleLinear } from "d3-scale";
+import { format } from "d3-format";
+import { axisBottom } from "d3-axis";
+import { line } from "d3-shape";
+import { hsl } from "d3-color";
+
 import {
   sortBy,
   map,
@@ -24,182 +29,205 @@ import {
   findIndex,
   debounce
 } from "lodash";
-import colors from "./color-set";
+import colorsSet from "./color-set";
 
-  export default {
-    name: AdditiveForceVisualizer,
-  componentDidMount() {
-    // create our permanent elements
-    this.mainGroup = this.svg.append("g");
-    this.axisElement = this.mainGroup
-      .append("g")
-      .attr("transform", "translate(0,35)")
-      .attr("class", "force-bar-axis");
-    this.onTopGroup = this.svg.append("g");
-    this.baseValueTitle = this.svg.append("text");
-    this.joinPointLine = this.svg.append("line");
-    this.joinPointLabelOutline = this.svg.append("text");
-    this.joinPointLabel = this.svg.append("text");
-    this.joinPointTitleLeft = this.svg.append("text");
-    this.joinPointTitleLeftArrow = this.svg.append("text");
-    this.joinPointTitle = this.svg.append("text");
-    this.joinPointTitleRightArrow = this.svg.append("text");
-    this.joinPointTitleRight = this.svg.append("text");
-
-    // Define the tooltip objects
-    this.hoverLabelBacking = this.svg.append("text")
-      .attr("x", 10)
-      .attr("y", 20)
-      .attr("text-anchor", "middle")
-      .attr("font-size", 12)
-      .attr("stroke", "#fff")
-      .attr("fill", "#fff")
-      .attr("stroke-width", "4")
-      .attr("stroke-linejoin", "round")
-      .text("")
-      .on("mouseover", () => {
-        this.hoverLabel.attr("opacity", 1);
-        this.hoverLabelBacking.attr("opacity", 1);
-      })
-      .on("mouseout", () => {
-        this.hoverLabel.attr("opacity", 0);
-        this.hoverLabelBacking.attr("opacity", 0);
-      });
-    this.hoverLabel = this.svg.append("text")
-      .attr("x", 10)
-      .attr("y", 20)
-      .attr("text-anchor", "middle")
-      .attr("font-size", 12)
-      .attr("fill", "#0f0")
-      .text("")
-      .on("mouseover", () => {
-        this.hoverLabel.attr("opacity", 1);
-        this.hoverLabelBacking.attr("opacity", 1);
-      })
-      .on("mouseout", () => {
-        this.hoverLabel.attr("opacity", 0);
-        this.hoverLabelBacking.attr("opacity", 0);
-      });
-
-    // Create our colors and color gradients
-    // Verify custom color map
-    let plot_colors=undefined;
-    if (typeof this.props.plot_cmap === "string")
-    {
-      if (!(this.props.plot_cmap in colors.colors))
-      {
-        console.log("Invalid color map name, reverting to default.");
-        plot_colors=colors.colors.RdBu;
-      }
-      else
-      {
-        plot_colors = colors.colors[this.props.plot_cmap]
-      }
+export default {
+  name: "SHAPForcePlot",
+  mounted() {
+    this.createChart();
+  },
+  data() {
+    return {
+      plot_color: "RGBDDDD",
     }
-    else if (Array.isArray(this.props.plot_cmap)){
-      plot_colors = this.props.plot_cmap
+  },
+  props: {
+    chartData: Object,
+    plot_cmap: {
+      type: String,
+      default: "RdBu",
     }
-    this.colors = plot_colors.map(x => hsl(x));
-    this.brighterColors = [1.45, 1.6].map((v, i) => this.colors[i].brighter(v));
-    this.colors.map((c, i) => {
-      let grad = this.svg
-        .append("linearGradient")
-        .attr("id", "linear-grad-" + i)
-        .attr("x1", "0%")
-        .attr("y1", "0%")
-        .attr("x2", "0%")
-        .attr("y2", "100%");
-      grad
-        .append("stop")
-        .attr("offset", "0%")
-        .attr("stop-color", c)
-        .attr("stop-opacity", 0.6);
-      grad
-        .append("stop")
-        .attr("offset", "100%")
-        .attr("stop-color", c)
-        .attr("stop-opacity", 0);
-      let grad2 = this.svg
-        .append("linearGradient")
-        .attr("id", "linear-backgrad-" + i)
-        .attr("x1", "0%")
-        .attr("y1", "0%")
-        .attr("x2", "0%")
-        .attr("y2", "100%");
-      grad2
-        .append("stop")
-        .attr("offset", "0%")
-        .attr("stop-color", c)
-        .attr("stop-opacity", 0.5);
-      grad2
-        .append("stop")
-        .attr("offset", "100%")
-        .attr("stop-color", c)
-        .attr("stop-opacity", 0);
+  },
+  methods: {
+    rerender() {
+      console.log("---> Calling draw <---");
+      this.createChart();
+    },
+    createChart() {
+  
+      const svg = select("svg")
+
+      // Adapted liberally from the SHAP repository under the MIT license
+      // create our permanent elements
+      const mainGroup = svg.append("g");
+      const axisElement = mainGroup
+        .append("g")
+        .attr("transform", "translate(0,35)")
+        .attr("class", "force-bar-axis");
+      const onTopGroup = svg.append("g");
+      const baseValueTitle = svg.append("text");
+      const joinPointLine = svg.append("line");
+      const joinPointLabelOutline = svg.append("text");
+      const joinPointLabel = svg.append("text");
+      const joinPointTitleLeft = svg.append("text");
+      const joinPointTitleLeftArrow = svg.append("text");
+      const joinPointTitle = svg.append("text");
+      const joinPointTitleRightArrow = svg.append("text");
+      const joinPointTitleRight = svg.append("text");
+
+  // Define the tooltip objects
+  const hoverLabelBacking = svg.append("text")
+    .attr("x", 10)
+    .attr("y", 20)
+    .attr("text-anchor", "middle")
+    .attr("font-size", 12)
+    .attr("stroke", "#fff")
+    .attr("fill", "#fff")
+    .attr("stroke-width", "4")
+    .attr("stroke-linejoin", "round")
+    .text("")
+    .on("mouseover", () => {
+      hoverLabel.attr("opacity", 1);
+      hoverLabelBacking.attr("opacity", 1);
+    })
+    .on("mouseout", () => {
+      hoverLabel.attr("opacity", 0);
+      hoverLabelBacking.attr("opacity", 0);
+    });
+  const hoverLabel = svg.append("text")
+    .attr("x", 10)
+    .attr("y", 20)
+    .attr("text-anchor", "middle")
+    .attr("font-size", 12)
+    .attr("fill", "#0f0")
+    .text("")
+    .on("mouseover", () => {
+      hoverLabel.attr("opacity", 1);
+      hoverLabelBacking.attr("opacity", 1);
+    })
+    .on("mouseout", () => {
+      hoverLabel.attr("opacity", 0);
+      hoverLabelBacking.attr("opacity", 0);
     });
 
+  // Create our colors and color gradients
+  // Verify custom color map
+  let plot_colors=undefined;
+  if (typeof this.plot_cmap === "string")
+  {
+    if (!(this.plot_cmap in colorsSet.colors))
+    {
+      console.log("Invalid color map name, reverting to default.");
+      plot_colors=colorsSet.colors.RdBu;
+    }
+    else
+    {
+      plot_colors = colorsSet.colors[this.plot_cmap]
+    }
+  }
+  else if (Array.isArray(this.plot_cmap)){
+    plot_colors = this.plot_cmap
+  }
+  const colors = plot_colors.map(x => hsl(x));
+  const brighterColors = [1.45, 1.6].map((v, i) => colors[i].brighter(v));
+  colors.map((c, i) => {
+    const grad = svg
+      .append("linearGradient")
+      .attr("id", "linear-grad-" + i)
+      .attr("x1", "0%")
+      .attr("y1", "0%")
+      .attr("x2", "0%")
+      .attr("y2", "100%");
+    grad
+      .append("stop")
+      .attr("offset", "0%")
+      .attr("stop-color", c)
+      .attr("stop-opacity", 0.6);
+    grad
+      .append("stop")
+      .attr("offset", "100%")
+      .attr("stop-color", c)
+      .attr("stop-opacity", 0);
+    const grad2 = svg
+      .append("linearGradient")
+      .attr("id", "linear-backgrad-" + i)
+      .attr("x1", "0%")
+      .attr("y1", "0%")
+      .attr("x2", "0%")
+      .attr("y2", "100%");
+    grad2
+      .append("stop")
+      .attr("offset", "0%")
+      .attr("stop-color", c)
+      .attr("stop-opacity", 0.5);
+    grad2
+      .append("stop")
+      .attr("offset", "100%")
+      .attr("stop-color", c)
+      .attr("stop-opacity", 0);
+  });
+
     // create our x axis
-    this.tickFormat = format(",.4");
-    this.scaleCentered = scaleLinear();
-    this.axis = axisBottom()
-      .scale(this.scaleCentered)
+    const tickFormat = format(",.4");
+    const scaleCentered = scaleLinear();
+    const axis = axisBottom()
+      .scale(scaleCentered)
       .tickSizeInner(4)
       .tickSizeOuter(0)
-      .tickFormat(d => this.tickFormat(this.invLinkFunction(d)))
+      .tickFormat(d => tickFormat(invLinkFunction(d)))
       .tickPadding(-18);
 
     // draw and then listen for resize events
     //this.draw();
     window.addEventListener("resize", this.redraw);
     window.setTimeout(this.redraw, 50); // re-draw after interface has updated
-  },
 
-  componentDidUpdate() {
-    this.draw();
-  },
-
-  draw() {
     // copy the feature names onto the features
-    each(this.props.featureNames, (n, i) => {
-      if (this.props.features[i]) this.props.features[i].name = n;
+    each(this.chartData.featureNames, (n, i) => {
+      if (this.chartData.features[i]) {
+        console.log("%s: %s", n, JSON.stringify(this.chartData.features[i]));
+        this.chartData.features[i].name = n;
+      }
     });
 
     // create our link function
-    if (this.props.link === "identity") {
-      this.invLinkFunction = x => this.props.baseValue + x;
-    } else if (this.props.link === "logit") {
-      this.invLinkFunction = x =>
-        1 / (1 + Math.exp(-(this.props.baseValue + x))); // logistic is inverse of logit
+    let invLinkFunction = undefined;
+    if (this.chartData.link === "identity") {
+      invLinkFunction = x => this.chartData.baseValue + x;
+    } else if (this.chartData.link === "logit") {
+      invLinkFunction = x =>
+        1 / (1 + Math.exp(-(this.chartData.baseValue + x))); // logistic is inverse of logit
     } else {
-      console.log("ERROR: Unrecognized link function: ", this.props.link);
+      console.log("ERROR: Unrecognized link function: ", this.chartData.link);
     }
 
     // Set the dimensions of the plot
-    let width = this.svg.node().parentNode.offsetWidth;
-    if (width == 0) return setTimeout(() => this.draw(this.props), 500);
-    this.svg.style("height", 150 + "px");
-    this.svg.style("width", width + "px");
+    // let width = svg?.node().parentNode.offsetWidth;
+    let width = svg.node() ? svg.node().parentNode.offsetWidth : 0;
+    // if (width == 0) return setTimeout(() => this.draw(this.chartData), 500);
+    svg.style("height", 150 + "px");
+    svg.style("width", width + "px");
     let topOffset = 50;
 
-    let data = sortBy(this.props.features, x => -1 / (x.effect + 1e-10));
+    let data = sortBy(this.chartData.features, x => -1 / (x.effect + 1e-10));
     let totalEffect = sum(map(data, x => Math.abs(x.effect)));
     let totalPosEffects =
       sum(map(filter(data, x => x.effect > 0), x => x.effect)) || 0;
     let totalNegEffects =
       sum(map(filter(data, x => x.effect < 0), x => -x.effect)) || 0;
-    this.domainSize = Math.max(totalPosEffects, totalNegEffects) * 3;
+    const domainSize = Math.max(totalPosEffects, totalNegEffects) * 3;
     let scale = scaleLinear()
-      .domain([0, this.domainSize])
+      .domain([0, domainSize])
       .range([0, width]);
     let scaleOffset = width / 2 - scale(totalNegEffects);
 
-    this.scaleCentered
-      .domain([-this.domainSize / 2, this.domainSize / 2])
+    scaleCentered
+      .domain([-domainSize / 2, domainSize / 2])
       .range([0, width])
       .clamp(true);
-    this.axisElement
+    axisElement
       .attr("transform", "translate(0," + topOffset + ")")
-      .call(this.axis);
+      .call(axis);
 
     // calculate the position of the join point between positive and negative effects
     // and also the positions of each feature effect block
@@ -229,13 +257,13 @@ import colors from "./color-set";
         return (
           d.name +
           " = " +
-          (isNaN(d.value) ? d.value : this.tickFormat(d.value))
+          (isNaN(d.value) ? d.value : tickFormat(d.value))
         );
       } else return d.name;
     };
 
-    data = this.props.hideBars ? [] : data;
-    let blocks = this.mainGroup.selectAll(".force-bar-blocks").data(data);
+    data = this.chartData.hideBars ? [] : data;
+    let blocks = mainGroup.selectAll(".force-bar-blocks").data(data);
     blocks
       .enter()
       .append("path")
@@ -257,19 +285,19 @@ import colors from "./color-set";
           [x + pointShiftStart, 14.5 + topOffset]
         ]);
       })
-      .attr("fill", d => (d.effect > 0 ? this.colors[0] : this.colors[1]))
+      .attr("fill", d => (d.effect > 0 ? colors[0] : colors[1]))
       .on("mouseover", d => {
         if (scale(Math.abs(d.effect)) < scale(totalEffect) / 50 ||
             scale(Math.abs(d.effect)) < 10) {
           let x = scale(d.x) + scaleOffset;
           let w = scale(Math.abs(d.effect));
-          this.hoverLabel
+          hoverLabel
             .attr("opacity", 1)
             .attr("x", x + w/2)
             .attr("y", topOffset + 0.5)
-            .attr("fill", d.effect > 0 ? this.colors[0] : this.colors[1])
+            .attr("fill", d.effect > 0 ? colors[0] : colors[1])
             .text(getLabel(d));
-          this.hoverLabelBacking
+          hoverLabelBacking
             .attr("opacity", 1)
             .attr("x", x + w/2)
             .attr("y", topOffset + 0.5)
@@ -277,8 +305,8 @@ import colors from "./color-set";
         }
       })
       .on("mouseout", () => {
-        this.hoverLabel.attr("opacity", 0);
-        this.hoverLabelBacking.attr("opacity", 0);
+        hoverLabel.attr("opacity", 0);
+        hoverLabelBacking.attr("opacity", 0);
       });
     blocks.exit().remove();
 
@@ -289,7 +317,7 @@ import colors from "./color-set";
       );
     });
 
-    let labels = this.onTopGroup
+    let labels = onTopGroup
       .selectAll(".force-bar-labels")
       .data(filteredData);
     labels.exit().remove();
@@ -305,11 +333,11 @@ import colors from "./color-set";
           return (
             d.name +
             " = " +
-            (isNaN(d.value) ? d.value : this.tickFormat(d.value))
+            (isNaN(d.value) ? d.value : tickFormat(d.value))
           );
         } else return d.name;
       })
-      .attr("fill", d => (d.effect > 0 ? this.colors[0] : this.colors[1]))
+      .attr("fill", d => (d.effect > 0 ? colors[0] : colors[1]))
       .attr("stroke", function(d) {
         d.textWidth = Math.max(
           this.getComputedTextLength(),
@@ -347,8 +375,8 @@ import colors from "./color-set";
     // Now that we know the text widths we further filter by what fits on the screen
     filteredData = filter(filteredData, d => {
       return (
-        scale(d.textx) + scaleOffset > this.props.labelMargin &&
-        scale(d.textx) + scaleOffset < width - this.props.labelMargin
+        scale(d.textx) + scaleOffset > this.chartData.labelMargin &&
+        scale(d.textx) + scaleOffset < width - this.chartData.labelMargin
       );
     });
     this.filteredData2 = filteredData;
@@ -358,7 +386,7 @@ import colors from "./color-set";
     let ind = findIndex(data, filteredData[0]) - 1;
     if (ind >= 0) filteredDataPlusOne.unshift(data[ind]);
 
-    let labelBacking = this.mainGroup
+    let labelBacking = mainGroup
       .selectAll(".force-bar-labelBacking")
       .data(filteredData);
     labelBacking
@@ -404,7 +432,7 @@ import colors from "./color-set";
       .attr("fill", d => `url(#linear-backgrad-${d.effect > 0 ? 0 : 1})`);
     labelBacking.exit().remove();
 
-    let labelDividers = this.mainGroup
+    let labelDividers = mainGroup
       .selectAll(".force-bar-labelDividers")
       .data(filteredData.slice(0, -1));
     labelDividers
@@ -425,7 +453,7 @@ import colors from "./color-set";
       .attr("fill", d => `url(#linear-grad-${d.effect > 0 ? 0 : 1})`);
     labelDividers.exit().remove();
 
-    let labelLinks = this.mainGroup
+    let labelLinks = mainGroup
       .selectAll(".force-bar-labelLinks")
       .data(filteredData.slice(0, -1));
     labelLinks
@@ -445,10 +473,10 @@ import colors from "./color-set";
           scaleOffset +
           5
       )
-      .attr("stroke", d => (d.effect > 0 ? this.colors[0] : this.colors[1]));
+      .attr("stroke", d => (d.effect > 0 ? colors[0] : colors[1]));
     labelLinks.exit().remove();
 
-    let blockDividers = this.mainGroup
+    let blockDividers = mainGroup
       .selectAll(".force-bar-blockDividers")
       .data(data.slice(0, -1));
     blockDividers
@@ -469,12 +497,12 @@ import colors from "./color-set";
       .attr("stroke", (d, i) => {
         if (joinPointIndex === i + 1 || Math.abs(d.effect) < 1e-8)
           return "#rgba(0,0,0,0)";
-        else if (d.effect > 0) return this.brighterColors[0];
-        else return this.brighterColors[1];
+        else if (d.effect > 0) return brighterColors[0];
+        else return brighterColors[1];
       });
     blockDividers.exit().remove();
 
-    this.joinPointLine
+    joinPointLine
       .attr("x1", scale(joinPoint) + scaleOffset)
       .attr("x2", scale(joinPoint) + scaleOffset)
       .attr("y1", 0 + topOffset)
@@ -483,7 +511,7 @@ import colors from "./color-set";
       .attr("stroke-width", 1)
       .attr("opacity", 1);
 
-    this.joinPointLabelOutline
+    joinPointLabelOutline
       .attr("x", scale(joinPoint) + scaleOffset)
       .attr("y", -5 + topOffset)
       .attr("color", "#fff")
@@ -491,7 +519,7 @@ import colors from "./color-set";
       .attr("font-weight", "bold")
       .attr("stroke", "#fff")
       .attr("stroke-width", 6)
-      .text(format(",.2f")(this.invLinkFunction(joinPoint - totalNegEffects)))
+      .text(format(",.2f")(invLinkFunction(joinPoint - totalNegEffects)))
       .attr("opacity", 1);
     console.log(
       "joinPoint",
@@ -500,62 +528,62 @@ import colors from "./color-set";
       topOffset,
       totalNegEffects
     );
-    this.joinPointLabel
+    joinPointLabel
       .attr("x", scale(joinPoint) + scaleOffset)
       .attr("y", -5 + topOffset)
       .attr("text-anchor", "middle")
       .attr("font-weight", "bold")
       .attr("fill", "#000")
-      .text(format(",.2f")(this.invLinkFunction(joinPoint - totalNegEffects)))
+      .text(format(",.2f")(invLinkFunction(joinPoint - totalNegEffects)))
       .attr("opacity", 1);
 
-    this.joinPointTitle
+    joinPointTitle
       .attr("x", scale(joinPoint) + scaleOffset)
       .attr("y", -22 + topOffset)
       .attr("text-anchor", "middle")
       .attr("font-size", "12")
       .attr("fill", "#000")
-      .text(this.props.outNames[0])
+      .text(this.chartData.outNames[0])
       .attr("opacity", 0.5);
 
-    if (!this.props.hideBars) {
-      this.joinPointTitleLeft
+    if (!this.chartData.hideBars) {
+      joinPointTitleLeft
         .attr("x", scale(joinPoint) + scaleOffset - 16)
         .attr("y", -38 + topOffset)
         .attr("text-anchor", "end")
         .attr("font-size", "13")
-        .attr("fill", this.colors[0])
+        .attr("fill", colors[0])
         .text("higher")
         .attr("opacity", 1.0);
-      this.joinPointTitleRight
+      joinPointTitleRight
         .attr("x", scale(joinPoint) + scaleOffset + 16)
         .attr("y", -38 + topOffset)
         .attr("text-anchor", "start")
         .attr("font-size", "13")
-        .attr("fill", this.colors[1])
+        .attr("fill", colors[1])
         .text("lower")
         .attr("opacity", 1.0);
 
-      this.joinPointTitleLeftArrow
+      joinPointTitleLeftArrow
         .attr("x", scale(joinPoint) + scaleOffset + 7)
         .attr("y", -42 + topOffset)
         .attr("text-anchor", "end")
         .attr("font-size", "13")
-        .attr("fill", this.colors[0])
+        .attr("fill", colors[0])
         .text("→")
         .attr("opacity", 1.0);
-      this.joinPointTitleRightArrow
+      joinPointTitleRightArrow
         .attr("x", scale(joinPoint) + scaleOffset - 7)
         .attr("y", -36 + topOffset)
         .attr("text-anchor", "start")
         .attr("font-size", "13")
-        .attr("fill", this.colors[1])
+        .attr("fill", colors[1])
         .text("←")
         .attr("opacity", 1.0);
     }
-    if (!this.props.hideBaseValueLabel) {
-      this.baseValueTitle
-        .attr("x", this.scaleCentered(0))
+    if (!this.chartData.hideBaseValueLabel) {
+      baseValueTitle
+        .attr("x", scaleCentered(0))
         .attr("y", -22 + topOffset)
         .attr("text-anchor", "middle")
         .attr("font-size", "12")
@@ -563,53 +591,11 @@ import colors from "./color-set";
         .text("base value")
         .attr("opacity", 0.5);
     }
-  },
-
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.redraw);
-  },
-
-  render() {
-    return (
-      <svg
-        ref={x => (this.svg = select(x))}
-        style={{
-          userSelect: "none",
-          display: "block",
-          fontFamily: "arial",
-          sansSerif: true
-        }}
-      >
-        <style
-          dangerouslySetInnerHTML={{
-            __html: `
-          .force-bar-axis path {
-            fill: none;
-            opacity: 0.4;
-          }
-          .force-bar-axis paths {
-            display: none;
-          }
-          .tick line {
-            stroke: #000;
-            stroke-width: 1px;
-            opacity: 0.4;
-          }
-          .tick text {
-            fill: #000;
-            opacity: 0.5;
-            font-size: 12px;
-            padding: 0px;
-          }`
-          }}
-        />
-      </svg>
-    );
+    console.log("Made it here ....")
     }
+  },
+  computed: {
+  },
 }
-
-AdditiveForceVisualizer.defaultProps = {
-  plot_cmap: "RdBu"
-};
 </script>
 

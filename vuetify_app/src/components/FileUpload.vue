@@ -61,17 +61,20 @@
       <v-alert v-if="message" color="blue-grey" class="pa-5" dark>
         {{ message }}
       </v-alert>
-      <v-row class="pa-5">
-        <Chart v-if="showChart" /> 
+      <v-row class="pa-5" v-if="showChart">
+        <StandinChart v-if="!chartData" />
+        <SHAPForcePlot v-if="chartData" :chart-data="chartData" :key="counterToken"/> 
+        <v-btn @click="forceRedraw()">Redraw!</v-btn>
       </v-row>
     </v-container>
     </div>
   </template>
   
   <script>
-  import UploadService from "@/services/UploadService";
-  import Chart from "@/components/Chart.vue";
 
+import UploadService from "@/services/UploadService";
+  import StandinChart from "@/components/StandinChart.vue";
+  import SHAPForcePlot from "@/components/SHAPForcePlot.vue";
   import * as XLSX from 'xlsx';
 
   export default {
@@ -79,18 +82,23 @@
     props: {
         uploadTargetURL: String,
     },
-    components: { Chart },
+    components: { SHAPForcePlot, StandinChart },
     data() {
       return {
         currentFile: null,
         data: null,
+        chartData: null,
         progress: 0,
         message: "Data must be selected before results are available",
         showChart: false,
         uploadSuccess: false,
+        counterToken: 0,
       };
     },
     methods: {
+        forceRedraw() {
+          this.counterToken += 1;
+        },
         importFileAndAnalyze() {
             if (!this.currentFile) {
                 this.message = "Please select a file for upload!"
@@ -127,6 +135,9 @@
           .then((response) => {
             // this.message = response.data.message;
             this.message = response.result ? response.result : response.error;
+            if (response.plot) {
+              this.chartData = JSON.parse(response.plot);
+            }
             this.showChart = true;
             return true;
           })
