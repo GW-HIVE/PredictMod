@@ -38,14 +38,14 @@ MDClone_Diet_Counseling_v1.1: _mdclone_diet_counseling_v1.1_example.csv_
 PredictMod_EHR_Keto_v1.1: _predictmod_ehr_keto_v1.0_example.csv_
 
 ## <a id="current-models">Current Models</a>  
-#### MG_Exercise_v1.1  
+#### <a id="current-models-mg-exercise">MG_Exercise_v1.1</a>  
 <!-- TODO/XXX: Links are likely broken, this material
 should be produced "live" from the models themselves in
 final implementation -->
 Documentation at [GitHub](https://github.com/GW-HIVE/PredictMod/tree/main/models)
-#### MDClone_Diet_Counseling_v1.1
+#### <a id="current-models-ehr-diet-counseling">MDClone_Diet_Counseling_v1.1</a>  
 Documentation at [GitHub](https://github.com/GW-HIVE/PredictMod/tree/main/models)
-#### PredictMod_EHR_Keto_v1.0
+#### <a id="current-models-ehr-keto">PredictMod_EHR_Keto_v1.0
 Documentation at [GitHub](https://github.com/GW-HIVE/PredictMod/tree/main/models)
 
 ## <a id="anticipated-models">Anticipated Models</a>  
