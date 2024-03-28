@@ -13,6 +13,7 @@ The classifier code takes patient data and labels, splits the data into training
 The predictor code loads the pre-trained Decision Tree Classifier (DTC) from the .pkl file. It prompts the user to provide the file path for the single patient input data. The input data is then read from an Excel file. The predictor reshapes the input data to match the classifier's requirements and uses the loaded classifier to predict whether the patient is responsive or non-responsive based on the input data. The prediction result is printed to the console.
 
 ## Intervention & Outcomes
+Intervention was stated as standard diabetetic exercise intervention in the Synthea database
 - Responder Status: Patients diagnosed with diabetes or prediabetes during doctor visits.
 - Nonresponder Status: Patients not diagnosed with diabetes or prediabetes during doctor visits.
 
