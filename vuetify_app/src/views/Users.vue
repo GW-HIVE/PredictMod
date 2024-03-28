@@ -31,6 +31,9 @@
 import DisclaimerShow from './DisclaimerShow.vue';
 import LicenseShow from './LicenseShow.vue';
 import UserList from '@/components/UserList.vue';
+
+const baseURL = import.meta.env.DEV ? import.meta.env.VITE_DEV_MIDDLEWARE_BASE + '/api/users/': "/predictmod/api/users/";
+
 export default {
 
   name: 'Users',
@@ -41,7 +44,7 @@ export default {
 			}
     },
   async mounted() {
-    const request = await fetch('/predictmod/api/users/', {
+    const request = await fetch(baseURL, {
       'Accept': 'application/json',
       credentials: 'include',
     })
