@@ -19,4 +19,4 @@ Intervention was stated as standard diabetetic exercise intervention in the Synt
 
 ## Algorithm & Model Performance
 Algorithm: Decision Tree Classifier (DTC)
-Model Accuracy: 91%
+Model Accuracy: 0.931
