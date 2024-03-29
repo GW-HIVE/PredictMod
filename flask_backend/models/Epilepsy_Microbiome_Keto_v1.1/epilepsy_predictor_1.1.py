@@ -1,13 +1,14 @@
 import pandas as pd
 import joblib
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler, LabelEncoder
-from sklearn.linear_model import LogisticRegression
 
 # Load the classifier and feature names and encoder
-clf = joblib.load('epilepsy_classifier.pkl')
-feature_names = joblib.load('feature_names.pkl')
-encoder = joblib.load('encoder.pkl')
+# Load the dictionary from the pickle file
+data = joblib.load('Epilepsy_keto_classifier_and_features.pickle')
+
+# Extract the classifier and feature names from the dictionary
+classifier = data['classifier']
+feature_names = data['feature_names']
+encoder = data['encoder']
 
 # Load the new data
 patient_data = pd.read_excel('single_patient_sample.xlsx')
@@ -24,10 +25,12 @@ if extra_cols:
     patient_data = patient_data.drop(columns=extra_cols)
 
 # Reorder the columns of the new data
-patient_data = patient_data.reindex(columns=feature_names)
-
+patient_data_sort = patient_data.reindex(columns=feature_names)
+if not patient_data.equals(patient_data_sort):
+    print(f"Message: patient data features was sorted to match order of model features")
 # Make a prediction
-prediction = clf.predict(patient_data)
+prediction = classifier.predict(patient_data_sort)
 
 # Decode the result
 decoded_result = encoder.inverse_transform(prediction)
+print(decoded_result)
