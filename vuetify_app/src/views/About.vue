@@ -64,6 +64,8 @@
     
     </v-row>
 
+    <PersonnelContent />
+
     <v-row>
       <v-col>
         <DisclaimerShow/>
@@ -89,6 +91,8 @@ import DisclaimerShow from './DisclaimerShow.vue';
 import NotFound from './NotFound.vue';
 import LicenseShow from './LicenseShow.vue';
 
+import PersonnelContent from "@/components/PersonnelContent.vue"
+
 export default {
 
   name: 'Home',
@@ -97,6 +101,6 @@ export default {
 				home: false,
 			}
     },
-  components: { DisclaimerShow, LicenseShow }
+  components: { PersonnelContent, DisclaimerShow, LicenseShow }
 }
 </script>
