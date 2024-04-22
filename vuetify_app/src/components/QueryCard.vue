@@ -1,14 +1,5 @@
 <template>
   <v-container>
-    <!-- <v-row justify="center"
-      v-for="(value, i) in values"
-      :key="i"
-      > -->
-      <!-- <v-col
-        v-for="(variant, i) in variants"
-        :key="i"
-        cols="auto"
-      > -->
         <v-card
           class="mx-auto"
           max-width="1200"
@@ -40,6 +31,9 @@
           <v-card-actions class="justify-center" v-if="select">
             <v-btn type="submit" @click.prevent="updateState()" :disabled="selected">
               {{ selected ? `${select} - Confirmed` : "Confirm Selection" }}
+            </v-btn>
+            <v-btn type="submit" @click.prevent="selected = !selected" :key="selected">
+              Change selection
             </v-btn>
           </v-card-actions>
         </v-card>
