@@ -102,6 +102,8 @@
 </template>
 <script>
 import { onMounted, ref } from 'vue';
+import { useQueryState } from '@stores/queryStore'
+
 
 import QueryCard from '@/components/QueryCard.vue';
 import ToolControlPanel from '@/components/ToolControlPanel.vue';
@@ -110,7 +112,7 @@ import LicenseShow from './LicenseShow.vue';
 
 export default {
 
-  name: 'TryIt',
+  name: 'QueryBuilder',
   data() {
 			return {
         conditionSet: false,
