@@ -3,6 +3,8 @@
     https://github.com/bezkoder/vuetify-file-upload
  -->
 <template>
+  <!--
+  <v-col cols="11">
     <div class="text-center">
       <div>
         <div>
@@ -16,7 +18,9 @@
           </v-progress-linear>
         </div>
       </div>
-  
+    </div>
+    </v-col>
+  -->
       <!-- <v-row no-gutters justify="center" align="center"> -->
         <!-- <v-col cols="8"> -->
         <!-- <v-col> -->
@@ -68,17 +72,45 @@
           :chart-data="chartData" 
           :key="counterToken"
         />
-        <v-img 
-          v-if="imageData" 
+        <!-- <v-btn 
+          @click="console.log('Toggling! %s', toggleOverlay); toggleOverlay = !toggleOverlay"
+          > -->
+        <v-card variant="outlined">
+          <v-card-text>
+            Shapely Force Plot - Click to expand
+          </v-card-text>
+        <v-img
           :src="imageData"
-          :height="600"
+          :height="200"
           :width="1000"
+          rounded="shaped"
+          @click="toggleOverlay = !toggleOverlay"
           height
         />
-        <!-- <v-btn @click="forceRedraw()">Redraw!</v-btn> -->
+      </v-card>
+        <!-- </v-btn> -->
+        
       </v-row>
     </v-container>
-    </div>
+        <v-container>
+        <v-overlay
+          v-model="toggleOverlay"
+          @click.prevent="toggleOverlay = !toggleOverlay"
+          class="d-flex align-center justify-center"
+          >
+        <v-card
+        >
+        <v-img
+          :src="imageData"
+          height="300"
+          width="1200"
+        ></v-img>
+        </v-card>
+        </v-overlay>
+        </v-container>
+        <!-- <v-btn @click="forceRedraw()">Redraw!</v-btn> -->
+
+
   </template>
   
   <script>
@@ -100,6 +132,7 @@ import UploadService from "@/services/UploadService";
         data: null,
         chartData: null,
         imageData: null,
+        toggleOverlay: false,
         standIn: false,
         progress: 0,
         message: "Data must be selected before results are available",
@@ -156,7 +189,8 @@ import UploadService from "@/services/UploadService";
               // console.log("Image data is now: %s", this.imageData)
             }
             else {
-              this.standIn = true;
+              console.log("Error in analysis - No image shown")
+              // this.standIn = true;
             }
             this.showChart = true;
             return true;
