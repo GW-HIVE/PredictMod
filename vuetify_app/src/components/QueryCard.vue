@@ -1,54 +1,5 @@
-<!-- <template>
-    <v-container>
-      <v-row align="center" justify="center">
-        <v-col
-          v-for="(variant, i) in variants"
-          :key="i"
-          cols="auto"
-        >
-          <v-card
-            class="mx-auto"
-            max-width="344"
-            :variant="variant"
-          >
-            <v-card-item>
-              <div>
-                <div class="text-overline mb-1">
-                  {{ variant }}
-                </div>
-                <div class="text-h6 mb-1">
-                  Headline
-                </div>
-                <div class="text-caption">Greyhound divisely hello coldly fonwderfully</div>
-              </div>
-            </v-card-item>
-  
-            <v-card-actions>
-              <v-btn>
-                Button
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
-  </template> -->
-
-<!-- <script setup>
-    const variants = ['elevated', 'flat', 'tonal', 'outlined']
-</script> -->
-
 <template>
   <v-container>
-    <!-- <v-row justify="center"
-      v-for="(value, i) in values"
-      :key="i"
-      > -->
-      <!-- <v-col
-        v-for="(variant, i) in variants"
-        :key="i"
-        cols="auto"
-      > -->
         <v-card
           class="mx-auto"
           max-width="1200"
@@ -60,26 +11,40 @@
               </div>
               <!-- <div class="text-h6 mb-1"> -->
               <v-select
+                :disabled="confirmed"
                 :items="menuItems"
-                v-model="select"
-                :key="selected"
-                :selectable="selected"
+                v-model="selection"
+                
+                :key="selection"
+                :selectable="!confirmed"
                 item-title="name"
                 item-value="name"
                 >
+                <!-- defaultSelected="previousSelection" -->
               </v-select>
                 
               <!-- </div> -->
               <div class="text-paragraph">
-                {{ select ? 
-                        menuItems.filter((i) => i.name === select)[0].description 
+                {{ selection ? 
+                        menuItems.filter((i) => i.name === selection)[0].description 
                       : `Please select a ${title}`}}</div>
             </div>
           </v-card-item>
 
-          <v-card-actions class="justify-center" v-if="select">
-            <v-btn type="submit" @click.prevent="updateState()" :disabled="selected">
-              {{ selected ? `${select} - Confirmed` : "Confirm Selection" }}
+          <v-card-actions class="justify-center" v-if="selection">
+            <v-btn 
+              type="submit" 
+              @click.prevent="confirmState()" 
+              :disabled="confirmed"
+            >
+              {{ confirmed ? `${selection} - Confirmed` : "Confirm Selection" }}
+            </v-btn>
+            <v-btn 
+              type="submit" 
+              @click.prevent="unconfirmState()" 
+              :disabled="!confirmed"
+            >
+              Change selection
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -89,27 +54,48 @@
 </template>
 
 <script>
+import { useQueryState } from '@/store/queryState';
 
 export default {
+    setup() {
+      const queryState = useQueryState();
+      return { queryState };
+    },
     props: {
       menuItems: Array,
       title: String,
       loggedIn: Boolean,
+      targetProp: String,
+    },
+    mounted() {
+      this.getPreviousSelection();
     },
     data() {
       return {
-        select: "",
-        selected: false,
+        selection: "",
+        confirmed: false,
       }
     },
     methods: {
-      updateState() {
-        if (!this.selected) {
-        // console.log("Toggling my state!");
-        this.$emit('clicked', this.select);
-        this.selected = true;
-      }
-    },
+      confirmState() {
+          this.$emit('confirmed', this.targetProp, this.selection);
+          console.log("Confirmed: Selection is %s", this.selection);
+          this.confirmed = true;
+      },
+      unconfirmState() {
+        this.$emit('unconfirmed', this.targetProp);
+        this.confirmed = false;
+      },
+      getPreviousSelection() {
+        const currentState = this.queryState.getMenuSelection(this.targetProp);
+        // console.log("---> Found current state: %s", currentState);
+        if (currentState !== null) {
+          this.selection = currentState;
+          this.confirmed = true;
+          return;
+        }
+        this.confirmed = false;
+      },
     }
 }
 </script>

@@ -20,13 +20,15 @@
 import { onMounted } from 'vue';
 import { useUserStore } from './store/user';
 import { useAppStore } from '@/store/app';
+import { useQueryState } from './store/queryState';
 
 
 export default {
     setup() {
+      const queryState = useQueryState();
       const userStore = useUserStore();
       const appStore = useAppStore();
-      return { userStore, appStore };
+      return { queryState, userStore, appStore };
     },
     mounted() {
       // We must double-check user state on events like reload/refresh
