@@ -75,7 +75,10 @@
         <!-- <v-btn 
           @click="console.log('Toggling! %s', toggleOverlay); toggleOverlay = !toggleOverlay"
           > -->
-        <v-card variant="outlined">
+        <v-card 
+          variant="elevated"
+          @click="toggleOverlay = !toggleOverlay"
+        >
           <v-card-text>
             Shapely Force Plot - Click to expand
           </v-card-text>
@@ -84,7 +87,7 @@
           :height="200"
           :width="1000"
           rounded="shaped"
-          @click="toggleOverlay = !toggleOverlay"
+          
           height
         />
       </v-card>
@@ -152,7 +155,7 @@ import UploadService from "@/services/UploadService";
             }
             // console.log("---> Now attempting to read file");
             const reader = new FileReader();
-            reader.readAsArrayBuffer(this.currentFile[0]);
+            reader.readAsArrayBuffer(this.currentFile);
             // console.log("---> Reader has read the file!");
             reader.onload = (event) => {
                 const rawData = reader.result;

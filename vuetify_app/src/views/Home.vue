@@ -78,7 +78,7 @@
           <h3>Version</h3>
         </v-card-title>
         <v-card-text class="text-center">
-          User Interface v1.2 (29 Feb 2024)
+          User Interface v1.3 (30 Apr 2024)
         </v-card-text>
       </v-card>
       <v-card outlined>

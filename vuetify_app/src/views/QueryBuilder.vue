@@ -1,4 +1,38 @@
 <template>
+  <!-- <v-navigation-drawer
+    location="left"
+    temporary
+  > -->
+  <v-app>
+  <v-navigation-drawer
+    width="800"
+    location="left"
+    v-model="queryState.downloadDrawer"
+    temporary
+    persistent
+  >
+  <v-col pa="2">
+      <v-row class="justify-end">
+        <v-btn color="primary" @click.prevent="downloadFromPreview">
+          Download
+        </v-btn>
+        <v-btn @click.prevent="queryState.downloadDrawer = !queryState.downloadDrawer">
+          Cancel
+        </v-btn>
+      </v-row>
+  </v-col>
+    <Spreadsheet 
+          :sheet-data="gridData" 
+          v-if="queryState.downloadDrawer"
+          :key="gridData"
+          />
+        <!-- <canvas-datagrid 
+          :data.prop="gridData" 
+          autoResizeRows.prop
+          canvas.prop=""
+        /> -->
+
+  </v-navigation-drawer>
   <v-banner
   single-line
   class="text-left">
@@ -25,7 +59,7 @@
     </v-img>
   </v-banner>
 
-  <v-container>
+  <v-container fluid>
     <v-col cols="11">
     <v-row>
       <v-col>
@@ -50,7 +84,21 @@
       rounded="xl0">
       <small>Restart query</small>
       </v-btn>
-      <!--  -->
+      <!--
+    <v-col cols="1">
+      <v-row>
+       <v-btn
+        @click.prevent="togglePreview"
+        fab
+        position="fixed"
+        size="large"
+        elevation="0"
+        rounded="xl0">
+      <small>Toggle Preview</small>
+      </v-btn>
+    </v-row>
+    </v-col>
+  -->
   </v-col>
     </v-row>
     <v-col cols="11">
@@ -116,7 +164,7 @@
 
 
 </v-container>
-
+</v-app>
 <!-- <v-img src="../assets/Footer.png">
   
 </v-img> -->
@@ -125,10 +173,11 @@
 </template>
 <script>
 import { onMounted, ref } from 'vue';
-import { useQueryState } from '@/store/queryState'
-
+import { useQueryState } from '@/store/queryState';
+import * as XLSX from 'xlsx';
 
 import QueryCard from '@/components/QueryCard.vue';
+import Spreadsheet from '@/components/Spreadsheet.vue';
 import ToolControlPanel from '@/components/ToolControlPanel.vue';
 import DisclaimerShow from './DisclaimerShow.vue';
 import LicenseShow from './LicenseShow.vue';
@@ -151,8 +200,46 @@ export default {
         this.queryState.intervention !== null &&
         this.queryState.datatype !== null
       );
-    }
+    },
+    gridData() {
+      if (!this.queryState.filePreviewData) {
+        return [];
+      }
+      // console.log("---> Computing worksheet <---")
+      const data = JSON.parse(this.queryState.filePreviewData);
 
+      // const wb = XLSX.read(data);
+      // const ws = wb.Sheets[wb.SheetNames[0]];
+      // const sheetData = XLSX.utils.sheet_to_json(ws, { header:1 });
+      
+      // if (!this.cdg) {
+      //   this.cdg = canvasDatagrid({
+      //     parentNode: this.$refs.gridContainer.$el,
+      //     data
+      //   })
+      // } else {
+      //   this.cdg.data = data;
+      // }
+
+      return data;
+    },
+    // columns() {
+    //   if (!this.queryState.filePreviewData) {
+    //     return [];
+    //   }
+    //   return Object.keys((JSON.parse(this.queryState.filePreviewData))[0]).forEach(k => {
+    //     console.log("Computing name %s", k)
+    //     return { field: k, label: k }
+    //   })
+    // },
+    // rows() {
+    //   if (!this.queryState.filePreviewData) {
+    //     return [];
+    //   }
+    //   return Object.values((JSON.parse(this.queryState.filePreviewData))[0]).forEach(v => {
+    //     return { name: v }
+    //   })
+    // },
   },
   data() {
 			return {
@@ -160,6 +247,7 @@ export default {
         interventionSet: false,
         inputTypeSet: false,
         showToolbar: false,
+        cdg: null,
         // conditions: [],
         // interventions: [],
         // dataInputTypes: {},
@@ -169,7 +257,7 @@ export default {
       //   selections: {},
         myTargetURL: "",
       //   modelAnchor: "",
-
+        
       // conditions: [
       //     {
       //       name: "Prediabetes",
@@ -240,6 +328,27 @@ export default {
 		}
   },
   methods: {
+    downloadFromPreview() {
+      if (!this.queryState.filePreviewData) {
+        // Error handling
+        return false;
+      }
+      const data = JSON.parse(this.queryState.filePreviewData);
+      const sampleName = this.queryState.targetURL;
+      // console.log("---> Data (Type %s):\n%s", typeof(data), JSON.stringify(data));
+      // console.log("---> Attempting to write to %s", sampleName);
+      // Write the response to a file
+      // console.log("Creating sheet!")
+      const worksheet = XLSX.utils.json_to_sheet(data);
+      // console.log("Creating workbook!")
+      const workbook = XLSX.utils.book_new();
+      // console.log("Appending sheet!")
+      XLSX.utils.book_append_sheet(workbook, worksheet);
+      // console.log("Writing file!")
+      XLSX.writeFile(workbook, sampleName, { compression: true });
+      // console.log("Complete...?")
+      return true;
+    },
     getConditions() {
       this.conditions = this.queryState.getConditions();
     },
@@ -302,10 +411,26 @@ export default {
       }
     },
     resetState() {
-      console.log("---> Resetting query state");
+      // console.log("---> Resetting query state");
       this.queryState.resetState();
+      this.queryState.filePreviewData = null;
+    },
+    // XXX
+    reportData() {
+      if (this.queryState.filePreviewData) {
+        console.log("Query preview data:\n%s", JSON.stringify(
+          this.queryState.filePreviewData
+        ));
+        console.log("---> Download drawer toggle: %s", this.queryState.downloadDrawer);
+      } else {
+        console.log("===> No file preview data available <===");
+      }
+      ;
+    },
+    togglePreview() {
+      this.queryState.downloadDrawer = !this.queryState.downloadDrawer;
     },
   },
-  components: { QueryCard, ToolControlPanel, DisclaimerShow, LicenseShow }
+  components: { QueryCard, Spreadsheet, ToolControlPanel, DisclaimerShow, LicenseShow }
 }
 </script>

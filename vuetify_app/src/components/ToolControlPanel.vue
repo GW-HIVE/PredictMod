@@ -9,7 +9,11 @@
         Learn More
     </v-btn>
 </router-link>
-    <FileDownload :download-target-u-r-l="queryState.targetURL" />
+    <!-- <FileDownload :download-target-u-r-l="queryState.targetURL" /> -->
+    <v-btn color="primary" small @click.prevent="downloadPreview">
+            Download example data file
+            <!-- <v-icon right dark>mdi-cloud-upload</v-icon> -->
+    </v-btn>
 </v-row>
 </v-col>
 <v-col cols="11">
@@ -36,7 +40,8 @@
 <script>
 import { useUserStore } from '@/store/user';
 import { useQueryState } from '@/store/queryState';
-import FileDownload from '@/components/FileDownload.vue';
+// import FileDownload from '@/components/FileDownload.vue';
+import DownloadService from '@/services/DownloadService';
 import FileUpload from '@/components/FileUpload.vue';
 
 export default {
@@ -49,7 +54,7 @@ export default {
     },
     computed: {
         loggedIn: function() {
-            console.log("User store has value %s", this.userStore.user);
+            // console.log("User store has value %s", this.userStore.user);
             return this.userStore.user ? true : false
         },
     },
@@ -62,8 +67,15 @@ export default {
         alertTBD(source) {
             alert(source + " functionality is under construction");
         },
+        async downloadPreview() {
+            const response = await DownloadService.download(this.queryState.targetURL, () => {
+            });
+            // console.log("TCP: Collected data:\n%s", response);
+            this.queryState.filePreviewData = response;
+            this.queryState.downloadDrawer = true;
+        },
     },
-    components: { FileDownload, FileUpload },
+    components: { DownloadService, FileUpload },
 
 
 }

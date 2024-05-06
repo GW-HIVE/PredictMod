@@ -22,7 +22,6 @@ import { useUserStore } from './store/user';
 import { useAppStore } from '@/store/app';
 import { useQueryState } from './store/queryState';
 
-
 export default {
     setup() {
       const queryState = useQueryState();
