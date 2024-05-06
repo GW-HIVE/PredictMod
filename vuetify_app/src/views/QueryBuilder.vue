@@ -412,8 +412,7 @@ export default {
     },
     resetState() {
       // console.log("---> Resetting query state");
-      // TODO Fix this hack
-      // this.queryState.resetState();
+      this.queryState.resetState();
       this.queryState.filePreviewData = null;
     },
     // XXX
