@@ -11,6 +11,7 @@ export default defineConfig({
   plugins: [
     vue({ 
       template: { transformAssetUrls },
+      ignoredElements: ['canvas-datagrid'],
     }),
     // https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vite-plugin
     vuetify({

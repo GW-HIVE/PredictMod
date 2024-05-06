@@ -2,10 +2,10 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-import * as XLSX from 'xlsx';
+// import * as XLSX from 'xlsx';
 
 class DownloadFilesService {
-  download(target) {
+  async download(target) {
     // const formData = new FormData();
 
     // const urlDest = "/".concat(target, "-sample/");
@@ -36,27 +36,20 @@ class DownloadFilesService {
 
     console.log(`Now downloading from ${fullURL}`);
 
-    axios.get(fullURL)
-      .then(response => {
-        const sampleName = target + "_example_data.xlsx";
-        const data = JSON.parse(response.data);
-        console.log("Received the following:\n%s", response.data);
-        console.log("---> Type of received:\n%s", typeof(data));
-        console.log("---> Attempting to write to %s", sampleName);
-        // Write the response to a file
-        console.log("Creating sheet!")
-        const worksheet = XLSX.utils.json_to_sheet(data);
-        console.log("Creating workbook!")
-        const workbook = XLSX.utils.book_new();
-        console.log("Appending sheet!")
-        XLSX.utils.book_append_sheet(workbook, worksheet);
-        console.log("Writing file!")
-        XLSX.writeFile(workbook, sampleName, { compression: true });
-        console.log("Complete...?")
-      })
-      .catch(error => {
-        console.log("---> ERROR!:\n\t%s", JSON.stringify(error));
-      })
+    const response = await axios.get(fullURL);
+    // console.log("Axios: Returned %s", response.data);
+    return response.data;
+
+    // axios.get(fullURL)
+    //   .then(response => {
+    //     const sampleName = target + "_example_data.xlsx";
+    //     const data = JSON.parse(response.data);
+    //     console.log("Received the following: (type %s)\n%s", typeof(response.data), response.data);
+    //     return response.data;
+    //   })
+    //   .catch(error => {
+    //     console.log("---> ERROR!:\n\t%s", JSON.stringify(error));
+    //   })
 
     // return axiosUtility.get(urlDest);
   }

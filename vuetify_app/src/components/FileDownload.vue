@@ -53,9 +53,16 @@
   <script>
 
   import DownloadService from '@/services/DownloadService';
+  import { useQueryState } from '@/store/queryState';
+
+  // TODO: Deprecated component, ready for removal?
 
   export default {
     name: "download-files",
+    setup() {
+      const queryState = useQueryState();
+      return { queryState }
+    },
     props: {
         downloadTargetURL: String,
     },
@@ -70,6 +77,9 @@
     //   };
     // },
     methods: {
+      triggerPreview() {
+        queryState.downloadPreview = true;
+      },
       download() {
         const response = DownloadService.download(this.downloadTargetURL, () => {
         })

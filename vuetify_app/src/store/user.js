@@ -24,7 +24,7 @@ export const useUserStore = defineStore("user", {
     },
 
     handleUserResponse(response) {
-      console.log("Handling response: %s", JSON.stringify(response));
+      // console.log("Handling response: %s", JSON.stringify(response));
       if (response.error) {
         this.error = response.error;
         return false;
@@ -128,7 +128,7 @@ export const useUserStore = defineStore("user", {
     },
 
     async checkUser() {
-      console.log("=>>> User record: %s", this.user);
+      // console.log("=>>> User record: %s", this.user);
       const res = await fetch(`${this.targetURL}/whoami/`, {
         // credentials: "same-origin",
         credentials: "include",

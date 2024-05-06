@@ -5,6 +5,8 @@ export const useQueryState = defineStore("query", {
     condition: null,
     intervention: null,
     datatype: null,
+    filePreviewData: null,
+    downloadDrawer: false,
     // conditionSet: false,
     // interventionSet: false,
     // inputTypeSet: false,
@@ -118,7 +120,7 @@ export const useQueryState = defineStore("query", {
 
     populateConditionOptions() {
       // TODO: API call to retrieve information from backend
-      console.log("Now retrieving options based on condition: %s", this.condition);
+      // console.log("Now retrieving options based on condition: %s", this.condition);
       if (this.condition !== null) {
         this.interventionOptions = this.interventions[this.condition];
         this.dataTypeOptions = this.dataInputTypes[this.condition];
@@ -126,14 +128,14 @@ export const useQueryState = defineStore("query", {
     },
 
     registerURL() {
-      console.log("Condition: %s | Intervention: %s | Data Type: %s", this.condition, this.intervention, this.datatype);
+      // console.log("Condition: %s | Intervention: %s | Data Type: %s", this.condition, this.intervention, this.datatype);
       if (
         this.condition !== null &&
         this.intervention !== null &&
         this.datatype !== null
       ) {
         this.targetURL = this.urlTargets[this.condition][this.datatype];
-        console.log("---> Found target URL %s", this.targetURL)
+        // console.log("---> Found target URL %s", this.targetURL)
       } else {
         this.targetURL = "";
       }
@@ -144,10 +146,12 @@ export const useQueryState = defineStore("query", {
       this.condition = null;
       this.intervention = null;
       this.datatype = null;
+      this.filePreviewData = null;
+      this.downloadDrawer = false;
     },
 
     setState(state, stateString) {
-      console.log("Query State: Setting %s to %s", state, stateString);
+      // console.log("Query State: Setting %s to %s", state, stateString);
       this[state] = stateString;
       if (state == "condition") {
         this.populateConditionOptions();

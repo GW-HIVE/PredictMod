@@ -79,7 +79,7 @@ export default {
     methods: {
       confirmState() {
           this.$emit('confirmed', this.targetProp, this.selection);
-          console.log("Confirmed: Selection is %s", this.selection);
+          // console.log("Confirmed: Selection is %s", this.selection);
           this.confirmed = true;
       },
       unconfirmState() {
