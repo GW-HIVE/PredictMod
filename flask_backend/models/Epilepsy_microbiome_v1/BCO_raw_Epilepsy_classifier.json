@@ -1,0 +1,306 @@
+{
+    "object_id": "https://biocomputeobject.org/BCO_000474/DRAFT",
+    "spec_version": "https://w3id.org/ieee/ieee-2791-schema/2791object.json",
+    "etag": "616c0da8c1b0cef23cb71e827609b465ba1999ed",
+    "provenance_domain": {
+        "name": "Epilepsy_classifier_1.1",
+        "version": "1.1",
+        "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+        "created": "2024-04-01T14:55:28",
+        "modified": "2024-04-17T00:36:36",
+        "derived_from": [],
+        "contributors": [
+            {
+                "name": "Miguel Mazumder",
+                "affiliation": "HIVE lab",
+                "email": "mfmmazumder@gwmail.gwu.edu",
+                "contribution": [
+                    "createdBy"
+                ],
+                "orcid": ""
+            },
+            {
+                "name": "Urnisha Bhuiyan",
+                "affiliation": "HIVE lab",
+                "email": "sbhuiyan28@email.gwu.edu",
+                "contribution": [
+                    "createdBy"
+                ],
+                "orcid": ""
+            },
+            {
+                "name": "Lori Krammer",
+                "affiliation": "HIVE lab",
+                "email": "lorikrammer@email.gwu.edu",
+                "contribution": [
+                    "createdBy"
+                ],
+                "orcid": ""
+            },
+            {
+                "name": "Patrick McNeely",
+                "affiliation": "HIVE lab",
+                "email": "pmcneely@email.gwu.edu",
+                "contribution": [
+                    "createdBy"
+                ],
+                "orcid": ""
+            }
+        ],
+        "review": []
+    },
+    "usability_domain": [],
+    "description_domain": {
+        "pipeline_steps": [
+            {
+                "step_number": 1,
+                "name": "Load Python Libraries",
+                "description": "from sklearn.model_selection import train_test_split // splitting dataset for training\nfrom sklearn.preprocessing import LabelEncoder // converting integer outputs to string response\nfrom sklearn.metrics import accuracy_score, classification_report, confusion_matrix // perform metrics on learned model\nfrom sklearn.linear_model import LogisticRegression // use of logistic regression\nimport joblib // used save trained ML to pickle file\nimport pandas as pd // operations on data frames",
+                "version": "1.1",
+                "prerequisite": [
+                    {
+                        "name": "sklearn library",
+                        "uri": {
+                            "filename": "scikit-learn 1.4.1",
+                            "access_time": "2024-04-01T14:51:00.000Z",
+                            "uri": "https://scikit-learn.org/stable/install.html#installation-instructions",
+                            "sha1_checksum": ""
+                        }
+                    },
+                    {
+                        "name": "joblib library",
+                        "uri": {
+                            "filename": "joblib 1.3.2",
+                            "access_time": "2024-04-01T14:50:00.000Z",
+                            "uri": "https://pypi.org/project/joblib/#downloads",
+                            "sha1_checksum": ""
+                        }
+                    },
+                    {
+                        "name": "pandas library",
+                        "uri": {
+                            "filename": "pandas 2.2.1",
+                            "access_time": "2024-04-01T14:51:00.000Z",
+                            "uri": "https://pypi.org/project/pandas/",
+                            "sha1_checksum": ""
+                        }
+                    }
+                ],
+                "input_list": [
+                    {
+                        "filename": "tmpfs",
+                        "access_time": "2024-04-16T04:59:00.000Z",
+                        "uri": "file:///dev/tmpfs",
+                        "sha1_checksum": ""
+                    }
+                ],
+                "output_list": [
+                    {
+                        "filename": "tmpfs",
+                        "access_time": "2024-04-09T04:00:00.000Z",
+                        "uri": "file:///dev/tmpfs",
+                        "sha1_checksum": ""
+                    }
+                ]
+            },
+            {
+                "step_number": 2,
+                "name": "Read Input Data",
+                "description": "- Read the data.xlsx file to pandas dataframe that contains the patient data using pd.read_excel\n- Extract features from the pandas dataframe",
+                "version": "1.1",
+                "input_list": [
+                    {
+                        "filename": "epilepsy_data_500.xlsx",
+                        "access_time": "2024-04-01T14:50:00.000Z",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/Epilepsy_microbiome_v1/epilepsy_data_500.xlsx",
+                        "sha1_checksum": ""
+                    }
+                ],
+                "output_list": [
+                    {
+                        "filename": "X_train",
+                        "access_time": "2024-04-16T06:00:00.000Z",
+                        "uri": "https://example.com/biocompute/4427eada-0374-400e-a823-63fe8ed3e671",
+                        "sha1_checksum": ""
+                    },
+                    {
+                        "filename": "Y_train",
+                        "access_time": "2024-05-09T15:55:00.000Z",
+                        "uri": "https://example.com/biocompute/06ba7b7c-717c-49e4-8395-c04834723850",
+                        "sha1_checksum": ""
+                    },
+                    {
+                        "filename": "feature_names",
+                        "access_time": "2024-05-09T15:55:00.000Z",
+                        "uri": "https://example.com/biocompute/9882bd9a-ccd3-45fe-ae83-622778cf3400",
+                        "sha1_checksum": ""
+                    }
+                ]
+            },
+            {
+                "step_number": 3,
+                "name": "Train ML model with Data",
+                "description": "- Create a logistic regression classifier\n- Train the classifier on the training data\n- Make predictions on the testing data\n- return metrics of trained model",
+                "version": "1.1",
+                "input_list": [
+                    {
+                        "filename": "X_train",
+                        "access_time": "2024-04-16T14:49:00.000Z",
+                        "uri": "file:///dev/https://example.com/biocompute/06ba7b7c-717c-49e4-8395-c04834723850",
+                        "sha1_checksum": ""
+                    },
+                    {
+                        "filename": "Y_train",
+                        "access_time": "2024-05-09T15:56:00.000Z",
+                        "uri": "https://example.com/biocompute/06ba7b7c-717c-49e4-8395-c04834723850",
+                        "sha1_checksum": ""
+                    }
+                ],
+                "output_list": [
+                    {
+                        "filename": "Classifier",
+                        "access_time": "2024-04-16T14:50:00.000Z",
+                        "uri": "https://example.com/biocompute/32ac73d1-4509-48db-85bd-3a780348001f",
+                        "sha1_checksum": ""
+                    }
+                ]
+            },
+            {
+                "step_number": 4,
+                "name": "Save model to Pickle File",
+                "description": "- Save trained ML model to pickle file to be utilized in future patient input data",
+                "version": "1.1",
+                "output_list": [
+                    {
+                        "filename": "Epilepsy_keto_classifier_and_features.pickle",
+                        "access_time": "2024-04-01T14:50:00.000Z",
+                        "uri": "flask_backend/models/Epilepsy_microbiome_v1/Epilepsy_keto_classifier_and_features.pickle",
+                        "sha1_checksum": ""
+                    }
+                ],
+                "input_list": [
+                    {
+                        "filename": "Classifier",
+                        "access_time": "2024-04-16T04:00:00.000Z",
+                        "uri": "https://example.com/biocompute/32ac73d1-4509-48db-85bd-3a780348001f",
+                        "sha1_checksum": ""
+                    },
+                    {
+                        "filename": "features_names",
+                        "access_time": "2024-05-09T15:54:00.000Z",
+                        "uri": "https://example.com/biocompute/9882bd9a-ccd3-45fe-ae83-622778cf3400",
+                        "sha1_checksum": ""
+                    }
+                ]
+            }
+        ],
+        "keywords": [
+            "machine learning",
+            "python",
+            "predictive intervention"
+        ]
+    },
+    "parametric_domain": [
+        {
+            "step": "3",
+            "param": "train_test_split",
+            "value": "test_size=0.2"
+        },
+        {
+            "step": "3",
+            "param": "standardize",
+            "value": "StandardScaler()"
+        }
+    ],
+    "io_domain": {
+        "input_subdomain": [
+            {
+                "uri": {
+                    "filename": "epilepsy_data_500.xlsx",
+                    "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/Epilepsy_microbiome_v1/epilepsy_data_500.xlsx"
+                }
+            }
+        ],
+        "output_subdomain": [
+            {
+                "mediatype": "Pickle File",
+                "uri": {
+                    "filename": "epilepsy_classifier.pkl",
+                    "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/Epilepsy_microbiome_v1/epilepsy_classifier.pkl",
+                    "access_time": "2024-04-01T14:50:00.000Z"
+                }
+            }
+        ]
+    },
+    "execution_domain": {
+        "script": [
+            {
+                "filename": "",
+                "uri": {
+                    "filename": "epilepsy_classifier.py",
+                    "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/Epilepsy_microbiome_v1/epilepsy_classifier.py"
+                },
+                "access_time": "",
+                "sha1_checksum": ""
+            }
+        ],
+        "script_driver": "Python",
+        "software_prerequisites": [
+            {
+                "name": "Python",
+                "version": "3.11.4",
+                "uri": {
+                    "filename": "python3.11.exe",
+                    "uri": "https://www.python.org/downloads/release/python-3114/",
+                    "access_time": "2024-04-01T14:50:00.000Z",
+                    "sha1_checksum": ""
+                }
+            },
+            {
+                "name": "sklearn library",
+                "version": "1.4.1",
+                "uri": {
+                    "filename": "",
+                    "uri": "https://scikit-learn.org/stable/install.html",
+                    "access_time": "2024-04-01T14:50:00.000Z",
+                    "sha1_checksum": ""
+                }
+            },
+            {
+                "name": "joblib library\t",
+                "version": "1.3.2",
+                "uri": {
+                    "filename": "",
+                    "uri": "https://pypi.org/project/joblib/",
+                    "access_time": "2024-04-01T14:50:00.000Z",
+                    "sha1_checksum": ""
+                }
+            },
+            {
+                "name": "pandas library",
+                "version": "2.2.1",
+                "uri": {
+                    "filename": "",
+                    "uri": "https://pypi.org/project/pandas/",
+                    "access_time": "2024-04-01T14:50:00.000Z",
+                    "sha1_checksum": ""
+                }
+            }
+        ],
+        "external_data_endpoints": [],
+        "environment_variables": {}
+    },
+    "extension_domain": [],
+    "error_domain": {
+        "empirical_error": {
+            "empirical_error": {
+                "Mean Squared Error": "0.099151099291015"
+            }
+        },
+        "algorithmic_error": {
+            "algorithmic_error": {
+                "Error Rate": "<0.07"
+            }
+        }
+    }
+}
