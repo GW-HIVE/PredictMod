@@ -1,0 +1,255 @@
+{
+    "object_id": "https://biocomputeobject.org/BCO_000471/DRAFT",
+    "spec_version": "https://w3id.org/ieee/ieee-2791-schema/2791object.json",
+    "etag": "616c0da8c1b0cef23cb71e827609b465ba1999ed",
+    "provenance_domain": {
+        "name": "Epilepsy_predictor_1.1",
+        "version": "1.1",
+        "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+        "created": "2024-04-01T14:55:28",
+        "modified": "2024-04-17T00:37:03",
+        "derived_from": [],
+        "contributors": [
+            {
+                "name": "Miguel Mazumder",
+                "affiliation": "HIVE lab",
+                "email": "mfmmazumder@gwmail.gwu.edu",
+                "contribution": [
+                    "createdBy"
+                ],
+                "orcid": ""
+            },
+            {
+                "name": "Urnisha Bhuiyan",
+                "affiliation": "HIVE lab",
+                "email": "sbhuiyan28@email.gwu.edu",
+                "contribution": [
+                    "createdBy"
+                ],
+                "orcid": ""
+            },
+            {
+                "name": "Lori Krammer",
+                "affiliation": "HIVE lab",
+                "email": "lorikrammer@email.gwu.edu",
+                "contribution": [
+                    "createdBy"
+                ],
+                "orcid": ""
+            },
+            {
+                "name": "Patrick McNeely",
+                "affiliation": "HIVE lab",
+                "email": "pmcneely@email.gwu.edu",
+                "contribution": [
+                    "createdBy"
+                ],
+                "orcid": ""
+            }
+        ],
+        "review": []
+    },
+    "usability_domain": [],
+    "description_domain": {
+        "pipeline_steps": [
+            {
+                "step_number": 1,
+                "name": "Load Python Libraries",
+                "description": "import joblib // used save trained ML to pickle file\nimport pandas as pd // operations on data frames",
+                "version": "1.1",
+                "prerequisite": [
+                    {
+                        "name": "joblib library",
+                        "uri": {
+                            "filename": "joblib 1.3.2",
+                            "access_time": "2024-04-01T14:50:00.000Z",
+                            "uri": "https://pypi.org/project/joblib/#downloads",
+                            "sha1_checksum": ""
+                        }
+                    },
+                    {
+                        "name": "pandas library",
+                        "uri": {
+                            "filename": "pandas 2.2.1",
+                            "access_time": "2024-04-01T14:51:00.000Z",
+                            "uri": "https://pypi.org/project/pandas/",
+                            "sha1_checksum": ""
+                        }
+                    }
+                ],
+                "input_list": [
+                    {
+                        "filename": "tmpfs",
+                        "access_time": "2024-05-09T15:55:00.000Z",
+                        "uri": "file:///dev/tmpfs",
+                        "sha1_checksum": ""
+                    }
+                ],
+                "output_list": [
+                    {
+                        "filename": "tmpfs",
+                        "access_time": "2024-05-09T15:55:00.000Z",
+                        "uri": "file:///dev/tmpfs",
+                        "sha1_checksum": ""
+                    }
+                ]
+            },
+            {
+                "step_number": 2,
+                "name": "Load Trained ML model",
+                "description": "Load trained Machine Learning model from pickle file to be used on single patient input data",
+                "version": "1.1",
+                "input_list": [
+                    {
+                        "filename": "Epilepsy_keto_classifier_and_features",
+                        "access_time": "2024-04-01T14:50:00.000Z",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/Epilepsy_microbiome_v1/Epilepsy_keto_classifier_and_features.pickle",
+                        "sha1_checksum": ""
+                    },
+                    {
+                        "filename": "Classifier",
+                        "access_time": "2024-05-09T15:56:00.000Z",
+                        "uri": "https://example.com/biocompute/32ac73d1-4509-48db-85bd-3a780348001f",
+                        "sha1_checksum": ""
+                    }
+                ]
+            },
+            {
+                "step_number": 3,
+                "name": "Apply patient data to ML model",
+                "description": "- load patient data and input it to trained ML model from the Epilepsy_keto_classifier_and_features.pickle file\n- Prediction of patient (0-Non-responder) (1-Responder) will be displayed on console/terminal",
+                "version": "1.1",
+                "output_list": [
+                    {
+                        "filename": "tmpfs",
+                        "access_time": "2024-04-01T14:50:00.000Z",
+                        "uri": "file:///dev/tmpfs",
+                        "sha1_checksum": ""
+                    }
+                ],
+                "input_list": [
+                    {
+                        "filename": "Classifier",
+                        "access_time": "2024-05-09T15:54:00.000Z",
+                        "uri": "https://example.com/biocompute/32ac73d1-4509-48db-85bd-3a780348001f",
+                        "sha1_checksum": ""
+                    },
+                    {
+                        "filename": "single_patient_sample.xlsx",
+                        "access_time": "2024-05-09T04:01:00.000Z",
+                        "uri": "flask_backend/models/Epilepsy_microbiome_v1/single_patient_sample.xlsx",
+                        "sha1_checksum": ""
+                    }
+                ]
+            }
+        ],
+        "keywords": [
+            "machine learning",
+            "python",
+            "predictive intervention"
+        ]
+    },
+    "parametric_domain": [
+        {
+            "step": "3",
+            "param": "train_test_split",
+            "value": "test_size=0.2"
+        },
+        {
+            "step": "3",
+            "param": "train_test_split",
+            "value": " random_state=42"
+        }
+    ],
+    "io_domain": {
+        "input_subdomain": [
+            {
+                "uri": {
+                    "uri": "flask_backend/models/Epilepsy_microbiome_v1/epilepsy_keto_data_500.xlsx",
+                    "filename": "epilepsy_keto_data_500.xlsx"
+                }
+            }
+        ],
+        "output_subdomain": [
+            {
+                "mediatype": "Pickle File",
+                "uri": {
+                    "filename": "Epilepsy_keto_classifier_and_features.pickle",
+                    "uri": "flask_backend/models/Epilepsy_microbiome_v1/Epilepsy_keto_classifier_and_features.pickle",
+                    "access_time": "2024-04-16T14:50:00.000Z"
+                }
+            }
+        ]
+    },
+    "execution_domain": {
+        "script": [
+            {
+                "filename": "",
+                "uri": {
+                    "filename": "epilepsy_predictor_1.1.py",
+                    "uri": "flask_backend/models/Epilepsy_microbiome_v1/epilepsy_classifier_1.1.py"
+                },
+                "access_time": "",
+                "sha1_checksum": ""
+            }
+        ],
+        "script_driver": "Python",
+        "software_prerequisites": [
+            {
+                "name": "Python",
+                "version": "3.11.4",
+                "uri": {
+                    "filename": "python3.11.exe",
+                    "uri": "https://www.python.org/downloads/release/python-3114/",
+                    "access_time": "2024-04-16T15:49:00.000Z",
+                    "sha1_checksum": ""
+                }
+            },
+            {
+                "name": "sklearn library",
+                "version": "1.4.1",
+                "uri": {
+                    "filename": "",
+                    "uri": "https://scikit-learn.org/stable/install.html#installation-instructions",
+                    "access_time": "2024-04-16T14:51:00.000Z",
+                    "sha1_checksum": ""
+                }
+            },
+            {
+                "name": "joblib library\t",
+                "version": "1.3.2",
+                "uri": {
+                    "filename": "",
+                    "uri": "https://pypi.org/project/joblib/",
+                    "access_time": "2024-04-16T14:51:00.000Z",
+                    "sha1_checksum": ""
+                }
+            },
+            {
+                "name": "pandas library",
+                "version": "2.2.1",
+                "uri": {
+                    "filename": "",
+                    "uri": "https://pypi.org/project/pandas/",
+                    "access_time": "2024-04-16T14:50:00.000Z",
+                    "sha1_checksum": ""
+                }
+            }
+        ],
+        "external_data_endpoints": [],
+        "environment_variables": {}
+    },
+    "extension_domain": [],
+    "error_domain": {
+        "empirical_error": {
+            "empirical_error": {
+                "Mean Squared Error": "0.099151099291015"
+            }
+        },
+        "algorithmic_error": {
+            "algorithmic_error": {
+                "Error Rate": "<0.07"
+            }
+        }
+    }
+}
