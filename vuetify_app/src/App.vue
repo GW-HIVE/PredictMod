@@ -9,6 +9,7 @@
         <v-tab to="/predictmod/query-builder">Query Builder</v-tab>
         <v-tab to="/predictmod/users">User Admin</v-tab>
         <v-tab to="/predictmod/help">Help</v-tab>
+        <v-spacer></v-spacer>
         <v-tab to="/predictmod/login">{{ this.userStore.user ? `User: ${this.userStore.user}` : "Login" }}</v-tab>
       </v-tabs>
     <main>
