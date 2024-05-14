@@ -1,0 +1,25 @@
+
+[MDClone_Diet_Exercise]
+name = "MDClone Diet Exercise"
+version = "1.1"
+release_date = 2023-12-01
+model_type = "Decision Tree Classifier (DTC)"
+data_type = "EHR"
+backend = "PredictModBackend"
+
+[MDClone_Diet_Exercise.data_meta]
+Patients = 19842
+"Data Features" = 19
+
+[Metagenomic_Exercise]
+name = "MG Exercise"
+version = "1.1"
+release_date = 2023-05-01
+model_type = "Decision Tree Classifier (DTC)"
+data_type = "Metagenomic"
+backend = "PredictModBackend"
+
+[Metagenomic_Exercise.data_meta]
+Patients = 40
+Genomes = 281
+

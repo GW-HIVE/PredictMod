@@ -1,0 +1,43 @@
+
+[PredictMod_EHR_KETO]
+name = "PredictMod-EHR-KETO"
+version = "1.0"
+data_type = "EHR"
+
+[Glycomics_PreDM]
+name = "Glycomics_PreDM"
+version = "1.0"
+data_type = "Glycomic"
+
+[Glycoproteomics_RC]
+name = "Glycoproteomics_RC"
+version = "1.0"
+data_type = "Glycoproteomic"
+
+[Epilepsy_Keto]
+name = "Epilepsy_Keto"
+version = "1.0"
+data_type = "Metagenomic"
+
+[Synthea_Exercise]
+name = "Synthea_Exercise"
+version = "1.1"
+data_type = "EHR"
+
+[MDClone_Diet_Counseling]
+name = "MDClone_Diet_Counseling"
+version = "1.2"
+data_type = "EHR"
+
+[MDClone_Semaglutide]
+name = "MDClone_Semaglutide"
+version = "1.0"
+data_type = "EHR"
+
+[MDClone_Exercise]
+name = "MDClone_Exercise"
+version = "1.0"
+data_type = "EHR"
+
+
+
