@@ -79,9 +79,18 @@ class MDClone_EHRTreeHandler:
 app = Flask(__name__)
 cors = CORS(app)
 app.config["CORS_HEADERS"] = "Content-Type"
-app.config["DOWNLOAD_FOLDER"] = os.path.join(
-    os.path.dirname(app.instance_path), "models"
+
+DOWNLOAD_FOLDER = os.path.abspath(os.path.join("./", "models"))
+MG_EXAMPLE = os.path.join(DOWNLOAD_FOLDER, "MG_Exercise_v1.1/unknown_response.csv")
+
+EHR_EXAMPLE = os.path.join(
+    DOWNLOAD_FOLDER, "MDClone_Diet_Counseling_v1.1/MDClone_unknown3.csv"
 )
+
+DOWNLOAD_ENDPOINTS = {
+    "mg": MG_EXAMPLE,
+    "ehr": EHR_EXAMPLE,
+}
 
 app.logger.setLevel(logging.DEBUG)
 
@@ -103,24 +112,22 @@ def query():
     return jsonify(data)
 
 
-@app.route("/metagenomic-download", methods=["GET"])
+@app.route("/download", methods=["GET"])
 @cross_origin()
-def mg_download():
+def download():
+    query = request.args.get("q", None)
+    if not query or query not in DOWNLOAD_ENDPOINTS.keys():
+        return Response(f"Error!")
     try:
-        app.logger.debug("MG: Received download request")
-        app.logger.debug(f"MG: Upload dir is {app.config['DOWNLOAD_FOLDER']}")
-        app.logger.debug("")
-        app.logger.debug(
-            f"\tSearching: {os.path.join(app.config['DOWNLOAD_FOLDER'], 'single_patient_data_1.xls')}"
-        )
-        app.logger.debug("")
-
-        return send_from_directory(
-            app.config["DOWNLOAD_FOLDER"],
-            "single_patient_data_1.xls",
-            as_attachment=True,
-            mimetype="application/vnd.ms-excel",
-        )
+        download_path = DOWNLOAD_ENDPOINTS[query]
+        extension = download_path.split(".")[-1]
+        if extension == "xlsx":
+            df = pd.read_excel(download_path)
+        elif extension == "csv":
+            df = pd.read_csv(download_path)
+        else:
+            return Response(f"Unsupported extension {extension}", status=500)
+        return jsonify(df.to_json(orient="records"))
     except Exception as e:
         app.logger.debug(f"Exception: {e}")
         return Response(f"Error! {e}")
