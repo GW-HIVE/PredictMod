@@ -18,21 +18,10 @@ import requests
 
 FLASK_BACKEND = settings.FLASK_BACKEND
 
-MG_EXAMPLE = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), "assets/mg_sample_data.xlsx")
-)
-EHR_EXAMPLE = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), "assets/MDClone_unknown3.csv")
-)
-
 logger = logging.getLogger()
 
-DOWNLOAD_ENDPOINTS = {
-    "mg",
-    "ehr",
-}
 
-UPLOAD_ENPOINTS = {
+UPLOAD_ENDPOINTS = {
     "mg",
     "ehr",
 }
@@ -84,38 +73,16 @@ def png_response(request):
 @csrf_exempt
 def file_download(request):
     sample_type = request.GET.get("q", None)
-    if sample_type is not None and sample_type in DOWNLOAD_ENDPOINTS:
+    if sample_type is not None:
         # TODO - Error handling should be down at the flask level
-        # response = requests.get(f"{FLASK_BACKEND}/download?q={sample_type}")
-        if sample_type == "mg":
-            df = pandas.read_excel(MG_EXAMPLE)
-            return JsonResponse(df.to_json(orient="records"), safe=False)
-        elif sample_type == "ehr":
-            df = pandas.read_csv(EHR_EXAMPLE)
-            return JsonResponse(df.to_json(orient="records"), safe=False)
-        else:
-            return JsonResponse(
-                {"error": f"bad sample type: {sample_type}"}, status=500
-            )
+        response = requests.get(f"{FLASK_BACKEND}/download?q={sample_type}")
+        if response.status_code != 200:
+            return JsonResponse({"error": response.content.decode("utf-8")})
+        logger.debug("-" * 80)
+        logger.debug(json.loads(response.content.decode("utf-8")))
+        logger.debug("-" * 80)
+        return JsonResponse(json.loads(response.content.decode("utf-8")), safe=False)
     return JsonResponse({"error": f"Unknown sample type: {sample_type}"}, status=500)
-
-
-# # XXX
-# @csrf_exempt
-# def mg_sample(request):
-#     # See SO: https://stackoverflow.com/a/36394206
-#     logger.debug("=" * 40)
-#     logger.debug(f"\tATTEMPTING DOWNLOAD!!")
-#     logger.debug("=" * 40)
-#     mg_df = pandas.read_excel(MG_EXAMPLE)
-#     return JsonResponse(mg_df.to_json(orient="records"), safe=False)
-
-
-# @csrf_exempt
-# def ehr_sample(request):
-#     # See also SO: https://stackoverflow.com/a/36394206
-#     ehr_df = pandas.read_csv(EHR_EXAMPLE)
-#     return JsonResponse(ehr_df.to_json(orient="records"), safe=False)
 
 
 def file_upload(request):
@@ -123,7 +90,7 @@ def file_upload(request):
 
         try:
             target = request.GET.get("q", None)
-            if not target or target not in UPLOAD_ENPOINTS:
+            if not target or target not in UPLOAD_ENDPOINTS:
                 return JsonResponse(
                     {"error": f"Invalid upload target {target}"}, status=404
                 )
