@@ -74,7 +74,6 @@ def png_response(request):
 def file_download(request):
     sample_type = request.GET.get("q", None)
     if sample_type is not None:
-        # TODO - Error handling should be down at the flask level
         response = requests.get(f"{FLASK_BACKEND}/download?q={sample_type}")
         if response.status_code != 200:
             return JsonResponse({"error": response.content.decode("utf-8")})
