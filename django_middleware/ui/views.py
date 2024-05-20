@@ -8,7 +8,9 @@ from django.views.decorators.csrf import (
 )
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
+from django.core import serializers
 
+from .models import ReleasedModel, PendingModel
 
 import json
 import logging
@@ -69,7 +71,15 @@ def png_response(request):
     return JsonResponse(data=data, safe=False)
 
 
-# TODO
+def models(request):
+    released_models = ReleasedModel.objects.all()
+    pending_models = PendingModel.objects.all()
+    complete_list = {"released_models": None, "pending_models": None}
+    complete_list["released_models"] = serializers.serialize("json", released_models)
+    complete_list["pending_models"] = serializers.serialize("json", pending_models)
+    return JsonResponse(complete_list, safe=False)
+
+
 @csrf_exempt
 def file_download(request):
     sample_type = request.GET.get("q", None)
@@ -77,9 +87,6 @@ def file_download(request):
         response = requests.get(f"{FLASK_BACKEND}/download?q={sample_type}")
         if response.status_code != 200:
             return JsonResponse({"error": response.content.decode("utf-8")})
-        logger.debug("-" * 80)
-        logger.debug(json.loads(response.content.decode("utf-8")))
-        logger.debug("-" * 80)
         return JsonResponse(json.loads(response.content.decode("utf-8")), safe=False)
     return JsonResponse({"error": f"Unknown sample type: {sample_type}"}, status=500)
 
