@@ -37,6 +37,9 @@
 
   </v-banner>
 
+  <!-- <router-link to="/predictmod/testing">
+    <v-btn>Testing Space</v-btn>
+  </router-link> -->
 
   <v-container>
  
@@ -67,9 +70,7 @@
               <v-btn color="primary">Try it out</v-btn>
         </router-link>
         <v-row>
-        <!-- <router-link to="/predictmod/testing">
-          <v-btn>Testing Space</v-btn>
-        </router-link> -->
+
       </v-row>
       </v-col>
     <v-col cols="5">
@@ -81,11 +82,12 @@
           User Interface v1.3 (30 Apr 2024)
         </v-card-text>
       </v-card>
-      <v-card outlined>
+      <v-card outlined flex>
         <v-card-title class="title text-center font-weight-bold">
           <h3>Model Statistics</h3>
         </v-card-title>
-        <v-card-text>
+        <ReleasedModels :data="releasedModels" v-if="show_models" />
+        <!--- <v-card-text>
         <v-row>
         <v-col cols="6" class="text-left">
           <b>MG_Exercise</b><br>
@@ -122,13 +124,16 @@
           Decision Tree Classifier (DTC)<br>
         </v-col>
       </v-row>
-      </v-card-text>
+      </v-card-text> -->
       </v-card>
       <v-card outlined>
         <v-card-title class="title text-center font-weight-bold">
           <h3>Anticipated Future Models</h3>
         </v-card-title>
-        <v-card-text class="text-center">
+
+        <PendingModels :data="pendingModels" v-if="show_models" />
+
+        <!-- <v-card-text class="text-center">
           <v-row>
           <v-col cols="6" class="text-left">
             <b>Model Name</b><br>
@@ -164,7 +169,7 @@
             EHR<br>
           </v-col>
         </v-row>
-        </v-card-text>
+        </v-card-text> -->
       </v-card>
     </v-col>
   </v-row>
@@ -192,9 +197,15 @@ import { onMounted, ref } from 'vue';
 
 // import SimpleUploadMG from './SimpleUploadMG.vue';
 // import SimpleUploadEHR from './SimpleUploadEHR.vue';
+import ReleasedModels from '@/components/ReleasedModels.vue';
+import PendingModels from '@/components/PendingModels.vue';
 import DisclaimerShow from './DisclaimerShow.vue';
 import NotFound from './NotFound.vue';
 import LicenseShow from './LicenseShow.vue';
+
+import axios from "axios";
+
+const modelsURL = import.meta.env.DEV ? import.meta.env.VITE_DEV_MIDDLEWARE_BASE + '/api/models/': "/predictmod/api/models/";
 
 export default {
 
@@ -202,14 +213,32 @@ export default {
   data() {
 			return {
 				home: false,
+        releasedModels: null,
+        pendingModels: null,
+        show_models: false,
 			}
     },
+  mounted() {
+    this.getModels();
+  },
   methods: {
     alertTBD(source) {
       alert(source + " functionality is under development");
+    },
+    async getModels() {
+      const response = await axios.get(modelsURL);
+      if (!response.status === 200) {
+        console.log("---> Error!\n%s", response.status);
+      } else {
+        this.releasedModels = JSON.parse(response.data.released_models);
+        this.pendingModels = JSON.parse(response.data.pending_models);
+        console.log("Released:\n%s", this.releasedModels);
+        console.log("Pending:\n%s", this.pendingModels);
+        this.show_models = true;
+      }
     }
   },
-  components: { DisclaimerShow, NotFound, LicenseShow }
+  components: { ReleasedModels, PendingModels, DisclaimerShow, NotFound, LicenseShow }
 }
 </script>
 
