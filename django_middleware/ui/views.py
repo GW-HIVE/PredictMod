@@ -40,7 +40,43 @@ def ping(request):
     return HttpResponse("PONG\n")
 
 
-# Development
+def search(request):
+    logger.debug("Received request for MENU items")
+    DATA_MODEL = [
+        {"name": "MDClone Diet Exercise (Intervention)", "link": "help#current-models"},
+        {"name": "MG Exercise (Intervention)", "link": "help#current-models"},
+        {"name": "Decision Tree Classifier (Model)", "link": "help#current-models"},
+        {
+            "name": "Electronic Health Records (EHR) (Data)",
+            "link": "help#current-models",
+        },
+        {"name": "Metagenomic (Data)", "link": "help#current-models"},
+        {
+            "name": "Glycomics PreDM v1.0 (Anticipated)",
+            "link": "help#anticipated-models",
+        },
+        {"name": "Epilepsy Keto v1.1 (Anticipated)", "link": "help#anticipated-models"},
+        {
+            "name": "Synthea Exercise v1.1 (Anticipated)",
+            "link": "help#anticipated-models",
+        },
+        {
+            "name": "MDClone Diet Counseling v1.2 (Anticipated)",
+            "link": "help#anticipated-models",
+        },
+        {
+            "name": "MDClone Semaglutide v1.0 (Anticipated)",
+            "link": "help#anticipated-models",
+        },
+        {
+            "name": "MDClone Exercise v1.0 (Anticipated)",
+            "link": "help#anticipated-models",
+        },
+    ]
+    return JsonResponse(DATA_MODEL, safe=False)
+
+
+# TODO: Development of backend search
 def queries(request):
     if request.method != "GET":
         return JsonResponse({"error": f"Invalid method {request.METHOD}"})
