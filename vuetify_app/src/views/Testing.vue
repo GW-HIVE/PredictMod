@@ -29,8 +29,12 @@
   <!-- <v-container>
     <LiveChartTest />
   </v-container> -->
-  <v-container>
+  <!-- <v-container>
     <FlaskRoundtrip />
+  </v-container> -->
+
+  <v-container>
+    <SearchInput />
   </v-container>
 
   <v-container>
@@ -65,7 +69,9 @@
 import { onMounted, ref } from 'vue';
 
 import LiveChartTest from '@/components/LiveChartTest.vue';
-import FlaskRoundtrip from '@/components/FlaskRoundtrip.vue';
+// import FlaskRoundtrip from '@/components/FlaskRoundtrip.vue';
+import SearchInput from '@/components/SearchInput';
+// import SearchInput from '@/components/SearchInput(Deprecated)';
 import DisclaimerShow from './DisclaimerShow.vue';
 import LicenseShow from './LicenseShow.vue';
 
@@ -73,10 +79,14 @@ export default {
 
   name: 'Home',
   data() {
-			return {
-				home: false,
-			}
+      return {
+        dummyResults: ["Apple", "Banana", "Cherry", "Orange", "Strawberry"],
+        home: false,
+        value: "",
+        items: [],
+      }
     },
-  components: { FlaskRoundtrip, LiveChartTest, DisclaimerShow, LicenseShow }
+  // components: { FlaskRoundtrip, LiveChartTest, DisclaimerShow, LicenseShow, SearchInput }
+  components: { SearchInput, DisclaimerShow, LicenseShow },
 }
 </script>

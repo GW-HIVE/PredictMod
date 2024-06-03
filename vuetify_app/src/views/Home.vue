@@ -232,8 +232,6 @@ export default {
       } else {
         this.releasedModels = JSON.parse(response.data.released_models);
         this.pendingModels = JSON.parse(response.data.pending_models);
-        console.log("Released:\n%s", this.releasedModels);
-        console.log("Pending:\n%s", this.pendingModels);
         this.show_models = true;
       }
     }
