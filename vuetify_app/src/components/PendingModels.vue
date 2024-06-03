@@ -1,6 +1,7 @@
 
 <template>
-<v-virtual-scroll :height="200">
+    <!-- TODO: Virtual scroll isn't working as expected, defaults to not showing the fields. -->
+<!-- <v-virtual-scroll :height="200"> -->
     <v-card v-for="obj in data" variant="flat" class="text-left">
     <v-card-text>
         <h4>Name: {{ obj.fields.name }}</h4>
@@ -8,7 +9,7 @@
         Data Type: {{ obj.fields.data_type }}<br>
     </v-card-text>
     </v-card>
-</v-virtual-scroll>
+<!-- </v-virtual-scroll> -->
 </template>
 
 
