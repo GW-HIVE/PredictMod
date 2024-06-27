@@ -1,0 +1,167 @@
+{
+  "object_id": "https://biocomputeobject.org/BCO_000500/DRAFT",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/2791object.json",
+  "etag": "8a4ad77ca255d9463c7f06311559a3345b35bdfde1b9b1e1ff39c906bb900b3c",
+  "provenance_domain": {
+    "name": "Diabetes Glycomic",
+    "version": "1.0",
+    "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+    "created": "2024-06-27T16:02:11",
+    "modified": "2024-06-27T17:07:43",
+    "contributors": [
+      {
+        "name": "Karina Martinez",
+        "affiliation": "The George Washington University",
+        "email": "karinamartinez@gwu.edu",
+        "contribution": [
+          "createdBy"
+        ],
+        "orcid": ""
+      }
+    ]
+  },
+  "usability_domain": [
+    "The Diabetes Glycomic model was trained to predict whether a patient will develop type 2 diabetes or remain normoglycaemic within 10 years. The training dataset contains abundance information on the plasma N-glycome of individuals participating in the FinRisk study, a study designed to investigate risk factors in a population from Finland. Baseline samples were analyzed from 37 individuals who developed type 2 diabetes within 10 years and 37 sex and age matched individuals who remained normoglycaemic. HILIC-UPLC chromatograms were separated into 46 peaks, and were assigned to the most abundant glycan structures in each peak. An XGBoost Classifier was trained and can be used to make single patient predictions.",
+    "The data is from Keser, Toma et al. “Increased plasma N-glycome complexity is associated with higher risk of type 2 diabetes.” Diabetologia vol. 60,12 (2017): 2352-2360. doi:10.1007/s00125-017-4426-9 and was provided by Dr. Olga Gornik, Faculty of Pharmacy and Biochemistry, University of Zagreb."
+  ],
+  "description_domain": {
+    "pipeline_steps": [
+      {
+        "step_number": 1,
+        "name": "diabetes_classifier.py",
+        "description": "The classifier code takes patient data and labels, cleans the data, maps the peak numbers to GlyTouCan (https://glytoucan.org/) accessions, splits the data into training (80%) and testing (20%) sets, and trains an XGBoost Classifier on the training data. The trained classifier is then serialized and stored as a .pkl file for later use. The trained classifier predicts whether the patient will develop type 2 diabetes or remain normoglycaemic within 10 years. After training, the classifier is run on the test set and metrics are printed.",
+        "version": "1.0",
+        "input_list": [
+          {
+            "filename": "HG_FinnRisk.txt",
+            "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/Diabetes_glycomic_v1/HG_FinnRisk.txt"
+          },
+          {
+            "filename": "gtc_headers.csv",
+            "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/Diabetes_glycomic_v1/gtc_headers.csv"
+          }
+        ],
+        "output_list": [
+          {
+            "filename": "diabetes_classifier.pkl",
+            "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/Diabetes_glycomic_v1/diabetes_classifier.pkl"
+          }
+        ],
+        "prerequisite": [
+          {
+            "name": "diabetes_classifier.py",
+            "uri": {
+              "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/Diabetes_glycomic_v1/diabetes_classifier.py"
+            }
+          }
+        ]
+      },
+      {
+        "step_number": 2,
+        "name": "diabetes_predict.py",
+        "description": "The predictor code expects a single patient input file with abundances for glycans peaks GP1-46, and accepts a file name argument (diabetes_predict.py --file example_input.csv). It then loads the pre-trained XGBoost Classifier from the .pkl file, reads the input data, and reshapes the input data to match the classifier's requirements. The loaded classifier predicts whether the patient will develop type 2 diabetes or remain normoglycaemic within 10 years. The prediction result is printed to the console.",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "diabetes_predict.py",
+            "uri": {
+              "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/Diabetes_glycomic_v1/diabetes_predict.py"
+            }
+          }
+        ],
+        "input_list": [
+          {
+            "filename": "diabetes_classifier.pkl",
+            "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/Diabetes_glycomic_v1/diabetes_classifier.pkl"
+          },
+          {
+            "filename": "example_input.csv",
+            "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/Diabetes_glycomic_v1/example_input.csv"
+          }
+        ]
+      }
+    ]
+  },
+  "parametric_domain": [],
+  "io_domain": {
+    "input_subdomain": [
+      {
+        "uri": {
+          "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/Diabetes_glycomic_v1/HG_FinnRisk.txt",
+          "filename": "HG_FinnRisk.txt"
+        }
+      },
+      {
+        "uri": {
+          "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/Diabetes_glycomic_v1/gtc_headers.csv",
+          "filename": "gtc_headers.csv"
+        }
+      }
+    ]
+  },
+  "execution_domain": {
+    "script": [
+      {
+        "uri": {
+          "filename": "diabetes_classifier.py",
+          "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/Diabetes_glycomic_v1/diabetes_classifier.py"
+        }
+      },
+      {
+        "uri": {
+          "filename": "diabetes_predict",
+          "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/Diabetes_glycomic_v1/diabetes_predict.py"
+        }
+      }
+    ],
+    "script_driver": "",
+    "software_prerequisites": [
+      {
+        "name": "python",
+        "version": "3.11.5",
+        "uri": {
+          "uri": "https://www.python.org/downloads/release/python-3115/"
+        }
+      },
+      {
+        "name": "pandas",
+        "version": "2.1.4",
+        "uri": {
+          "uri": "https://pandas.pydata.org/pandas-docs/version/2.1.4/"
+        }
+      },
+      {
+        "name": "scikit-learn",
+        "version": "1.3.2",
+        "uri": {
+          "uri": "https://scikit-learn.org/stable/whats_new/v1.3.html"
+        }
+      },
+      {
+        "name": "xgboost",
+        "version": "2.0.3",
+        "uri": {
+          "uri": "https://xgboost.readthedocs.io/en/release_2.0.0/"
+        }
+      },
+      {
+        "name": "joblib",
+        "version": "1.3.2",
+        "uri": {
+          "uri": "https://pypi.org/project/joblib/1.3.2/"
+        }
+      },
+      {
+        "name": "numpy",
+        "version": "1.26.3",
+        "uri": {
+          "uri": "https://numpy.org/devdocs/release/1.26.3-notes.html"
+        }
+      }
+    ],
+    "external_data_endpoints": [],
+    "environment_variables": {}
+  },
+  "extension_domain": [],
+  "error_domain": {}
+}
