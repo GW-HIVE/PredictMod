@@ -1,0 +1,216 @@
+{
+  "object_id": "https://biocomputeobject.org/BCO_000501/DRAFT",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/2791object.json",
+  "etag": "",
+  "provenance_domain": {
+    "name": "ccRCC Glycoproteomic",
+    "version": "1.0",
+    "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+    "created": "2024-06-27T16:45:16",
+    "modified": "2024-06-27T17:07:30",
+    "contributors": [
+      {
+        "name": "Karina Martinez",
+        "affiliation": "The George Washington University",
+        "email": "karinamartinez@gwu.edu",
+        "contribution": [
+          "createdBy"
+        ],
+        "orcid": ""
+      }
+    ]
+  },
+  "usability_domain": [
+    "The ccRCC Glycoproteomic model was trained to predict whether a patient is at high or low risk of death or disease progression within 5 years from tumor resection. The training datasets contain intact glycopeptide abundances, biospecimen and clinical metadata from 183 resected clear cell renal cell carcinoma (ccRCC) tumor and normal adjacent tissues collected by the CPTAC program. A Logistic Regression Classifier was trained on 10814 glycopeptide abundances from tumor samples and can be used to make single patient predictions.",
+    "The data is from Lih, T Mamie et al. “Integrated glycoproteomic characterization of clear cell renal cell carcinoma.” Cell reports vol. 42,5 (2023): 112409. doi:10.1016/j.celrep.2023.112409 and was retrieved from the Proteomic Data Commons (PDC) and can be accessed at https://proteomic.datacommons.cancer.gov/pdc/study/PDC000471. "
+  ],
+  "description_domain": {
+    "keywords": [],
+    "xref": [],
+    "platform": [],
+    "pipeline_steps": [
+      {
+        "step_number": 1,
+        "name": "ccrcc_classifier.py",
+        "description": "The classifier code takes patient data, calls the preprocessing utility function, cleans the data, assigns target labels, splits the data into training (80%) and testing (20%) sets. It then runs a pipeline to select the top 0.09% of features based on the MannWhitneyU p-value, standardizes, performs backward sequential feature selection and trains a Logistic Regression Classifier on the training data. The trained classifier is then serialized and stored as a .pkl file for later use. The trained classifier predicts whether the patient is at high or low risk of death or disease progression within 5 years from tumor resection. After training, the classifier is run on the test set and metrics are printed.",
+        "version": "1.0",
+        "input_list": [
+          {
+            "filename": "ccRCC_TMT_intact glycopeptide_abundance_MD-MAD_50percentQuant_imputed.tsv",
+            "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/ccRCC_glycoproteomic_v1/ccRCC_TMT_intact glycopeptide_abundance_MD-MAD_50percentQuant_imputed.tsv"
+          },
+          {
+            "filename": "PDC_study_biospecimen_09182023_104440.tsv",
+            "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/ccRCC_glycoproteomic_v1/PDC_study_biospecimen_09182023_104440.tsv"
+          },
+          {
+            "filename": "PDC_study_clinical_09182023_105327.tsv",
+            "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/ccRCC_glycoproteomic_v1/PDC_study_clinical_09182023_105327.tsv"
+          },
+          {
+            "filename": "PDC_study_clinical_exposure_09182023_105327.tsv",
+            "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/ccRCC_glycoproteomic_v1/PDC_study_clinical_exposure_09182023_105327.tsv"
+          },
+          {
+            "filename": "PDC_study_clinical_followup_09182023_105327.tsv",
+            "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/ccRCC_glycoproteomic_v1/PDC_study_clinical_followup_09182023_105327.tsv"
+          }
+        ],
+        "output_list": [
+          {
+            "filename": "ccrcc_classifier.pkl",
+            "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/ccRCC_glycoproteomic_v1/ccrcc_classifier.pkl"
+          }
+        ],
+        "prerequisite": [
+          {
+            "name": "ccrcc_classifier.py",
+            "uri": {
+              "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/ccRCC_glycoproteomic_v1/ccrcc_classifier.py"
+            }
+          },
+          {
+            "name": "ccrcc_preprocessing.py",
+            "uri": {
+              "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/ccRCC_glycoproteomic_v1/ccrcc_preprocessing.py"
+            }
+          }
+        ]
+      },
+      {
+        "step_number": 2,
+        "name": "diabetes_predict.py",
+        "description": "The predictor code expects a single patient input file with 10814 glycopeptide abundances, and accepts a file name argument (ccrcc_predict.py --file example_input.csv). It then loads the pre-trained Logistic Regression Classifier from the .pkl file, reads the input data, and reshapes the input data to match the classifier's requirements. The loaded classifier predicts whether the patient is at high or low risk of death or disease progression within 5 years from tumor resection. The prediction result is printed to the console.",
+        "version": "1.0",
+        "prerequisite": [
+          {
+            "name": "ccrcc_predict.py",
+            "uri": {
+              "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/ccRCC_glycoproteomic_v1/ccrcc_predict.py"
+            }
+          }
+        ],
+        "input_list": [
+          {
+            "filename": "ccrcc_classifier.pkl",
+            "access_time": "",
+            "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/ccRCC_glycoproteomic_v1/ccrcc_classifier.pkl",
+            "sha1_checksum": ""
+          },
+          {
+            "filename": "example_input.csv",
+            "access_time": "",
+            "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/ccRCC_glycoproteomic_v1/example_input.csv",
+            "sha1_checksum": ""
+          }
+        ]
+      }
+    ]
+  },
+  "parametric_domain": [],
+  "io_domain": {
+    "input_subdomain": [
+      {
+        "uri": {
+          "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/ccRCC_glycoproteomic_v1/ccRCC_TMT_intact glycopeptide_abundance_MD-MAD_50percentQuant_imputed.tsv",
+          "filename": "ccRCC_TMT_intact glycopeptide_abundance_MD-MAD_50percentQuant_imputed.tsv"
+        }
+      },
+      {
+        "uri": {
+          "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/ccRCC_glycoproteomic_v1/PDC_study_biospecimen_09182023_104440.tsv",
+          "filename": "PDC_study_biospecimen_09182023_104440.tsv"
+        }
+      },
+      {
+        "uri": {
+          "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/ccRCC_glycoproteomic_v1/PDC_study_clinical_09182023_105327.tsv",
+          "filename": "PDC_study_clinical_09182023_105327.tsv"
+        }
+      },
+      {
+        "uri": {
+          "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/ccRCC_glycoproteomic_v1/PDC_study_clinical_exposure_09182023_105327.tsv",
+          "filename": "PDC_study_clinical_exposure_09182023_105327.tsv"
+        }
+      },
+      {
+        "uri": {
+          "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/ccRCC_glycoproteomic_v1/PDC_study_clinical_followup_09182023_105327.tsv",
+          "filename": "PDC_study_clinical_followup_09182023_105327.tsv"
+        }
+      }
+    ]
+  },
+  "execution_domain": {
+    "script": [
+      {
+        "uri": {
+          "filename": "ccrcc_classifier.py",
+          "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/ccRCC_glycoproteomic_v1/ccrcc_classifier.py"
+        }
+      },
+      {
+        "uri": {
+          "filename": "ccrcc_predict.py",
+          "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/ccRCC_glycoproteomic_v1/ccrcc_predict.py"
+        }
+      },
+      {
+        "uri": {
+          "filename": "ccrcc_preprocessing.py",
+          "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/ccRCC_glycoproteomic_v1/ccrcc_preprocessing.py"
+        }
+      }
+    ],
+    "script_driver": "",
+    "software_prerequisites": [
+      {
+        "name": "python",
+        "version": "3.11.5",
+        "uri": {
+          "uri": "https://www.python.org/downloads/release/python-3115/"
+        }
+      },
+      {
+        "name": "pandas",
+        "version": "2.1.4",
+        "uri": {
+          "uri": "https://pandas.pydata.org/pandas-docs/version/2.1.4/"
+        }
+      },
+      {
+        "name": "scikit-learn",
+        "version": "1.3.2",
+        "uri": {
+          "uri": "https://scikit-learn.org/stable/whats_new/v1.3.html"
+        }
+      },
+      {
+        "name": "xgboost",
+        "version": "2.0.3",
+        "uri": {
+          "uri": "https://xgboost.readthedocs.io/en/release_2.0.0/"
+        }
+      },
+      {
+        "name": "joblib",
+        "version": "1.3.2",
+        "uri": {
+          "uri": "https://pypi.org/project/joblib/1.3.2/"
+        }
+      },
+      {
+        "name": "numpy",
+        "version": "1.26.3",
+        "uri": {
+          "uri": "https://numpy.org/devdocs/release/1.26.3-notes.html"
+        }
+      }
+    ],
+    "external_data_endpoints": [],
+    "environment_variables": {}
+  },
+  "extension_domain": [],
+  "error_domain": {}
+}

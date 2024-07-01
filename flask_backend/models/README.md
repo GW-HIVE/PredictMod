@@ -18,13 +18,19 @@ EHR SVM model with 65% accuracy. Trained on US patient data from Epic Cosmos, wi
 * Intervention: Keto Diet
 * Data Type: EHR
 
-### Anticipated Models: 
-**Glycomics_PreDM_v1.0:**   
-Glycomics model predicting diagnosis of Type 2 Diabetes Mellitus.    
+**Diabetes_glycomic_v1:**   
+XGBoost model predicting whether patient will develop type 2 diabetes or remain normoglycaemic within 10 years, based on N-glycomic data.    
 * Condition: Type 2 Diabetes Mellitus
 * Intervention: Null (No Intervention)
-* Data Type: Glycomics
+* Data Type: Glycomic
 
+**ccRCC_glycoproteomic_v1:**   
+Logistic regression model predicting whether the patient is at high or low risk of death or disease progression within 5 years from tumor resection, based on N-glycoproteomic data.
+* Condition: Clear cell renal cell carcinoma
+* Intervention: Null (No Intervention)
+* Data Type: Glycoproteomic
+
+### Anticipated Models: 
 **Epilepsy_Keto_v1.1:**   
 MG Logistic Regression model predicting 50% reduction in seizure frequency following a ketogenic diet intervention.  
 * Condition: Epilepsy
