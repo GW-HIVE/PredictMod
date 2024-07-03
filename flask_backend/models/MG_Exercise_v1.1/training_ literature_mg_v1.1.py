@@ -6,7 +6,7 @@ from sklearn.ensemble import RandomForestClassifier
 import numpy as np
 
 # Load dataset
-train_table = pd.read_csv("upsampled_data.csv")
+train_table = pd.read_csv("cleaned_literature_mg_v1.1.csv")
 # Split dataset into training (75%) and testing (25%) set
 X = train_table.drop(["Status", "Reference"], axis=1)
 y = train_table["Status"]
