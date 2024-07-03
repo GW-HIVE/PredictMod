@@ -97,6 +97,18 @@
             <!-- <input type="text" v-model="email" /> -->
           </v-row>
           </v-col>
+          <v-col>
+            <v-row>
+              <v-select 
+                :items="userRoles" 
+                v-model="roleSelection" 
+                :hint="'User role'"
+                item-title="title"
+                item-value="value"
+              >
+              </v-select>
+            </v-row>
+          </v-col>
           <v-row :v-if="userError" v-for="err in userError">
             <p style="color:#FF0000">
               {{ err }}
@@ -175,6 +187,12 @@ export default {
         newPassword: "",
         newPasswordConfirmation: "",
         loginError: "",
+        roleSelection: 3,
+        userRoles: [
+          {title: "Patient", value: 1},
+          {title: "Clinician", value:2},
+          {title: "Researcher", value: 3}],
+        role: "",
         userError: [],
         loggedIn: false,
         showAdmin: false,
@@ -250,16 +268,16 @@ export default {
         // )
 
         if (this.newEmail != this.newEmailConfirmation) {
-          this.userError.push("New email doesn't match");
+          this.userError.push("New email doesn't match\n");
         }
         if (this.newPassword != this.newPasswordConfirmation) {
-          this.userError.push("\nNew passwords don't match\n");
+          this.userError.push("New passwords don't match\n");
         }
         if (this.userError.length > 0) {
           return;
         }
         const success = await this.userStore.createUser(
-          this.newEmail, this.newPassword, this.firstName, this.lastName
+          this.newEmail, this.newPassword, this.firstName, this.lastName, this.roleSelection
         );
         if (success) {
           this.clearState();

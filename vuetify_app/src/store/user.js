@@ -7,6 +7,7 @@ export const useUserStore = defineStore("user", {
     user: null,
     token: null,
     isAdmin: false,
+    role: 0,
     isAuthenticated: false,
     error: null,
     targetURL: import.meta.env.DEV ? import.meta.env.VITE_DEV_MIDDLEWARE_BASE + '/api' : '/predictmod/api',
@@ -24,7 +25,7 @@ export const useUserStore = defineStore("user", {
     },
 
     handleUserResponse(response) {
-      // console.log("Handling response: %s", JSON.stringify(response));
+      console.log("Handling response: %s", JSON.stringify(response));
       if (response.error) {
         this.error = response.error;
         return false;
@@ -48,8 +49,22 @@ export const useUserStore = defineStore("user", {
         this.isAdmin = false
       };
 
+      if (response.role) {
+        console.log("Confirming role presence: ", response.role);
+        switch(response.role) {
+          case "Researcher":
+            this.role = 3; break;
+          case "Clinician":
+            this.role = 2; break;
+          case "Patient":
+            this.role = 1; break;
+          default:
+            console.log("===> ERROR on role: Fond value ", response.role);
+        }
+      };
+
       if (!response.username) {
-        console.log("Got a response username: %s", response.username);
+        console.log("Got a response non-username: %s", response.username);
         this.user = null;
         this.token = null;
         return false;
@@ -155,8 +170,8 @@ export const useUserStore = defineStore("user", {
 
     },
 
-    async createUser(email, password, firstName, lastName) {
-      console.log("--> Attempting to register user with credentials:\nUser %s Password: %s\n Name: %s %s", email, password, firstName, lastName);
+    async createUser(email, password, firstName, lastName, userRole) {
+      console.log("--> Attempting to register user with credentials:\nUser %s Password: %s\n Name: %s %s\nRole", email, password, firstName, lastName, userRole);
 
       const res = await fetch(`${this.targetURL}/create-user/`, {
         method: "POST",
@@ -173,6 +188,7 @@ export const useUserStore = defineStore("user", {
             "last_name": lastName,
             "email": email,
             "password": password,
+            "category": userRole,
           }
         )
       })

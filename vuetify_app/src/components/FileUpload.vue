@@ -65,7 +65,7 @@
       <v-alert v-if="message" color="blue-grey" class="pa-5" dark>
         {{ message }}
       </v-alert>
-      <v-row class="pa-5" v-if="showChart">
+      <v-row class="pa-5" v-if="showChart && this.checkUser()">
         <StandinChart v-if="standIn" />
         <SHAPForcePlot 
           v-if="chartData" 
@@ -95,7 +95,7 @@
         
       </v-row>
     </v-container>
-        <v-container>
+        <v-container v-if="this.checkUser()">
         <v-overlay
           v-model="toggleOverlay"
           @click.prevent="toggleOverlay = !toggleOverlay"
@@ -119,14 +119,19 @@
   <script>
 
 import UploadService from "@/services/UploadService";
-  import StandinChart from "@/components/StandinChart.vue";
-  import SHAPForcePlot from "@/components/SHAPForcePlot.vue";
-  import * as XLSX from 'xlsx';
+import StandinChart from "@/components/StandinChart.vue";
+import SHAPForcePlot from "@/components/SHAPForcePlot.vue";
+import { useUserStore } from "@/store/user";
+import * as XLSX from 'xlsx';
 
   export default {
     name: "upload-files",
     props: {
         uploadTargetURL: String,
+    },
+    setup() {
+      const userStore = useUserStore();
+      return { userStore };
     },
     components: { SHAPForcePlot, StandinChart },
     data() {
@@ -145,6 +150,10 @@ import UploadService from "@/services/UploadService";
       };
     },
     methods: {
+        checkUser() {
+          console.log("Checking user ROLE: ", this.userStore.role);
+          return this.userStore.role > 2;
+        },
         forceRedraw() {
           this.counterToken += 1;
         },
