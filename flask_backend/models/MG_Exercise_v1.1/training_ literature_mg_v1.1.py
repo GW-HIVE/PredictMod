@@ -16,8 +16,12 @@ X_train, X_test, y_train, y_test = train_test_split(
 # Train Random Forest Classifier with dataset
 RF = RandomForestClassifier(random_state=123)
 RF.fit(X_train, y_train)
-# Make predictions from a single patient's data
-sample = pd.read_csv("unknown_response.csv")
-sample = sample.drop(["Status"], axis=1)
-prediction = RF.predict(sample)
-print(f"Prediction based on metagenomic profile: {prediction}")
+#%%
+#Convert model into pickle 
+#Filename should be as follows: [resource]_[version #].pkl 
+model = DTC
+filename = "mdclone_v1.1.pkl"
+with open(filename, "wb") as fp:
+    pickle.dump(model, fp)
+fp.close()
+#%%
