@@ -1,1 +1,207 @@
-
+{
+  "object_id": "https://biocomputeobject.org/BCO_000496/DRAFT",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/2791object.json",
+  "etag": "b33444eca81c60e6a85cbc1bc30fed211b5a5310e285c07537525e51fcd10582",
+  "provenance_domain": {
+    "name": "mdclone_diet_counseling",
+    "version": "v1.1",
+    "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+    "created": "2024-06-03T17:44:57",
+    "modified": "2024-06-25T01:27:13.318Z",
+    "contributors": [
+      {
+        "name": "Urnisha Bhuiyan",
+        "affiliation": "George Washington University",
+        "email": "sbhuiyan28@email.gwu.edu",
+        "contribution": [
+          "createdBy"
+        ],
+        "orcid": ""
+      },
+      {
+        "name": "Miguel Mazumder",
+        "affiliation": "George Washington University",
+        "email": "mfmmazumder@gwmail.gwu.edu",
+        "contribution": [
+          "createdBy"
+        ]
+      },
+      {
+        "name": "Patrick McNeely ",
+        "affiliation": "George Washington University",
+        "email": "pmcneely@email.gwu.edu",
+        "contribution": [
+          "createdBy"
+        ]
+      },
+      {
+        "name": "Lori Krammer",
+        "affiliation": "George Washington University ",
+        "email": "lorikrammer@email.gwu.edu",
+        "contribution": [
+          "createdBy"
+        ]
+      }
+    ]
+  },
+  "usability_domain": [
+    "MDClone (https://www.mdclone.com/) is a synthetic patient data platform that collaborates with the Veterans Affairs (VA) to generate synthetic patients that exhibit similar statistics to the veterans. This allows for data transfer internally and externally without the compromise of any personal patient information. They also house real-world data that may be accessed upon additional clearance that contains data such as EHR, lab results, procedures, medications, and lifestyle intervention data. \n\nThe EHR housed within the MDClone platform has been leveraged by PredictMod to generate an intervention-predictive model for diet counseling prescribed for prediabetes. This model leverages a decision tree classifier to predict response outcome by a patient's ability to reduce their weight by >/= 5 lbs (responder) or not (non-responder). "
+  ],
+  "description_domain": {
+    "pipeline_steps": [
+      {
+        "step_number": 1,
+        "name": "cleaning_mdclone",
+        "description": "This script conducts the following preprocessing steps: \n1. Determine R/NR labeling based on weight reduction (=/>5 weight reduction = responder (R) and <5 weight reduction = non-responder NR)\n2. Drop irrelevant columns \n3. Merge loinc and key features into a singular feature for each EHR variable.\n4. Get dummy values for categorical values (race, sex, and ethnicity) ",
+        "version": "1.1",
+        "input_list": [
+          {
+            "filename": "raw_mdclone_v1.1.csv",
+            "access_time": "2024-06-14T04:00:00.000Z",
+            "uri": "https://github.com/GW-HIVE/PredictMod/tree/main/flask_backend/models/MDClone_Diet_Counseling_v1.1"
+          },
+          {
+            "filename": "cleaning_mdclone_v1.1.py",
+            "access_time": "2024-06-14T04:00:00.000Z",
+            "uri": "https://github.com/GW-HIVE/PredictMod/tree/main/flask_backend/models/MDClone_Diet_Counseling_v1.1"
+          }
+        ],
+        "output_list": [
+          {
+            "filename": "clean_mdclone_v1.1.csv",
+            "access_time": "2024-06-14T04:00:00.000Z",
+            "uri": "https://github.com/GW-HIVE/PredictMod/tree/main/flask_backend/models/MDClone_Diet_Counseling_v1.1"
+          }
+        ]
+      },
+      {
+        "step_number": 2,
+        "name": "training_mdclone",
+        "description": "This script intends to perform the following:\n1. Use clean_mdclone_v1.1.csv file to train a decision tree classifier, generate a classification report,  and store this model into a pickle file. ",
+        "version": "1.1",
+        "input_list": [
+          {
+            "filename": "clean_mdclone_v1.1.csv",
+            "access_time": "2024-06-14T04:00:00.000Z",
+            "uri": "https://github.com/GW-HIVE/PredictMod/tree/main/flask_backend/models/MDClone_Diet_Counseling_v1.1"
+          },
+          {
+            "filename": "training_mdclone_v1.1.py",
+            "access_time": "2024-06-14T04:00:00.000Z",
+            "uri": "https://github.com/GW-HIVE/PredictMod/tree/main/flask_backend/models/MDClone_Diet_Counseling_v1.1"
+          }
+        ],
+        "output_list": [
+          {
+            "filename": "mdclone_v1.1.pickle",
+            "access_time": "2024-06-14T04:00:00.000Z",
+            "uri": "https://github.com/GW-HIVE/PredictMod/tree/main/flask_backend/models/MDClone_Diet_Counseling_v1.1"
+          }
+        ]
+      },
+      {
+        "step_number": 3,
+        "name": "model_evaluation",
+        "description": "The following script performs model evaluation by conducting. the following: \n1. Generate classification report \n2. Generate feature importance ",
+        "version": "1.1",
+        "input_list": [
+          {
+            "filename": "mdclone_v1.1.pkl",
+            "access_time": "2024-06-14T04:00:00.000Z",
+            "uri": "https://github.com/GW-HIVE/PredictMod/tree/main/flask_backend/models/MDClone_Diet_Counseling_v1.1"
+          },
+          {
+            "filename": "predicting_mdclone_v1.1.py",
+            "access_time": "2024-06-14T04:00:00.000Z",
+            "uri": "https://github.com/GW-HIVE/PredictMod/tree/main/flask_backend/models/MDClone_Diet_Counseling_v1.1"
+          }
+        ],
+        "output_list": [
+          {
+            "filename": "prediction_mdclone_v1.1.csv",
+            "access_time": "2024-06-14T04:00:00.000Z",
+            "uri": "https://github.com/GW-HIVE/PredictMod/tree/main/flask_backend/models/MDClone_Diet_Counseling_v1.1"
+          }
+        ]
+      }
+    ],
+    "keywords": [
+      "Python",
+      "Machine Learning",
+      "Diet Counseling "
+    ],
+    "platform": [
+      "VS Code"
+    ]
+  },
+  "parametric_domain": [],
+  "io_domain": {
+    "input_subdomain": [
+      {
+        "uri": {
+          "filename": "raw_mdclone_v1.1.csv",
+          "uri": "https://github.com/GW-HIVE/PredictMod/tree/main/flask_backend/models/MDClone_Diet_Counseling_v1.1"
+        }
+      }
+    ],
+    "output_subdomain": [
+      {
+        "mediatype": "pickle",
+        "uri": {
+          "filename": "mdclone_v1.1.pickle",
+          "uri": "https://github.com/GW-HIVE/PredictMod/tree/main/flask_backend/models/MDClone_Diet_Counseling_v1.1",
+          "access_time": "2024-06-14T04:00:00.000Z"
+        }
+      },
+      {
+        "mediatype": "png",
+        "uri": {
+          "filename": "feature_imp_mdclone_v1.1.png",
+          "uri": "https://github.com/GW-HIVE/PredictMod/tree/main/flask_backend/models/MDClone_Diet_Counseling_v1.1",
+          "access_time": "2024-06-17T04:00:00.000Z"
+        }
+      }
+    ]
+  },
+  "execution_domain": {
+    "script": [],
+    "script_driver": "",
+    "software_prerequisites": [
+      {
+        "name": "Python",
+        "version": "3.9.5",
+        "uri": {
+          "uri": "https://www.python.org/",
+          "access_time": "2024-06-14T04:00:00.000Z"
+        }
+      },
+      {
+        "name": "pandas",
+        "version": "1.4.1",
+        "uri": {
+          "uri": "https://pandas.pydata.org/",
+          "access_time": "2024-06-14T04:00:00.000Z"
+        }
+      },
+      {
+        "name": "numpy",
+        "version": "1.22.3",
+        "uri": {
+          "uri": "https://numpy.org/",
+          "access_time": "2024-06-14T04:00:00.000Z"
+        }
+      },
+      {
+        "name": "sklearn",
+        "version": "1.4.1.post1",
+        "uri": {
+          "uri": "https://scikit-learn.org/stable/"
+        }
+      }
+    ],
+    "external_data_endpoints": [],
+    "environment_variables": {}
+  },
+  "extension_domain": [],
+  "error_domain": {}
+}
