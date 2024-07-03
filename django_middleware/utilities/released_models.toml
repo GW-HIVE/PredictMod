@@ -1,16 +1,17 @@
-
+########### MDClone_Diet_Exercise ###############
 [MDClone_Diet_Exercise]
 name = "MDClone Diet Exercise"
 version = "1.1"
 release_date = 2023-12-01
 model_type = "Decision Tree Classifier (DTC)"
-data_type = "EHR"
+data_type = "EHR Diet"
 backend = "PredictModBackend"
 
 [MDClone_Diet_Exercise.data_meta]
 Patients = 19842
 "Data Features" = 19
-
+#################################################
+########### MDClone_Diet_Exercise ###############
 [Metagenomic_Exercise]
 name = "MG Exercise"
 version = "1.1"
@@ -22,4 +23,42 @@ backend = "PredictModBackend"
 [Metagenomic_Exercise.data_meta]
 Patients = 40
 Genomes = 281
+#################################################
+########### ccRCC Glycoproteomic ###############
+["ccRCC Glycoproteomic"]
+BCO = "ccRCC_glycoproteomic_v1/BCO_ccRCC_Glycoproteomic.json"
+# Was not in the BCO
+data_type = "ccRCC"
+model_type = "Logistic Regression Classifier"
 
+["ccRCC Glycoproteomic".data_meta]
+
+########### Diabetes_EHR ###############
+[Diabetes_EHR]
+BCO = "Diabetes_EHR_v1/BCO_raw_Diabetes_EHR_Classifier.json"
+model_type = "Decision Tree Classifier (DTC)"
+data_type = "Metagenomic"
+
+[Diabetes_EHR.data_meta]
+#################################################
+########### Diabetes Glycomic ###############
+["Diabetes Glycomic"]
+BCO = "Diabetes_glycomic_v1/BCO_Diabetes_Glycomic.json"
+model_type = "Decision Tree Classifier (DTC)"
+data_type = "Metagenomic"
+
+["Diabetes Glycomic".data_meta]
+#################################################
+
+########### Epilepsy_classifier_1.1 ###############
+["Epilepsy_classifier_1.1"]
+BCO = "Epilepsy_microbiome_v1/BCO_raw_Epilepsy_classifier.json"
+# Guessing; BCOs don't contain. Also, is this EHR, metagenomic, etc?
+data_type = "Epilepsy EHR"
+model_type = "Decision Tree Classifier (DTC)"
+
+["Epilepsy_classifier_1.1".data_meta]
+# Taken from README, BCOs should contain this in future
+Patients = 500
+Features = 188
+#################################################
