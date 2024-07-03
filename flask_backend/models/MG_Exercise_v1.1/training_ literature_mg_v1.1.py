@@ -19,8 +19,8 @@ RF.fit(X_train, y_train)
 #%%
 #Convert model into pickle 
 #Filename should be as follows: [resource]_[version #].pkl 
-model = DTC
-filename = "mdclone_v1.1.pkl"
+model = RF
+filename = "literature_mg_v1.1.pkl"
 with open(filename, "wb") as fp:
     pickle.dump(model, fp)
 fp.close()
