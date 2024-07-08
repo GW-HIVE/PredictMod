@@ -7,95 +7,71 @@ import json
 import logging
 import pickle
 import io
-from base64 import b64encode
+
+from model_handlers import (
+    MDClone_EHRTreeHandler,
+    MGTreeHandler,
+    ccRCC_ClassifierHandler,
+    Diabetes_EHR_Handler,
+    Diabetes_Glycomic_Handler,
+    Epilepsy_Microbiome_Handler,
+)
+
+# from base64 import b64encode
 
 import numpy as np
 import pandas as pd
-import matplotlib
-import matplotlib.pyplot as plt
-import shap
 
+# import matplotlib
+# import matplotlib.pyplot as plt
+# import shap
 
-class MGTreeHandler:
-    def __init__(self):
-        with open("pickled_mg_tree.pickle", "rb") as fp:
-            self.pickled_tree = pickle.load(fp)
-        fp.close()
+MODELS_DIR = "models"
 
-    def make_prediction(self, data):
-        prediction = self.pickled_tree.predict(data)[0]
-        if prediction == "R":
-            return "This patient is expected to respond to the intervention based on Metagenomic input"
-        return "This patient is not expected to respond to the intervention based on Metagenomic input"
+DETAIL_LOOKUP = {
+    "MDClone-Diet-Exercise": "MDClone_Diet_Counseling_v1.1/README.md",
+    "MG-Exercise": "MG_Exercise_v1.1/README.md",
+    "ccRCC-Glycoproteomic": "ccRCC_glycoproteomic_v1/README.md",
+    "Diabetes_EHR": "Diabetes_EHR_v1/README.md",
+    "Diabetes-Glycomic": "Diabetes_glycomic_v1/README.md",
+    "Epilepsy_classifier_1.1": "Epilepsy_microbiome_v1/README.md",
+}
 
+DOWNLOAD_LOOKUP = {
+    "MDClone-Diet-Exercise": "MDClone_Diet_Counseling_v1.1/MDClone_unknown3.csv",
+    "MG-Exercise": "MG_Exercise_v1.1/unknown_response.csv",
+    "ccRCC-Glycoproteomic": "ccRCC_glycoproteomic_v1/example_input.csv",
+    "Diabetes_EHR": "Diabetes_EHR_v1/single_patient_input.xlsx",
+    "Diabetes-Glycomic": "Diabetes_glycomic_v1/example_input.csv",
+    "Epilepsy_classifier_1.1": "Epilepsy_microbiome_v1/single_patient_sample.xlsx",
+}
 
-class MDClone_EHRTreeHandler:
-    def __init__(self):
-        with open(
-            "./models/MDClone_Diet_Counseling_v1.1/MDClone_DTCv1.2.pickle", "rb"
-        ) as fp:
-            pickled_tree = pickle.load(fp)
-        fp.close()
-        self.pickled_tree = pickled_tree
-        self.explainer = shap.Explainer(pickled_tree)
-        # For shipping images
-
-    def make_prediction(self, data):
-        prediction = self.pickled_tree.predict(data)[0]
-        shap_values = self.explainer.shap_values(data)
-        result = "expected" if prediction == "R" else "not expected"
-        # To return an image
-        shap.force_plot(
-            self.explainer.expected_value[0],
-            shap_values[0],
-            data.iloc[0],
-            matplotlib=True,
-            show=False,
-        )
-        buf = io.BytesIO()
-        # XXX?
-        # width, height = plt.gcf().get_size_inches()
-        # app.logger.debug(f"Image dimensions are {height} x {width}")
-        # plt.gcf().set_size_inches(height * 2, width * 2)
-        # app.logger.debug(
-        #     "Image dimensions are NOW {0} x {1}".format(*(plt.gcf().get_size_inches()))
-        # )
-        plt.savefig(buf, format="png", bbox_inches="tight")
-        b64_image = b64encode(buf.getvalue()).decode("utf-8").replace("\n", "")
-        return {
-            "result": f"This patient is {result} to respond to the intervention based on EHR input",
-            "image": b64_image,
-        }
-        # To return JSONified information
-        # fp = shap.force_plot(
-        #     self.explainer.expected_value[0], shap_values[0], data.iloc[0]
-        # )
-        # return {
-        #     "result": f"This patient is {result} to respond to the intervention based on EHR input",
-        #     "plot": json.dumps(fp.data),
-        # }
-
+HANDLERS = {
+    "MDClone-Diet-Exercise": MDClone_EHRTreeHandler(),
+    "MG-Exercise": MGTreeHandler(),
+    "ccRCC-Glycoproteomic": ccRCC_ClassifierHandler(),
+    "Diabetes_EHR": Diabetes_EHR_Handler(),
+    "Diabetes-Glycomic": Diabetes_Glycomic_Handler(),
+    "Epilepsy_classifier_1.1": Epilepsy_Microbiome_Handler(),
+}
 
 app = Flask(__name__)
 cors = CORS(app)
 app.config["CORS_HEADERS"] = "Content-Type"
 
-DOWNLOAD_FOLDER = os.path.abspath(os.path.join("./", "models"))
-MG_EXAMPLE = os.path.join(DOWNLOAD_FOLDER, "MG_Exercise_v1.1/unknown_response.csv")
-
-EHR_EXAMPLE = os.path.join(
-    DOWNLOAD_FOLDER, "MDClone_Diet_Counseling_v1.1/MDClone_unknown3.csv"
-)
-
-DOWNLOAD_ENDPOINTS = {
-    "mg": MG_EXAMPLE,
-    "ehr": EHR_EXAMPLE,
-}
-
 app.logger.setLevel(logging.DEBUG)
 
-metagenomic_predictor = MGTreeHandler()
-mdclone_ehr_predictor = MDClone_EHRTreeHandler()
+
+@app.route("/model-details", methods=["GET"])
+def model_details():
+    query = request.args.get("q", None)
+    app.logger.debug(f"Found detail request arg: {query}")
+    if query not in DETAIL_LOOKUP.keys():
+        return jsonify({"details": f"## _Model details for {query} are coming soon!_"})
+    details_path = os.path.join(MODELS_DIR, DETAIL_LOOKUP[query])
+    with open(details_path, "r") as fp:
+        raw_markdown = fp.read()
+    return jsonify({"details": raw_markdown})
 
 
 @app.route("/query", methods=["GET"])
@@ -116,15 +92,17 @@ def query():
 @cross_origin()
 def download():
     query = request.args.get("q", None)
-    if not query or query not in DOWNLOAD_ENDPOINTS.keys():
+    if not query or query not in DOWNLOAD_LOOKUP.keys():
         return Response(f"Error!")
     try:
-        download_path = DOWNLOAD_ENDPOINTS[query]
+        download_path = os.path.join(MODELS_DIR, DOWNLOAD_LOOKUP[query])
         extension = download_path.split(".")[-1]
         if extension == "xlsx":
             df = pd.read_excel(download_path)
         elif extension == "csv":
             df = pd.read_csv(download_path)
+        elif extension == "tsv":
+            df = pd.read_csv(download_path, sep="\t")
         else:
             return Response(f"Unsupported extension {extension}", status=500)
         return jsonify(df.to_json(orient="records"))
@@ -146,19 +124,28 @@ def ping():
 @app.route("/upload", methods=["POST"])
 def upload():
     target = request.args.get("q", None)
-    if target == "mg":
-        raw_data = request.get_json()
-        headers, data = raw_data[0], np.array([raw_data[1]])
-        df = pd.DataFrame(data, columns=headers)
-        df = df.drop(["Status"], axis=1)
-        return jsonify({"result": metagenomic_predictor.make_prediction(df)})
-    elif target == "ehr":
-        raw_data = request.get_json()
-        headers, data = raw_data[0], np.array([raw_data[1]])
-        df = pd.DataFrame(data, columns=headers)
-        return jsonify(mdclone_ehr_predictor.make_prediction(df))
+    if target not in HANDLERS.keys():
+        app.logger.debug("*" * 40)
+        app.logger.debug(f"Target: {target}")
+        app.logger.debug(f"Keys: {[k for k in HANDLERS.keys()]}")
+        app.logger.debug("*" * 40)
+        return jsonify({"error": "Illegal upload target error"})
     else:
-        return jsonify({"error": "Illegal upload target error"}, status=404)
+        raw_data = request.get_json()
+        return jsonify(HANDLERS[target].make_prediction(raw_data))
+    # if target == "mg":
+    #     raw_data = request.get_json()
+    #     headers, data = raw_data[0], np.array([raw_data[1]])
+    #     df = pd.DataFrame(data, columns=headers)
+    #     df = df.drop(["Status"], axis=1)
+    #     return jsonify({"result": metagenomic_predictor.make_prediction(df)})
+    # elif target == "ehr":
+    #     raw_data = request.get_json()
+    #     headers, data = raw_data[0], np.array([raw_data[1]])
+    #     df = pd.DataFrame(data, columns=headers)
+    #     return jsonify(mdclone_ehr_predictor.make_prediction(df))
+    # else:
+    #     return jsonify({"error": "Illegal upload target error"}, status=404)
 
 
 @app.route("/mg-upload", methods=["POST"])
