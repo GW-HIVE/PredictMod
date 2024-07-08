@@ -12,8 +12,8 @@ with open("./utilities/released_models.toml", "rb") as fp:
 with open("./utilities/pending_models.toml", "rb") as fp:
     pending_configs = tomli.load(fp)
 
-DRY_RUN = True
-BCO_DIR = os.path.abspath("../flask_backend/models/")
+DRY_RUN = False
+BCO_DIR = os.path.abspath("../flask_backend/models")
 
 print(f"Examining file {BCO_DIR}")
 
@@ -26,9 +26,10 @@ def handle_BCO(bco_path):
     formatted_info = {
         "name": bco["provenance_domain"]["name"],
         "version": bco["provenance_domain"]["version"],
-        "release_date": time.strptime(
-            bco["provenance_domain"]["modified"], "%Y-%m-%dT%H:%M:%S"
-        ),
+        # "release_date": time.strptime(
+        #     bco["provenance_domain"]["modified"], "%Y-%m-%dT%H:%M:%S"
+        # ),
+        "release_date": bco["provenance_domain"]["modified"].split("T")[0],
     }
     return formatted_info
 
@@ -39,11 +40,12 @@ for k, v in released_configs.items():
         bco_info = handle_BCO(v["BCO"])
         print(f"===Got info: {bco_info}")
         v.pop("BCO")
+        # Requires python 3.9+
         v = v | bco_info
         print(f"{v}")
-    # Requires python 3.9+
     if DRY_RUN:
         continue
+    link = "{}".format(v["name"].replace(" ", "-"))
     ReleasedModel.objects.create(
         name=v["name"],
         version=v["version"],
@@ -52,14 +54,14 @@ for k, v in released_configs.items():
         model_type=v["model_type"],
         data_meta=v["data_meta"],
         backend=v["backend"],
+        link=link,
     )
 
 for k, v in pending_configs.items():
     print(f"Creating Model ---> {k}")
     if DRY_RUN:
         continue
+    link = "{}-anticipated".format(v["name"].replace(" ", "-"))
     PendingModel.objects.create(
-        name=v["name"],
-        version=v["version"],
-        data_type=v["data_type"],
+        name=v["name"], version=v["version"], data_type=v["data_type"], link=link
     )

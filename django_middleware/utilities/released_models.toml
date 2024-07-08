@@ -30,6 +30,7 @@ BCO = "ccRCC_glycoproteomic_v1/BCO_ccRCC_Glycoproteomic.json"
 # Was not in the BCO
 data_type = "ccRCC"
 model_type = "Logistic Regression Classifier"
+backend = "PredictModBackend"
 
 ["ccRCC Glycoproteomic".data_meta]
 
@@ -38,6 +39,7 @@ model_type = "Logistic Regression Classifier"
 BCO = "Diabetes_EHR_v1/BCO_raw_Diabetes_EHR_Classifier.json"
 model_type = "Decision Tree Classifier (DTC)"
 data_type = "Metagenomic"
+backend = "PredictModBackend"
 
 [Diabetes_EHR.data_meta]
 #################################################
@@ -46,6 +48,7 @@ data_type = "Metagenomic"
 BCO = "Diabetes_glycomic_v1/BCO_Diabetes_Glycomic.json"
 model_type = "Decision Tree Classifier (DTC)"
 data_type = "Metagenomic"
+backend = "PredictModBackend"
 
 ["Diabetes Glycomic".data_meta]
 #################################################
@@ -56,6 +59,7 @@ BCO = "Epilepsy_microbiome_v1/BCO_raw_Epilepsy_classifier.json"
 # Guessing; BCOs don't contain. Also, is this EHR, metagenomic, etc?
 data_type = "Epilepsy EHR"
 model_type = "Decision Tree Classifier (DTC)"
+backend = "PredictModBackend"
 
 ["Epilepsy_classifier_1.1".data_meta]
 # Taken from README, BCOs should contain this in future
