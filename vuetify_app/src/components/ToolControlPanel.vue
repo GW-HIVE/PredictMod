@@ -4,7 +4,7 @@
 <v-btn type="submit" @click="alertTBD(source=`Review`)">
     Review Available Models
 </v-btn>
-<router-link :to="queryState.modelAnchor">
+<router-link :to="queryState.modelAnchor" v-if="!targetURL">
     <v-btn>
         Learn More
     </v-btn>
@@ -18,7 +18,7 @@
 </v-col>
 <v-col cols="11">
 <v-row class="justify-center pa-2" v-if="loggedIn">
-    <FileUpload :upload-target-u-r-l="queryState.targetURL" />
+    <FileUpload :upload-target-u-r-l="targetURL ? modelName : queryState.targetURL" />
 </v-row>
 </v-col>
 <v-col cols="11">
@@ -58,17 +58,19 @@ export default {
             return this.userStore.user ? true : false
         },
     },
-    // props: {
-        // selections: Object,
-        // targetURL: String,
+    props: {
+        targetURL: String,
+        modelName: String,
         // modelAnchor: String,
-    // },
+    },
     methods: {
         alertTBD(source) {
             alert(source + " functionality is under construction");
         },
         async downloadPreview() {
-            const response = await DownloadService.download(this.queryState.targetURL, () => {
+            const targetName = this.modelName ? this.modelName : this.queryState.targetURL;
+            // console.log("TCP: Downloading from target ", targetName);
+            const response = await DownloadService.download(targetName, () => {
             });
             // console.log("TCP: Collected data:\n%s", response);
             this.queryState.filePreviewData = response;

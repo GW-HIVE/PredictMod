@@ -1,7 +1,7 @@
 <template>
     <v-card v-for="obj in data" variant="flat" class="text-left">
     <v-card-title>
-        {{ obj.fields.name }}
+        <a :href=modelsURL+obj.fields.link>{{ obj.fields.name }}</a>
     </v-card-title>
     <v-card-text>
         Version: {{ obj.fields.version }}<br>
@@ -17,10 +17,19 @@
 </template>
 
 <script>
+
+const modelsURL = '/predictmod/models/'
+// const modelsURL = import.meta.env.DEV ? import.meta.env.VITE_DEV_MIDDLEWARE_BASE + '/models/': "/predictmod/models/";
+
 export default {
     name: "ReleasedModels",
     props: {
         data: Object,
+    },
+    data() {
+        return {
+            modelsURL: modelsURL,
+        }
     },
     mounted() {
     },

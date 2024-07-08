@@ -69,6 +69,17 @@
         <router-link to="/predictmod/query-builder">
               <v-btn color="primary">Try it out</v-btn>
         </router-link>
+        <v-card flat color="transparent"> 
+          <v-card-title class="title text-center font-weight-bold">
+            Explore models in the PredictMod platform
+          </v-card-title>
+          <v-card-text class="text-center">
+            See the models that make up the PredictMod platform ecosystem
+          </v-card-text>
+        </v-card>
+        <router-link to="/predictmod/models">
+              <v-btn color="primary">Start exploring</v-btn>
+        </router-link>
         <v-row>
 
       </v-row>
@@ -86,7 +97,7 @@
         <v-card-title class="title text-center font-weight-bold">
           <h3>Model Statistics</h3>
         </v-card-title>
-        <ReleasedModels :data="releasedModels" v-if="show_models" />
+        <ReleasedModels :data="this.appStore.releasedModels" v-if="show_models" />
         <!--- <v-card-text>
         <v-row>
         <v-col cols="6" class="text-left">
@@ -131,7 +142,7 @@
           <h3>Anticipated Future Models</h3>
         </v-card-title>
 
-        <PendingModels :data="pendingModels" v-if="show_models" />
+        <PendingModels :data="this.appStore.pendingModels" v-if="show_models" />
 
         <!-- <v-card-text class="text-center">
           <v-row>
@@ -199,13 +210,12 @@ import { onMounted, ref } from 'vue';
 // import SimpleUploadEHR from './SimpleUploadEHR.vue';
 import ReleasedModels from '@/components/ReleasedModels.vue';
 import PendingModels from '@/components/PendingModels.vue';
+import { useAppStore } from '@/store/app';
 import DisclaimerShow from './DisclaimerShow.vue';
 import NotFound from './NotFound.vue';
 import LicenseShow from './LicenseShow.vue';
 
 import axios from "axios";
-
-const modelsURL = import.meta.env.DEV ? import.meta.env.VITE_DEV_MIDDLEWARE_BASE + '/api/models/': "/predictmod/api/models/";
 
 export default {
 
@@ -218,6 +228,10 @@ export default {
         show_models: false,
 			}
     },
+  setup() {
+    const appStore = useAppStore();
+    return { appStore };
+  },
   mounted() {
     this.getModels();
   },
@@ -226,17 +240,11 @@ export default {
       alert(source + " functionality is under development");
     },
     async getModels() {
-      const response = await axios.get(modelsURL);
-      if (!response.status === 200) {
-        console.log("---> Error!\n%s", response.status);
-      } else {
-        this.releasedModels = JSON.parse(response.data.released_models);
-        this.pendingModels = JSON.parse(response.data.pending_models);
-        this.show_models = true;
-      }
-    }
+      this.appStore.getModels();
+      this.show_models = true;
+    },
   },
-  components: { ReleasedModels, PendingModels, DisclaimerShow, NotFound, LicenseShow }
+  components: { ReleasedModels, PendingModels, DisclaimerShow, NotFound, LicenseShow },
 }
 </script>
 
