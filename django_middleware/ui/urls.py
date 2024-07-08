@@ -13,6 +13,7 @@ urlpatterns = [
     path("live-data/", views.live_data, name="live-data"),
     path("query/", views.queries, name="queries"),
     path("models/", views.models, name="models"),
+    path("model-details/", views.model_details, name="model-details"),
     path("search/", views.search, name="search"),
     # path("predictmod/mg-upload/", views.mg_upload, name="pm-mg-upload"),
     # path("predictmod/ehr-upload/", views.ehr_upload, name="pm-ehr-upload"),
