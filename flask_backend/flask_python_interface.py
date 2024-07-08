@@ -148,41 +148,41 @@ def upload():
     #     return jsonify({"error": "Illegal upload target error"}, status=404)
 
 
-@app.route("/mg-upload", methods=["POST"])
-@cross_origin()
-def mg_request():
-    try:
-        # XXX
-        app.logger.debug(f"---> Collected request at >>> MG <<<")
-        # app.logger.debug(f"---> Method is {request.method}")
+# @app.route("/mg-upload", methods=["POST"])
+# @cross_origin()
+# def mg_request():
+#     try:
+#         # XXX
+#         app.logger.debug(f"---> Collected request at >>> MG <<<")
+#         # app.logger.debug(f"---> Method is {request.method}")
 
-        raw_data = request.get_json()
+#         raw_data = request.get_json()
 
-        app.logger.debug(raw_data)
+#         app.logger.debug(raw_data)
 
-        headers, data = raw_data[0], np.array([raw_data[1]])
-        df = pd.DataFrame(data, columns=headers)
-        df = df.drop(["Status"], axis=1)
-        # app.logger.debug(f"---> JSON Data:\n{df}")
+#         headers, data = raw_data[0], np.array([raw_data[1]])
+#         df = pd.DataFrame(data, columns=headers)
+#         df = df.drop(["Status"], axis=1)
+#         # app.logger.debug(f"---> JSON Data:\n{df}")
 
-        return jsonify(metagenomic_predictor.make_prediction(df))
+#         return jsonify(metagenomic_predictor.make_prediction(df))
 
-    except Exception as e:
-        app.logger.debug(f"--->>> Exception!\n{e}")
-        return jsonify({"error": f"Got an error!\n\t{e}"})
+#     except Exception as e:
+#         app.logger.debug(f"--->>> Exception!\n{e}")
+#         return jsonify({"error": f"Got an error!\n\t{e}"})
 
 
-@app.route("/ehr-upload", methods=["POST"])
-@cross_origin()
-def ehr_request():
-    try:
-        app.logger.debug(f"---> Collected request at >>> EHR <<<")
-        raw_data = request.get_json()
-        headers, data = raw_data[0], np.array([raw_data[1]])
-        df = pd.DataFrame(data, columns=headers)
+# @app.route("/ehr-upload", methods=["POST"])
+# @cross_origin()
+# def ehr_request():
+#     try:
+#         app.logger.debug(f"---> Collected request at >>> EHR <<<")
+#         raw_data = request.get_json()
+#         headers, data = raw_data[0], np.array([raw_data[1]])
+#         df = pd.DataFrame(data, columns=headers)
 
-        return jsonify({"result": mdclone_ehr_predictor.make_prediction(df)})
+#         return jsonify({"result": mdclone_ehr_predictor.make_prediction(df)})
 
-    except Exception as e:
-        app.logger.debug(f"--->>> Exception!\n{e}")
-        return jsonify({"error": f"Got an error!  ---> {e}"})
+#     except Exception as e:
+#         app.logger.debug(f"--->>> Exception!\n{e}")
+#         return jsonify({"error": f"Got an error!  ---> {e}"})
