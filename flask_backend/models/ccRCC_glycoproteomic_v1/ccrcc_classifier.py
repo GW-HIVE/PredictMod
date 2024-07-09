@@ -1,9 +1,9 @@
 """
 File:           ccrcc_classifier.py
 Author:         Karina Martinez
-Version:        1.0
+Version:        1.1
 Description:    The script takes patient data and labels, splits the data into training and testing sets, 
-                and trains a linear regression classifier on the training data. 
+                and trains a multilayer perceptron classifier on the training data. 
                 Output is a pickle file named 'ccrcc_classifier.pkl'
 """
 
@@ -15,12 +15,11 @@ import pandas as pd
 import numpy as np
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
-from scipy.stats import mannwhitneyu
 from sklearn.pipeline import Pipeline
-from sklearn.feature_selection import SelectPercentile
 from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import LogisticRegression
-from sklearn.feature_selection import SequentialFeatureSelector
+from sklearn.feature_selection import SelectFromModel
+from sklearn.linear_model import Lasso
+from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import accuracy_score, f1_score, roc_auc_score, confusion_matrix, ConfusionMatrixDisplay
 import joblib
 
@@ -38,14 +37,21 @@ def get_glycoforms(glycoform_df):
         row = i.split("_")
         gene, pep_start, sequence, gly_site, glycan = row[0], int(row[1]), row[2], int(row[4]), row[5]
         glycosylation_site = pep_start + gly_site - 1
-        glycosite = gene + "_" + str(glycosylation_site) + "_" + sequence + "_" + glycan
-        site_dict[i] = glycosite
     
+        glycosite = gene + "_" + str(glycosylation_site) + "_" + glycan
+
+        if glycosite not in site_dict:
+            site_dict[glycosite] = [i]
+
+        else:
+            site_dict[glycosite].append(i)
+
     df_dict = {}
 
     for key,value in site_dict.items():
-        df_dict[value] = glycoform_df[key]
-    
+        df_dict[key] = glycoform_df[value].sum(axis=1)
+
+
     return pd.DataFrame(df_dict)
 
 
@@ -96,15 +102,6 @@ def train_test(X,y):
     # Reset the index
     X_train, X_test = X_train.reset_index(drop=True), X_test.reset_index(drop=True)
     return X_train, X_test, y_train, y_test
-
-
-def transform_mannwhitneyu(X,y):
-    """
-    Convert stats.mannwhitneyu() inputs from two independent samples to X and y for compatibility with Pipeline.
-    """
-    arg1, arg2 = X[y==0], X[y==1]
-    f_statistic, p_values = mannwhitneyu(arg1,arg2)
-    return f_statistic, p_values
 
 
 def eval_model(model, X_test, y_test):
@@ -161,10 +158,9 @@ def main():
     # Train the model
     model = Pipeline(
         [
-            ("select_fdr", SelectPercentile(transform_mannwhitneyu,percentile=0.09)),
             ("scaling", StandardScaler()),
-            ("select_features",SequentialFeatureSelector(LogisticRegression(C=0.21,class_weight="balanced",random_state=RANDOM_SEED),direction="backward",scoring="roc_auc",tol=-0.001)),
-            ("classify",LogisticRegression(C=0.21,class_weight="balanced",random_state=RANDOM_SEED))
+            ("select_features",SelectFromModel(Lasso(random_state=RANDOM_SEED,max_iter=5000,alpha=0.0003))),
+            ("classify",MLPClassifier(random_state=RANDOM_SEED, max_iter=2000,solver='adam',hidden_layer_sizes=(100,)))
         ]
     )
 

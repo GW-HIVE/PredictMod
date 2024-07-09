@@ -1,7 +1,7 @@
 """
 File:           diabetes_predict.py
 Author:         Karina Martinez
-Version:        1.0
+Version:        1.1
 Description:    The script loads the pre-trained classifier from the diabetes_classifier.pkl file, 
                 reads an input file with plasma protein N-glycome levels, and outputs whether the patient 
                 is predicted to develop type 2 diabetes or remain normoglycaemic within 10 years.
