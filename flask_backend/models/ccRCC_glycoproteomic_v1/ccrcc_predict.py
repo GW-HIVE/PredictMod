@@ -1,7 +1,7 @@
 """
 File:           ccrcc_predict.py
 Author:         Karina Martinez
-Version:        1.0
+Version:        1.1
 Description:    The script loads the pre-trained classifier from the ccrcc_classifier.pkl file, 
                 reads an input file with 10814 clear cell renal cell carcinoma tumor glycoproteomic
                 abundances, and outputs whether the patient is predicted have high or low risk
@@ -18,7 +18,6 @@ Description:    The script loads the pre-trained classifier from the ccrcc_class
 import joblib
 import pandas as pd
 from optparse import OptionParser
-from scipy.stats import mannwhitneyu
 
 def get_glycoforms(glycoform_df):
     """
@@ -30,24 +29,22 @@ def get_glycoforms(glycoform_df):
         row = i.split("_")
         gene, pep_start, sequence, gly_site, glycan = row[0], int(row[1]), row[2], int(row[4]), row[5]
         glycosylation_site = pep_start + gly_site - 1
-        glycosite = gene + "_" + str(glycosylation_site) + "_" + sequence + "_" + glycan
-        site_dict[i] = glycosite
     
+        glycosite = gene + "_" + str(glycosylation_site) + "_" + glycan
+
+        if glycosite not in site_dict:
+            site_dict[glycosite] = [i]
+
+        else:
+            site_dict[glycosite].append(i)
+
     df_dict = {}
 
     for key,value in site_dict.items():
-        df_dict[value] = glycoform_df[key]
-    
+        df_dict[key] = glycoform_df[value].sum(axis=1)
+
+
     return pd.DataFrame(df_dict)
-
-
-def transform_mannwhitneyu(X,y):
-    """
-    Convert stats.mannwhitneyu() inputs from two independent samples to X and y for compatibility with Pipeline.
-    """
-    arg1, arg2 = X[y==0], X[y==1]
-    f_statistic, p_values = mannwhitneyu(arg1,arg2)
-    return f_statistic, p_values
 
 
 ###############################

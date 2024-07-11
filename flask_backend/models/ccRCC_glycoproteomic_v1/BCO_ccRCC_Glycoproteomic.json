@@ -1,13 +1,14 @@
 {
   "object_id": "https://biocomputeobject.org/BCO_000501/DRAFT",
   "spec_version": "https://w3id.org/ieee/ieee-2791-schema/2791object.json",
-  "etag": "",
+  "etag": "7cb358d05b97eccda381b6e1b17abd7b3924eaae155fb3ab939ac0f8a64dd319",
   "provenance_domain": {
     "name": "ccRCC Glycoproteomic",
-    "version": "1.0",
+    "version": "1.1",
     "license": "https://spdx.org/licenses/CC-BY-4.0.html",
     "created": "2024-06-27T16:45:16",
-    "modified": "2024-06-27T17:07:30",
+    "modified": "2024-07-09T15:15:07",
+    "derived_from": "",
     "contributors": [
       {
         "name": "Karina Martinez",
@@ -18,10 +19,11 @@
         ],
         "orcid": ""
       }
-    ]
+    ],
+    "review": []
   },
   "usability_domain": [
-    "The ccRCC Glycoproteomic model was trained to predict whether a patient is at high or low risk of death or disease progression within 5 years from tumor resection. The training datasets contain intact glycopeptide abundances, biospecimen and clinical metadata from 183 resected clear cell renal cell carcinoma (ccRCC) tumor and normal adjacent tissues collected by the CPTAC program. A Logistic Regression Classifier was trained on 10814 glycopeptide abundances from tumor samples and can be used to make single patient predictions.",
+    "The ccRCC Glycoproteomic model was trained to predict whether a patient is at high or low risk of death or disease progression within 5 years from tumor resection. The training datasets contain intact glycopeptide abundances, biospecimen and clinical metadata from 183 resected clear cell renal cell carcinoma (ccRCC) tumor and normal adjacent tissues collected by the CPTAC program. A Multilayer Perceptron Classifier was trained on 10814 glycopeptide abundances from tumor samples and can be used to make single patient predictions.",
     "The data is from Lih, T Mamie et al. “Integrated glycoproteomic characterization of clear cell renal cell carcinoma.” Cell reports vol. 42,5 (2023): 112409. doi:10.1016/j.celrep.2023.112409 and was retrieved from the Proteomic Data Commons (PDC) and can be accessed at https://proteomic.datacommons.cancer.gov/pdc/study/PDC000471. "
   ],
   "description_domain": {
@@ -32,7 +34,7 @@
       {
         "step_number": 1,
         "name": "ccrcc_classifier.py",
-        "description": "The classifier code takes patient data, calls the preprocessing utility function, cleans the data, assigns target labels, splits the data into training (80%) and testing (20%) sets. It then runs a pipeline to select the top 0.09% of features based on the MannWhitneyU p-value, standardizes, performs backward sequential feature selection and trains a Logistic Regression Classifier on the training data. The trained classifier is then serialized and stored as a .pkl file for later use. The trained classifier predicts whether the patient is at high or low risk of death or disease progression within 5 years from tumor resection. After training, the classifier is run on the test set and metrics are printed.",
+        "description": "The classifier code takes patient data, calls the preprocessing utility function, cleans the data, assigns target labels, splits the data into training (80%) and testing (20%) sets. It then runs a pipeline standardize the data, select the best features using LASSO, and train a Multilayer Perceptron Classifier on the training data. The trained classifier is then serialized and stored as a .pkl file for later use. The trained classifier predicts whether the patient is at high or low risk of death or disease progression within 5 years from tumor resection. After training, the classifier is run on the test set and metrics are printed.",
         "version": "1.0",
         "input_list": [
           {
@@ -80,7 +82,7 @@
       {
         "step_number": 2,
         "name": "diabetes_predict.py",
-        "description": "The predictor code expects a single patient input file with 10814 glycopeptide abundances, and accepts a file name argument (ccrcc_predict.py --file example_input.csv). It then loads the pre-trained Logistic Regression Classifier from the .pkl file, reads the input data, and reshapes the input data to match the classifier's requirements. The loaded classifier predicts whether the patient is at high or low risk of death or disease progression within 5 years from tumor resection. The prediction result is printed to the console.",
+        "description": "The predictor code expects a single patient input file with 10814 glycopeptide abundances, and accepts a file name argument (ccrcc_predict.py --file example_input.csv). It then loads the pre-trained Multilayer Perceptron Classifier from the .pkl file, reads the input data, and reshapes the input data to match the classifier's requirements. The loaded classifier predicts whether the patient is at high or low risk of death or disease progression within 5 years from tumor resection. The prediction result is printed to the console.",
         "version": "1.0",
         "prerequisite": [
           {
@@ -93,15 +95,11 @@
         "input_list": [
           {
             "filename": "ccrcc_classifier.pkl",
-            "access_time": "",
-            "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/ccRCC_glycoproteomic_v1/ccrcc_classifier.pkl",
-            "sha1_checksum": ""
+            "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/ccRCC_glycoproteomic_v1/ccrcc_classifier.pkl"
           },
           {
             "filename": "example_input.csv",
-            "access_time": "",
-            "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/ccRCC_glycoproteomic_v1/example_input.csv",
-            "sha1_checksum": ""
+            "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/ccRCC_glycoproteomic_v1/example_input.csv"
           }
         ]
       }

@@ -1,7 +1,7 @@
 """
 File:           diabetes_classifier.py
 Author:         Karina Martinez
-Version:        1.0
+Version:        1.1
 Description:    The script takes patient data and labels, splits the data into training 
                 and testing sets, and trains an XGBoost classifier on the training data. 
                 Output is a pickle file named 'diabetes_classifier.pkl'
@@ -13,6 +13,7 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import PowerTransformer
+from sklearn.feature_selection import SequentialFeatureSelector
 import xgboost as xgb
 from sklearn.metrics import accuracy_score, f1_score, roc_auc_score, confusion_matrix, ConfusionMatrixDisplay
 import joblib
@@ -115,7 +116,8 @@ def main():
     model = Pipeline(
         [
             ("scaling", PowerTransformer()),
-            ("classify", xgb.XGBClassifier(gamma=1, min_child_weight=5))
+            ("select_features",SequentialFeatureSelector(xgb.XGBClassifier(),direction="backward",scoring="roc_auc",tol=0.0001)),
+            ("classify", xgb.XGBClassifier(gamma=3, min_child_weight=5))
             ])
     
     model.fit(X_train, y_train)
