@@ -1,5 +1,6 @@
 <template>
 
+<!--
 <v-container class="text-center center">
     <v-col class="text-center center">
         <v-row class="text-center center">
@@ -9,6 +10,7 @@
         </v-row>
     </v-col>
 </v-container>
+-->
 
   <v-col v-if="render">
     <UserList :user-list="users" />

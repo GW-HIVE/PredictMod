@@ -7,8 +7,10 @@ flask-cors
 gunicorn
 matplotlib
 numpy
+openpyxl
 pandas
 scikit-learn
+xgboost
 # NB - As of Mar 2024, there are 1256 open bugs reported on SHAP
 # - they attempted to update the format of SHAP outputs between
 #   0.44.2.dev34 to 0.45.0 and it broke all kinds of things. 

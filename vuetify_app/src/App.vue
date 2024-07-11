@@ -7,6 +7,7 @@
         <v-tab to="/predictmod/faq">FAQ</v-tab>
         <v-tab to="/predictmod/contact">Contact</v-tab>
         <v-tab to="/predictmod/query-builder">Query Builder</v-tab>
+        <v-tab to="/predictmod/models">Models</v-tab>
         <v-tab to="/predictmod/users">User Admin</v-tab>
         <v-tab to="/predictmod/help">Help</v-tab>
         <v-spacer></v-spacer>

@@ -65,7 +65,7 @@
       <v-alert v-if="message" color="blue-grey" class="pa-5" dark>
         {{ message }}
       </v-alert>
-      <v-row class="pa-5" v-if="showChart">
+      <v-row class="pa-5" v-if="showChart && this.checkUser()">
         <StandinChart v-if="standIn" />
         <SHAPForcePlot 
           v-if="chartData" 
@@ -95,7 +95,7 @@
         
       </v-row>
     </v-container>
-        <v-container>
+        <v-container v-if="this.checkUser()">
         <v-overlay
           v-model="toggleOverlay"
           @click.prevent="toggleOverlay = !toggleOverlay"
@@ -119,14 +119,19 @@
   <script>
 
 import UploadService from "@/services/UploadService";
-  import StandinChart from "@/components/StandinChart.vue";
-  import SHAPForcePlot from "@/components/SHAPForcePlot.vue";
-  import * as XLSX from 'xlsx';
+import StandinChart from "@/components/StandinChart.vue";
+import SHAPForcePlot from "@/components/SHAPForcePlot.vue";
+import { useUserStore } from "@/store/user";
+import * as XLSX from 'xlsx';
 
   export default {
     name: "upload-files",
     props: {
         uploadTargetURL: String,
+    },
+    setup() {
+      const userStore = useUserStore();
+      return { userStore };
     },
     components: { SHAPForcePlot, StandinChart },
     data() {
@@ -145,6 +150,10 @@ import UploadService from "@/services/UploadService";
       };
     },
     methods: {
+        checkUser() {
+          // console.log("Checking user ROLE: ", this.userStore.role);
+          return this.userStore.role > 2;
+        },
         forceRedraw() {
           this.counterToken += 1;
         },
@@ -171,11 +180,11 @@ import UploadService from "@/services/UploadService";
       upload() {
         if (!this.currentFile) {
           this.message = "Please select a file for upload!";
-          return;
+          return false;
         }
         if (!this.data) {
           this.message = "Please upload a data file!";
-          return;
+          return false;
         }
   
         UploadService.upload(this.data, this.uploadTargetURL, (event) => {
@@ -183,19 +192,22 @@ import UploadService from "@/services/UploadService";
         })
           .then((response) => {
             // this.message = response.data.message;
+            // console.log("Got response:\n", response);
             this.message = response.result ? response.result : response.error;
             if (response.plot) {
               this.chartData = JSON.parse(response.plot);
+              this.showChart = true;
             }
             else if (response.image) {
               this.imageData = "data:image/png; base64, " + response.image;
+              this.showChart = true;
               // console.log("Image data is now: %s", this.imageData)
             }
-            else {
-              console.log("Error in analysis - No image shown")
+            else if (response.error) {
+              console.log("ERROR: ", response.error);
+              this.showChart = false;
               // this.standIn = true;
             }
-            this.showChart = true;
             return true;
           })
           .catch(() => {

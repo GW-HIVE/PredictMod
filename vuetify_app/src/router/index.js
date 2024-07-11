@@ -2,6 +2,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import Home from '../views/Home.vue';
+// import ModelView from '../views/ModelView.vue';
 
 const routes = [
   {
@@ -32,18 +33,18 @@ const routes = [
     path: '/predictmod/contact',
     component: () => import('../views/Contact.vue'),
   },
-    {
-      path: '/predictmod/ehr-home', 
-      component: () => import('../views/EHRHome.vue'),
-    },
-    {
-      path: '/predictmod/mg-home', 
-      component: () => import('../views/MGHome.vue'),
-    },
-    {
-      path: '/predictmod/omics-home', 
-      component: () => import('../views/OmicsHome.vue'),
-    },
+    // {
+    //   path: '/predictmod/ehr-home', 
+    //   component: () => import('../views/EHRHome.vue'),
+    // },
+    // {
+    //   path: '/predictmod/mg-home', 
+    //   component: () => import('../views/MGHome.vue'),
+    // },
+    // {
+    //   path: '/predictmod/omics-home', 
+    //   component: () => import('../views/OmicsHome.vue'),
+    // },
     {
       path: '/predictmod/users',
       component: () => import('@/views/Users.vue'),
@@ -63,6 +64,15 @@ const routes = [
     {
       path: '/predictmod/testing', 
       component: () => import('../views/Testing.vue'),
+    },
+    {
+      path: '/predictmod/models', 
+      component: () => import('../views/Models.vue'),
+    },
+    {
+      path: '/predictmod/models/:name', 
+      component: () => import('../views/ModelView.vue'),
+      props: true,
     },
     {
       path: '/:pathMatch(.*)*',

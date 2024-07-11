@@ -13,6 +13,9 @@
                 Email
             </th>
             <th class="text-center">
+                User Category
+            </th>
+            <th class="text-center">
             </th>
             <th class="text-center">
             </th>
@@ -21,18 +24,19 @@
         </tr>
     </thead>
     <tbody>
-        <tr v-for="user in this.userList">
-            <td>{{ user.first_name }}</td>
-            <td>{{ user.last_name }}</td>
-            <td><a :href="user.url">{{ user.email }}</a></td>
+        <tr v-for="info in this.userList">
+            <td>{{ info.user.first_name }}</td>
+            <td>{{ info.user.last_name }}</td>
+            <td><a :href="info.user.url">{{ info.user.email }}</a></td>
+            <td>{{ info.category }}</td>
             <td>
-                <UpdatePassword :userID="user.id"/>
+                <UpdatePassword :userID="info.user.id"/>
             </td>
             <td>
-                <UpdateUser :userID="user.id" />
+                <UpdateUser :userID="info.user.id" />
             </td>
             <td>
-                <DeleteUser :userID="user.id" />
+                <DeleteUser :userID="info.user.id" />
             </td>
         </tr>
     </tbody>

@@ -23,10 +23,10 @@ FLASK_BACKEND = settings.FLASK_BACKEND
 logger = logging.getLogger()
 
 
-UPLOAD_ENDPOINTS = {
-    "mg",
-    "ehr",
-}
+# UPLOAD_ENDPOINTS = {
+#     "mg",
+#     "ehr",
+# }
 
 
 def binary_response_to_json(response):
@@ -42,38 +42,14 @@ def ping(request):
 
 def search(request):
     logger.debug("Received request for MENU items")
-    DATA_MODEL = [
-        {"name": "MDClone Diet Exercise (Intervention)", "link": "help#current-models"},
-        {"name": "MG Exercise (Intervention)", "link": "help#current-models"},
-        {"name": "Decision Tree Classifier (Model)", "link": "help#current-models"},
-        {
-            "name": "Electronic Health Records (EHR) (Data)",
-            "link": "help#current-models",
-        },
-        {"name": "Metagenomic (Data)", "link": "help#current-models"},
-        {
-            "name": "Glycomics PreDM v1.0 (Anticipated)",
-            "link": "help#anticipated-models",
-        },
-        {"name": "Epilepsy Keto v1.1 (Anticipated)", "link": "help#anticipated-models"},
-        {
-            "name": "Synthea Exercise v1.1 (Anticipated)",
-            "link": "help#anticipated-models",
-        },
-        {
-            "name": "MDClone Diet Counseling v1.2 (Anticipated)",
-            "link": "help#anticipated-models",
-        },
-        {
-            "name": "MDClone Semaglutide v1.0 (Anticipated)",
-            "link": "help#anticipated-models",
-        },
-        {
-            "name": "MDClone Exercise v1.0 (Anticipated)",
-            "link": "help#anticipated-models",
-        },
-    ]
-    return JsonResponse(DATA_MODEL, safe=False)
+    released_models = ReleasedModel.objects.all()
+    pending_models = PendingModel.objects.all()
+    complete_list = [{"name": k.name, "link": k.link} for k in released_models]
+    complete_list.extend(
+        [{"name": k.name + " (Anticipated)", "link": k.link} for k in pending_models]
+    )
+
+    return JsonResponse(complete_list, safe=False)
 
 
 # TODO: Development of backend search
@@ -116,6 +92,29 @@ def models(request):
     return JsonResponse(complete_list, safe=False)
 
 
+def model_details(request):
+    try:
+        model_name = request.GET.get("q", None)
+        logger.debug(f"===> Requested details for model {model_name}")
+        if model_name is None:
+            return JsonResponse({"error": f"Unknown model name: {model_name}"})
+        response = requests.get(f"{FLASK_BACKEND}/model-details?q={model_name}")
+        logger.debug(f"Response: {response.status_code}")
+        if response.status_code == 404:
+            logger.debug("===> Response was 404 <===")
+            return JsonResponse({"results": "complete"}, status=200, safe=False)
+        response = json.loads(response._content.decode("utf-8"))
+        return JsonResponse(response, status=200, safe=False)
+    except ConnectionRefusedError:
+        return JsonResponse(
+            {"error": f"Flask error: Is the Flask server running?"},
+            status=404,
+            safe=False,
+        )
+    except Exception as error:
+        return JsonResponse({"error": f"Django error: {error}"}, status=500, safe=False)
+
+
 @csrf_exempt
 def file_download(request):
     sample_type = request.GET.get("q", None)
@@ -132,10 +131,10 @@ def file_upload(request):
 
         try:
             target = request.GET.get("q", None)
-            if not target or target not in UPLOAD_ENDPOINTS:
-                return JsonResponse(
-                    {"error": f"Invalid upload target {target}"}, status=404
-                )
+            # if not target or target not in UPLOAD_ENDPOINTS:
+            #     return JsonResponse(
+            #         {"error": f"Invalid upload target {target}"}, status=404
+            #     )
             data = json.loads(request.body)
             # logger.debug(f"---> Request received data: {data}")
             response = requests.post(f"{FLASK_BACKEND}/upload?q={target}", json=data)

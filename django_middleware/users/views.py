@@ -16,7 +16,8 @@ from rest_framework.views import APIView
 
 from rest_framework.renderers import JSONRenderer
 
-from .serializers import UserSerializer
+from .serializers import SiteUserSerializer, UserSerializer
+from .models import SiteUser
 
 import logging
 
@@ -31,33 +32,51 @@ class CreateUser(APIView):
         new_info = json.loads(request.body)
         new_info["username"] = new_info["email"]
 
-        logger.debug(f"New info:\n\n{new_info}\n")
+        category = new_info.pop("category", None)
+
+        logger.debug(f"New info:\n\n{new_info}\n\tCategory: {category}")
         # Ensure that there's no conflict of email
         previous_entry = User.objects.filter(email=new_info["email"]).first()
         logger.debug(f"==== {previous_entry} ====")
         if previous_entry:
+            logger.error(
+                f"=== ERROR: User email {previous_entry.email} already exists ==="
+            )
             return JsonResponse(
                 {"error": f"User email {previous_entry.email} already exists"}
             )
 
-        new_user = UserSerializer(data=new_info)
-        if new_user.is_valid():
-            logger.debug(f"New user IS VALID!")
-            new_user.save()
+        new_user_serializer = UserSerializer(data=new_info)
+        if not new_user_serializer.is_valid():
+            logger.debug("Base user information is not valid")
+            logger.debug(f"+" * 40)
+            logger.debug(f"{new_user_serializer.errors}")
+            logger.debug(f"+" * 40)
+        new_user_serializer.save()
+        new_user = User.objects.filter(email=new_info["email"]).first()
+        base_information = {"user_id": new_user.id}
+        base_information["category"] = category
 
-            user = User.objects.filter(email=new_info["email"]).first()
+        new_site_user_serializer = SiteUserSerializer(data=base_information)
+        if new_site_user_serializer.is_valid():
+            logger.debug(f"New user IS VALID!")
+
             # Correct the DRFs broken password ingestion
-            user.set_password(new_info["password"])
-            user.save()
-            if user.is_superuser:
+            new_user.set_password(new_info["password"])
+            new_user.save()
+            SiteUser.objects.create(user=new_user, category=category)
+
+            new_site_user = SiteUser.objects.filter(user_id=new_user.id).first()
+
+            if new_user.is_superuser:
                 return JsonResponse(
-                    {"created": user.get_username(), "admin": True}, status=200
+                    {"created": new_user.get_username(), "admin": True}, status=200
                 )
-            return JsonResponse({"created": user.get_username()}, status=200)
+            return JsonResponse({"created": new_user.get_username()}, status=200)
         else:
-            if "email" in new_user.errors.keys():
+            if "email" in new_user_serializer.errors.keys():
                 return JsonResponse({"error": new_user.errors["email"][0]}, status=401)
-            for key, msg in new_user.errors.items():
+            for key, msg in new_site_user_serializer.errors.items():
                 logger.debug(f"{key}: {msg}")
             return JsonResponse({"error": "Unknown"}, status=500)
 
@@ -138,6 +157,7 @@ class UpdateUser(APIView):
 class UserListView(APIView):
 
     def get(self, request):
+        logger.debug("=" * 80)
         user = request.user
         logged_in = request.user.is_authenticated
 
@@ -146,15 +166,23 @@ class UserListView(APIView):
                 {"error": "You must be logged in to view user information"}, status=401
             )
 
-        user = User.objects.filter(email=user.email).first()
+        # user = User.objects.filter(email=user.email).first()
+        siteuser = SiteUser.objects.filter(user=user).first()
 
         if not user.is_staff:
-            serialized_data = UserSerializer(user).data
-            return JsonResponse([serialized_data], safe=False, status=200)
+            serialized_site_info = SiteUserSerializer(siteuser).data
+            serialized_site_info["category"] = siteuser.get_category()
+            logger.debug(f"===> Data: {serialized_site_info}")
+            return JsonResponse([serialized_site_info], safe=False, status=200)
 
-        users = User.objects.all()
-        serialized_data = UserSerializer(users, many=True).data
+        siteusers = SiteUser.objects.all()
+        serialized_data = []
+        for su in siteusers:
+            data = SiteUserSerializer(su).data
+            data["category"] = su.get_category()
+            serialized_data.append(data)
         logger.debug(f"{serialized_data}")
+        logger.debug("=" * 80)
 
         return JsonResponse(serialized_data, safe=False, status=200)
 
@@ -210,11 +238,22 @@ def login_view(request):
         logger.debug(
             f"Refreshed (?) DB User: {u} ---> Authenticated? {u.is_authenticated}"
         )
+    site_user = SiteUser.objects.filter(user=user).first()
+    user_category = site_user.get_category()
+
     if user.is_superuser:
         return JsonResponse(
-            {"username": user.get_username(), "admin": True}, status=200
+            {
+                "username": user.get_username(),
+                "role": user_category,
+                "admin": True,
+                "authenticated": True,
+            },
+            status=200,
         )
-    return JsonResponse({"username": user.get_username(), "authenticated": True})
+    return JsonResponse(
+        {"username": user.get_username(), "role": user_category, "authenticated": True}
+    )
 
 
 def logout_view(request):
@@ -231,18 +270,25 @@ def logout_view(request):
 
 
 def whoami_view(request):
-    if not request.user.is_authenticated:
+    user = request.user
+    if not user.is_authenticated:
         return JsonResponse({"isAuthenticated": False})
 
-    headers = request.headers
+    # headers = request.headers
 
     # XXX
     # for h in headers:
     #     logger.debug(f"===> {h}")
 
-    if request.user.is_superuser:
+    site_user = SiteUser.objects.filter(user=user).first()
+    category = site_user.get_category()
+
+    if user.is_superuser:
         return JsonResponse(
-            {"username": request.user.username, "admin": True}, status=200
+            {"username": request.user.username, "role": category, "admin": True},
+            status=200,
         )
 
-    return JsonResponse({"username": request.user.username}, status=200)
+    return JsonResponse(
+        {"username": request.user.username, "role": category}, status=200
+    )

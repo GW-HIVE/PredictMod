@@ -22,6 +22,7 @@ export default {
     methods: {
         setUpSpreadsheet() {
             // Get element
+            // console.log("---> Attempting spreadsheet initialization");
             const element = this.$refs.htmlout;
             element.style.height = 250 + "px";
             element.style.width = 800 + "px";
