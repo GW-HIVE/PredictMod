@@ -57,8 +57,8 @@ export const useQueryState = defineStore("query", {
     urlTargets: {  // Populated based on selection of 'conditions'
       "Prediabetes": 
       {
-        "EHR": "ehr",
-        "Gut Microbiome": "mg",
+        "EHR": "MDClone-Diet-Exercise",
+        "Gut Microbiome": "MG-Exercise",
       },
     "Epilepsy": {},
     "Renal Carcinoma": {},
