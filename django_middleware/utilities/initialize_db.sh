@@ -16,6 +16,10 @@ fi
 echo Initializing database
 python manage.py migrate
 
+# Install query builder database
+echo Updating database with clinical query information
+python manage.py shell < ./utilities/install_clinical_information.py
+
 # Initialize users
 echo Creating initial users
 python manage.py shell < ./utilities/create_users.py
