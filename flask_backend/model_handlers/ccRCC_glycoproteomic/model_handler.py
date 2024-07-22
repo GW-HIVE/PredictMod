@@ -1,55 +1,50 @@
 import os
-import pickle
+import joblib
 import numpy as np
-from scipy.stats import mannwhitneyu
 import pandas as pd
+import time
 
-CLASSIFIER_PICKLE = "./classifier.pkl"
+CLASSIFIER_PICKLE = "./model_handlers/ccRCC_glycoproteomic/ccrcc_classifier.pkl"
+
+
+def get_glycoforms(glycoform_df):
+    """
+    Helper function to display gene, glycosylation site, sequence, and glycan composition in header.
+    """
+    site_dict = {}
+
+    for i in glycoform_df.columns:
+        row = i.split("_")
+        gene, pep_start, sequence, gly_site, glycan = (
+            row[0],
+            int(row[1]),
+            row[2],
+            int(row[4]),
+            row[5],
+        )
+        glycosylation_site = pep_start + gly_site - 1
+
+        glycosite = gene + "_" + str(glycosylation_site) + "_" + glycan
+
+        if glycosite not in site_dict:
+            site_dict[glycosite] = [i]
+
+        else:
+            site_dict[glycosite].append(i)
+
+    df_dict = {}
+
+    for key, value in site_dict.items():
+        df_dict[key] = glycoform_df[value].sum(axis=1)
+
+    return pd.DataFrame(df_dict)
 
 
 class ccRCC_ClassifierHandler:
     def __init__(self):
-        self.classifier = None
-        # with open("./classifier.pkl", "rb") as fp:
-        #     self.classifier = pickle.load(fp)
-        # fp.close()
-        ...
-
-    def transform_mannwhitneyu(self, X, y):
-        """
-        Convert stats.mannwhitneyu() inputs from two independent samples to X and y for compatibility with Pipeline.
-        """
-        arg1, arg2 = X[y == 0], X[y == 1]
-        f_statistic, p_values = mannwhitneyu(arg1, arg2)
-        return f_statistic, p_values
-
-    def get_glycoforms(self, glycoform_df):
-        """
-        Helper function to display gene, glycosylation site, sequence, and glycan composition in header.
-        """
-        site_dict = {}
-
-        for i in glycoform_df.columns:
-            row = i.split("_")
-            gene, pep_start, sequence, gly_site, glycan = (
-                row[0],
-                int(row[1]),
-                row[2],
-                int(row[4]),
-                row[5],
-            )
-            glycosylation_site = pep_start + gly_site - 1
-            glycosite = (
-                gene + "_" + str(glycosylation_site) + "_" + sequence + "_" + glycan
-            )
-            site_dict[i] = glycosite
-
-        df_dict = {}
-
-        for key, value in site_dict.items():
-            df_dict[value] = glycoform_df[key]
-
-        return pd.DataFrame(df_dict)
+        with open(CLASSIFIER_PICKLE, "rb") as fp:
+            self.classifier = joblib.load(fp)
+        fp.close()
 
     def make_prediction(self, raw_data):
 
@@ -58,13 +53,22 @@ class ccRCC_ClassifierHandler:
                 "result": "Results are from this model are undergoing revision.\nCheck back soon!"
             }
 
+        print(f"===> ccRCC Handler - Got a request! <===")
+
         headers, data = raw_data[0], np.array([raw_data[1]])
         df = pd.DataFrame(data, columns=headers)
 
-        processed_df = self.get_glycoforms(df)
+        start = time.time()
+        processed_df = get_glycoforms(df)
+        # print(
+        #     f"===> Preprocessing required {time.time() - start:.3f} seconds of compute..."
+        # )
 
-        pred = self.model.predict(processed_df)
-
+        start = time.time()
+        pred = self.classifier.predict(processed_df)
+        # print(
+        #     f"===> Prediction required {time.time() - start:.3f} seconds of compute..."
+        # )
         outcome = "Low risk" if pred == 1 else "High risk"
 
         # return {"error": "Please contact the Predictmod development team for updates."}

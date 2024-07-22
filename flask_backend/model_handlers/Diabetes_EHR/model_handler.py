@@ -43,7 +43,7 @@ class Diabetes_EHR_Handler:
         prediction = self.classifier.predict(patient_data_sort)[0]
         return {
             "result": "This patient {} expected to respond to the intervention based on EHR input".format(
-                "is" if prediction[0] == 1 else "is not"
+                "is" if prediction == 1 else "is not"
             )
         }
         # if prediction == "R":

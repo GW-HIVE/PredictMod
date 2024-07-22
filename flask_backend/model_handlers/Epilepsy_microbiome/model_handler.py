@@ -49,7 +49,7 @@ class Epilepsy_Microbiome_Handler:
         # Decode the result
         decoded_result = self.encoder.inverse_transform(prediction)[0]
         return {
-            "result": "This patient {} expected to respond to the intervention based on EHR input".format(
+            "result": "This patient {} expected to respond to the intervention based on Gut Microbiome input".format(
                 "is" if prediction == "R" else "is not"
             )
         }
