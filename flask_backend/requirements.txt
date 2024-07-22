@@ -6,7 +6,7 @@ flask
 flask-cors
 gunicorn
 matplotlib
-numpy
+numpy<2.0
 openpyxl
 pandas
 scikit-learn==1.4.2
