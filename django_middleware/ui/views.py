@@ -139,12 +139,6 @@ def query_model_endpoints(request):
     )
     # Should only be one model now
     models_available = serializers.serialize("json", models)
-    logger.debug(f"============> GOT MODELS <================")
-    logger.debug(models_available)
-    logger.debug("=" * 60)
-    logger.debug(f"============> ALL MODELS <================")
-    logger.debug(all_models)
-    logger.debug("=" * 60)
     return JsonResponse(models_available, safe=False)
 
 
