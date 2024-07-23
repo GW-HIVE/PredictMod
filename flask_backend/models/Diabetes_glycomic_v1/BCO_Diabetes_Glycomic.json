@@ -1,13 +1,13 @@
 {
-  "object_id": "https://biocomputeobject.org/BCO_000500/DRAFT",
+  "object_id": "https://biocomputeobject.org/BCO_000500/1.1",
   "spec_version": "https://w3id.org/ieee/ieee-2791-schema/2791object.json",
-  "etag": "dc8a0ba9a1766d2d168a75f3d69b4b51faea768ee2231ddaaaa0132dac31b682",
+  "etag": "4f6ddab35027cb60531f5b1044a79cca8e03523845d4ebf08046969fba0c32fe",
   "provenance_domain": {
     "name": "Diabetes Glycomic",
     "version": "1.1",
     "license": "https://spdx.org/licenses/CC-BY-4.0.html",
     "created": "2024-06-27T16:02:11",
-    "modified": "2024-06-27T17:07:45.222Z",
+    "modified": "2024-07-22T06:59:57.842Z",
     "contributors": [
       {
         "name": "Karina Martinez",
@@ -15,24 +15,22 @@
         "email": "karinamartinez@gwu.edu",
         "contribution": [
           "createdBy"
-        ],
-        "orcid": ""
+        ]
       }
     ]
   },
   "usability_domain": [
-    "The Diabetes Glycomic model was trained to predict whether a patient will develop type 2 diabetes or remain normoglycaemic within 10 years. The training dataset contains abundance information on the plasma N-glycome of individuals participating in the FinRisk study, a study designed to investigate risk factors in a population from Finland. Baseline samples were analyzed from 37 individuals who developed type 2 diabetes within 10 years and 37 sex and age matched individuals who remained normoglycaemic. HILIC-UPLC chromatograms were separated into 46 peaks, and were assigned to the most abundant glycan structures in each peak. An XGBoost Classifier was trained and can be used to make single patient predictions.",
-    "The data is from Keser, Toma et al. “Increased plasma N-glycome complexity is associated with higher risk of type 2 diabetes.” Diabetologia vol. 60,12 (2017): 2352-2360. doi:10.1007/s00125-017-4426-9 and was provided by Dr. Olga Gornik, Faculty of Pharmacy and Biochemistry, University of Zagreb."
+    "The Diabetes Glycomic model is an XGBoost classifier trained to predict whether healthy individuals will remain normoglycemic or are at risk of developing type 2 diabetes within the next 10 years.",
+    "The data is from Keser, Toma et al. “Increased plasma N-glycome complexity is associated with higher risk of type 2 diabetes.” Diabetologia vol. 60,12 (2017): 2352-2360. doi:10.1007/s00125-017-4426-9 and was provided by Dr. Olga Gornik, Faculty of Pharmacy and Biochemistry, University of Zagreb.",
+    "The dataset contains abundance information on the plasma N-glycome of individuals participating in the FinRisk study, a study designed to investigate risk factors in a population from Finland. Baseline samples were analyzed from 37 individuals who developed type 2 diabetes within 10 years and 37 sex and age matched individuals who remained normoglycaemic. HILIC-UPLC chromatograms were separated into 46 peaks, and were assigned to the most abundant glycan structures in each peak. The dataset consists of 74 patients and 68 columns (including metadata, glycan peaks and derived traits). Only abundances of 46 glycans from HILIC-UPLC chromatograms were used for training.",
+    "Algorithm: XGBoost Classifier, AUC: 0.812, Accuracy: 0.800, Sensitivity: 0.857, Specificity: 0.750"
   ],
   "description_domain": {
-    "keywords": [],
-    "xref": [],
-    "platform": [],
     "pipeline_steps": [
       {
         "step_number": 1,
         "name": "diabetes_classifier.py",
-        "description": "The classifier code takes patient data and labels, cleans the data, maps the peak numbers to GlyTouCan (https://glytoucan.org/) accessions, splits the data into training (80%) and testing (20%) sets. It then runs a pipeline standardize the data, select the best features using backward sequential feature selection, and train a an XGBoost Classifier on the training data. The trained classifier is then serialized and stored as a .pkl file for later use. The trained classifier predicts whether the patient will develop type 2 diabetes or remain normoglycaemic within 10 years. After training, the classifier is run on the test set and metrics are printed.",
+        "description": "The classifier code takes patient data and labels, cleans the data, maps the peak numbers to GlyTouCan (https://glytoucan.org/) accessions, splits the data into training (80%) and testing (20%) sets. It then runs a pipeline standardize the data, select the best features using backward sequential feature selection, and train a an XGBoost Classifier on the training data. The trained classifier is then serialized and stored as a .pkl file for later use. The trained classifier predicts whether the patient will develop type 2 diabetes or remain normoglycemic within 10 years. After training, the classifier is run on the test set and metrics are printed.",
         "version": "1.0",
         "input_list": [
           {
@@ -62,7 +60,7 @@
       {
         "step_number": 2,
         "name": "diabetes_predict.py",
-        "description": "The predictor code expects a single patient input file with abundances for glycans peaks GP1-46, and accepts a file name argument (diabetes_predict.py --file example_input.csv). It then loads the pre-trained XGBoost Classifier from the .pkl file, reads the input data, and reshapes the input data to match the classifier's requirements. The loaded classifier predicts whether the patient will develop type 2 diabetes or remain normoglycaemic within 10 years. The prediction result is printed to the console.",
+        "description": "The predictor code expects a single patient input file with abundances for glycans peaks GP1-46, and accepts a file name argument (diabetes_predict.py --file example_input.csv). It then loads the pre-trained XGBoost Classifier from the .pkl file, reads the input data, and reshapes the input data to match the classifier's requirements. The loaded classifier predicts whether the patient will develop type 2 diabetes or remain normoglycemic within 10 years. The prediction result is printed to the console.",
         "version": "1.0",
         "prerequisite": [
           {
@@ -81,11 +79,20 @@
             "filename": "example_input.csv",
             "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/Diabetes_glycomic_v1/example_input.csv"
           }
+        ],
+        "output_list": [
+          {
+            "filename": "tmpfs",
+            "uri": "file:///dev/tmpfs"
+          }
         ]
       }
+    ],
+    "keywords": [
+      "machine learning",
+      "xgboost"
     ]
   },
-  "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [
       {
@@ -98,6 +105,14 @@
         "uri": {
           "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/Diabetes_glycomic_v1/gtc_headers.csv",
           "filename": "gtc_headers.csv"
+        }
+      }
+    ],
+    "output_subdomain": [
+      {
+        "mediatype": "tmpfs",
+        "uri": {
+          "uri": "file:///dev/tmpfs"
         }
       }
     ]
@@ -117,7 +132,7 @@
         }
       }
     ],
-    "script_driver": "",
+    "script_driver": "manual",
     "software_prerequisites": [
       {
         "name": "python",
@@ -165,6 +180,16 @@
     "external_data_endpoints": [],
     "environment_variables": {}
   },
-  "extension_domain": [],
-  "error_domain": {}
+  "error_domain": {
+    "empirical_error": {
+      "empirical_error": {
+        "empirical_error": "0"
+      }
+    },
+    "algorithmic_error": {
+      "algorithmic_error": {
+        "algorithmic_error": "0"
+      }
+    }
+  }
 }
