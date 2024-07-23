@@ -65,7 +65,7 @@
       <v-col>
         <h4>Step 1: Select medical condition</h4>
         <QueryCard
-        :key="queryState.condition"
+        :key="queryState.conditions"
         @confirmed="confirmCondition"
         @unconfirmed="unconfirmCondition"
           target-prop="condition"
@@ -104,11 +104,11 @@
     <v-col cols="11">
       <v-row v-if="queryState.condition">
         <h4>Step 2: Select intervention type</h4>
-        <QueryCard :key="queryState.condition"
+        <QueryCard :key="queryState.interventions"
         @confirmed="confirmCondition"
         @unconfirmed="unconfirmCondition"
         target-prop="intervention"
-          :menuItems="queryState.interventionOptions" 
+          :menuItems="queryState.interventions" 
           :title="'Intervention'"
         />
       </v-row>
@@ -116,7 +116,7 @@
     <v-col cols="11">
       <v-row v-if="queryState.condition">
         <h4>Step 3: Select available data format</h4>
-        <QueryCard :key="queryState.condition"
+        <QueryCard :key="queryState.dataTypeOptions"
         @confirmed="confirmCondition"
         @unconfirmed="unconfirmCondition"
         target-prop="datatype"
@@ -384,6 +384,9 @@ export default {
     unconfirmCondition(condition) {
       switch (condition) {
         case 'condition':
+          this.queryState.setState(condition, null);
+          this.queryState.populateOptions();
+          break;
         case 'intervention':
         case 'datatype':
           this.queryState.setState(condition, null);

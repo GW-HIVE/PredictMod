@@ -1,0 +1,72 @@
+[conditions]
+Prediabetes = """\
+A precursor to Type 2 Diabetes Mellitus (T2DM), where blood sugars are higher than normal, \
+but not high enough to be considered T2DM. Prediction outcomes are based \
+on a 5% reduction in weight, HOMA-IR, or a diagnosis of T2DM."""
+Epilepsy = """\
+A neurological disorder in which nerve cell activity in the brain \
+is disturbed, causing seizures. Prediction outcomes are based on [TBD].
+"""
+"Renal Carcinoma" = """\
+[TBD]
+"""
+"Type 2 Diabetes Mellitus" = "Content TBD"
+
+[interventions]
+[interventions.Prediabetes]
+"Diet - Dietary Counseling" = "Involves following a physician-recommended diet for the management of prediabetes."
+"Diet - Keto Diet" = "A low-carb, ketogenic diet commonly recommended for the management of prediabetes."
+"Exercise" = "Involves following a physician-recommended exercise regimen for the management of prediabetes."
+"Medication - Semaglutide" = "Medication management of prediabetes using an increasingly popular GLP1-agonist."
+"No Intervention" = "Predictions based on existing biomarkers. These predictions do not involve a specific intervention."
+
+[interventions.Epilepsy]
+"Diet - Keto Diet" = "A low-carb, ketogenic diet commonly recommended for the management of prediabetes."
+
+[interventions."Renal Carcinoma"]
+None = """\
+An observational study of patients, sourced from 'Integrated glycoproteomic characterization of clear \
+cell renal cell carcinoma.' Cell reports vol. 42,5 (2023): 112409. doi:10.1016/j.celrep.2023.112409\
+"""
+[interventions."Type 2 Diabetes Mellitus"]
+None = """\
+The data is from Keser, Toma et al. “Increased plasma N-glycome complexity is associated with \
+higher risk of type 2 diabetes.” Diabetologia vol. 60,12 (2017): 2352-2360. \
+doi:10.1007/s00125-017-4426-9 and was provided by Dr. Olga Gornik, Faculty of Pharmacy and Biochemistry, University of Zagreb.\
+"""
+
+[input_data_types]
+[input_data_types.Prediabetes]
+"EHR" = "Data sourced from clinical Electronic Health Records, e.g. EPIC-COSMOS or MDClone"
+"EHR-Synthea" = "Data sourced from the Synthea synthetic data patient cohort"
+"Gut-Microbiome" = "Microflora population and diversity information measured via High Throughput Sequencing"
+"Glycoproteomics" = "TBD"
+"Glycomics" = "TBD"
+
+[input_data_types.Epilepsy]
+"Gut-Microbiome" = """\
+Epilepsy data set was provided by Department of Veterians Affairs. This was used as a training set \
+to generate a 500 patient dataset for the epilepsy gut microbiome classifier and predictor \
+"""
+
+[input_data_types."Renal Carcinoma"]
+Glycoproteomic = """\
+The datasets contain intact glycopeptide abundances, biospecimen and clinical \
+ metadata from 183 resected clear cell renal cell carcinoma (ccRCC) tumor and \ 
+ normal adjacent tissues collected by the CPTAC program.\
+ """
+[input_data_types."Type 2 Diabetes Mellitus"]
+Glycomic = """\
+The data is from Keser, Toma et al. “Increased plasma N-glycome complexity is associated with higher risk of type 2 diabetes.” \
+Diabetologia vol. 60,12 (2017): 2352-2360. doi:10.1007/s00125-017-4426-9 and was provided by Dr. Olga Gornik, Faculty of \
+Pharmacy and Biochemistry, University of Zagreb.\
+"""
+
+[url_targets]
+[url_targets.Prediabetes]
+EHR = "MDClone-Diet-Exercise"
+"Gut-Microbiome" = "MG-Exercise"
+
+[url_targets.Epilepsy]
+
+[url_targets."Renal Carcinoma"]

@@ -53,7 +53,7 @@ class Diabetes_Glycomic_Handler:
 
         prediction = self.pickled_model.predict(processed_df)
         return {
-            "result": "This patient {} expected to respond to the intervention based on Metagenomic input".format(
+            "result": "This patient {} expected to respond to the intervention based on Glycomic input".format(
                 "is not" if prediction == 1 else "is"
             )
         }

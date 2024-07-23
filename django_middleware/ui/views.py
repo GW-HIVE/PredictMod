@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.core import serializers
 
-from .models import ReleasedModel, PendingModel
+from .models import ReleasedModel, PendingModel, Condition, Intervention, InputDataType
 
 import json
 import logging
@@ -90,6 +90,56 @@ def models(request):
     complete_list["released_models"] = serializers.serialize("json", released_models)
     complete_list["pending_models"] = serializers.serialize("json", pending_models)
     return JsonResponse(complete_list, safe=False)
+
+
+def query_conditions(request):
+    intervention = request.GET.get("i", None)
+    input_data_type = request.GET.get("dt", None)
+    conditions = Condition.objects.all()
+    # if intervention is not None:
+    #     conditions = conditions.filter(intervention_id == intervention)
+    return JsonResponse(serializers.serialize("json", conditions), safe=False)
+
+
+def query_interventions(request):
+    condition_name = request.GET.get("c", None)
+    if condition_name is None or condition_name == "null":
+        return JsonResponse({"error": f"Condition was not found in query"}, safe=False)
+    else:
+        logger.debug(f"Got request for interventions of {condition_name}")
+    condition = Condition.objects.filter(name=condition_name).first()
+    interventions_set = serializers.serialize("json", condition.interventions.all())
+    return JsonResponse(interventions_set, safe=False)
+
+
+def query_input_data(request):
+    condition_name = request.GET.get("c", None)
+    if condition_name is None:
+        return JsonResponse({"error": f"Condition was not found in query"}, safe=False)
+    else:
+        logger.debug(f"Got request for interventions of {condition_name}")
+    condition = Condition.objects.filter(name=condition_name).first()
+    input_types_set = serializers.serialize("json", condition.input_data_types.all())
+    return JsonResponse(input_types_set, safe=False)
+
+
+def query_model_endpoints(request):
+    condition_name = request.GET.get("c", None)
+    intervention_name = request.GET.get("i", None)
+    input_data_type = request.GET.get("dt", None)
+    logger.debug(
+        f"===> Attempting to filter models based on: Condition {condition_name} Intervention: {intervention_name} Data Type: {input_data_type}"
+    )
+    models = ReleasedModel.objects.all()
+    all_models = serializers.serialize("json", models)
+    models = (
+        models.filter(condition__name=condition_name)
+        .filter(intervention__name=intervention_name)
+        .filter(input_type__name=input_data_type)
+    )
+    # Should only be one model now
+    models_available = serializers.serialize("json", models)
+    return JsonResponse(models_available, safe=False)
 
 
 def model_details(request):

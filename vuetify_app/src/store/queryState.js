@@ -17,7 +17,11 @@ export const useQueryState = defineStore("query", {
     targetURL: "",
     modelAnchor: "",    
     // targetURL: import.meta.env.DEV ? import.meta.env.VITE_DEV_MIDDLEWARE_BASE + '/api' : '/predictmod/api',
-
+    queriesURL: import.meta.env.DEV ? import.meta.env.VITE_DEV_MIDDLEWARE_BASE: "/predictmod/",
+    conditions: [],
+    interventions: [],
+    dataTypeOptions: [],
+/*
     conditions: [  // Ideally, populated once after mounting
       {
         name: "Prediabetes",
@@ -45,7 +49,7 @@ export const useQueryState = defineStore("query", {
         {name: "Medication - Semaglutide", description: "Medication management of prediabetes using an increasingly popular GLP1-agonist."},
         {name: "No Intervention", description: "Predictions based on existing biomarkers. These predictions do not involve a specific intervention."},
       ],
-    'Epilepsy':
+      'Epilepsy':
     [
       {name: "TBD", description: "TBD"},
     ],
@@ -80,17 +84,25 @@ export const useQueryState = defineStore("query", {
       {name: "TBD", description: "TBD"},
     ],
     },
+    */
 
   }),
 
   mounted() {
+    this.populateOptions();
   },
 
   getters: { /* */ },
   actions: {
 
-    populateOptions() {
-      // TODO: Reach out over backend API to retrieve 'condition' options
+    async populateOptions() {
+      const response = await fetch(this.queriesURL+"/api/query-conditions/");
+      const result = JSON.parse(await response.json());
+      // console.log("Got options ", result);
+      this.conditions = [];
+      result.forEach(r => {
+        this.conditions.push({ name: r.fields.name, description: r.fields.description })
+      });
     },
 
     confirmCondition() {},
@@ -118,23 +130,47 @@ export const useQueryState = defineStore("query", {
       return this.conditions;
     },
 
-    populateConditionOptions() {
+    async populateConditionOptions() {
       // TODO: API call to retrieve information from backend
       // console.log("Now retrieving options based on condition: %s", this.condition);
-      if (this.condition !== null) {
-        this.interventionOptions = this.interventions[this.condition];
-        this.dataTypeOptions = this.dataInputTypes[this.condition];
-      }
+      // if (this.condition !== null) {
+      //   this.interventionOptions = this.interventions[this.condition];
+      //   this.dataTypeOptions = this.dataInputTypes[this.condition];
+      // }
+      const iResponse = await fetch(this.queriesURL+`/api/query-interventions/?c=${this.condition}`);
+      const interventions = JSON.parse(await iResponse.json());
+      // console.log("New interventions: ", interventions);
+      // Reset state
+      this.interventions = [];
+      interventions.forEach(i => {
+        this.interventions.push({ name: i.fields.name, description: i.fields.description })
+      })
+      const dtResponse = await fetch(this.queriesURL+`/api/query-input-data/?c=${this.condition}`);
+      const inputDataTypes = JSON.parse(await dtResponse.json());
+      // Reset state
+      // console.log("New data types: ", inputDataTypes);
+      this.dataTypeOptions = [];
+      inputDataTypes.forEach(dt => {
+        this.dataTypeOptions.push({ name: dt.fields.name, description: dt.fields.description })
+      })
     },
 
-    registerURL() {
+    async registerURL() {
       // console.log("Condition: %s | Intervention: %s | Data Type: %s", this.condition, this.intervention, this.datatype);
       if (
         this.condition !== null &&
         this.intervention !== null &&
         this.datatype !== null
       ) {
-        this.targetURL = this.urlTargets[this.condition][this.datatype];
+        // this.targetURL = this.urlTargets[this.condition][this.datatype];
+        
+        const response = await fetch(this.queriesURL+`/api/query-model-endpoints/?c=${this.condition}&i=${this.intervention}&dt=${this.datatype}`);
+        const endpoint = JSON.parse(await response.json());
+        console.log("Got response: ", JSON.stringify(endpoint));
+        endpoint.forEach(model => {
+          this.targetURL = model.fields.link;
+        });
+
         // console.log("---> Found target URL %s", this.targetURL)
       } else {
         this.targetURL = "";
