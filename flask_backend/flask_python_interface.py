@@ -2,11 +2,7 @@ from flask import Flask, request, Response, send_from_directory, jsonify
 from flask_cors import CORS, cross_origin
 
 import os
-import time
-import json
 import logging
-import pickle
-import io
 
 from model_handlers import (
     MDClone_EHRTreeHandler,
@@ -17,14 +13,10 @@ from model_handlers import (
     Epilepsy_Microbiome_Handler,
 )
 
-# from base64 import b64encode
+# TODO: Documentation
 
 import numpy as np
 import pandas as pd
-
-# import matplotlib
-# import matplotlib.pyplot as plt
-# import shap
 
 MODELS_DIR = "models"
 
@@ -133,56 +125,3 @@ def upload():
     else:
         raw_data = request.get_json()
         return jsonify(HANDLERS[target].make_prediction(raw_data))
-    # if target == "mg":
-    #     raw_data = request.get_json()
-    #     headers, data = raw_data[0], np.array([raw_data[1]])
-    #     df = pd.DataFrame(data, columns=headers)
-    #     df = df.drop(["Status"], axis=1)
-    #     return jsonify({"result": metagenomic_predictor.make_prediction(df)})
-    # elif target == "ehr":
-    #     raw_data = request.get_json()
-    #     headers, data = raw_data[0], np.array([raw_data[1]])
-    #     df = pd.DataFrame(data, columns=headers)
-    #     return jsonify(mdclone_ehr_predictor.make_prediction(df))
-    # else:
-    #     return jsonify({"error": "Illegal upload target error"}, status=404)
-
-
-# @app.route("/mg-upload", methods=["POST"])
-# @cross_origin()
-# def mg_request():
-#     try:
-#         # XXX
-#         app.logger.debug(f"---> Collected request at >>> MG <<<")
-#         # app.logger.debug(f"---> Method is {request.method}")
-
-#         raw_data = request.get_json()
-
-#         app.logger.debug(raw_data)
-
-#         headers, data = raw_data[0], np.array([raw_data[1]])
-#         df = pd.DataFrame(data, columns=headers)
-#         df = df.drop(["Status"], axis=1)
-#         # app.logger.debug(f"---> JSON Data:\n{df}")
-
-#         return jsonify(metagenomic_predictor.make_prediction(df))
-
-#     except Exception as e:
-#         app.logger.debug(f"--->>> Exception!\n{e}")
-#         return jsonify({"error": f"Got an error!\n\t{e}"})
-
-
-# @app.route("/ehr-upload", methods=["POST"])
-# @cross_origin()
-# def ehr_request():
-#     try:
-#         app.logger.debug(f"---> Collected request at >>> EHR <<<")
-#         raw_data = request.get_json()
-#         headers, data = raw_data[0], np.array([raw_data[1]])
-#         df = pd.DataFrame(data, columns=headers)
-
-#         return jsonify({"result": mdclone_ehr_predictor.make_prediction(df)})
-
-#     except Exception as e:
-#         app.logger.debug(f"--->>> Exception!\n{e}")
-#         return jsonify({"error": f"Got an error!  ---> {e}"})
