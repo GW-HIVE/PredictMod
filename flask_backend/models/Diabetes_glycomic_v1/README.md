@@ -5,7 +5,7 @@
 The data is from Keser, Toma et al. “Increased plasma N-glycome complexity is associated with higher risk of type 2 diabetes.” Diabetologia vol. 60,12 (2017): 2352-2360. doi:10.1007/s00125-017-4426-9 and was provided by Dr. Olga Gornik, Faculty of Pharmacy and Biochemistry, University of Zagreb.
 
 ## Training Dataset
-The dataset contains abundance information on the plasma N-glycome of individuals participating in the FinRisk study, a study designed to investigate risk factors in a population from Finland. Baseline samples were analyzed from 37 individuals who developed type 2 diabetes within 10 years and 37 sex and age matched individuals who remained normoglycaemic. HILIC-UPLC chromatograms were separated into 46 peaks, and were assigned to the most abundant glycan structures in each peak. The dataset consists of 74 patients and 68 columns (including metadata, glycan peaks and derived traits). Only abundances of 46 glycans from HILIC-UPLC chromatograms were used for training.
+The dataset contains abundance information on the plasma N-glycome of individuals participating in the FinRisk study, a study designed to investigate risk factors in a population from Finland. Baseline samples were analyzed from 37 individuals who developed type 2 diabetes within 10 years and 37 sex and age matched individuals who remained normoglycemic. HILIC-UPLC chromatograms were separated into 46 peaks, and were assigned to the most abundant glycan structures in each peak. The dataset consists of 74 patients and 68 columns (including metadata, glycan peaks and derived traits). Only abundances of 46 glycans from HILIC-UPLC chromatograms were used for training.
 
 ## Classifier and Predictor
 ### Classifier Code:

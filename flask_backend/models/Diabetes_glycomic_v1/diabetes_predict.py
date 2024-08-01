@@ -4,7 +4,7 @@ Author:         Karina Martinez
 Version:        1.1
 Description:    The script loads the pre-trained classifier from the diabetes_classifier.pkl file, 
                 reads an input file with plasma protein N-glycome levels, and outputs whether the patient 
-                is predicted to develop type 2 diabetes or remain normoglycaemic within 10 years.
+                is predicted to develop type 2 diabetes or remain normoglycemic within 10 years.
 
                 This script accepts a filename argument:
                 Usage: diabetes_predict.py [options] 
@@ -63,7 +63,7 @@ def main():
 
     pred = model.predict(processed_df)
 
-    outcome = "Type 2 diabetes" if pred == 1 else "Normoglycaemic"
+    outcome = "Type 2 diabetes" if pred == 1 else "Normoglycemic"
         
     print(f"Prediction based on plasma protein N-glycome: {outcome}")
 
