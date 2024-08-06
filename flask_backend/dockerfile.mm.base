@@ -1,0 +1,9 @@
+# docker build -t predictmod:backend-mm-base -f dockerfile.base .
+FROM python:3.10-slim-buster
+
+COPY ./mm-requirements.txt /
+
+RUN pip3 install -r mm-requirements.txt && \
+    mkdir -p /var/log/gunicorn
+
+# Last working code was in shap==0.44.2.dev34, 0.45.0 was "breaking"
