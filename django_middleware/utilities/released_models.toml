@@ -1,6 +1,6 @@
-########### MDClone_Diet_Exercise ###############
-[MDClone_Diet_Exercise]
-name = "MDClone Diet Exercise"
+########### MDClone_Diet_Counseling ###############
+[MDClone_Diet_Counseling]
+name = "MDClone Diet Counseling"
 version = "1.1"
 release_date = 2023-12-01
 model_type = "Decision Tree Classifier (DTC)"
@@ -10,7 +10,7 @@ condition = "Prediabetes"
 intervention = "Diet - Dietary Counseling"
 input_data_type = "EHR"
 
-[MDClone_Diet_Exercise.data_meta]
+[MDClone_Diet_Counseling.data_meta]
 Patients = 19842
 "Data Features" = 19
 #################################################
