@@ -56,10 +56,12 @@
     </v-banner>
   
     <v-container fluid>
-      <h1>{{ name }}</h1>
+      <h1>{{ convertedModelName }}</h1>
     </v-container>
+  <v-container fluid>
     <div v-html="modelDetails" v-if="showDetails" style="text-align: justify">
     </div>
+  </v-container>
 <!-- <v-btn @click.submit="getMarkDown()">Test getting markdown</v-btn> -->
 <v-container>
 
@@ -139,6 +141,9 @@
         const data = JSON.parse(this.queryState.filePreviewData);
         console.log("Got data:\n", data);
         return data;
+      },
+      convertedModelName() {
+        return this.name.replace(/[-_]/g, ' ')
       },
     },
     methods: {
