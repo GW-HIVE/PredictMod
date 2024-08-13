@@ -1,15 +1,18 @@
-from ui.models import (
-    ReleasedModel,
-    PendingModel,
-    Condition,
-    Intervention,
-    InputDataType,
-)
-
 import json
 import os
 import time
 import tomli
+
+IN_DJANGO = bool(os.environ.get("DJANGO_SETTINGS_MODULE", False))
+
+if IN_DJANGO:
+    from ui.models import (
+        ReleasedModel,
+        PendingModel,
+        Condition,
+        Intervention,
+        InputDataType,
+    )
 
 
 with open("./utilities/released_models.toml", "rb") as fp:
@@ -18,8 +21,8 @@ with open("./utilities/released_models.toml", "rb") as fp:
 with open("./utilities/pending_models.toml", "rb") as fp:
     pending_configs = tomli.load(fp)
 
-DRY_RUN = False
 BCO_DIR = os.path.abspath("../flask_backend/models")
+MODELS_DIR = os.path.abspath("../flask_backend/models")
 
 print(f"Examining file {BCO_DIR}")
 
@@ -40,61 +43,67 @@ def handle_BCO(bco_path):
     return formatted_info
 
 
-for k, v in released_configs.items():
-    if "BCO" in v.keys():
-        print(f"{k}: Procssing BCO {v['BCO']}")
-        bco_info = handle_BCO(v["BCO"])
-        # print(f"===Got info: {bco_info}")
-        v.pop("BCO")
-        # Requires python 3.9+
-        v = v | bco_info
-        print(f"{v}")
-    if DRY_RUN:
-        continue
-    link = "{}".format(v["name"].replace(" ", "-"))
+# Ingest self-defined model information (new method)
+for parent, dirnames, filenames in os.path.walk(MODELS_DIR):
+    print(f"Parent: {parent} | Directories: {dirnames} | Filenames: {filenames}")
 
-    condition_name = v["condition"]
-    intervention_name = v["intervention"]
-    input_data_type_name = v["input_data_type"]
 
-    ReleasedModel.objects.create(
-        name=v["name"],
-        version=v["version"],
-        release_date=v["release_date"],
-        data_type=v["data_type"],
-        model_type=v["model_type"],
-        data_meta=v["data_meta"],
-        backend=v["backend"],
-        link=link,
-    )
-    condition = Condition.objects.filter(name=condition_name).first()
-    intervention = Intervention.objects.filter(name=intervention_name).first()
-    input_data_type = InputDataType.objects.filter(name=input_data_type_name).first()
-    if not condition or not intervention or not input_data_type:
-        # Error handling
-        print("+" * 80)
-        if not condition:
-            print(f"Condition {condition_name} was empty!")
-        if not intervention:
-            print(f"Intervention {intervention_name} was empty!")
-        if not input_data_type:
-            print(f"Data type {input_data_type_name} was empty!")
-        print("+" * 80)
-        print(f"Released model dict was\n{v}")
-        print("+" * 80)
-        import sys
+# Ingest deprecated-definitions configuration
+# for k, v in released_configs.items():
+#     if "BCO" in v.keys():
+#         print(f"{k}: Procssing BCO {v['BCO']}")
+#         bco_info = handle_BCO(v["BCO"])
+#         # print(f"===Got info: {bco_info}")
+#         v.pop("BCO")
+#         # Requires python 3.9+
+#         v = v | bco_info
+#         print(f"{v}")
+#     if not IN_DJANGO:
+#         continue
+#     link = "{}".format(v["name"].replace(" ", "-"))
 
-        sys.exit(1)
-    model = ReleasedModel.objects.filter(name=v["name"]).first()
-    model.condition.add(condition)
-    model.intervention.add(intervention)
-    model.input_type.add(input_data_type)
+#     condition_name = v["condition"]
+#     intervention_name = v["intervention"]
+#     input_data_type_name = v["input_data_type"]
 
-for k, v in pending_configs.items():
-    print(f"Creating Model ---> {k}")
-    if DRY_RUN:
-        continue
-    link = "{}-anticipated".format(v["name"].replace(" ", "-"))
-    PendingModel.objects.create(
-        name=v["name"], version=v["version"], data_type=v["data_type"], link=link
-    )
+#     ReleasedModel.objects.create(
+#         name=v["name"],
+#         version=v["version"],
+#         release_date=v["release_date"],
+#         data_type=v["data_type"],
+#         model_type=v["model_type"],
+#         data_meta=v["data_meta"],
+#         backend=v["backend"],
+#         link=link,
+#     )
+#     condition = Condition.objects.filter(name=condition_name).first()
+#     intervention = Intervention.objects.filter(name=intervention_name).first()
+#     input_data_type = InputDataType.objects.filter(name=input_data_type_name).first()
+#     if not condition or not intervention or not input_data_type:
+#         # Error handling
+#         print("+" * 80)
+#         if not condition:
+#             print(f"Condition {condition_name} was empty!")
+#         if not intervention:
+#             print(f"Intervention {intervention_name} was empty!")
+#         if not input_data_type:
+#             print(f"Data type {input_data_type_name} was empty!")
+#         print("+" * 80)
+#         print(f"Released model dict was\n{v}")
+#         print("+" * 80)
+#         import sys
+
+#         sys.exit(1)
+#     model = ReleasedModel.objects.filter(name=v["name"]).first()
+#     model.condition.add(condition)
+#     model.intervention.add(intervention)
+#     model.input_type.add(input_data_type)
+
+# for k, v in pending_configs.items():
+#     print(f"Creating Model ---> {k}")
+#     if not IN_DJANGO:
+#         continue
+#     link = "{}-anticipated".format(v["name"].replace(" ", "-"))
+#     PendingModel.objects.create(
+#         name=v["name"], version=v["version"], data_type=v["data_type"], link=link
+#     )
