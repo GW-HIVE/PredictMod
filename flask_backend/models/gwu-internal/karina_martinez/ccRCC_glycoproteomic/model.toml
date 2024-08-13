@@ -1,0 +1,29 @@
+[conditions]
+"Renal Carcinoma" = """\
+[TBD]
+"""
+
+[interventions]
+None = """\
+An observational study of patients, sourced from 'Integrated glycoproteomic characterization of clear \
+cell renal cell carcinoma.' Cell reports vol. 42,5 (2023): 112409. doi:10.1016/j.celrep.2023.112409\
+"""
+
+[data_types]
+Glycoproteomic = """\
+The datasets contain intact glycopeptide abundances, biospecimen and clinical \
+ metadata from 183 resected clear cell renal cell carcinoma (ccRCC) tumor and \ 
+ normal adjacent tissues collected by the CPTAC program.\
+ """
+
+[infrastructure]
+["ccRCC Glycoproteomic"]
+BCO = "BCO_ccRCC_Glycoproteomic.json"
+# Was not in the BCO
+data_type = "ccRCC"
+model_type = "Logistic Regression Classifier"
+backend = "PredictModBackend"
+condition = "Renal Carcinoma"
+intervention = "None"
+input_data_type = "Glycoproteomic"
+data_meta = ""
