@@ -31,17 +31,18 @@ Patients = 40
 Genomes = 281
 #################################################
 ########### ccRCC Glycoproteomic ###############
-["ccRCC Glycoproteomic"]
-BCO = "ccRCC_glycoproteomic_v1/BCO_ccRCC_Glycoproteomic.json"
-# Was not in the BCO
-data_type = "ccRCC"
-model_type = "Logistic Regression Classifier"
-backend = "PredictModBackend"
-condition = "Renal Carcinoma"
-intervention = "None"
-input_data_type = "Glycoproteomic"
+### MOVED TO MODEL-SPECIFIC FOLDER ###
+# ["ccRCC Glycoproteomic"]
+# BCO = "ccRCC_glycoproteomic_v1/BCO_ccRCC_Glycoproteomic.json"
+# # Was not in the BCO
+# data_type = "ccRCC"
+# model_type = "Logistic Regression Classifier"
+# backend = "PredictModBackend"
+# condition = "Renal Carcinoma"
+# intervention = "None"
+# input_data_type = "Glycoproteomic"
 
-["ccRCC Glycoproteomic".data_meta]
+# ["ccRCC Glycoproteomic".data_meta]
 
 ########### Diabetes_EHR ###############
 [Diabetes_EHR]
@@ -56,16 +57,17 @@ input_data_type = "EHR-Synthea"
 [Diabetes_EHR.data_meta]
 #################################################
 ########### Diabetes Glycomic ###############
-["Diabetes Glycomic"]
-BCO = "Diabetes_glycomic_v1/BCO_Diabetes_Glycomic.json"
-model_type = "Decision Tree Classifier (DTC)"
-data_type = "Glycomic"
-backend = "PredictModBackend"
-condition = "Type 2 Diabetes Mellitus"
-intervention = "None"
-input_data_type = "Glycomic"
+### MOVED TO MODEL-SPECIFIC FOLDER ###
+# ["Diabetes Glycomic"]
+# BCO = "Diabetes_glycomic_v1/BCO_Diabetes_Glycomic.json"
+# model_type = "Decision Tree Classifier (DTC)"
+# data_type = "Glycomic"
+# backend = "PredictModBackend"
+# condition = "Type 2 Diabetes Mellitus"
+# intervention = "None"
+# input_data_type = "Glycomic"
 
-["Diabetes Glycomic".data_meta]
+# ["Diabetes Glycomic".data_meta]
 #################################################
 
 ########### Epilepsy_classifier_1.1 ###############
