@@ -11,4 +11,7 @@ fp.close()
 sample = pd.read_csv("MDClone_unknown1.csv")
 sample = sample.drop(["response"], axis=1)
 prediction = SVM.predict(sample)
-print(f"Prediction based on EHR data: {prediction}")
+statement = print(f"Prediction based on EHR data: {prediction}")
+with open('prediction.txt', 'w') as f:
+    f.write(statement)
+
