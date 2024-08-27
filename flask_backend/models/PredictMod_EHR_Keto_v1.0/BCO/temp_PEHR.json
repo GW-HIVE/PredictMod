@@ -1,0 +1,159 @@
+{
+    "object_id": "https://biocomputeobject.org/BCO_000496/DRAFT",
+    "spec_version": "https://w3id.org/ieee/ieee-2791-schema/2791object.json",
+    "etag": "b33444eca81c60e6a85cbc1bc30fed211b5a5310e285c07537525e51fcd10582",
+    "provenance_domain": {
+        "name": "predictmod_ehr_keto",
+        "version": "v1.1",
+        "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+        "created": "2024-06-03T17:44:57",
+        "modified": "2024-08-27T18:38:50",
+        "contributors": [
+            {
+                "name": "Urnisha Bhuiyan",
+                "affiliation": "George Washington University",
+                "email": "sbhuiyan28@email.gwu.edu",
+                "contribution": [
+                    "createdBy"
+                ],
+                "orcid": ""
+            },
+            {
+                "name": "Miguel Mazumder",
+                "affiliation": "George Washington University",
+                "email": "mfmmazumder@gwmail.gwu.edu",
+                "contribution": [
+                    "createdBy"
+                ]
+            },
+            {
+                "name": "Patrick McNeely ",
+                "affiliation": "George Washington University",
+                "email": "pmcneely@email.gwu.edu",
+                "contribution": [
+                    "createdBy"
+                ]
+            },
+            {
+                "name": "Lori Krammer",
+                "affiliation": "George Washington University ",
+                "email": "lorikrammer@email.gwu.edu",
+                "contribution": [
+                    "createdBy"
+                ]
+            }
+        ]
+    },
+    "usability_domain": [
+        "Epic Cosmos (https://www.cosmos.epic.com) is a health record database that compiles clinical data points from several EMR systems to consolidate patient information. The aim of Cosmos is to provide this information to advance health care research. Currently, Cosmos contains 196 million recorded patients with 7.8 billion encounters documented. Additionally, Cosmos is the largest integrated database for clinical information in the United States that contains patients representing the general statistics of the US population. Cosmos contains longitudinal data spanning several years of visits per patient. The charts are also integrated to contain both in-patient and out-patient charts to provide a clear and connected view of each patient’s medical history.\n\nThe training dataset included 308 patients and 26 variables."
+    ],
+    "description_domain": {
+        "keywords": [
+            "Python",
+            "Machine Learning",
+            "keto",
+            "prediabetes"
+        ],
+        "xref": [],
+        "platform": [
+            "VS Code"
+        ],
+        "pipeline_steps": [
+            {
+                "step_number": 1,
+                "name": "model_evaluation",
+                "description": "The following script performs model evaluation by conducting the following: \n1. Generate classification report \n2. Generate feature importance ",
+                "version": "1.1",
+                "input_list": [
+                    {
+                        "filename": "svm_classifier.pkl",
+                        "access_time": "2024-06-14T04:00:00.000Z",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/PredictMod_EHR_Keto_v1.0"
+                    },
+                    {
+                        "filename": "PredictModEHR_v1.0.py",
+                        "access_time": "2024-06-14T04:00:00.000Z",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/PredictMod_EHR_Keto_v1.0"
+                    }
+                ],
+                "output_list": [
+                    {
+                        "filename": "prediction.txt ",
+                        "access_time": "2024-08-27T04:00:00.000Z",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/PredictMod_EHR_Keto_v1.0",
+                        "sha1_checksum": ""
+                    }
+                ]
+            }
+        ]
+    },
+    "parametric_domain": [],
+    "io_domain": {
+        "input_subdomain": [
+            {
+                "uri": {
+                    "filename": "svm_classifier.pkl",
+                    "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/PredictMod_EHR_Keto_v1.0/svm_classifier.pkl",
+                    "sha1_checksum": "https://github.com/GW-HIVE/PredictMod/blob/edadc2be3efd9f539efb9b7b64710a800cc254f3/flask_backend/models/PredictMod_EHR_Keto_v1.0/svm_classifier.pkl"
+                }
+            },
+            {
+                "uri": {
+                    "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/PredictMod_EHR_Keto_v1.0/PredictModEHR_v1.0.py",
+                    "filename": "PredictModEHR_v1.0.py",
+                    "sha1_checksum": "https://github.com/GW-HIVE/PredictMod/blob/edadc2be3efd9f539efb9b7b64710a800cc254f3/flask_backend/models/PredictMod_EHR_Keto_v1.0/PredictModEHR_v1.0.py"
+                }
+            }
+        ],
+        "output_subdomain": [
+            {
+                "mediatype": "txt ",
+                "uri": {
+                    "filename": "prediction.txt",
+                    "uri": "https://github.com/GW-HIVE/PredictMod/tree/main/flask_backend/models/PredictMod_EHR_Keto_v1.0"
+                }
+            }
+        ]
+    },
+    "execution_domain": {
+        "script": [],
+        "script_driver": "",
+        "software_prerequisites": [
+            {
+                "name": "Python",
+                "version": "3.9.5",
+                "uri": {
+                    "uri": "https://www.python.org/",
+                    "access_time": "2024-06-14T04:00:00.000Z"
+                }
+            },
+            {
+                "name": "pandas",
+                "version": "1.4.1",
+                "uri": {
+                    "uri": "https://pandas.pydata.org/",
+                    "access_time": "2024-06-14T04:00:00.000Z"
+                }
+            },
+            {
+                "name": "numpy",
+                "version": "1.22.3",
+                "uri": {
+                    "uri": "https://numpy.org/",
+                    "access_time": "2024-06-14T04:00:00.000Z"
+                }
+            },
+            {
+                "name": "sklearn",
+                "version": "1.4.1.post1",
+                "uri": {
+                    "uri": "https://scikit-learn.org/stable/"
+                }
+            }
+        ],
+        "external_data_endpoints": [],
+        "environment_variables": {}
+    },
+    "extension_domain": [],
+    "error_domain": {}
+}
