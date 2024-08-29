@@ -44,6 +44,8 @@ users = {
 
 categories = [3, 1, 2, 3, 3]
 
+print(f"====\tCreating USERS\t====")
+
 for k, v in users.items():
     user = User.objects.create_user(**users[k])
     SiteUser.objects.create(user=user, category=categories[k])

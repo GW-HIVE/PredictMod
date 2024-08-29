@@ -30,10 +30,7 @@ else:
     MODELS_DIR = os.path.abspath("../../flask_backend/models")
 
 
-def handle_BCO(bco_path):
-    with open(os.path.join(BCO_DIR, bco_path), "r") as fp:
-        bco = json.load(fp)
-    fp.close()
+def handle_BCO(bco: dict):
     formatted_info = {
         "name": bco["provenance_domain"]["name"],
         "version": bco["provenance_domain"]["version"],
@@ -51,11 +48,11 @@ def find_models(model_definition_string, parent_dir):
 
 
 # Ingest self-defined model information (new method)
+print(f"====\tCreating MODELS\t====")
 model_definitions = find_models("model.toml", MODELS_DIR)
 for model in model_definitions:
     with open(model, "rb") as fp:
         config = tomli.load(fp)
-    print(f"\nModel path {model}: Config:\n{config}\n")
     # Get BCO information
     model_root = os.path.dirname(model)
     with open(os.path.join(model_root, config["BCO"]), "r") as fp:
@@ -88,28 +85,46 @@ for model in model_definitions:
     model = ReleasedModel.objects.filter(name=config["name"]).first()
 
     for condition_name, description in condition_names.items():
+        condition_list = Condition.objects.filter(name=condition_name)
+        if not condition_list:
+            print(
+                f"===> Condition list for {condition_name} was empty! Creating Condition <==="
+            )
+            Condition.objects.update_or_create(
+                name=condition_name,
+                description=description,
+            )
         condition = Condition.objects.filter(name=condition_name).first()
-        if not condition:
-            print(f"Condition {condition_name} was empty!")
-        else:
-            model.condition.add(condition)
+        model.condition.add(condition)
     for intervention_name, description in intervention_names.items():
+        intervention_list = Intervention.objects.filter(name=intervention_name)
+        if not intervention_list:
+            print(
+                f"===> Intervention list for {intervention_name} was empty! Creating Intervention <==="
+            )
+            Intervention.objects.update_or_create(
+                name=intervention_name, description=description
+            )
         intervention = Intervention.objects.filter(name=intervention_name).first()
-        if not intervention:
-            print(f"Intervention {intervention_name} was empty!")
-        else:
-            model.intervention.add(intervention)
+        model.intervention.add(intervention)
     for data_type_name, description in input_data_type_names.items():
+        data_type_list = InputDataType.objects.filter(name=data_type_name)
+        if not data_type_list:
+            print(
+                f"===> Data type list for {data_type_name} was empty! Creating InputDataType <==="
+            )
+            InputDataType.objects.update_or_create(
+                name=data_type_name, description=description
+            )
         data_type = InputDataType.objects.filter(name=data_type_name).first()
-        if not data_type:
-            print(f"Data type {data_type_name} was empty!")
-        else:
-            model.input_type.add(data_type)
+        model.input_type.add(data_type)
 
 # Ingest deprecated-definitions configuration
 for k, v in released_configs.items():
     if "BCO" in v.keys():
-        bco_info = handle_BCO(v["BCO"])
+        with open(os.path.join(BCO_DIR, v["BCO"]), "r") as fp:
+            bco = json.load(fp)
+        bco_info = handle_BCO(bco)
         v.pop("BCO")
         # Requires python 3.9+
         v = v | bco_info
