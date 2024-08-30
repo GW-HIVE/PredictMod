@@ -1,0 +1,16 @@
+BCO = "BCO_ccRCC_Glycoproteomic.json"
+data_types = { Glycoproteomic = """\
+The datasets contain intact glycopeptide abundances, biospecimen and clinical \
+ metadata from 183 resected clear cell renal cell carcinoma (ccRCC) tumor and \ 
+ normal adjacent tissues collected by the CPTAC program.\
+ """ }
+model_type = "Logistic Regression Classifier"
+backend = "PredictModBackend"
+conditions = { "Renal Carcinoma" = """\
+[TBD]
+""" }
+interventions = { None = """\
+An observational study of patients, sourced from 'Integrated glycoproteomic characterization of clear \
+cell renal cell carcinoma.' Cell reports vol. 42,5 (2023): 112409. doi:10.1016/j.celrep.2023.112409\
+""" }
+data_meta = ""

@@ -1,0 +1,20 @@
+# NB - The matlab engine is finicky (ie, proprietary code)
+#   and requires manual installation. Don't attempt using the
+#   `-e` flag on pip install!
+# matlabengine
+flask
+flask-cors
+gunicorn
+matplotlib
+numpy<2.0
+openpyxl
+pandas
+scikit-learn==1.4.2
+xgboost
+# NB - As of Mar 2024, there are 1256 open bugs reported on SHAP
+# - they attempted to update the format of SHAP outputs between
+#   0.44.2.dev34 to 0.45.0 and it broke all kinds of things. 
+#   Easiest workaround is to have docker install v0.44.1
+#   locally and run with that
+# See: https://github.com/shap/shap/releases/tag/v0.45.0
+shap==0.44.1 

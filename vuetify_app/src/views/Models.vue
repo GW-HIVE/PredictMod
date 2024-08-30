@@ -63,6 +63,12 @@
     </v-row>
 </v-container>
 
+<v-container fluid>
+    <h1>Contribute to the PredictMod Platform</h1>
+    <v-card :href="newModelsURL">
+      <v-card-text>Learn how to submit new models and contribute to the PredictMod platform!</v-card-text>
+    </v-card>
+</v-container>
 
 <v-container>
     <!-- <v-btn @click.submit="logModels()">Click to log models to console</v-btn> -->
@@ -92,9 +98,9 @@ import DisclaimerShow from './DisclaimerShow.vue';
 import NotFound from './NotFound.vue';
 import LicenseShow from './LicenseShow.vue';
 
-// const modelsURL = import.meta.env.DEV ? import.meta.env.VITE_DEV_MIDDLEWARE_BASE + '/models/': "/predictmod/models/";
-const modelsURL = 'models/';
-
+const baseURL = import.meta.env.DEV ? import.meta.env.VITE_DEV_MIDDLEWARE_BASE : "/predictmod/";
+const modelsURL = baseURL + 'models/';
+const newModelsURL = 'new-models/'
 
 export default {
 
@@ -112,6 +118,7 @@ export default {
   data() {
 			return {
 				modelsURL: modelsURL,
+        newModelsURL: newModelsURL,
 			}
     },
   methods: {

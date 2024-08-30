@@ -1,55 +1,137 @@
-from ui.models import (
-    ReleasedModel,
-    PendingModel,
-    Condition,
-    Intervention,
-    InputDataType,
-)
-
 import json
 import os
 import time
 import tomli
 
+IN_DJANGO = bool(os.environ.get("DJANGO_SETTINGS_MODULE", False))
 
-with open("./utilities/released_models.toml", "rb") as fp:
-    released_configs = tomli.load(fp)
+if IN_DJANGO:
+    from ui.models import (
+        ReleasedModel,
+        PendingModel,
+        Condition,
+        Intervention,
+        InputDataType,
+    )
 
-with open("./utilities/pending_models.toml", "rb") as fp:
-    pending_configs = tomli.load(fp)
+    with open("./utilities/released_models.toml", "rb") as fp:
+        released_configs = tomli.load(fp)
 
-DRY_RUN = False
-BCO_DIR = os.path.abspath("../flask_backend/models")
+    with open("./utilities/pending_models.toml", "rb") as fp:
+        pending_configs = tomli.load(fp)
+    BCO_DIR = os.path.abspath("../flask_backend/models")
+    MODELS_DIR = os.path.abspath("../flask_backend/models")
+else:
+    with open("./released_models.toml", "rb") as fp:
+        released_configs = tomli.load(fp)
+    with open("./pending_models.toml", "rb") as fp:
+        pending_configs = tomli.load(fp)
+    BCO_DIR = os.path.abspath("../../flask_backend/models")
+    MODELS_DIR = os.path.abspath("../../flask_backend/models")
 
-print(f"Examining file {BCO_DIR}")
 
-
-def handle_BCO(bco_path):
-    with open(os.path.join(BCO_DIR, bco_path), "r") as fp:
-        bco = json.load(fp)
-    fp.close()
-    # print(f"===> Got info: {bco['provenance_domain']}\n{type(bco)}")
+def handle_BCO(bco: dict):
     formatted_info = {
         "name": bco["provenance_domain"]["name"],
         "version": bco["provenance_domain"]["version"],
-        # "release_date": time.strptime(
-        #     bco["provenance_domain"]["modified"], "%Y-%m-%dT%H:%M:%S"
-        # ),
         "release_date": bco["provenance_domain"]["modified"].split("T")[0],
     }
     return formatted_info
 
 
+def find_models(model_definition_string, parent_dir):
+    target_definitions = []
+    for parent, dirnames, filenames in os.walk(parent_dir):
+        if model_definition_string in filenames:
+            target_definitions.append(os.path.join(parent, model_definition_string))
+    return target_definitions
+
+
+# Ingest self-defined model information (new method)
+print(f"====\tCreating MODELS\t====")
+model_definitions = find_models("model.toml", MODELS_DIR)
+for model in model_definitions:
+    with open(model, "rb") as fp:
+        config = tomli.load(fp)
+    # Get BCO information
+    model_root = os.path.dirname(model)
+    with open(os.path.join(model_root, config["BCO"]), "r") as fp:
+        bco = json.load(fp)
+    bco_info = handle_BCO(bco)
+    ### XXX: Duplicated code is expedient, but needs to be trimmed once
+    ### the previous model definitions have been fully deprecated
+    if not IN_DJANGO:
+        continue
+    # Merge name, version, release date from BCO
+    config = config | bco_info
+    link = "{}".format(config["name"].replace(" ", "-"))
+
+    # Now (possibly) providing support for multiples of condition, intervention, or data types
+    condition_names = config["conditions"]
+    intervention_names = config["interventions"]
+    input_data_type_names = config["data_types"]
+
+    ReleasedModel.objects.create(
+        name=config["name"],
+        version=config["version"],
+        release_date=config["release_date"],
+        data_type=config["data_types"],
+        model_type=config["model_type"],
+        data_meta=config["data_meta"],
+        backend=config["backend"],
+        link=link,
+    )
+
+    model = ReleasedModel.objects.filter(name=config["name"]).first()
+
+    for condition_name, description in condition_names.items():
+        condition_list = Condition.objects.filter(name=condition_name)
+        if not condition_list:
+            print(
+                f"===> Condition list for {condition_name} was empty! Creating Condition <==="
+            )
+            Condition.objects.update_or_create(
+                name=condition_name,
+                description=description,
+            )
+        condition = Condition.objects.filter(name=condition_name).first()
+        model.condition.add(condition)
+    for intervention_name, description in intervention_names.items():
+        intervention_list = Intervention.objects.filter(name=intervention_name)
+        if not intervention_list:
+            print(
+                f"===> Intervention list for {intervention_name} was empty! Creating Intervention <==="
+            )
+            Intervention.objects.update_or_create(
+                name=intervention_name, description=description
+            )
+        intervention = Intervention.objects.filter(name=intervention_name).first()
+        model.intervention.add(intervention)
+    for data_type_name, description in input_data_type_names.items():
+        data_type_list = InputDataType.objects.filter(name=data_type_name)
+        if not data_type_list:
+            print(
+                f"===> Data type list for {data_type_name} was empty! Creating InputDataType <==="
+            )
+            InputDataType.objects.update_or_create(
+                name=data_type_name, description=description
+            )
+        data_type = InputDataType.objects.filter(name=data_type_name).first()
+        model.input_type.add(data_type)
+
+# Ingest deprecated-definitions configuration
 for k, v in released_configs.items():
     if "BCO" in v.keys():
-        print(f"{k}: Procssing BCO {v['BCO']}")
-        bco_info = handle_BCO(v["BCO"])
-        # print(f"===Got info: {bco_info}")
+        with open(os.path.join(BCO_DIR, v["BCO"]), "r") as fp:
+            bco = json.load(fp)
+        bco_info = handle_BCO(bco)
         v.pop("BCO")
         # Requires python 3.9+
         v = v | bco_info
-        print(f"{v}")
-    if DRY_RUN:
+        # BCOs previously only provided name, version, and release date
+        # These will be automatically parsed on model submission in
+        # future iterations of the model submission pipeline
+    if not IN_DJANGO:
         continue
     link = "{}".format(v["name"].replace(" ", "-"))
 
@@ -82,9 +164,7 @@ for k, v in released_configs.items():
         print("+" * 80)
         print(f"Released model dict was\n{v}")
         print("+" * 80)
-        import sys
 
-        sys.exit(1)
     model = ReleasedModel.objects.filter(name=v["name"]).first()
     model.condition.add(condition)
     model.intervention.add(intervention)
@@ -92,7 +172,7 @@ for k, v in released_configs.items():
 
 for k, v in pending_configs.items():
     print(f"Creating Model ---> {k}")
-    if DRY_RUN:
+    if not IN_DJANGO:
         continue
     link = "{}-anticipated".format(v["name"].replace(" ", "-"))
     PendingModel.objects.create(

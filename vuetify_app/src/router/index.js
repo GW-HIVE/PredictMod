@@ -75,6 +75,11 @@ const routes = [
       props: true,
     },
     {
+      path: '/predictmod/new-models', 
+      component: () => import('../views/NewModelView.vue'),
+      props: true,
+    },
+    {
       path: '/:pathMatch(.*)*',
       component: () => import('../views/NotFound.vue'),
     },

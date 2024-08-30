@@ -3,6 +3,10 @@ import { defineStore } from 'pinia'
 
 import axios from 'axios';
 
+function convertModelName(name) {
+  return name.replace(/[_-]/g, ' ')
+}
+
 export const useAppStore = defineStore('app', {
     state: () => ({
       releasedModels: null,
@@ -25,8 +29,17 @@ export const useAppStore = defineStore('app', {
           console.log("---> Error!\n%s", response.status);
         } else {
           // console.log("---> Home: Got response\n", JSON.stringify(response.data))
-          this.releasedModels = JSON.parse(response.data.released_models);
-          this.pendingModels = JSON.parse(response.data.pending_models);
+          const releasedModels = JSON.parse(response.data.released_models);
+          releasedModels.forEach(model => {
+            model.fields.name = convertModelName(model.fields.name)
+          });
+          this.releasedModels = releasedModels;
+
+          const pendingModels = JSON.parse(response.data.pending_models);
+          pendingModels.forEach(model => {
+            model.fields.name = convertModelName(model.fields.name)
+          })
+          this.pendingModels = pendingModels;
         }
       },
       async retrieveModelInfo() {

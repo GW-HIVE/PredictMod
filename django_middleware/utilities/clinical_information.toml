@@ -24,16 +24,10 @@ is disturbed, causing seizures. Prediction outcomes are based on [TBD].
 "Diet - Keto Diet" = "A low-carb, ketogenic diet commonly recommended for the management of prediabetes."
 
 [interventions."Renal Carcinoma"]
-None = """\
-An observational study of patients, sourced from 'Integrated glycoproteomic characterization of clear \
-cell renal cell carcinoma.' Cell reports vol. 42,5 (2023): 112409. doi:10.1016/j.celrep.2023.112409\
-"""
+None = "[TBD]"
+
 [interventions."Type 2 Diabetes Mellitus"]
-None = """\
-The data is from Keser, Toma et al. “Increased plasma N-glycome complexity is associated with \
-higher risk of type 2 diabetes.” Diabetologia vol. 60,12 (2017): 2352-2360. \
-doi:10.1007/s00125-017-4426-9 and was provided by Dr. Olga Gornik, Faculty of Pharmacy and Biochemistry, University of Zagreb.\
-"""
+None = "[TBD]"
 
 [input_data_types]
 [input_data_types.Prediabetes]
@@ -49,24 +43,14 @@ Epilepsy data set was provided by Department of Veterians Affairs. This was used
 to generate a 500 patient dataset for the epilepsy gut microbiome classifier and predictor \
 """
 
-[input_data_types."Renal Carcinoma"]
-Glycoproteomic = """\
-The datasets contain intact glycopeptide abundances, biospecimen and clinical \
- metadata from 183 resected clear cell renal cell carcinoma (ccRCC) tumor and \ 
- normal adjacent tissues collected by the CPTAC program.\
- """
 [input_data_types."Type 2 Diabetes Mellitus"]
-Glycomic = """\
-The data is from Keser, Toma et al. “Increased plasma N-glycome complexity is associated with higher risk of type 2 diabetes.” \
-Diabetologia vol. 60,12 (2017): 2352-2360. doi:10.1007/s00125-017-4426-9 and was provided by Dr. Olga Gornik, Faculty of \
-Pharmacy and Biochemistry, University of Zagreb.\
-"""
+Glycomic = "[TBD]"
 
-[url_targets]
-[url_targets.Prediabetes]
-EHR = "MDClone-Diet-Exercise"
-"Gut-Microbiome" = "MG-Exercise"
+# [url_targets]
+# [url_targets.Prediabetes]
+# EHR = "MDClone-Diet-Exercise"
+# "Gut-Microbiome" = "MG-Exercise"
 
-[url_targets.Epilepsy]
+# [url_targets.Epilepsy]
 
-[url_targets."Renal Carcinoma"]
+# [url_targets."Renal Carcinoma"]
