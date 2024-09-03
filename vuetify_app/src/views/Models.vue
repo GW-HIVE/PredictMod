@@ -98,8 +98,7 @@ import DisclaimerShow from './DisclaimerShow.vue';
 import NotFound from './NotFound.vue';
 import LicenseShow from './LicenseShow.vue';
 
-const baseURL = import.meta.env.DEV ? import.meta.env.VITE_DEV_MIDDLEWARE_BASE : "/predictmod/";
-const modelsURL = baseURL + 'models/';
+const modelsURL = 'models/';
 const newModelsURL = 'new-models/'
 
 export default {
@@ -126,7 +125,7 @@ export default {
       console.log("Released models: ", JSON.stringify(this.appStore.releasedModels));
     },
     goToTarget(linkText) {
-      // console.log("Targeting:\nBase URL: %s\nModel URL: %s", this.modelsURL, linkText)
+      // console.log("Targeting:\nBase URL: %s\nModel URL: %s", this.modelsURL, linkText);
       this.$router.push(this.modelsURL+linkText);
     },
   },
