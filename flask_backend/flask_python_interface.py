@@ -7,9 +7,7 @@ import logging
 from model_handlers import (
     MDClone_EHRTreeHandler,
     MGTreeHandler,
-    ccRCC_ClassifierHandler,
     Diabetes_EHR_Handler,
-    Diabetes_Glycomic_Handler,
     Epilepsy_Microbiome_Handler,
 )
 
@@ -23,27 +21,21 @@ MODELS_DIR = "models"
 DETAIL_LOOKUP = {
     "MDClone-Diet-Exercise": "MDClone_Diet_Counseling_v1.1/README.md",
     "MG-Exercise": "MG_Exercise_v1.1/README.md",
-    "ccRCC-Glycoproteomic": "ccRCC_glycoproteomic_v1/README.md",
     "Diabetes_EHR": "Diabetes_EHR_v1/README.md",
-    "Diabetes-Glycomic": "Diabetes_glycomic_v1/README.md",
     "Epilepsy_classifier_1.1": "Epilepsy_microbiome_v1/README.md",
 }
 
 DOWNLOAD_LOOKUP = {
     "MDClone-Diet-Exercise": "MDClone_Diet_Counseling_v1.1/MDClone_unknown3.csv",
     "MG-Exercise": "MG_Exercise_v1.1/unknown_response.csv",
-    "ccRCC-Glycoproteomic": "ccRCC_glycoproteomic_v1/example_input.csv",
     "Diabetes_EHR": "Diabetes_EHR_v1/single_patient_input.xlsx",
-    "Diabetes-Glycomic": "Diabetes_glycomic_v1/example_input.csv",
     "Epilepsy_classifier_1.1": "Epilepsy_microbiome_v1/single_patient_sample.xlsx",
 }
 
 HANDLERS = {
     "MDClone-Diet-Exercise": MDClone_EHRTreeHandler(),
     "MG-Exercise": MGTreeHandler(),
-    "ccRCC-Glycoproteomic": ccRCC_ClassifierHandler(),
     "Diabetes_EHR": Diabetes_EHR_Handler(),
-    "Diabetes-Glycomic": Diabetes_Glycomic_Handler(),
     "Epilepsy_classifier_1.1": Epilepsy_Microbiome_Handler(),
 }
 
