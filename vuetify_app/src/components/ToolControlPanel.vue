@@ -73,8 +73,13 @@ export default {
             const response = await DownloadService.download(targetName, () => {
             });
             // console.log("TCP: Collected data:\n%s", response);
+            if (response.error) {
+                console.log("Download experienced an error: ", response.error);
+                alert("Download experienced an error: " + response.error);
+            } else {
             this.queryState.filePreviewData = response;
             this.queryState.downloadDrawer = true;
+            }
         },
     },
     components: { DownloadService, FileUpload },
