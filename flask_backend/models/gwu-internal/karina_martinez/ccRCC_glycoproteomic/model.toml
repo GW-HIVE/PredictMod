@@ -5,7 +5,7 @@ The datasets contain intact glycopeptide abundances, biospecimen and clinical \
  normal adjacent tissues collected by the CPTAC program.\
  """ }
 model_type = "Logistic Regression Classifier"
-backend = "PredictModBackend"
+backend = "PredictMod-KM-Analysis-Backend"
 conditions = { "Renal Carcinoma" = """\
 [TBD]
 """ }
