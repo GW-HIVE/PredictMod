@@ -5,7 +5,7 @@ version = "1.1"
 release_date = 2023-12-01
 model_type = "Decision Tree Classifier (DTC)"
 data_type = "EHR Diet"
-backend = "PredictModBackend"
+backend = "predict-backend"
 condition = "Prediabetes"
 intervention = "Diet - Dietary Counseling"
 input_data_type = "EHR"
@@ -21,7 +21,7 @@ version = "1.1"
 release_date = 2023-05-01
 model_type = "Decision Tree Classifier (DTC)"
 data_type = "Gut-Microbiome"
-backend = "PredictModBackend"
+backend = "predict-backend"
 condition = "Prediabetes"
 intervention = "Exercise"
 input_data_type = "Gut-Microbiome"
@@ -30,44 +30,18 @@ input_data_type = "Gut-Microbiome"
 Patients = 40
 Genomes = 281
 #################################################
-########### ccRCC Glycoproteomic ###############
-### MOVED TO MODEL-SPECIFIC FOLDER ###
-# ["ccRCC Glycoproteomic"]
-# BCO = "ccRCC_glycoproteomic_v1/BCO_ccRCC_Glycoproteomic.json"
-# # Was not in the BCO
-# data_type = "ccRCC"
-# model_type = "Logistic Regression Classifier"
-# backend = "PredictModBackend"
-# condition = "Renal Carcinoma"
-# intervention = "None"
-# input_data_type = "Glycoproteomic"
-
-# ["ccRCC Glycoproteomic".data_meta]
 
 ########### Diabetes_EHR ###############
 [Diabetes_EHR]
 BCO = "Diabetes_EHR_v1/BCO_raw_Diabetes_EHR_Classifier.json"
 model_type = "Decision Tree Classifier (DTC)"
 data_type = "EHR"
-backend = "PredictModBackend"
+backend = "predict-backend"
 condition = "Prediabetes"
 intervention = "Exercise"
 input_data_type = "EHR-Synthea"
 
 [Diabetes_EHR.data_meta]
-#################################################
-########### Diabetes Glycomic ###############
-### MOVED TO MODEL-SPECIFIC FOLDER ###
-# ["Diabetes Glycomic"]
-# BCO = "Diabetes_glycomic_v1/BCO_Diabetes_Glycomic.json"
-# model_type = "Decision Tree Classifier (DTC)"
-# data_type = "Glycomic"
-# backend = "PredictModBackend"
-# condition = "Type 2 Diabetes Mellitus"
-# intervention = "None"
-# input_data_type = "Glycomic"
-
-# ["Diabetes Glycomic".data_meta]
 #################################################
 
 ########### Epilepsy_classifier_1.1 ###############
@@ -76,7 +50,7 @@ BCO = "Epilepsy_microbiome_v1/BCO_raw_Epilepsy_classifier.json"
 # Guessing; BCOs don't contain. Also, is this EHR, metagenomic, etc?
 data_type = "Epilepsy EHR"
 model_type = "Decision Tree Classifier (DTC)"
-backend = "PredictModBackend"
+backend = "predict-backend"
 condition = "Epilepsy"
 intervention = "Diet - Keto Diet"
 input_data_type = "Gut-Microbiome"
