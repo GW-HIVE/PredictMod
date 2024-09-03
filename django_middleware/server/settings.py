@@ -32,8 +32,6 @@ SECRET_KEY = "django-insecure-v$rywutoth&6+v8&_#t@_7l*d=k-u^lnx@1)f(o9rs(2pu=i=n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config[DJANGO_MODE]["Debug"]
 
-FLASK_BACKEND = config[DJANGO_MODE]["BackendBaseURL"]
-
 ALLOWED_HOSTS = ["middleware", "127.0.0.1", "localhost"]
 
 APPEND_SLASH = False
