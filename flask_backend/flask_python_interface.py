@@ -1,6 +1,7 @@
 from flask import Flask, request, Response, send_from_directory, jsonify
 from flask_cors import CORS, cross_origin
 
+import tomli
 import os
 import logging
 
@@ -19,21 +20,21 @@ import pandas as pd
 MODELS_DIR = "models"
 
 DETAIL_LOOKUP = {
-    "MDClone-Diet-Exercise": "MDClone_Diet_Counseling_v1.1/README.md",
+    "MDClone-Diet-Counseling": "MDClone_Diet_Counseling_v1.1/README.md",
     "MG-Exercise": "MG_Exercise_v1.1/README.md",
     "Diabetes_EHR": "Diabetes_EHR_v1/README.md",
     "Epilepsy_classifier_1.1": "Epilepsy_microbiome_v1/README.md",
 }
 
 DOWNLOAD_LOOKUP = {
-    "MDClone-Diet-Exercise": "MDClone_Diet_Counseling_v1.1/MDClone_unknown3.csv",
+    "MDClone-Diet-Counseling": "MDClone_Diet_Counseling_v1.1/MDClone_unknown3.csv",
     "MG-Exercise": "MG_Exercise_v1.1/unknown_response.csv",
     "Diabetes_EHR": "Diabetes_EHR_v1/single_patient_input.xlsx",
     "Epilepsy_classifier_1.1": "Epilepsy_microbiome_v1/single_patient_sample.xlsx",
 }
 
 HANDLERS = {
-    "MDClone-Diet-Exercise": MDClone_EHRTreeHandler(),
+    "MDClone-Diet-Counseling": MDClone_EHRTreeHandler(),
     "MG-Exercise": MGTreeHandler(),
     "Diabetes_EHR": Diabetes_EHR_Handler(),
     "Epilepsy_classifier_1.1": Epilepsy_Microbiome_Handler(),
@@ -45,13 +46,26 @@ app.config["CORS_HEADERS"] = "Content-Type"
 
 app.logger.setLevel(logging.DEBUG)
 
+with open(".env", "rb") as config_p:
+    config = tomli.load(config_p)
+
+FLASK_MODE = config["mode"]
+
 
 @app.route("/model-details", methods=["GET"])
 def model_details():
     query = request.args.get("q", None)
     app.logger.debug(f"Found detail request arg: {query}")
     if query not in DETAIL_LOOKUP.keys():
-        return jsonify({"details": f"## _Model details for {query} are coming soon!_"})
+        if FLASK_MODE != "dev":
+            return jsonify(
+                {"details": f"## _Model details for {query} are coming soon!_"}
+            )
+        return jsonify(
+            {
+                "details": f"## Flask mode {FLASK_MODE} detected; models may be incorrectly shown as 'missing'"
+            }
+        )
     details_path = os.path.join(MODELS_DIR, DETAIL_LOOKUP[query])
     with open(details_path, "r") as fp:
         raw_markdown = fp.read()
@@ -76,9 +90,19 @@ def query():
 @cross_origin()
 def download():
     query = request.args.get("q", None)
-    if not query or query not in DOWNLOAD_LOOKUP.keys():
-        return Response(f"Error!")
+    if not query:
+        return jsonify({"error": f"Error! No query found"})
     try:
+        if query not in DOWNLOAD_LOOKUP.keys():
+            if FLASK_MODE != "dev":
+                return jsonify(
+                    {"error": f"Download for unknown model {query} not available"}
+                )
+            return jsonify(
+                {
+                    "error": f"Flask mode is {FLASK_MODE}; no downloads for {query} available"
+                }
+            )
         download_path = os.path.join(MODELS_DIR, DOWNLOAD_LOOKUP[query])
         extension = download_path.split(".")[-1]
         if extension == "xlsx":
@@ -88,11 +112,11 @@ def download():
         elif extension == "tsv":
             df = pd.read_csv(download_path, sep="\t")
         else:
-            return Response(f"Unsupported extension {extension}", status=500)
+            return jsonify({"error": f"Unsupported extension {extension}"}, status=500)
         return jsonify(df.to_json(orient="records"))
     except Exception as e:
         app.logger.debug(f"Exception: {e}")
-        return Response(f"Error! {e}")
+        return jsonify({"error": f"Flask exception: {e}"})
 
 
 @app.route("/ping", methods=["GET"])
@@ -109,6 +133,12 @@ def ping():
 def upload():
     target = request.args.get("q", None)
     if target not in HANDLERS.keys():
+        if FLASK_MODE == "dev":
+            return jsonify(
+                {
+                    "error": f"Flask mode is {FLASK_MODE}; uploads to {target} aren't supported"
+                }
+            )
         app.logger.debug("*" * 40)
         app.logger.debug(f"Target: {target}")
         app.logger.debug(f"Keys: {[k for k in HANDLERS.keys()]}")
