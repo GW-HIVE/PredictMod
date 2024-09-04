@@ -5,7 +5,7 @@ The data is from Keser, Toma et al. “Increased plasma N-glycome complexity is 
 Diabetologia vol. 60,12 (2017): 2352-2360. doi:10.1007/s00125-017-4426-9 and was provided by Dr. Olga Gornik, Faculty of \
 Pharmacy and Biochemistry, University of Zagreb.\
 """}
-backend = "PredictMod-KM-Analysis-Backend"
+backend = "karina-martinez-analysis"
 conditions = {"Type 2 Diabetes Mellitus" = "Content TBD"}
 interventions = {None = """\
 The data is from Keser, Toma et al. “Increased plasma N-glycome complexity is associated with \
