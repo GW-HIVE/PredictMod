@@ -5,14 +5,12 @@ import pandas as pd
 
 class Diabetes_Glycomic_Handler:
     def __init__(self):
-        with open("./models/Diabetes_glycomic_v1/diabetes_classifier.pkl", "rb") as fp:
-            self.pickled_model = joblib.load(fp)
-        fp.close()
+        self.pickled_model = joblib.load("./Diabetes_glycomic/diabetes_classifier.pkl")
 
         # See ../../models/Diabetes_glycomic_v1/{files} for original source
-        self.headers = pd.read_csv(
-            "./models/Diabetes_glycomic_v1/gtc_headers.csv", sep=","
-        )["Header"].to_list()
+        self.headers = pd.read_csv("./Diabetes_glycomic/gtc_headers.csv", sep=",")[
+            "Header"
+        ].to_list()
 
         self.glycan_dict = {
             "GP32-33_G67579EM": ["GP32_G67579EM", "GP33_G67579EM"],
