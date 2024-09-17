@@ -11,17 +11,17 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 import mimetypes
-import configparser
+import tomli
 
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-config = configparser.ConfigParser()
-config.read(BASE_DIR / "server/.env")
+with open(BASE_DIR / "server/.env", "rb") as config_p:
+    config = tomli.load(config_p)
 
-DJANGO_MODE = config["mode"]["mode"]
+DJANGO_MODE = config["mode"]
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -31,8 +31,6 @@ SECRET_KEY = "django-insecure-v$rywutoth&6+v8&_#t@_7l*d=k-u^lnx@1)f(o9rs(2pu=i=n
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config[DJANGO_MODE]["Debug"]
-
-FLASK_BACKEND = config[DJANGO_MODE]["BackendBaseURL"]
 
 ALLOWED_HOSTS = ["middleware", "127.0.0.1", "localhost"]
 

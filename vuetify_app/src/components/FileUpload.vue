@@ -62,6 +62,9 @@
     </v-container>
       <!-- </v-row> -->
       <v-container>
+      <v-alert v-if="error" color="red" class="pa-5">
+        {{ error }}
+      </v-alert>
       <v-alert v-if="message" color="blue-grey" class="pa-5" dark>
         {{ message }}
       </v-alert>
@@ -144,6 +147,7 @@ import * as XLSX from 'xlsx';
         standIn: false,
         progress: 0,
         message: "Data must be selected before results are available",
+        error: null,
         showChart: false,
         uploadSuccess: false,
         counterToken: 0,
@@ -159,7 +163,8 @@ import * as XLSX from 'xlsx';
         },
         importFileAndAnalyze() {
             if (!this.currentFile) {
-                this.message = "Please select a file for upload!"
+                this.message = null;
+                this.error = "Please select a file for upload!"
                 return;
             }
             // console.log("---> Now attempting to read file");
@@ -179,11 +184,13 @@ import * as XLSX from 'xlsx';
   
       upload() {
         if (!this.currentFile) {
-          this.message = "Please select a file for upload!";
+          this.message = null;
+          this.error = "Please select a file for upload!";
           return false;
         }
         if (!this.data) {
-          this.message = "Please upload a data file!";
+          this.message = null;
+          this.error = "Please upload a data file!";
           return false;
         }
   
@@ -193,7 +200,7 @@ import * as XLSX from 'xlsx';
           .then((response) => {
             // this.message = response.data.message;
             // console.log("Got response:\n", response);
-            this.message = response.result ? response.result : response.error;
+            this.message = response.result ? response.result : null;
             if (response.plot) {
               this.chartData = JSON.parse(response.plot);
               this.showChart = true;
@@ -205,6 +212,7 @@ import * as XLSX from 'xlsx';
             }
             else if (response.error) {
               console.log("ERROR: ", response.error);
+              this.error = response.error;
               this.showChart = false;
               // this.standIn = true;
             }
@@ -212,7 +220,8 @@ import * as XLSX from 'xlsx';
           })
           .catch(() => {
             this.progress = 0;
-            this.message = "Could not upload the file!";
+            this.message = null;
+            this.error = "Could not upload the file!";
             // this.currentFile = null;
             // this.data = null;
             return false;

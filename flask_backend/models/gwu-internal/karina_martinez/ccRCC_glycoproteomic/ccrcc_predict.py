@@ -15,6 +15,7 @@ Description:    The script loads the pre-trained classifier from the ccrcc_class
                     -f FILENAME, --file=FILENAME    example input csv file [default: example_input.csv]
 """
 
+# fmt: off
 import joblib
 import pandas as pd
 from optparse import OptionParser
@@ -74,3 +75,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+# fmt: on

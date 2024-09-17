@@ -18,8 +18,6 @@ import os
 import pandas
 import requests
 
-FLASK_BACKEND = settings.FLASK_BACKEND
-
 logger = logging.getLogger()
 
 
@@ -31,6 +29,26 @@ logger = logging.getLogger()
 
 def binary_response_to_json(response):
     return json.loads(response.content.decode("utf-8"))
+
+
+def get_anlaysis_urls():
+    try:
+        models = ReleasedModel.objects.all()
+        return {m.name: f"http://{m.backend}:5000" for m in models}
+    except Exception as e:
+        logger.critical("=" * 80)
+        logger.critical(f"Exception: {e}")
+        logger.critical("=" * 80)
+        return {"None": "No models found in database"}
+
+
+ANALYSIS_BACKENDS = get_anlaysis_urls()
+
+
+def lookup_backend(model_name: str):
+    if settings.DJANGO_MODE == "dev":
+        return "http://localhost:5000"
+    return ANALYSIS_BACKENDS.get(model_name, None)
 
 
 # XXX - Sanity check
@@ -68,7 +86,8 @@ def queries(request):
     logger.debug("---> Received query")
     query = request.GET.get("q", None)
     logger.debug(f"Found query: {query}")
-    result = requests.get(f"{FLASK_BACKEND}/query?query={query}")
+
+    result = requests.get(f"{lookup_backend(query)}/query?query={query}")
 
     return JsonResponse(json.loads(result.content.decode("utf-8")), safe=False)
 
@@ -157,7 +176,9 @@ def model_details(request):
         logger.debug(f"===> Requested details for model {model_name}")
         if model_name is None:
             return JsonResponse({"error": f"Unknown model name: {model_name}"})
-        response = requests.get(f"{FLASK_BACKEND}/model-details?q={model_name}")
+        response = requests.get(
+            f"{lookup_backend(model_name)}/model-details?q={model_name}"
+        )
         logger.debug(f"Response: {response.status_code}")
         if response.status_code == 404:
             logger.debug("===> Response was 404 <===")
@@ -176,13 +197,13 @@ def model_details(request):
 
 @csrf_exempt
 def file_download(request):
-    sample_type = request.GET.get("q", None)
-    if sample_type is not None:
-        response = requests.get(f"{FLASK_BACKEND}/download?q={sample_type}")
+    model_name = request.GET.get("q", None)
+    if model_name is not None:
+        response = requests.get(f"{lookup_backend(model_name)}/download?q={model_name}")
         if response.status_code != 200:
             return JsonResponse({"error": response.content.decode("utf-8")})
         return JsonResponse(json.loads(response.content.decode("utf-8")), safe=False)
-    return JsonResponse({"error": f"Unknown sample type: {sample_type}"}, status=500)
+    return JsonResponse({"error": f"Unknown model name: {model_name}"}, status=500)
 
 
 def file_upload(request):
@@ -196,7 +217,9 @@ def file_upload(request):
             #     )
             data = json.loads(request.body)
             # logger.debug(f"---> Request received data: {data}")
-            response = requests.post(f"{FLASK_BACKEND}/upload?q={target}", json=data)
+            response = requests.post(
+                f"{lookup_backend(target)}/upload?q={target}", json=data
+            )
             response = json.loads(response._content.decode("utf-8"))
             return JsonResponse(response, status=200, safe=False)
         except ConnectionRefusedError:

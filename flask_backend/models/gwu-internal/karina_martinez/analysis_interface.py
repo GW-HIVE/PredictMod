@@ -4,8 +4,8 @@ from flask_cors import CORS, cross_origin
 import os
 import logging
 
-from .Diabetes_glycomic.model_handler import Diabetes_Glycomic_Handler
-from .ccRCC_glycoproteomic.model_handler import ccRCC_ClassifierHandler
+from Diabetes_glycomic import Diabetes_Glycomic_Handler
+from ccRCC_glycoproteomic import ccRCC_ClassifierHandler
 
 # TODO: Documentation
 

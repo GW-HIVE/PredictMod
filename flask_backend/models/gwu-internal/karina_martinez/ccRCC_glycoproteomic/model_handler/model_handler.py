@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import time
 
-CLASSIFIER_PICKLE = "./model_handlers/ccRCC_glycoproteomic/ccrcc_classifier.pkl"
+CLASSIFIER_PICKLE = "./ccRCC_glycoproteomic/ccrcc_classifier_new.pkl"
 
 
 def get_glycoforms(glycoform_df):
@@ -42,9 +42,7 @@ def get_glycoforms(glycoform_df):
 
 class ccRCC_ClassifierHandler:
     def __init__(self):
-        with open(CLASSIFIER_PICKLE, "rb") as fp:
-            self.classifier = joblib.load(fp)
-        fp.close()
+        self.classifier = joblib.load(CLASSIFIER_PICKLE)
 
     def make_prediction(self, raw_data):
 
