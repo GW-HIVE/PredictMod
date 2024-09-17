@@ -9,8 +9,13 @@ matplotlib
 numpy<2.0
 openpyxl
 pandas
-scikit-learn==1.4.2
-xgboost
+scikit-learn==1.3.2
+# Original submission from Karina did not include XGBoost version
+# which presented breaking issues upon dockerization (after her
+# departure). I've updated as best I can, and lock in the XGBoost 
+# version here. There is an import warning, but the system appears
+# to work correctly
+xgboost==2.1.1
 # NB - As of Mar 2024, there are 1256 open bugs reported on SHAP
 # - they attempted to update the format of SHAP outputs between
 #   0.44.2.dev34 to 0.45.0 and it broke all kinds of things. 
