@@ -7,6 +7,7 @@ Description:    The script takes patient data and labels, splits the data into t
                 Output is a pickle file named 'ccrcc_classifier.pkl'
 """
 
+# fmt: off
 # Supress warnings
 import warnings
 warnings.filterwarnings("ignore") 
@@ -173,3 +174,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+# fmt: on
