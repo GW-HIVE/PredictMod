@@ -32,8 +32,14 @@ def binary_response_to_json(response):
 
 
 def get_anlaysis_urls():
-    models = ReleasedModel.objects.all()
-    return {m.name: f"http://{m.backend}:5000" for m in models}
+    try:
+        models = ReleasedModel.objects.all()
+        return {m.name: f"http://{m.backend}:5000" for m in models}
+    except Exception as e:
+        logger.critical("=" * 80)
+        logger.critical(f"Exception: {e}")
+        logger.critical("=" * 80)
+        return {"None": "No models found in database"}
 
 
 ANALYSIS_BACKENDS = get_anlaysis_urls()
