@@ -1,4 +1,4 @@
-# docker build -t predictmod:km-analysis-backend-base -f dockerfile.km.base .
+# docker build -t karina-martinez-analysis.base -f dockerfile.base .
 FROM python:3.10-slim-buster
 
 COPY ./requirements.txt /

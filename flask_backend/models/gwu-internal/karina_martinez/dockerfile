@@ -1,5 +1,5 @@
-# docker build -t predictmod:km-analysis-backend-1.0 .
-FROM predictmod:km-analysis-backend-base
+# docker build -t karina-martinez-analysis.base .
+FROM karina-martinez-analysis.base
 
 COPY . /backend
 WORKDIR /backend
