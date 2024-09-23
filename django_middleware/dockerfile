@@ -1,6 +1,7 @@
 # docker build -t predictmod:v0.3.1-frontend -f dockerfile .
 FROM predictmod:middleware-base
 
+COPY ./flask_backend /flask_backend
 COPY ./ /server
 WORKDIR /server
 
