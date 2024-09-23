@@ -1,5 +1,5 @@
 black
-Django
+Django<5.1
 django-cors-headers
 django-filter
 django-guardian
