@@ -111,7 +111,7 @@ for model in model_definitions:
             )
         intervention = Intervention.objects.filter(name=intervention_name).first()
         model.intervention.add(intervention)
-    for data_type_name, description in input_data_type_names.items():
+    for data_type_name, description in data_types.items():
         data_type_list = InputDataType.objects.filter(name=data_type_name)
         if not data_type_list:
             print(
