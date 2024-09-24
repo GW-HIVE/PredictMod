@@ -15,7 +15,7 @@
             <div class="d-flex fill-height align-center justify-center"> 
               <v-card flat color="transparent">
               <v-card-title class="title text-center font-weight-bold">
-                <h1>PredictMod: Model Submission</h1>
+                <h1>PredictMod: AI/ML Example Workflow & Tutorial</h1>
               </v-card-title>
               </v-card>
           </div>
@@ -53,7 +53,7 @@
   <script>
   import { useAppStore } from '@/store/app';  // For user info
   import { marked } from "marked";
-  import NewModelText from '@/docs/submit_content/submission_steps.md?raw';
+  import TutorialText from '@/docs/tutorial_content/tutorial.md?raw';
   import DisclaimerShow from '@/views/DisclaimerShow.vue';
   import LicenseShow from '@/views/LicenseShow.vue';
   
@@ -64,7 +64,7 @@
   
   export default {
   
-    name: 'NewModelInstructions',
+    name: 'AIMLTutorial',
     setup() {
     //   console.log("---> Model view, initializing")
       const appStore = useAppStore();
@@ -82,8 +82,8 @@
             modelsURL: modelsURL,
             showDetails: false,
             modelDetails: null,
-            name: "New Models",
-            text: marked.parse(NewModelText),
+            name: "AI/ML Tutorial",
+            text: marked.parse(TutorialText),
         }
       },
     methods: {
