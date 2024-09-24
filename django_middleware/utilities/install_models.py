@@ -69,13 +69,17 @@ for model in model_definitions:
     # Now (possibly) providing support for multiples of condition, intervention, or data types
     condition_names = config["conditions"]
     intervention_names = config["interventions"]
-    input_data_type_names = config["data_types"]
+    data_types = config["data_types"]
+    if isinstance(data_types, str):
+        input_data_type_name = data_types
+    elif isinstance(data_types, dict):
+        input_data_type_name = data_types.keys()[0]
 
     ReleasedModel.objects.create(
         name=config["name"],
         version=config["version"],
         release_date=config["release_date"],
-        data_type=config["data_types"],
+        data_type=input_data_type_name,
         model_type=config["model_type"],
         data_meta=config["data_meta"],
         backend=config["backend"],
