@@ -15,13 +15,13 @@ import pandas as pd
 MODELS_DIR = "./"
 
 DETAIL_LOOKUP = {
-    "ccRCC-Glycoproteomic": "ccRCC_glycoproteomic_v1/README.md",
-    "Diabetes-Glycomic": "Diabetes_glycomic_v1/README.md",
+    "ccRCC-Glycoproteomic": "ccRCC_glycoproteomic/README.md",
+    "Diabetes-Glycomic": "Diabetes_glycomic/README.md",
 }
 
 DOWNLOAD_LOOKUP = {
-    "ccRCC-Glycoproteomic": "ccRCC_glycoproteomic_v1/example_input.csv",
-    "Diabetes-Glycomic": "Diabetes_glycomic_v1/example_input.csv",
+    "ccRCC-Glycoproteomic": "ccRCC_glycoproteomic/example_input.csv",
+    "Diabetes-Glycomic": "Diabetes_glycomic/example_input.csv",
 }
 
 HANDLERS = {
@@ -51,6 +51,7 @@ def model_details():
         app.logger.critical(f"---> Exception {e} <---")
         app.logger.critical(f"Query: {query}")
         app.logger.critical(f"File path: {details_path}")
+        app.logger.critical(f"Current path: {os.getcwd()}")
         app.logger.critical("-" * 60)
         return jsonify({"error": "Flask error. See logs"})
 
