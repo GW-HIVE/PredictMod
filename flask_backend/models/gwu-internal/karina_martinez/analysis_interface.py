@@ -12,16 +12,16 @@ from ccRCC_glycoproteomic import ccRCC_ClassifierHandler
 import numpy as np
 import pandas as pd
 
-MODELS_DIR = "models"
+MODELS_DIR = "./"
 
 DETAIL_LOOKUP = {
-    "ccRCC-Glycoproteomic": "ccRCC_glycoproteomic_v1/README.md",
-    "Diabetes-Glycomic": "Diabetes_glycomic_v1/README.md",
+    "ccRCC-Glycoproteomic": "ccRCC_glycoproteomic/README.md",
+    "Diabetes-Glycomic": "Diabetes_glycomic/README.md",
 }
 
 DOWNLOAD_LOOKUP = {
-    "ccRCC-Glycoproteomic": "ccRCC_glycoproteomic_v1/example_input.csv",
-    "Diabetes-Glycomic": "Diabetes_glycomic_v1/example_input.csv",
+    "ccRCC-Glycoproteomic": "ccRCC_glycoproteomic/example_input.csv",
+    "Diabetes-Glycomic": "Diabetes_glycomic/example_input.csv",
 }
 
 HANDLERS = {
@@ -42,10 +42,18 @@ def model_details():
     app.logger.debug(f"Found detail request arg: {query}")
     if query not in DETAIL_LOOKUP.keys():
         return jsonify({"details": f"## _Model details for {query} are coming soon!_"})
-    details_path = os.path.join(MODELS_DIR, DETAIL_LOOKUP[query])
-    with open(details_path, "r") as fp:
-        raw_markdown = fp.read()
-    return jsonify({"details": raw_markdown})
+    try:
+        details_path = os.path.join(MODELS_DIR, DETAIL_LOOKUP[query])
+        with open(details_path, "r") as fp:
+            raw_markdown = fp.read()
+        return jsonify({"details": raw_markdown})
+    except Exception as e:
+        app.logger.critical(f"---> Exception {e} <---")
+        app.logger.critical(f"Query: {query}")
+        app.logger.critical(f"File path: {details_path}")
+        app.logger.critical(f"Current path: {os.getcwd()}")
+        app.logger.critical("-" * 60)
+        return jsonify({"error": "Flask error. See logs"})
 
 
 @app.route("/query", methods=["GET"])
