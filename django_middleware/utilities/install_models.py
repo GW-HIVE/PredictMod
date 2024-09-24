@@ -73,7 +73,7 @@ for model in model_definitions:
     if isinstance(data_types, str):
         input_data_type_name = data_types
     elif isinstance(data_types, dict):
-        input_data_type_name = data_types.keys()[0]
+        input_data_type_name = list(data_types.keys())[0]
 
     ReleasedModel.objects.create(
         name=config["name"],
