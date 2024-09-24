@@ -34,7 +34,7 @@ def binary_response_to_json(response):
 def get_anlaysis_urls():
     try:
         models = ReleasedModel.objects.all()
-        return {m.name: f"http://{m.backend}:5000" for m in models}
+        return {m.name: f"http://{m.backend}:4243" for m in models}
     except Exception as e:
         logger.critical("=" * 80)
         logger.critical(f"Exception: {e}")
@@ -48,11 +48,12 @@ ANALYSIS_BACKENDS = get_anlaysis_urls()
 def lookup_backend(model_name: str):
     if settings.DJANGO_MODE == "dev":
         return "http://localhost:5000"
+    de_modified_model_name = model_name.replace("-", " ")
     logger.debug("-" * 40)
     logger.debug(f"ANALYSIS BACKENDS: {ANALYSIS_BACKENDS}")
-    logger.debug(f"Searching for {model_name}")
+    logger.debug(f"Searching for {de_modified_model_name}")
     logger.debug("-" * 40)
-    return ANALYSIS_BACKENDS.get(model_name, None)
+    return ANALYSIS_BACKENDS.get(de_modified_model_name, None)
 
 
 # XXX - Sanity check
