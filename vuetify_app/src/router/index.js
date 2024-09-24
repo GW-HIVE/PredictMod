@@ -80,6 +80,11 @@ const routes = [
       props: true,
     },
     {
+      path: '/predictmod/tutorial', 
+      component: () => import('../views/TutorialView.vue'),
+      props: true,
+    },
+    {
       path: '/:pathMatch(.*)*',
       component: () => import('../views/NotFound.vue'),
     },
