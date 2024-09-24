@@ -48,6 +48,10 @@ ANALYSIS_BACKENDS = get_anlaysis_urls()
 def lookup_backend(model_name: str):
     if settings.DJANGO_MODE == "dev":
         return "http://localhost:5000"
+    logger.debug("-" * 40)
+    logger.debug(f"ANALYSIS BACKENDS: {ANALYSIS_BACKENDS}")
+    logger.debug(f"Searching for {model_name}")
+    logger.debug("-" * 40)
     return ANALYSIS_BACKENDS.get(model_name, None)
 
 
