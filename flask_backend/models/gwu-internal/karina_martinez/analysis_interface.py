@@ -12,7 +12,7 @@ from ccRCC_glycoproteomic import ccRCC_ClassifierHandler
 import numpy as np
 import pandas as pd
 
-MODELS_DIR = "models"
+MODELS_DIR = "./"
 
 DETAIL_LOOKUP = {
     "ccRCC-Glycoproteomic": "ccRCC_glycoproteomic_v1/README.md",
