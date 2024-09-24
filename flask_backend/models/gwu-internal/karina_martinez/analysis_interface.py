@@ -52,7 +52,7 @@ def model_details():
         app.logger.critical(f"Query: {query}")
         app.logger.critical(f"File path: {details_path}")
         app.logger.critical("-" * 60)
-        return jsonify({"error": "Flask error. See logs"}, status=500)
+        return jsonify({"error": "Flask error. See logs"})
 
 
 @app.route("/query", methods=["GET"])
