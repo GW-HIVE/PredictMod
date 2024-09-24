@@ -70,6 +70,13 @@
     </v-card>
 </v-container>
 
+<v-container fluid>
+    <h1>See how our example AI/ML pipeline can work for you!</h1>
+    <v-card :href="tutorialURL">
+      <v-card-text>Not sure where to start with AI/ML? Get started with our example workflow pipeline.</v-card-text>
+    </v-card>
+</v-container>
+
 <v-container>
     <!-- <v-btn @click.submit="logModels()">Click to log models to console</v-btn> -->
 
@@ -100,6 +107,7 @@ import LicenseShow from './LicenseShow.vue';
 
 const modelsURL = 'models/';
 const newModelsURL = 'new-models/'
+const tutorialURL = 'tutorial/'
 
 export default {
 
@@ -118,7 +126,8 @@ export default {
 			return {
 				modelsURL: modelsURL,
         newModelsURL: newModelsURL,
-			}
+        tutorialURL: tutorialURL,
+      }
     },
   methods: {
     logModels() {
