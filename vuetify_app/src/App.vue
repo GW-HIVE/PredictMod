@@ -10,6 +10,8 @@
         <v-tab to="/predictmod/models">Models</v-tab>
         <v-tab to="/predictmod/users">User Admin</v-tab>
         <v-tab to="/predictmod/help">Help</v-tab>
+        <v-tab to="/predictmod/tutorial">AI/ML Tutorial</v-tab>
+        <v-tab to="/predictmod/new-models">New Models</v-tab>
         <v-spacer></v-spacer>
           <v-col class="text-right ma-0 pa-0">
           <!-- TODO: Search input over countries scolls as expected, but the PredictMod values do not. 
