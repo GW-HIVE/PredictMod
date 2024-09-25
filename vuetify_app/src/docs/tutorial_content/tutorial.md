@@ -129,10 +129,15 @@ Based on the results, we can observe that most models performed well on the data
 
 ### Further Analysis and Next Steps:
 While most models performed exceptionally well, additional techniques could further enhance results:
-**1. Hyperparameter Tuning:** Fine-tuning model parameters using techniques like **Grid Search** or **Random Search** will likely yield improvements. Parameters like learning rate, depth, number of estimators, and regularization strength could be optimized.
-**2. Cross-Validation:** While we used a basic train-test split, applying k-fold cross-validation would provide a more reliable estimate of each model’s performance by reducing variance and avoiding overfitting on the test set.
-**3. Feature Selection and Dimensionality Reduction:** Implementing Principal Component Analysis (PCA) or feature selection methods can help reduce noise, improve computation efficiency, and potentially enhance the predictive power of the models. This is particularly important for models like **KNN** and **SVM**, which can struggle with high-dimensional data.
-**4. Handling Class Imbalance:** If class imbalance is an issue (though it’s unclear in the current dataset), techniques such as **SMOTE** (Synthetic Minority Over-sampling Technique) or class weighting can be used to balance the dataset and improve model performance on minority classes.
+1. Hyperparameter Tuning:
+Fine-tuning model parameters using techniques like **Grid Search** or **Random Search** will likely yield improvements. Parameters like learning rate, depth, number of estimators, and regularization strength could be optimized.
+2. Cross-Validation:
+While we used a basic train-test split, applying k-fold cross-validation would provide a more reliable estimate of each model’s performance by reducing variance and avoiding overfitting on the test set.
+3. Feature Selection and Dimensionality Reduction:
+Implementing Principal Component Analysis (PCA) or feature selection methods can help reduce noise, improve computation efficiency, and potentially enhance the predictive power of the models. This is particularly important for models like **KNN** and **SVM**, which can struggle with high-dimensional data.
+4. Handling Class Imbalance:
+If class imbalance is an issue (though it’s unclear in the current dataset), techniques such as **SMOTE** (Synthetic Minority Over-sampling Technique) or class weighting can be used to balance the dataset and improve model performance on minority classes.
+
 By applying these further techniques, we can continue to refine the model performance, increase predictive accuracy, and reduce error metrics across the board.
 
 
