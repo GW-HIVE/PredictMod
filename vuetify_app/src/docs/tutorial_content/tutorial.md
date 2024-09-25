@@ -49,8 +49,7 @@ First, ensure that Python is installed on your system. This tutorial uses Python
 
 ### 5. Downloading the Input Files for Synthetic Data Generation
 Download the required material for this tutorial from this [link](https://drive.google.com/drive/folders/1U-TIZe-Iqmziijiiw-1VHZNaGhIXUerQ?usp=drive_link). The Synthetic Generation folder contains the python file and input excel files required for generating the dataset that we will use
-**Python Project Materials List:**
-Python Script Files:
+- Python Project Materials List:
 **Synthetic_EHR_data_diabetes.py:** A Python script that generates synthetic Electronic Health Record (EHR) data for diabetes-related studies, using GAN techniques
 Excel Data Files:
 **label_non_responsive.xlsx:** Contains labels for non_responsive patient data
@@ -58,18 +57,82 @@ Excel Data Files:
 **data_non_responsive.xlsx:** Contains observational data related to patients non responsive to the treatment
 **data_responsive.xlsx:** Contains observational data related to patients non responsive to the treatment
 **var_list_.xlsx:** A list of variables or features that are present in the dataset. This can be used to identify key variables of interest during analysis.
-Documentation:
+- Documentation:   
 **README.md**: A markdown file providing an overview of the project, explaining the purpose of the scripts, and instructions on how to use the code and data.
 *The README contains information on a separate filter_format file that was used to curate the original synthea data into a digestible format for GAN techniques. Because this tutorial aims to demonstrate a machine learning model building workflow process, the format process for other datasets will differ. If you are interested in learning more, that process is available here: [MATLAB GAN](https://docs.google.com/document/d/1yfUjoaU0lfTx8blTCgZehR7Qdn0C0iTU3VTPAag9ITI/edit#heading=h.rqajp99xfplp)*
 
 ### 6. Downloading the Input Files for Model Training
 Download the required material for this tutorial from this link. The model training folder contains the python file and input excel files required for testing multiple models and providing performance metrics.
 
-Python Project Materials List:
-
+- Python Project Materials List:
 Python Script Files:
-multiple_model_analysis.py: A Python script that tests multiple traditional machine learning models on the input Electronic Health Record (EHR) data for diabetes-related studies
+**multiple_model_analysis.py:** A Python script that tests multiple traditional machine learning models on the input Electronic Health Record (EHR) data for diabetes-related studies
 Excel Data Files:
-EHR_data_1000patients.xlsx: Contains labels of patient data in first column, remaining columns are patient features (i.e blood pressure, sodium)
+**EHR_data_1000patients.xlsx:** Contains labels of patient data in first column, remaining columns are patient features (i.e blood pressure, sodium)
+
+## Part II. Using Python scripts to detect signal difference in the Electronic Healthcare Records of responsive and unresponsive patients
+**Process**
+1.Create GAN model that will take input data and generate synthetic data within the same distribution of the initial data but without NAN/NULL values to avoid errors in later steps
+2. Run multi-model analysis python script that tests a wide variety of machine learning models and outputs the accuracy and RMSE (Root Mean Squared Error) for each.
+### Step 1 Creating Synthetic Data
+1. Open VScode and in the top left corner, click on File -> Open Folder
+2. Navigate to the folder where you have downloaded the Synthetic_EHR_data_diabetes.py
+3. Once it has opened you should see the file explorer
+4. Double click on the python file and it should show the script in the center of the page. On the top right of VScode, click the run python button
+5. Make sure you are generating synthetic data for both the responsive dataset and non responsive dataset by adjusting what files the script is reading. Do so by adjusting data_responsive.xlsx to data_non_responsive.xlsx. Do the same for label_responsive.xlsx to label_non_responsive.xlsx. Make sure you do the same for the output xlsx file found at line 167:
+`df.to_excel('EHR_responsive_at_epoch_{:04d}.xlsx'.format(epoch))`
+`df.to_excel('EHR_non_responsive_at_epoch_{:04d}.xlsx'.format(epoch))`
+6. You will need to concatenate the two synthetic files you generate from this process until it looks like this:
+7. Make sure that the response column is filled out appropriately (0 for the non-responsive dataset and 1 for the responsive dataset)
+### Step 2: Running the multi-model analysis
+The multimodal analysis python script can be broken down into the following steps:
+1. Load the dataset and extract X (features) and y (labels).
+2. Split the data into training and testing sets.
+3. Define a list of machine learning models to test.
+4. Train each model and evaluate its performance (accuracy and RMSE).
+5. Print results for each model.
+All you need to do is run the python script and it will print the performance metrics in the terminal of VScode. This will provide you with a base to then determine which model will be the most effective in pursuing your more in-depth analysis as well as parameter and hyperparameter tuning. Please remember that curation of the data is an important step in the process of machine learning and ensure you have done what you could.
+
+**Interpreting the Results**
+Based on the results, we can observe that most models performed well on the dataset, with several models achieving high accuracy scores and low RMSE values. Below is a summary of the key findings and further suggestions for analysis.
+
+**1. Logistic Regression:**
+**Interpretation:** Logistic Regression performed decently with an accuracy of ~89.5%. However, the RMSE indicates that there's room for improvement in terms of prediction error. The confusion matrix shows some misclassification errors with 21 incorrect predictions in total (11 false positives and 10 false negatives).
+**Next Steps:** Logistic Regression may benefit from **feature scaling** (standardization or normalization), **regularization** (such as L1 or L2 penalties), and **hyperparameter tuning** (for the regularization strength).
+
+**2. Decision Tree**
+**Interpretation:** The Decision Tree model achieved excellent accuracy (99%) with a very low RMSE, indicating strong predictive performance. The confusion matrix shows only two false negatives and no false positives.
+**Next Steps:** While the Decision Tree performed very well, further improvements could involve pruning to avoid **overfitting**. **Hyperparameter tuning** (e.g., depth, minimum samples per split) and **ensemble techniques** (like boosting or bagging) could be explored to generalize the model further.
+
+**3. Random Forest**
+**Interpretation:** Random Forests also performed strongly, with an accuracy of 98% and a low RMSE. The model misclassified four samples, showing slightly less precision compared to Gradient Boosting but still very effective.
+**Next Steps:** **Hyperparameter tuning** (number of trees, maximum depth, and minimum samples split) could further enhance Random Forest's performance. **Feature importance analysis** could also help to determine which features have the most impact on the model's predictions, allowing for potential data curation.
+
+**4. Gradient Boosting:**
+**Interpretation:** Gradient Boosting performed exceptionally well, achieving the highest accuracy (99.5%) and the lowest RMSE among the models tested. This suggests it handled both the class separability and prediction errors very effectively, with only one false negative and no false positives.
+**Next Steps:** Tuning the **learning rate, number of boosting stages**, and **maximum depth** could further optimize this model. Additionally, feature selection or **dimensionality reduction** techniques like PCA (Principal Component Analysis) could be applied to reduce complexity and improve generalization.
+
+**5. K-Nearest Neighbors (KNN):**
+**Interpretation:** KNN achieved a reasonable accuracy of 94.5%, but the RMSE of 0.2345 suggests that its prediction error was slightly higher compared to tree-based methods. The confusion matrix shows that KNN had 11 false negatives, which could indicate issues with its distance-based approach on this dataset.
+**Next Steps:** Scaling the data is crucial for KNN since it relies on distance measures. Additionally, **tuning the number of neighbors** (k) and trying different distance metrics (e.g., Euclidean, Manhattan) could improve performance. Dimensionality reduction like **PCA** might also help by removing noise and reducing computation time.
+
+**6. Support Vector Machine (SVM):**
+**Interpretation:** SVM had the lowest accuracy (81.5%) and highest RMSE (0.4301), indicating that it struggled with this dataset. The confusion matrix shows a significant number of false negatives (37), which implies SVM failed to correctly classify many instances in one class.
+**Next Steps:** Tuning the **kernel type** (e.g., RBF, polynomial), C parameter (regularization), and gamma (for RBF kernel) could improve performance. SVM may also benefit from **dimensionality reduction** techniques, as it tends to perform better in lower-dimensional spaces.
+
+**7. Extra Trees:**
+**Interpretation:** Extra Trees achieved 97.5% accuracy with an RMSE of 0.1581. The confusion matrix indicates only five false negatives, showing that this model performed well, albeit slightly less than Gradient Boosting.
+**Next Steps:** Extra Trees can be further tuned using hyperparameters like the **number of trees, depth**, and **minimum samples** per split. It may also benefit from ensemble techniques like **boosting**, or **feature selection** to focus on the most informative features.
+**8. AdaBoost:**
+**Interpretation:** AdaBoost performed very well, with an accuracy of 98.5% and a low RMSE (0.1225). The confusion matrix shows only three misclassifications, demonstrating AdaBoost's ability to generalize well.
+**Next Steps:** Tuning the learning rate and number of estimators could provide further performance boosts. AdaBoost may also benefit from **ensemble techniques** or **cross-validation** to ensure robust generalization across different datasets.
+
+### Further Analysis and Next Steps:
+While most models performed exceptionally well, additional techniques could further enhance results:
+**1. Hyperparameter Tuning:** Fine-tuning model parameters using techniques like **Grid Search** or **Random Search** will likely yield improvements. Parameters like learning rate, depth, number of estimators, and regularization strength could be optimized.
+**2. Cross-Validation:** While we used a basic train-test split, applying k-fold cross-validation would provide a more reliable estimate of each model’s performance by reducing variance and avoiding overfitting on the test set.
+**3. Feature Selection and Dimensionality Reduction:** Implementing Principal Component Analysis (PCA) or feature selection methods can help reduce noise, improve computation efficiency, and potentially enhance the predictive power of the models. This is particularly important for models like **KNN** and **SVM**, which can struggle with high-dimensional data.
+**4. Handling Class Imbalance:** If class imbalance is an issue (though it’s unclear in the current dataset), techniques such as **SMOTE** (Synthetic Minority Over-sampling Technique) or class weighting can be used to balance the dataset and improve model performance on minority classes.
+By applying these further techniques, we can continue to refine the model performance, increase predictive accuracy, and reduce error metrics across the board.
 
 
