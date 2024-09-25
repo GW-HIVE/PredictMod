@@ -1,5 +1,5 @@
 # Tutorial: Integration of a Machine Learning-based Approach for Predictive Clinical Decision-making using Python
-ADD IMAGE
+![alt text](images/image_tutorial.png)
 ## Summary
 ### Part I. Machine Learning Using Python
 1. What is Python?
