@@ -55,7 +55,7 @@ condition = "Epilepsy"
 intervention = "Diet - Keto Diet"
 input_data_type = "Gut-Microbiome"
 
-["Epilepsy_classifier_1.1".data_meta]
+["Epilepsy_classifier".data_meta]
 # Taken from README, BCOs should contain this in future
 Patients = 500
 Features = 188
