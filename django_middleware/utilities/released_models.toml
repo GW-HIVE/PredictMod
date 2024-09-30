@@ -45,7 +45,7 @@ input_data_type = "EHR-Synthea"
 #################################################
 
 ########### Epilepsy_classifier_1.1 ###############
-["Epilepsy_classifier_1.1"]
+["Epilepsy_classifier"]
 BCO = "Epilepsy_microbiome_v1/BCO_raw_Epilepsy_classifier.json"
 # Guessing; BCOs don't contain. Also, is this EHR, metagenomic, etc?
 data_type = "Epilepsy EHR"
