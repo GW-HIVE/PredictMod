@@ -23,21 +23,21 @@ DETAIL_LOOKUP = {
     "MDClone-Diet-Counseling": "MDClone_Diet_Counseling_v1.1/README.md",
     "MG-Exercise": "MG_Exercise_v1.1/README.md",
     "Diabetes_EHR": "Diabetes_EHR_v1/README.md",
-    "Epilepsy_classifier_1.1": "Epilepsy_microbiome_v1/README.md",
+    "Epilepsy_classifier": "Epilepsy_microbiome_v1/README.md",
 }
 
 DOWNLOAD_LOOKUP = {
     "MDClone-Diet-Counseling": "MDClone_Diet_Counseling_v1.1/MDClone_unknown3.csv",
     "MG-Exercise": "MG_Exercise_v1.1/unknown_response.csv",
     "Diabetes_EHR": "Diabetes_EHR_v1/single_patient_input.xlsx",
-    "Epilepsy_classifier_1.1": "Epilepsy_microbiome_v1/single_patient_sample.xlsx",
+    "Epilepsy_classifier": "Epilepsy_microbiome_v1/single_patient_sample.xlsx",
 }
 
 HANDLERS = {
     "MDClone-Diet-Counseling": MDClone_EHRTreeHandler(),
     "MG-Exercise": MGTreeHandler(),
     "Diabetes_EHR": Diabetes_EHR_Handler(),
-    "Epilepsy_classifier_1.1": Epilepsy_Microbiome_Handler(),
+    "Epilepsy_classifier": Epilepsy_Microbiome_Handler(),
 }
 
 app = Flask(__name__)

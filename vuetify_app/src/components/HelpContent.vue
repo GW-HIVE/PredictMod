@@ -9,7 +9,7 @@
 // import MarkdownItAnchor from 'markdown-it-anchor';
 
 import { marked } from "marked";
-import HelpText from '@/docs/help_content/help_v1.3.md?raw';
+import HelpText from '@/docs/help_content/help.md?raw';
 
 export default {
   name: "HelpContent",

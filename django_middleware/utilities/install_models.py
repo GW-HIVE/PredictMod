@@ -51,6 +51,7 @@ def find_models(model_definition_string, parent_dir):
 print(f"====\tCreating MODELS\t====")
 model_definitions = find_models("model.toml", MODELS_DIR)
 for model in model_definitions:
+    print(f"===> Using model definition from {model}")
     with open(model, "rb") as fp:
         config = tomli.load(fp)
     # Get BCO information
@@ -65,6 +66,8 @@ for model in model_definitions:
     # Merge name, version, release date from BCO
     config = config | bco_info
     link = "{}".format(config["name"].replace(" ", "-"))
+
+    print(f"XXX Model {config['name']} ::: {link}")
 
     # Now (possibly) providing support for multiples of condition, intervention, or data types
     condition_names = config["conditions"]
@@ -139,9 +142,13 @@ for k, v in released_configs.items():
         continue
     link = "{}".format(v["name"].replace(" ", "-"))
 
+    print(f"XXX Model {config['name']} ::: {link}")
+
     condition_name = v["condition"]
     intervention_name = v["intervention"]
     input_data_type_name = v["input_data_type"]
+
+    print(f"===> Creating LEGACY model definition for {v['name']}")
 
     ReleasedModel.objects.create(
         name=v["name"],
