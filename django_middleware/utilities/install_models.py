@@ -67,6 +67,8 @@ for model in model_definitions:
     config = config | bco_info
     link = "{}".format(config["name"].replace(" ", "-"))
 
+    print(f"XXX Model {config['name']} ::: {link}")
+
     # Now (possibly) providing support for multiples of condition, intervention, or data types
     condition_names = config["conditions"]
     intervention_names = config["interventions"]
@@ -139,6 +141,8 @@ for k, v in released_configs.items():
     if not IN_DJANGO:
         continue
     link = "{}".format(v["name"].replace(" ", "-"))
+
+    print(f"XXX Model {config['name']} ::: {link}")
 
     condition_name = v["condition"]
     intervention_name = v["intervention"]
