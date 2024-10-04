@@ -83,7 +83,7 @@
           @click="toggleOverlay = !toggleOverlay"
         >
           <v-card-text>
-            Shapely Force Plot - Click to expand
+            SHAP Force Plot - Click to expand
           </v-card-text>
         <v-img
           :src="imageData"
