@@ -23,6 +23,6 @@ if sample_data_scaled.ndim == 1:
 
 # Step 5: Make a prediction using the SVM model
 prediction = svm_model.predict(sample_data_scaled)
-prediction_label = "Responder" if prediction == 1 else "Non-Responder"
+prediction_label = "Non-Responder" if prediction == 1 else "Responder"
 # Step 6: Print or return the result
 print("Prediction of response to a ketogenic diet:", prediction_label)
