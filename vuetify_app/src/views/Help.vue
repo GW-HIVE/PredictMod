@@ -80,43 +80,13 @@
         </v-card>
         <v-card class="text-left" variant="flat">
           <v-card-title>
-            Current Models
+            Models
           </v-card-title>
           <v-card-text>
           <router-link to="/predictmod/help#current-models">
-            MG_Exercise_v1.1<br>
+            Current and Anticipated Models<br>
         </router-link>
-        <router-link to="/predictmod/help#current-models">
-          MDClone_Diet_Counseling_v1.1<br>
-        </router-link>
-        <router-link to="/predictmod/help#current-models">
-          EHR_Keto_v1.0<br>
-        </router-link>
-        </v-card-text>
-        </v-card>
-        <v-card class="text-left" variant="flat">
-          <v-card-title>
-            Anticipated Models<br>
-          </v-card-title>
-          <v-card-text>
-          <router-link to="/predictmod/help#anticipated-models">
-            Glycomics_PreDM_v1.0<br>
-        </router-link>
-        <router-link to="/predictmod/help#anticipated-models">
-          Epilepsy_Keto_v1.1<br>
-        </router-link>
-        <router-link to="/predictmod/help#anticipated-models">
-          Synthea_Exercise_v1.1<br>
-        </router-link>
-        <router-link to="/predictmod/help#anticipated-models">
-          MDClone_Diet_Counseling_v1.2<br>
-        </router-link>
-        <router-link to="/predictmod/help#anticipated-models">
-          MDClone_Semaglutide_v1.0<br>
-        </router-link>
-        <router-link to="/predictmod/help#anticipated-models">
-          MDClone_Exercise_v1.0<br>
-        </router-link>
+        
         </v-card-text>
         </v-card>
       </v-col>
@@ -129,36 +99,7 @@
           <router-link to="/predictmod/help#query-builder">
             How the Query Builder works<br>
           </router-link>
-          <router-link to="/predictmod/help#qb-step-1">
-            Step 1: Selecting a condition<br>
-          </router-link>
-          <router-link to="/predictmod/help#about-prediabetes">
-            About the Prediabetes condition<br>
-          </router-link>
-          <router-link to="/predictmod/help#qb-step-2">
-            Step 2: Selecting an intervention<br>
-          </router-link>
-          <router-link to="/predictmod/help#about-exercise">
-            About the Exercise condition<br>
-          </router-link>
-          <router-link to="/predictmod/help#about-keto-diet">
-            About the <i>Diet - Keto Diet</i> intervention<br>
-          </router-link>
-          <router-link to="/predictmod/help#about-diet-couseling">
-            About the <i>Diet - Dietary Counseling</i> intervention<br>
-          </router-link>
-          <router-link to="/predictmod/help#qb-step-3">
-            Step 3: Selecting a Data Type<br>
-          </router-link>
-          <router-link to="/predictmod/help#about-gut-microbiome">
-            About the <i>Gut Microbiome</i> data type<br>
-          </router-link>
-          <router-link to="/predictmod/help#about-ehr">
-            About the <i>Electronic Health Records</i> data type<br>
-          </router-link>
-          <router-link to="/predictmod/help#qb-step-4">
-            Step 4: Uploading a data file<br>
-          </router-link>
+          
           <router-link to="/predictmod/help#file-formats">
             Formatting data FAQs<br>
           </router-link>
@@ -184,13 +125,13 @@
             Coming soon: Upload a Model
           </v-card-title>
           <v-card-text>
-          <router-link to="/predictmod/help#coming-soon">
+          <router-link to="/predictmod/new-models">
             Uploading your machine-learning model<br>
           </router-link>
-          <router-link to="/predictmod/help#coming-soon">
+          <router-link to="/predictmod/new-models">
             Model review & verification process<br>
           </router-link>
-          <router-link to="/predictmod/help#coming-soon">
+          <router-link to="/predictmod/faq">
             Model Upload FAQs<br>
           </router-link>
         </v-card-text>
