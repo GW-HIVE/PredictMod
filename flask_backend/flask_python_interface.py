@@ -10,6 +10,7 @@ from model_handlers import (
     MGTreeHandler,
     Diabetes_EHR_Handler,
     Epilepsy_Microbiome_Handler,
+    EC_EHR_Keto_ModelHandler,
 )
 
 # TODO: Documentation
@@ -24,6 +25,7 @@ DETAIL_LOOKUP = {
     "MG-Exercise": "MG_Exercise_v1.1/README.md",
     "Diabetes_EHR": "Diabetes_EHR_v1/README.md",
     "Epilepsy_classifier": "Epilepsy_microbiome_v1/README.md",
+    "Predictmod_EHR_Keto": "PredictMod_EHR_Keto_v1.0/README.md",
 }
 
 DOWNLOAD_LOOKUP = {
@@ -31,6 +33,7 @@ DOWNLOAD_LOOKUP = {
     "MG-Exercise": "MG_Exercise_v1.1/unknown_response.csv",
     "Diabetes_EHR": "Diabetes_EHR_v1/single_patient_input.xlsx",
     "Epilepsy_classifier": "Epilepsy_microbiome_v1/single_patient_sample.xlsx",
+    "Predictmod_EHR_Keto": "PredictMod_EHR_Keto_v1.0/svm_sample.csv",
 }
 
 HANDLERS = {
@@ -38,6 +41,7 @@ HANDLERS = {
     "MG-Exercise": MGTreeHandler(),
     "Diabetes_EHR": Diabetes_EHR_Handler(),
     "Epilepsy_classifier": Epilepsy_Microbiome_Handler(),
+    "Predictmod_EHR_Keto": EC_EHR_Keto_ModelHandler(),
 }
 
 app = Flask(__name__)
