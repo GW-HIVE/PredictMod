@@ -60,3 +60,20 @@ input_data_type = "Gut-Microbiome"
 Patients = 500
 Features = 188
 #################################################
+
+########### Epic_Cosmos_EHR_Keto_1.0 ###############
+["PredictMod-EHR-Keto"]
+BCO = "PredictMod_EHR_Keto_v1.0/BCO/temp_PEHR.json"
+# Unclear from the README; BCO indicates prediabetes as a keyword
+data_type = "EHR"
+model_type = "Support Vector Machine (SVM)"
+backend = "predict-backend"
+condition = "Prediabetes"
+intervention = "Diet - Keto Diet"
+input_data_type = "EHR-Epic-Cosmos"
+
+["PredictMod-EHR-Keto".data_meta]
+# Taken from README, BCOs should contain this in future
+Patients = 308
+Features = 26
+#################################################
