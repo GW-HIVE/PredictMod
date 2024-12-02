@@ -1,0 +1,10 @@
+flask
+flask-cors
+gunicorn
+matplotlib
+numpy
+openpyxl
+pandas
+scikit-learn
+xgboost
+shap 

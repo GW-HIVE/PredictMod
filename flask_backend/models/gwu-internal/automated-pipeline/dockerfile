@@ -1,0 +1,18 @@
+# docker build -t automated-pipeline-base --target base .
+FROM python:3.10-slim-buster AS automated-pipeline-base
+
+COPY ./requirements.txt /
+
+RUN pip3 install -r requirements.txt && \
+    mkdir -p /var/log/gunicorn
+
+# Last working code was in shap==0.44.2.dev34, 0.45.0 was "breaking"
+
+# docker build -t automated-pipeline .
+FROM automated-pipeline-base
+
+COPY . /backend
+WORKDIR /backend
+
+CMD ["gunicorn", "--bind", "0.0.0.0:4243", "--access-logfile", "/var/log/gunicorn/dev.log", "wsgi:app"]
+# CMD ["gunicorn", "-c", "gunicorn_conf.py"]
