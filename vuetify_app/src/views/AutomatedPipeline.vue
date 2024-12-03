@@ -13,11 +13,11 @@
           <div class="d-flex fill-height align-center justify-center"> 
             <v-card flat color="transparent">
             <v-card-title class="title text-center font-weight-bold">
-              Run a Sample Prediction
+              Automated Pipeline Application
             </v-card-title>
-            <!-- <v-card-text class="text-center">
-              A Machine Learning-Based Application for Informed Clinical Decision Making
-            </v-card-text> -->
+            <v-card-text class="text-center">
+              Bring your own data to the PredictMod AI/ML sandbox
+            </v-card-text>
             </v-card>
       <!-- <span class="introduction">PredictMod Test Text</span> -->
       </div>
@@ -30,6 +30,7 @@
 
     <v-row>
       <v-col>
+        <AutomatedPipelineUpload :upload-target-u-r-l="'/predictmod/pipeline/'" />
 
       </v-col>
     
@@ -59,6 +60,7 @@ import { onMounted, ref } from 'vue';
 import DisclaimerShow from './DisclaimerShow.vue';
 import NotFound from './NotFound.vue';
 import LicenseShow from './LicenseShow.vue';
+import AutomatedPipelineUpload from '@/components/AutomatedPipelineUpload.vue';
 
 export default {
 
@@ -68,6 +70,6 @@ export default {
 				home: false,
 			}
     },
-  components: { DisclaimerShow, LicenseShow }
+  components: { DisclaimerShow, LicenseShow, AutomatedPipelineUpload }
 }
 </script>
