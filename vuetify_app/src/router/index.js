@@ -85,6 +85,11 @@ const routes = [
       props: true,
     },
     {
+      path: '/predictmod/automated-pipeline', 
+      component: () => import('../views/AutomatedPipeline.vue'),
+      props: true,
+    },
+    {
       path: '/:pathMatch(.*)*',
       component: () => import('../views/NotFound.vue'),
     },
