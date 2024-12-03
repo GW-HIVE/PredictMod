@@ -80,7 +80,7 @@ export default {
         { name: "Help", to: "/predictmod/help" },
       ],
       modelMenu: [
-        { name: "Automated Pipeline", to: "/predictmod/autmoated-pipeline" },
+        { name: "Automated Pipeline", to: "/predictmod/automated-pipeline" },
         { name: "AI/ML Tutorial", to: "/predictmod/tutorial" },
         { name: "New Models", to: "/predictmod/new-models" },
       ]
