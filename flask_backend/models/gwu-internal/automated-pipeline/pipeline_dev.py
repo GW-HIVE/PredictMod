@@ -1,3 +1,0 @@
-from pipeline import Pipeline
-
-target_file = ...
