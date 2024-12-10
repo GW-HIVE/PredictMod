@@ -3,13 +3,24 @@ import axiosUtility from "./AxiosUtils";
 import { useUserStore } from "@/store/user";
 class UploadFilesService {
 
-  async upload(json, target, onUploadProgress) {
+  async upload(json, target, onUploadProgress, labelColumn, columnsToDrop) {
     const userStore = useUserStore();
     const baseURL = import.meta.env.DEV ? import.meta.env.VITE_DEV_MIDDLEWARE_BASE + '/api': "/predictmod/api";
     // const formData = new FormData();
     // console.log("...Uploading?")
     // const urlDest = "/".concat(target, "-upload/");
-    const fullURL = baseURL + `/upload/?q=${target}`;
+    let fullURL = baseURL + `/upload/?q=${target}`;
+    // console.log("Target: " + fullURL)
+    if (labelColumn) {
+      fullURL = fullURL + `&label=${labelColumn}`
+    }
+    // console.log("Target: " + fullURL)
+
+    if (columnsToDrop) {
+      const arrayArg = columnsToDrop.split(",")
+      fullURL = fullURL + `&drop=${arrayArg}`
+    }
+    // console.log("Target: " + fullURL)
     // const headers = {
     //   "Content-type": "application/json",
     //   "X-CSRFToken": userStore.token,
@@ -40,7 +51,7 @@ class UploadFilesService {
 
     const response = await res.json();
   
-    // console.log("---> Got response %s", JSON.stringify(response));
+    console.log("---> Got response %s", JSON.stringify(response));
 
     return response;
 

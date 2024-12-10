@@ -30,7 +30,7 @@
 
     <v-row>
       <v-col>
-        <AutomatedPipelineUpload :upload-target-u-r-l="'/predictmod/pipeline/'" />
+        <AutomatedPipelineUpload :upload-target-u-r-l="'pipeline'" />
 
       </v-col>
     

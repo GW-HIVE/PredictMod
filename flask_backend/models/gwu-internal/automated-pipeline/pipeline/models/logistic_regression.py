@@ -7,6 +7,10 @@ from sklearn.metrics import (
 )
 from sklearn.model_selection import train_test_split
 
+import time
+
+from .utilities import CMtoCMDisplay
+
 
 class LogisticRegressionHandler:
 
@@ -20,7 +24,9 @@ class LogisticRegressionHandler:
             self.data, self.labels, test_size=0.2, random_state=42
         )
 
+        start = time.time()
         classifier.fit(X, Y)
+        train_time = time.time() - start
 
         predictions = classifier.predict(X_test)
         accuracy = accuracy_score(Y_test, predictions)
@@ -29,12 +35,15 @@ class LogisticRegressionHandler:
         report = classification_report(self.labels, train_predictions)
         cm = confusion_matrix(self.labels, train_predictions)
 
+        image = CMtoCMDisplay(cm)
+
         return {
             "Method": "Logistic Regression",
             "Accuracy": accuracy,
-            "Mean Absolute Error": mae,
+            "Mean Absolute Error": mae.tolist(),
             "Classification Report": report,
-            "Confusion Matrix": cm,
+            "Confusion Matrix": image,
+            "Train Time": train_time,
         }
 
     def sample_prediction(self):

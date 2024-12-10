@@ -4,8 +4,7 @@ from flask_cors import CORS, cross_origin
 import os
 import logging
 
-from Diabetes_glycomic import Diabetes_Glycomic_Handler
-from ccRCC_glycoproteomic import ccRCC_ClassifierHandler
+from pipeline import Pipeline
 
 # TODO: Documentation
 
@@ -15,18 +14,15 @@ import pandas as pd
 MODELS_DIR = "./"
 
 DETAIL_LOOKUP = {
-    "ccRCC-Glycoproteomic": "ccRCC_glycoproteomic/README.md",
-    "Diabetes-Glycomic": "Diabetes_glycomic/README.md",
+    "Pipeline": "TBD",
 }
 
 DOWNLOAD_LOOKUP = {
-    "ccRCC-Glycoproteomic": "ccRCC_glycoproteomic/example_input.csv",
-    "Diabetes-Glycomic": "Diabetes_glycomic/example_input.csv",
+    "Pipeline": "TBD",
 }
 
 HANDLERS = {
-    "ccRCC-Glycoproteomic": ccRCC_ClassifierHandler(),
-    "Diabetes-Glycomic": Diabetes_Glycomic_Handler(),
+    "pipeline": Pipeline(),
 }
 
 app = Flask(__name__)
@@ -106,6 +102,8 @@ def ping():
 @app.route("/upload", methods=["POST"])
 def upload():
     target = request.args.get("q", None)
+    label_column = request.args.get("label", None)
+    drop_columns = request.args.get("drop", None)
     if target not in HANDLERS.keys():
         app.logger.debug("*" * 40)
         app.logger.debug(f"Target: {target}")
@@ -113,5 +111,10 @@ def upload():
         app.logger.debug("*" * 40)
         return jsonify({"error": "Illegal upload target error"})
     else:
+        app.logger.debug(f"Found target: {target}")
+        app.logger.debug(f"Found label column: {label_column}")
+        app.logger.debug(f"Found drop columns: {drop_columns}")
         raw_data = request.get_json()
-        return jsonify(HANDLERS[target].make_prediction(raw_data))
+        return jsonify(
+            HANDLERS[target].train_models(raw_data, label_column, drop_columns)
+        )
