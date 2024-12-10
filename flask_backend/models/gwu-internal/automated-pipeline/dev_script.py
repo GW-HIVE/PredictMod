@@ -13,7 +13,9 @@ with open(target_file, "r") as fp:
 pl = Pipeline()
 
 label_column = "Status"
-
-response = pl.train_models(data, label_column, outcome_type="binary")
+drop_columns = [
+    "Reference",
+]
+response = pl.train_models(data, label_column, drop_columns, outcome_type="binary")
 
 print(f"Got response:\n{response}")

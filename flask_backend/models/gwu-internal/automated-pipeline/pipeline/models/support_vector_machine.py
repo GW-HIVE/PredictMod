@@ -7,6 +7,10 @@ from sklearn.metrics import (
     confusion_matrix,
 )
 
+from .utilities import CMtoCMDisplay
+
+import time
+
 
 class SupportVectorMachineHandler:
 
@@ -19,7 +23,9 @@ class SupportVectorMachineHandler:
             self.samples, self.labels, test_size=0.2
         )
         classifier = svm.SVC()
+        start = time.time()
         classifier.fit(X, Y)
+        training_time = time.time() - start
         predictions = classifier.predict(X_test)
 
         accuracy = accuracy_score(Y_test, predictions)
@@ -28,12 +34,15 @@ class SupportVectorMachineHandler:
         report = classification_report(self.labels, train_predictions)
         cm = confusion_matrix(self.labels, train_predictions)
 
+        image = CMtoCMDisplay(cm)
+
         return {
             "Method": "Support Vector Machine Classifier",
             "Accuracy": accuracy,
-            "Mean Absolute Error": mae,
+            "Mean Absolute Error": mae.tolist(),
             "Classification Report": report,
-            "Confusion Matrix": cm,
+            "Confusion Matrix": image,
+            "Training Time": training_time,
         }
 
     def sample_prediction(self):

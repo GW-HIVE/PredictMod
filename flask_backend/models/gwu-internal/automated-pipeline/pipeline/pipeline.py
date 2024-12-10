@@ -43,10 +43,10 @@ def binary_classifiers(label_data, data):
     svm = SupportVectorMachineHandler(label_data, data)
     results.append(svm.train_model())
 
-    print("VVV BINARY CLASSIFIER VVV")
-    for idx, r in enumerate(results):
-        print(f"Result {idx+1}: {r}")
-    print("^^^^^^^^^^^^^^^^^^^^^^^^^")
+    for r in results:
+        print(f"Type of result: {type(r)}")
+
+    return results
 
 
 def multiclass_classifiers(label_data, data):
@@ -59,50 +59,38 @@ class Pipeline:
     def __init__(self):
         pass
 
-    def train_models(self, raw_data, label_column, outcome_type="binary"):
+    def train_models(self, raw_data, label_column, drop_columns, outcome_type="binary"):
 
         print(f"===> Automated Pipeline - Got a request! <===")
 
         if not isinstance(raw_data, pd.DataFrame):
-            headers, data = raw_data[0], np.array([raw_data[1]])
-            data = pd.DataFrame(data, columns=headers)
+            data = pd.DataFrame(raw_data[1:])
+            data.columns = raw_data[0]
         else:
             data = raw_data
-
         label_data = data[label_column]
-        data = data.drop(columns=[label_column])
-
-        # Hack hack hack
-        data = data.drop(columns=["Reference"])
+        if label_column is not None:
+            data = data.drop(columns=[label_column])
+        if drop_columns is not None:
+            data = data.drop(columns=drop_columns)
 
         match outcome_type:
             case "binary":
-                binary_classifiers(label_data, data)
+                return binary_classifiers(label_data, data)
             case "multiclass":
-                multiclass_classifiers(label_data, data)
+                return multiclass_classifiers(label_data, data)
             case "regression":
-                regressions(label_data, data)
+                return regressions(label_data, data)
             case _:
-                raise NotImplementedError
+                return {"error": f"Case {outcome_type} is not supported"}
 
         # outcome_type: classsifier [binary | multiclass], regression [distribution/etc.]
-
+        # From the tutorial ...
         # logistic regression
-
         # decision tree
-
         # random forest
-
         # gradient boosting
-
         # k-nearest neighbors
-
         # support vector machine
-
         # extra trees (?)
-
         # adaboost
-
-        start = time.time()
-
-        return {"result": f"Prediction achieved!!"}

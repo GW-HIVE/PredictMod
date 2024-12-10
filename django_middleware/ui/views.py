@@ -221,9 +221,14 @@ def file_upload(request):
             #         {"error": f"Invalid upload target {target}"}, status=404
             #     )
             data = json.loads(request.body)
-            # logger.debug(f"---> Request received data: {data}")
+            other_args = ""
+            for arg in request.GET.keys():
+                logger.debug(f"---> Request received arg: {arg} -- {request.GET[arg]}")
+                if arg == "q":
+                    continue
+                other_args += f"&{arg}={request.GET[arg]}"
             response = requests.post(
-                f"{lookup_backend(target)}/upload?q={target}", json=data
+                f"{lookup_backend(target)}/upload?q={target}{other_args}", json=data
             )
             response = json.loads(response._content.decode("utf-8"))
             return JsonResponse(response, status=200, safe=False)

@@ -5,18 +5,21 @@ import io
 import matplotlib
 import matplotlib.pyplot as plt
 import pandas as pd
+import time
 
 
 class PCAHandler:
 
     def __init__(self, labels, data):
-        self.data = data
         self.labels = labels
+        self.data = data
 
     def train_model(self):
         pca = PCA(n_components=3)
+        start = time.time()
         pca_variance = pca.fit(self.data)
         reduced_data = pca.fit_transform(self.data)
+        solve_time = time.time() - start
 
         ### Not needed?
         # self.pca = pca
@@ -61,8 +64,10 @@ class PCAHandler:
         # plt.savefig("PCA.png", format="png", bbox_inches="tight")
         return {
             "Method": "PCA 3D",
+            "Explained Variance": pca_variance.explained_variance_.tolist(),
             "Principal Components": report_df.to_dict(),
             "image": b64_image,
+            "Solution Time": solve_time,
         }
 
     def sample_prediction(self):
