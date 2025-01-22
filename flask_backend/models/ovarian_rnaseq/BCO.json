@@ -1,0 +1,316 @@
+{
+    "object_id": "https://biocomputeobject.org/BCO_000578/DRAFT",
+    "spec_version": "https://w3id.org/ieee/ieee-2791-schema/2791object.json",
+    "etag": "4a1a7013fa09199f058e332aee083dfbfb8194208aa6365816d16f69f6ca621e",
+    "provenance_domain": {
+        "name": "Ovarian Cancer RNAseq",
+        "version": "1.0",
+        "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+        "created": "2025-01-04T18:32:24",
+        "modified": "2025-01-22T21:29:19",
+        "derived_from": "",
+        "contributors": [
+            {
+                "name": "Miguel Mazumder",
+                "affiliation": "HIVE lab",
+                "email": "mfmmazumder@gwmail.gwu.edu",
+                "contribution": [
+                    "contributedBy"
+                ],
+                "orcid": ""
+            },
+            {
+                "name": "Urnisha Bhuiyan",
+                "affiliation": "HIVE lab",
+                "email": "sbhuiyan28@email.gwu.edu",
+                "contribution": [
+                    "contributedBy"
+                ]
+            },
+            {
+                "name": "Lori Krammer",
+                "affiliation": "HIVE lab",
+                "email": "lorikrammer@email.gwu.edu",
+                "contribution": [
+                    "contributedBy"
+                ]
+            },
+            {
+                "name": "Patrick McNeely",
+                "affiliation": "HIVE lab",
+                "email": "pmcneely@email.gwu.edu",
+                "contribution": [
+                    "contributedBy"
+                ]
+            }
+        ],
+        "review": []
+    },
+    "usability_domain": [
+        "Need\nAccurate prediction of patient outcomes based on RNA-Seq data is critical for assessing the effectiveness of treatments, such as their potential to reduce tumor size in ovarian cancer. Class imbalance in such datasets can hinder the development of reliable predictive models.\n\nMethod\nThis script processes RNA-Seq data from an Excel file to classify patient outcomes. It employs the Synthetic Minority Oversampling Technique (SMOTE) to balance the dataset, followed by training a Random Forest classifier. The workflow includes:\n\nNormalizing RNA-Seq data (e.g., TPM scaling or log transformation).\nFeature preprocessing to reduce noise and dimensionality.\nTrain-test splitting.\nOversampling to address minority class imbalance.\nModel evaluation using metrics such as accuracy, ROC-AUC, and a detailed classification report.\nResults\nThe workflow demonstrates successful balancing of class distributions, enabling robust classification of patient outcomes using RNA-Seq features. Key outputs include:\n\nA trained classification model tailored to RNA-Seq data.\nThe list of selected features contributing to the model's predictions.\nPerformance metrics highlighting the model's reliability (e.g., ROC-AUC, F1 score).\nThe approach integrates RNA-Seq data preprocessing and class balancing, ensuring the model's robustness and generalizability.\n\nHow the Results Can Be Used/Interpreted\nThe trained model provides a tool for predicting whether a treatment is likely to reduce tumor size in ovarian cancer patients based on RNA-Seq profiles. This supports:\n\nClinical decision-making: Identifying patients who may benefit from specific treatments.\nBiomarker discovery: Highlighting genes significantly associated with treatment outcomes.\nPersonalized medicine: Developing targeted therapies based on patient-specific RNA-Seq profiles.\nThis usability domain emphasizes the purpose, methodology, and potential applications of the workflow, providing a clear scientific context and actionable insights."
+    ],
+    "description_domain": {
+        "keywords": [
+            "SMOTE",
+            "Python",
+            "Machine Learning",
+            "Ovarian Cancer"
+        ],
+        "xref": [],
+        "platform": [],
+        "pipeline_steps": [
+            {
+                "step_number": 1,
+                "name": "Load Python Libraries",
+                "version": "1.0",
+                "prerequisite": [
+                    {
+                        "name": "sklearn library",
+                        "uri": {
+                            "filename": "scikit-learn 1.4.1",
+                            "uri": "https://scikit-learn.org/stable/install.html#installation-instructions"
+                        }
+                    },
+                    {
+                        "name": "joblib library",
+                        "uri": {
+                            "filename": "joblib 1.3.2",
+                            "uri": "https://pypi.org/project/joblib/#downloads"
+                        }
+                    },
+                    {
+                        "name": "pandas library",
+                        "uri": {
+                            "filename": "pandas 2.2.1",
+                            "uri": "https://pypi.org/project/pandas/"
+                        }
+                    }
+                ],
+                "input_list": [
+                    {
+                        "filename": "combined_patient_data_sample.xlsx.xlsx",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/ovarian_rnaseq/combined_patient_data_sample.xlsx"
+                    },
+                    {
+                        "filename": "combined_patient_data_sample.xlsx",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/ovarian_rnaseq/combined_patient_data_sample.xlsx"
+                    }
+                ],
+                "description": "Load required python libraries",
+                "output_list": [
+                    {
+                        "filename": "tmpfs",
+                        "uri": "file:///dev/tmpfs"
+                    }
+                ]
+            },
+            {
+                "step_number": 2,
+                "name": "Read/Format Input Data",
+                "version": "1.0",
+                "description": "Reading in data, formatting data for random tree classifier, adding SMOTE steps for increasing patient count",
+                "output_list": [
+                    {
+                        "filename": "tmpfs",
+                        "uri": "file:///dev/tmpfs"
+                    }
+                ],
+                "input_list": [
+                    {
+                        "filename": "tmpfs",
+                        "uri": "file:///dev/tmpfs"
+                    }
+                ]
+            },
+            {
+                "step_number": 3,
+                "name": "Train ML model with Data",
+                "version": "1.0",
+                "description": "Training model with formatted data and outputting pickle file to be used for single patient data",
+                "input_list": [
+                    {
+                        "filename": "tmpfs",
+                        "access_time": "2025-01-04T05:01:00.000Z",
+                        "uri": "file:///dev/tmpfs"
+                    }
+                ],
+                "output_list": [
+                    {
+                        "filename": "tmpfs",
+                        "access_time": "2025-01-04T05:59:00.000Z",
+                        "uri": "file:///dev/tmpfs"
+                    }
+                ]
+            },
+            {
+                "step_number": 2,
+                "name": "Save model to Pickle File",
+                "version": "1.0",
+                "description": "Saving pickle file for future predictions of patient treatment outcome",
+                "input_list": [
+                    {
+                        "filename": "tmpfs",
+                        "uri": "file:///dev/tmpfs"
+                    }
+                ],
+                "output_list": [
+                    {
+                        "filename": "ovarian_rnaseq_model.pkl",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/ovarian_rnaseq/ovarian_rnaseq_model.pkl"
+                    }
+                ]
+            },
+            {
+                "step_number": 5,
+                "name": "Load pickle file for single patient",
+                "version": "1.0",
+                "description": "loading pickle file of trained model for future use of patient predictions",
+                "input_list": [
+                    {
+                        "filename": "tmpfs",
+                        "uri": "file:///dev/tmpfs"
+                    }
+                ],
+                "output_list": [
+                    {
+                        "filename": "ovarian_rnaseq_model.pkl",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/ovarian_rnaseq/ovarian_rnaseq_model.pkl"
+                    }
+                ]
+            },
+            {
+                "step_number": 6,
+                "name": "Predict Patient Outcome",
+                "description": "Using trained pickle file determine outcome of new single patient data",
+                "version": "1.0",
+                "input_list": [
+                    {
+                        "filename": "ovarian_rnaseq_model.pkl",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/ovarian_rnaseq/ovarian_rnaseq_model.pkl"
+                    },
+                    {
+                        "filename": "ovarian_RNAseq_single_patient.xlsx",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/ovarian_rnaseq/ovarian_RNAseq_single_patient.xlsx"
+                    }
+                ],
+                "output_list": [
+                    {
+                        "filename": "tmpfs",
+                        "uri": "file:///dev/tmpfs"
+                    }
+                ]
+            }
+        ]
+    },
+    "parametric_domain": [
+        {
+            "step": "3",
+            "param": "train_test_split",
+            "value": "test_size=0.5"
+        },
+        {
+            "step": "3",
+            "param": "SMOTE Patient Number",
+            "value": "Scale(100,100)"
+        }
+    ],
+    "io_domain": {
+        "input_subdomain": [
+            {
+                "uri": {
+                    "filename": "ovarian_RNAseq_single_patient.xlsx",
+                    "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/ovarian_rnaseq/ovarian_RNAseq_single_patient.xlsx"
+                }
+            }
+        ],
+        "output_subdomain": [
+            {
+                "mediatype": "Pickle File",
+                "uri": {
+                    "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/ovarian_rnaseq/ovarian_rnaseq_model.pkl",
+                    "filename": "ovarian_rnaseq_model.pkl"
+                }
+            }
+        ]
+    },
+    "execution_domain": {
+        "script": [
+            {
+                "uri": {
+                    "filename": "ovarian_rnaseq_classifier.py",
+                    "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/ovarian_rnaseq/ovarian_rnaseq_classifier.py"
+                }
+            },
+            {
+                "uri": {
+                    "filename": "ovarian_rnaseq_predictor.py",
+                    "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/ovarian_rnaseq/ovarian_rnaseq_predictor.py"
+                }
+            }
+        ],
+        "script_driver": "Python",
+        "software_prerequisites": [
+            {
+                "name": "Python",
+                "version": "3.11.4",
+                "uri": {
+                    "filename": "python3.11.exe",
+                    "uri": "https://www.python.org/downloads/release/python-3114/"
+                }
+            },
+            {
+                "name": "sklearn library",
+                "version": "1.4.1",
+                "uri": {
+                    "uri": "https://scikit-learn.org/stable/install.html#installation-instructions"
+                }
+            },
+            {
+                "name": "joblib library\t",
+                "version": "1.3.2",
+                "uri": {
+                    "uri": "https://pypi.org/project/joblib/"
+                }
+            },
+            {
+                "name": "pandas library",
+                "version": "2.2.1",
+                "uri": {
+                    "filename": "Diabetes_classifier.pkl",
+                    "uri": "https://pypi.org/project/pandas/"
+                }
+            },
+            {
+                "name": "numpy library",
+                "version": "1.26.4",
+                "uri": {
+                    "uri": "https://pypi.org/project/numpy/"
+                }
+            },
+            {
+                "name": "imblearn library",
+                "version": "0.5",
+                "uri": {
+                    "filename": "imblearn",
+                    "uri": "https://imbalanced-learn.org/stable/"
+                }
+            }
+        ],
+        "external_data_endpoints": [
+            {
+                "name": "N/A",
+                "url": "N/A"
+            }
+        ],
+        "environment_variables": {}
+    },
+    "extension_domain": [],
+    "error_domain": {
+        "empirical_error": {
+            "empirical_error": "0.0"
+        },
+        "algorithmic_error": {
+            "algorithmic_error": "0.53"
+        }
+    }
+}
