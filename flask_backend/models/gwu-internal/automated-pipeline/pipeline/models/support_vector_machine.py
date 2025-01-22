@@ -36,6 +36,8 @@ class SupportVectorMachineHandler:
 
         image = CMtoCMDisplay(cm)
 
+        self.classifier = classifier
+
         return {
             "Method": "Support Vector Machine Classifier",
             "Accuracy": accuracy,
@@ -45,8 +47,8 @@ class SupportVectorMachineHandler:
             "Training Time": training_time,
         }
 
-    def sample_prediction(self):
-        raise NotImplementedError
+    def sample_prediction(self, new_data):
+        return self.classifier.predict(new_data)
 
     def save_model(self):
         raise NotImplementedError

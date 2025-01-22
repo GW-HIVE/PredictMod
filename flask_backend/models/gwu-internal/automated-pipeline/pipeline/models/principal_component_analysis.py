@@ -62,6 +62,9 @@ class PCAHandler:
         plt.savefig(buf, format="png", bbox_inches="tight")
         b64_image = b64encode(buf.getvalue()).decode("utf-8").replace("\n", "")
         # plt.savefig("PCA.png", format="png", bbox_inches="tight")
+
+        self.model = pca
+
         return {
             "Method": "PCA 3D",
             "Explained Variance": pca_variance.explained_variance_.tolist(),
@@ -70,8 +73,8 @@ class PCAHandler:
             "Solution Time": solve_time,
         }
 
-    def sample_prediction(self):
-        raise NotImplementedError
+    def sample_prediction(self, new_data):
+        return self.pca.transform(new_data)
 
     def save_model(self):
         raise NotImplementedError
