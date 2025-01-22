@@ -1,0 +1,312 @@
+{
+    "object_id": "https://biocomputeobject.org/BCO_000578/DRAFT",
+    "spec_version": "https://w3id.org/ieee/ieee-2791-schema/2791object.json",
+    "etag": "3fdd067007bec1e7f3b4ef4dc4fd0516709ba3df12d7428920d93eca97dc2cd0",
+    "provenance_domain": {
+        "name": "Ovarian Cancer",
+        "version": "1.0",
+        "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+        "created": "2025-01-04T18:32:24",
+        "modified": "2025-01-04T22:47:32.343Z",
+        "contributors": [
+            {
+                "name": "Miguel Mazumder",
+                "affiliation": "HIVE lab",
+                "email": "mfmmazumder@gwmail.gwu.edu",
+                "contribution": [
+                    "contributedBy"
+                ],
+                "orcid": ""
+            },
+            {
+                "name": "Urnisha Bhuiyan",
+                "affiliation": "HIVE lab",
+                "email": "sbhuiyan28@email.gwu.edu",
+                "contribution": [
+                    "contributedBy"
+                ]
+            },
+            {
+                "name": "Lori Krammer",
+                "affiliation": "HIVE lab",
+                "email": "lorikrammer@email.gwu.edu",
+                "contribution": [
+                    "contributedBy"
+                ]
+            },
+            {
+                "name": "Patrick McNeely",
+                "affiliation": "HIVE lab",
+                "email": "pmcneely@email.gwu.edu",
+                "contribution": [
+                    "contributedBy"
+                ]
+            }
+        ]
+    },
+    "usability_domain": [
+        "Need\nAccurate prediction of patient outcomes based on methylation data is critical for assessing the effectiveness of treatments, such as their potential to reduce tumor size in ovarian cancer. Class imbalance in such datasets can hinder the development of reliable predictive models.\n\nMethod\nThis script processes methylation data from an Excel file to classify patient outcomes. It employs the Synthetic Minority Oversampling Technique (SMOTE) to balance the dataset, followed by training a Random Forest classifier. The workflow includes feature preprocessing, train-test splitting, oversampling for minority classes, and model evaluation using metrics such as accuracy, ROC-AUC, and a classification report.\n\nResults\nThe workflow demonstrates successful balancing of class distributions, enabling robust classification of patient outcomes. Key outputs include a trained classification model and associated feature names, stored for future analysis and deployment. The model achieves reliable performance metrics, supporting its use in clinical or research settings.\n\nHow the Results Can Be Used/Interpreted\nThe trained model provides a tool for predicting whether a treatment is likely to reduce tumor size in ovarian cancer patients, based on methylation profiles. This supports clinical decision-making, biomarker discovery, and personalized medicine approaches by leveraging methylation data to evaluate therapeutic efficacy.\n\nThis usability domain emphasizes the purpose, methodology, and potential applications of the workflow, providing a clear scientific context and actionable insights."
+    ],
+    "description_domain": {
+        "pipeline_steps": [
+            {
+                "step_number": 1,
+                "name": "Load Python Libraries",
+                "version": "1.0",
+                "prerequisite": [
+                    {
+                        "name": "sklearn library",
+                        "uri": {
+                            "filename": "scikit-learn 1.4.1",
+                            "uri": "https://scikit-learn.org/stable/install.html#installation-instructions"
+                        }
+                    },
+                    {
+                        "name": "joblib library",
+                        "uri": {
+                            "filename": "joblib 1.3.2",
+                            "uri": "https://pypi.org/project/joblib/#downloads"
+                        }
+                    },
+                    {
+                        "name": "pandas library",
+                        "uri": {
+                            "filename": "pandas 2.2.1",
+                            "uri": "https://pypi.org/project/pandas/"
+                        }
+                    }
+                ],
+                "input_list": [
+                    {
+                        "filename": "methyl_data_test.xlsx",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/overian_cancer/methyl_data_test.xlsx"
+                    },
+                    {
+                        "filename": "methyl_single_patient.xlsx",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/overian_cancer/methyl_single_patient.xlsx"
+                    }
+                ],
+                "description": "Load required python libraries",
+                "output_list": [
+                    {
+                        "filename": "tmpfs",
+                        "uri": "file:///dev/tmpfs"
+                    }
+                ]
+            },
+            {
+                "step_number": 2,
+                "name": "Read/Format Input Data",
+                "version": "1.0",
+                "description": "Reading in data, formatting data for random tree classifier, adding SMOTE steps for increasing patient count",
+                "output_list": [
+                    {
+                        "filename": "tmpfs",
+                        "uri": "file:///dev/tmpfs"
+                    }
+                ],
+                "input_list": [
+                    {
+                        "filename": "tmpfs",
+                        "uri": "file:///dev/tmpfs"
+                    }
+                ]
+            },
+            {
+                "step_number": 3,
+                "name": "Train ML model with Data",
+                "version": "1.0",
+                "description": "Training model with formatted data and outputting pickle file to be used for single patient data",
+                "input_list": [
+                    {
+                        "filename": "tmpfs",
+                        "access_time": "2025-01-04T05:01:00.000Z",
+                        "uri": "file:///dev/tmpfs"
+                    }
+                ],
+                "output_list": [
+                    {
+                        "filename": "tmpfs",
+                        "access_time": "2025-01-04T05:59:00.000Z",
+                        "uri": "file:///dev/tmpfs"
+                    }
+                ]
+            },
+            {
+                "step_number": 2,
+                "name": "Save model to Pickle File",
+                "version": "1.0",
+                "description": "Saving pickle file for future predictions of patient treatment outcome",
+                "input_list": [
+                    {
+                        "filename": "tmpfs",
+                        "uri": "file:///dev/tmpfs"
+                    }
+                ],
+                "output_list": [
+                    {
+                        "filename": "methylation_model.pkl",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/overian_cancer/methylation_model.pkl"
+                    }
+                ]
+            },
+            {
+                "step_number": 5,
+                "name": "Load pickle file for single patient",
+                "version": "1.0",
+                "description": "loading pickle file of trained model for future use of patient predictions",
+                "input_list": [
+                    {
+                        "filename": "tmpfs",
+                        "uri": "file:///dev/tmpfs"
+                    }
+                ],
+                "output_list": [
+                    {
+                        "filename": "methylation_model.pkl",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/overian_cancer/methylation_model.pkl"
+                    }
+                ]
+            },
+            {
+                "step_number": 6,
+                "name": "Predict Patient Outcome",
+                "description": "Using trained pickle file determine outcome of new single patient data",
+                "version": "1.0",
+                "input_list": [
+                    {
+                        "filename": "methylation_model.pkl",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/overian_cancer/methylation_model.pkl"
+                    },
+                    {
+                        "filename": "methyl_single_patient.xlsx",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/overian_cancer/methyl_single_patient.xlsx"
+                    }
+                ],
+                "output_list": [
+                    {
+                        "filename": "tmpfs",
+                        "uri": "file:///dev/tmpfs"
+                    }
+                ]
+            }
+        ],
+        "keywords": [
+            "SMOTE",
+            "Python",
+            "Machine Learning",
+            "Ovarian Cancer"
+        ]
+    },
+    "parametric_domain": [
+        {
+            "step": "3",
+            "param": "train_test_split",
+            "value": "test_size=0.5"
+        },
+        {
+            "step": "3",
+            "param": "SMOTE Patient Number",
+            "value": "Scale(100,100)"
+        }
+    ],
+    "io_domain": {
+        "input_subdomain": [
+            {
+                "uri": {
+                    "filename": "methyl_single_patient.xlsx",
+                    "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/overian_cancer/methyl_single_patient.xlsx"
+                }
+            }
+        ],
+        "output_subdomain": [
+            {
+                "mediatype": "Pickle File",
+                "uri": {
+                    "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/overian_cancer/methylation_model.pkl",
+                    "filename": "methylation_model.pkl"
+                }
+            }
+        ]
+    },
+    "execution_domain": {
+        "script": [
+            {
+                "uri": {
+                    "filename": "methylation_classifier.py",
+                    "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/overian_cancer/methylation_classifier.py"
+                }
+            },
+            {
+                "uri": {
+                    "filename": "methylation_single_classifier.py",
+                    "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/overian_cancer/methylation_single_classifier.py"
+                }
+            }
+        ],
+        "script_driver": "Python",
+        "software_prerequisites": [
+            {
+                "name": "Python",
+                "version": "3.11.4",
+                "uri": {
+                    "filename": "python3.11.exe",
+                    "uri": "https://www.python.org/downloads/release/python-3114/"
+                }
+            },
+            {
+                "name": "sklearn library",
+                "version": "1.4.1",
+                "uri": {
+                    "uri": "https://scikit-learn.org/stable/install.html#installation-instructions"
+                }
+            },
+            {
+                "name": "joblib library\t",
+                "version": "1.3.2",
+                "uri": {
+                    "uri": "https://pypi.org/project/joblib/"
+                }
+            },
+            {
+                "name": "pandas library",
+                "version": "2.2.1",
+                "uri": {
+                    "filename": "Diabetes_classifier.pkl",
+                    "uri": "https://pypi.org/project/pandas/"
+                }
+            },
+            {
+                "name": "numpy library",
+                "version": "1.26.4",
+                "uri": {
+                    "uri": "https://pypi.org/project/numpy/"
+                }
+            },
+            {
+                "name": "imblearn library",
+                "version": "0.5",
+                "uri": {
+                    "filename": "imblearn",
+                    "uri": "https://imbalanced-learn.org/stable/"
+                }
+            }
+        ],
+        "external_data_endpoints": [
+            {
+                "name": "N/A",
+                "url": "N/A"
+            }
+        ],
+        "environment_variables": {}
+    },
+    "extension_domain": [],
+    "error_domain": {
+        "empirical_error": {
+            "empirical_error": "0.0"
+        },
+        "algorithmic_error": {
+            "algorithmic_error": "0.75"
+        }
+    }
+}
