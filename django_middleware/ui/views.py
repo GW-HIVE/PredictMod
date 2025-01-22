@@ -12,6 +12,10 @@ from django.core import serializers
 
 from .models import ReleasedModel, PendingModel, Condition, Intervention, InputDataType
 
+from users.models import SiteUser, TrainedModel
+
+from base64 import b64decode
+
 import json
 import logging
 import os
@@ -221,17 +225,58 @@ def file_upload(request):
             #         {"error": f"Invalid upload target {target}"}, status=404
             #     )
             data = json.loads(request.body)
-            other_args = ""
-            for arg in request.GET.keys():
-                logger.debug(f"---> Request received arg: {arg} -- {request.GET[arg]}")
-                if arg == "q":
-                    continue
-                other_args += f"&{arg}={request.GET[arg]}"
-            response = requests.post(
-                f"{lookup_backend(target)}/upload?q={target}{other_args}", json=data
-            )
-            response = json.loads(response._content.decode("utf-8"))
-            return JsonResponse(response, status=200, safe=False)
+            if target == "pipeline":
+                # Logged-in user is required for launching the pipeline
+                user = request.user
+                if not user.is_authenticated:
+                    return JsonResponse(
+                        {"error": "Login required to use the automated pipeline"},
+                        safe=False,
+                        status=403,
+                    )
+                logger.debug(
+                    f"Uploading file with algorithm method: {request.GET['method']}"
+                )
+                other_args = ""
+                for arg in request.GET.keys():
+                    logger.debug(
+                        f"---> Request received arg: {arg} -- {request.GET[arg]}"
+                    )
+                    if arg == "q":
+                        continue
+                    other_args += f"&{arg}={request.GET[arg]}"
+                response = requests.post(
+                    f"{lookup_backend(target)}/upload?q={target}{other_args}", json=data
+                )
+                response = json.loads(response._content.decode("utf-8"))
+                logger.debug("=" * 80)
+                site_user = SiteUser.objects.filter(user=user).first()
+                logger.debug(f"---> Modeling: Found user {site_user.user.email}")
+                for p in response["pickles"]:
+                    logger.debug(
+                        f"Name: {p['name']} -- base64 size: {len(p['encoded_object'])}"
+                    )
+                    # trained_model = TrainedModel(
+                    #     model_name=p["name"],
+                    #     serialized_model=b64decode(p["encoded_object"].encode("utf-8")),
+                    #     siteuser=site_user,
+                    # )
+                    # trained_model.objects.update_or_create()
+                    TrainedModel.objects.update_or_create(
+                        model_name=p["name"],
+                        serialized_model=b64decode(p["encoded_object"].encode("utf-8")),
+                        siteuser=site_user,
+                    )
+
+                logger.debug("=" * 80)
+                return JsonResponse(response["results"], status=200, safe=False)
+            else:
+                response = requests.post(
+                    f"{lookup_backend(target)}/upload?q={target}", json=data
+                )
+                response = json.loads(response._content.decode("utf-8"))
+                return JsonResponse(response, status=200, safe=False)
+
         except ConnectionRefusedError:
             return JsonResponse(
                 {"error": f"Flask error: Is the Flask server running?"},

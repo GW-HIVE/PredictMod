@@ -19,3 +19,10 @@ class SiteUser(models.Model):
     category = models.PositiveSmallIntegerField(
         choices=UserCategories.choices, default=UserCategories.RESEARCHER
     )
+
+
+class TrainedModel(models.Model):
+
+    model_name = models.CharField(max_length=255)
+    serialized_model = models.BinaryField()
+    siteuser = models.ForeignKey(SiteUser, on_delete=models.CASCADE, null=True)

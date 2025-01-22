@@ -17,6 +17,7 @@ logger = logging.getLogger()
 urlpatterns = [
     # path("api/users/", include(router.urls)),
     path("api/users/", views.UserListView.as_view()),
+    path("api/user-models/", views.ModelListView.as_view()),
     path("api/create-user/", views.CreateUser.as_view()),
     path("api/update-user/", views.UpdateUser.as_view()),
     path("api/delete-user/", views.DeleteUser.as_view()),

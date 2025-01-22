@@ -17,7 +17,7 @@ from rest_framework.views import APIView
 from rest_framework.renderers import JSONRenderer
 
 from .serializers import SiteUserSerializer, UserSerializer
-from .models import SiteUser
+from .models import SiteUser, TrainedModel
 
 import logging
 
@@ -152,6 +152,32 @@ class UpdateUser(APIView):
             )
 
         return JsonResponse({"update": user.get_username()}, status=200)
+
+
+class ModelListView(APIView):
+    def get(self, request):
+        user = request.user
+        logged_in = request.user.is_authenticated
+
+        logger.debug(f"Found user {user} ({'not ' if not logged_in else ''}logged in)")
+
+        if not logged_in:
+            return JsonResponse({"models_available": []})
+        logger.debug(f"Model list view: Accessing models for user {user}")
+        models = TrainedModel.objects.all()
+        logger.debug(f"Found user models {models}")
+        user_models = TrainedModel.objects.filter(siteuser__user=user).all()
+        logger.debug(f"Found filtered user models {user_models}")
+
+        return JsonResponse(
+            {
+                "models_available": [
+                    {"name": "Model 1", "pickle": "pickles are yummy"},
+                    {"name": "Example 2", "pickle": "no they aren't!"},
+                ]
+            },
+            safe=False,
+        )
 
 
 class UserListView(APIView):
