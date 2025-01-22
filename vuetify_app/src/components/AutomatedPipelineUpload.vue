@@ -7,11 +7,31 @@
                 See `rules` for filtering on file type. 
                 Not super critical at present. 
              -->
+  <v-container :key="action">
+    Current key: {{ action }}
+  </v-container>
   <v-row>
-    <v-col>
+    <v-col cols="4">
+      <v-radio-group v-model="action" v-on:change="getModels">
+        <v-radio label="Train new models" value="training"></v-radio>
+        <v-radio label="New sample with trained model" value="newSample"></v-radio>
+      </v-radio-group>
+    <v-card flat :key="action" v-if="action === 'newSample'">
+      <v-card-title>Available models</v-card-title>
+      <v-list>
+        <v-list-item
+          v-for="obj in availableModels"
+          :key="obj"
+          :title="'Name: ' + obj.name"
+          :subtitle="'Pickle: ' + obj.pickle"
+        ></v-list-item>
+      </v-list>
+    </v-card>
+    </v-col>
+    <v-col cols="8">
       <v-file-input
             show-size
-            label="Provide training data in xls or xlsx file format. Row 1=Column headings, Row 2..N=Data samples"
+            label="Training set or new sample to use with prior models."
             type="File"
             clearable
             v-model="currentFile"
@@ -83,6 +103,7 @@ import * as XLSX from 'xlsx';
     name: "upload-files",
     props: {
         uploadTargetURL: String,
+        modelsURL: String,
     },
     setup() {
       const userStore = useUserStore();
@@ -91,6 +112,7 @@ import * as XLSX from 'xlsx';
     components: { PipelineResultsCard, UploadService },
     data() {
       return {
+        baseURL: import.meta.env.DEV ? import.meta.env.VITE_DEV_MIDDLEWARE_BASE + "/api": "/predictmod/api",
         currentFile: null,
         response: null,
         progress: 0,
@@ -100,6 +122,8 @@ import * as XLSX from 'xlsx';
         error: null,
         uploadSuccess: false,
         counterToken: 0,
+        action: "training",
+        availableModels: [],
       };
     },
     methods: {
@@ -107,11 +131,40 @@ import * as XLSX from 'xlsx';
           // console.log("Checking user ROLE: ", this.userStore.role);
           return this.userStore.role > 2;
         },
+        // XXX
+        // getFileLabelText() {
+        //   if (this.action === "training") {
+        //     return "Provide training data in xls or xlsx file format. Row 1=Column headings, Row 2..N=Data samples"
+        //   } else if (this.action === "newSample") {
+        //     return "Select a model to use and provide a sample in xls or xlsx format. Row 1=Column headings, Row 2=New data sample"
+        //   } else {
+        //     return "Error state: Action is " + this.action
+        //   }
+        // },
+        // XXX
         forceRedraw() {
           this.counterToken += 1;
         },
         logResponseToConsole() {
           console.log(this.response);
+        },
+        async getModels() {
+          if (this.action === 'training') {
+            return
+          }
+          const modelsURL = this.baseURL + '/' + this.modelsURL
+          console.log("---> Called get models. Collecting from " + modelsURL)
+          const response = await fetch(modelsURL, {
+            credentials: "include",
+          })
+          const models = await response.json()
+          console.log("Got response ", JSON.stringify(models))
+          if (!response.ok) {
+            // Error handling
+          } else {
+            this.availableModels = models.models_available
+          }
+          
         },
         importFileAndScan() {
             if (!this.currentFile) {
@@ -155,7 +208,7 @@ import * as XLSX from 'xlsx';
 
         UploadService.upload(this.data, this.uploadTargetURL, (event) => {
           this.progress = Math.round((100 * event.loaded) / event.total);
-        }, this.labelColumn, this.columnsToDrop)
+        }, this.labelColumn, this.columnsToDrop, this.action)
           .then((response) => {
             // this.message = response.data.message;
             // console.log("Got response:\n", response);

@@ -3,7 +3,7 @@ import axiosUtility from "./AxiosUtils";
 import { useUserStore } from "@/store/user";
 class UploadFilesService {
 
-  async upload(json, target, onUploadProgress, labelColumn, columnsToDrop) {
+  async upload(json, target, onUploadProgress, labelColumn, columnsToDrop, mode) {
     const userStore = useUserStore();
     const baseURL = import.meta.env.DEV ? import.meta.env.VITE_DEV_MIDDLEWARE_BASE + '/api': "/predictmod/api";
     // const formData = new FormData();
@@ -13,6 +13,9 @@ class UploadFilesService {
     // console.log("Target: " + fullURL)
     if (labelColumn) {
       fullURL = fullURL + `&label=${labelColumn}`
+    }
+    if (mode) {
+      fullURL += `&method=${mode}`
     }
     // console.log("Target: " + fullURL)
 

@@ -30,7 +30,10 @@
 
     <v-row>
       <v-col>
-        <AutomatedPipelineUpload :upload-target-u-r-l="'pipeline'" />
+        <AutomatedPipelineUpload 
+          :upload-target-u-r-l="'pipeline'"
+          :models-u-r-l="'user-models/'" 
+        />
 
       </v-col>
     
