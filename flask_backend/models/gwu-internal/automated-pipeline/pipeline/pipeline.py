@@ -1,6 +1,8 @@
 import numpy as np
 import pandas as pd
 import sklearn as skl
+import pickle
+from base64 import b64encode
 import time
 
 from .models import (
@@ -12,6 +14,13 @@ from .models import (
 )
 
 
+def package_for_shipping(name, model_obj):
+    return {
+        "name": name,
+        "encoded_object": b64encode(pickle.dumps(model_obj)).decode("utf-8"),
+    }
+
+
 def regressions(label_data, data):
 
     pca = PCAHandler(label_data, data)
@@ -21,32 +30,35 @@ def regressions(label_data, data):
 def binary_classifiers(label_data, data):
 
     results = []
+    pickles = []
 
     pca = PCAHandler(label_data, data)
     results.append(pca.train_model())
+    pickles.append(package_for_shipping("PCA", pca))
 
     label_data = label_data.apply(lambda x: 0 if x == "R" else 1)
 
     print("---> LR")
     lr = LogisticRegressionHandler(label_data, data)
     results.append(lr.train_model())
+    pickles.append(package_for_shipping("Logistic Regression", lr))
 
     print("---> DTC")
     dtc = DecisionTreeClassifierHandler(label_data, data)
     results.append(dtc.train_model())
+    pickles.append(package_for_shipping("Decision Tree Classifier", dtc))
 
     print("---> RFC")
     rfc = RandomForestClassifierHandler(label_data, data)
     results.append(rfc.train_model())
+    pickles.append(package_for_shipping("Random Forest", rfc))
 
     print("---> SVM")
     svm = SupportVectorMachineHandler(label_data, data)
     results.append(svm.train_model())
+    pickles.append(package_for_shipping("Support Vector Machine", svm))
 
-    for r in results:
-        print(f"Type of result: {type(r)}")
-
-    return results
+    return {"results": results, "pickles": pickles}
 
 
 def multiclass_classifiers(label_data, data):
