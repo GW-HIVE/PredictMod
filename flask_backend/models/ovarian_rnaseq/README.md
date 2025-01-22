@@ -1,4 +1,3 @@
-Raw Data used for model training available at https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE188249
 # **Data Preprocessing, Algorithm Selection, and Model Evaluation for RNA-Seq Classifier**
 
 ## **Data Source**  
@@ -75,5 +74,6 @@ The dataset consists of patient RNA-Seq profiles, with expression values reporte
 ## **Key Insights**  
 - Using TPM normalization ensures robust cross-sample comparisons, improving model reliability.  
 - SMOTE effectively addresses class imbalance, enabling more accurate predictions for underrepresented classes.  
-- This model supports personalized treatment decisions by identifying potential responders and non-responders based on RNA-Seq profiles.  
+- This model supports personalized treatment decisions by identifying potential responders and non-responders based on RNA-Seq profiles.
+- Raw Data used for model training available at https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE188249
 
