@@ -206,7 +206,7 @@
         {
             "step": "3",
             "param": "train_test_split",
-            "value": "test_size=0.5"
+            "value": "test_size=0.3"
         },
         {
             "step": "3",
@@ -310,7 +310,10 @@
             "empirical_error": "0.0"
         },
         "algorithmic_error": {
-            "algorithmic_error": "0.53"
+            "algorithmic_error": "0.25"
+        }
+        "ROC-AUC": {
+            "ROC-AUC": "0.87"
         }
     }
 }
