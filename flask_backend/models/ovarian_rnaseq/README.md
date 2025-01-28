@@ -65,9 +65,9 @@ The dataset consists of patient RNA-Seq profiles, with expression values reporte
 - **Algorithm:**  
   Random Forest Classifier  
 - **Model Accuracy:**  
-  53%  
+  75%  
 - **ROC-AUC:**  
-  0.72  
+  0.81 
 
 ---
 
