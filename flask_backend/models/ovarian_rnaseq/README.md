@@ -2,11 +2,11 @@
 
 ## **Data Source**  
 RNA-Seq data was derived from ovarian cancer patients undergoing treatment. This dataset is used to develop a classifier for predicting patient responsiveness to treatment, specifically their likelihood to exhibit tumor size reduction.  
-
+BCO accessible via this directory as well as biocompute DB
 ---
 
 ## **Training Dataset**  
-The dataset consists of patient RNA-Seq profiles, with expression values reported as TPM (Transcripts Per Million). TPM was chosen over FPKM because TPM ensures consistency across samples by normalizing for total read counts, making it better suited for cross-sample comparisons. Attempts to curated data included Spearman Correlation, Volcano plots, and PCA. Current feature selection based on the top features exhibiting the highest range dispersion.
+The dataset consists of patient RNA-Seq profiles, with expression values reported as TPM (Transcripts Per Million). TPM was chosen over FPKM because TPM ensures consistency across samples by normalizing for total read counts, making it better suited for cross-sample comparisons. Attempts to reduce 70,000 genes from the data included Spearman Correlation, Volcano plots, and PCA, and more. Current feature selection based on the top features exhibiting the highest range dispersion.
 
 Gene expression used for final Model have appeared to pick up genes that could potentially be of additional research (FASTA file with genes within the fasta zipped file)
 
