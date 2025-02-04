@@ -4,6 +4,7 @@ The following information provided in this document details our process for data
 ## Data Source 
 This dataset was retrieved from a publication interested in identifying the protein-related predictors for exercise. 
 The training dataset included 48 patients and 688 variables.
+PMID: 36787735
 
 ## Intervention & Outcomes 
 The intervention consisted of a 12-week high-intensity interval exercise training program for medication-naïve overweight or obese men with prediabetes.
