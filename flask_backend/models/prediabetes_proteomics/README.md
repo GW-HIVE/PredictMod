@@ -1,5 +1,5 @@
 # prediabetes_proteomics_model
-The following information provided in this document details our process for data preprocessing, algorithm selection, hyperparameters, model evaluation, and quality control. Additionally, the goal of this document is to highlight source code associated with each iteration of the MDClone model.
+The following information provided in this document details our process for data preprocessing, algorithm selection, hyperparameters, model evaluation, and quality control. Additionally, the goal of this document is to highlight source code associated with each iteration of the proteomics model.
 
 ## Data Source 
 This dataset was retrieved from a publication interested in identifying the protein-related predictors for exercise. 
