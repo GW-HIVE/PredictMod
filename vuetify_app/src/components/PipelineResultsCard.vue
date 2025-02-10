@@ -1,22 +1,39 @@
 <template>
   <v-col>
   <v-row v-for="obj in data">
-    <v-card variant="flat" class="text-left">
+    <v-card 
+      variant="flat"
+      class="text-left"
+      >
+      <!-- append-icon="mdi-help-box" -->
+      <v-toolbar density="compact">
+        {{  obj.Method }}
+        <v-spacer></v-spacer>
+      <v-btn 
+        icon 
+        href="https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html" 
+        target="_blank"
+      >
+        <v-icon>mdi-help-box</v-icon>
+      </v-btn>
+      <v-icon icon="mdi-help mdi-spin"></v-icon>
+    </v-toolbar>
   <v-card-title>
-    {{ obj.Method }}
+    <!-- {{ obj.Method }} -->
       <!-- <a :href=modelsURL+obj.fields.link>{{ obj.fields.name }}</a> -->
   </v-card-title>
+  <!-- <v-icon ></v-icon> -->
   <v-card-text>
       <!-- {{ obj['Confusion Matrix'] ? "Confusion Matrix" + obj['Confusion Matrix'] : null }}<br> -->
       <v-img 
-        :v-if="obj['Confusion Matrix']"
+        v-if="obj['Confusion Matrix']"
         :src="'data:image/png; base64, ' + obj['Confusion Matrix']"
         :height="300"
-        :width="800"              
+        :width="800"
       >
       </v-img>
       <v-img
-        :v-if="obj.image"
+        v-if="obj.image"
         :src="'data:image/png; base64, ' + obj.image"
         :height="300"
         :width="800"
@@ -46,6 +63,11 @@ export default {
   },
   mounted() {
   },
+  methods: {
+      routeTo(newLocation) {
+        this.$router.push(newLocation);
+      }
+  }
 }
 
 </script>
