@@ -131,6 +131,8 @@ import * as XLSX from 'xlsx';
     name: "upload-files",
     props: {
         uploadTargetURL: String,
+        modelsToUse: Array || null,
+
     },
     setup() {
       const userStore = useUserStore();

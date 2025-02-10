@@ -3,7 +3,7 @@ import axiosUtility from "./AxiosUtils";
 import { useUserStore } from "@/store/user";
 class UploadFilesService {
 
-  async upload(json, target, onUploadProgress, labelColumn, columnsToDrop, mode) {
+  async upload(json, target, onUploadProgress, labelColumn, columnsToDrop, mode, modelName) {
     const userStore = useUserStore();
     const baseURL = import.meta.env.DEV ? import.meta.env.VITE_DEV_MIDDLEWARE_BASE + '/api': "/predictmod/api";
     // const formData = new FormData();
@@ -15,8 +15,23 @@ class UploadFilesService {
       fullURL = fullURL + `&label=${labelColumn}`
     }
     if (mode) {
-      fullURL += `&method=${mode}`
+      if (!modelName) {
+        alert("Error: modelName not completed when using `mode` toggle")
+        return {"Error": "modelName not completed when using `mode` toggle"}
+      }
+        switch (mode) {
+        case 'training':
+          fullURL += `&method=${mode}&data_name=${modelName}`
+          break;
+        case 'newSample':
+          fullURL += `&method=${mode}&data_name=${modelName.data_name}`
+          fullURL += `&model_ids=${JSON.stringify(modelName.ids)}`
     }
+    }
+    // XXX?
+    // if (modelName) {
+    //   fullURL += `&data_name=${modelName}`
+    // }
     // console.log("Target: " + fullURL)
 
     if (columnsToDrop) {
