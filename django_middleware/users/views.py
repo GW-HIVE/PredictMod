@@ -16,7 +16,12 @@ from rest_framework.views import APIView
 
 from rest_framework.renderers import JSONRenderer
 
-from .serializers import SiteUserSerializer, UserSerializer
+from .serializers import (
+    SiteUserSerializer,
+    UserSerializer,
+    TrainedModelDataTypeSerializer,
+    TrainedModelPartialSerializer,
+)
 from .models import SiteUser, TrainedModel
 
 import logging
@@ -154,6 +159,51 @@ class UpdateUser(APIView):
         return JsonResponse({"update": user.get_username()}, status=200)
 
 
+# class ModelsByDataTypeView(APIView):
+#     def get(self, request):
+#         user = request.user
+#         logged_in = request.user.is_authenticated
+
+#         if not logged_in:
+#             return JsonResponse({"models_by_data_type": []})
+#         user_models = TrainedModel.objects.filter(siteuser__user=user.all())
+
+#
+
+
+def model_updates(request):
+    try:
+        logger.debug("-" * 80)
+        logger.debug("Model updates: Got request")
+        logger.debug("-" * 80)
+
+        if request.method != "POST":
+            return JsonResponse(
+                {"error": f"Method {request.method} is not support on update"},
+                safe=False,
+            )
+
+        query = request.GET.get("q", None)
+        if not query:
+            return JsonResponse({"error": "Invalid request URL arguments"})
+        if query == "model_updates":
+            updates = {}
+            # Get the body and validate
+            updated_models = json.loads(request.body)
+            tm_manager = TrainedModel.objects
+
+            for m in updated_models:
+                tm = tm_manager.filter(id=m["id"]).first()
+                tm.to_save = m["save"]
+                tm.save()
+                updates[tm.id] = TrainedModelPartialSerializer(tm).data
+
+            return JsonResponse(updates, safe=False)
+
+    except Exception as e:
+        return JsonResponse({"error": f"Unknwon error {e}"}, safe=False)
+
+
 class ModelListView(APIView):
     def get(self, request):
         user = request.user
@@ -163,21 +213,37 @@ class ModelListView(APIView):
 
         if not logged_in:
             return JsonResponse({"models_available": []})
-        logger.debug(f"Model list view: Accessing models for user {user}")
-        models = TrainedModel.objects.all()
-        logger.debug(f"Found user models {models}")
-        user_models = TrainedModel.objects.filter(siteuser__user=user).all()
-        logger.debug(f"Found filtered user models {user_models}")
 
-        return JsonResponse(
-            {
-                "models_available": [
-                    {"name": "Model 1", "pickle": "pickles are yummy"},
-                    {"name": "Example 2", "pickle": "no they aren't!"},
-                ]
-            },
-            safe=False,
-        )
+        data_type_query = request.GET.get("q", None)
+        user_models = TrainedModel.objects.filter(siteuser__user=user).all()
+
+        if data_type_query:
+            data_types = [TrainedModelDataTypeSerializer(m).data for m in user_models]
+            unique_data_types = sorted(list(set(dt["data_name"] for dt in data_types)))
+            logger.debug("-" * 80)
+            logger.debug(unique_data_types)
+            logger.debug("-" * 80)
+
+            data_types = [{"name": str(dt)} for dt in unique_data_types]
+            logger.debug(f"---> Returning data types {data_types}")
+            return JsonResponse(data_types, safe=False)
+
+        data_type_name = request.GET.get("data_type", None)
+        if data_type_name is None:
+            return JsonResponse({"error": "Unsupported request parameters"}, safe=False)
+
+        selected_models = user_models.filter(data_name=data_type_name)
+
+        logger.debug(f"Model list view: Accessing models for user {user}")
+        logger.debug(f"Found user models {selected_models}")
+
+        models = {
+            "models_available": [
+                TrainedModelPartialSerializer(m).data for m in selected_models
+            ]
+        }
+
+        return JsonResponse(models, safe=False)
 
 
 class UserListView(APIView):
