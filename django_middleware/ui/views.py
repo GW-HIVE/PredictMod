@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
+from django.utils.http import urlsafe_base64_decode
 from django.template.response import TemplateResponse
 from django.views.decorators.csrf import (
     requires_csrf_token,
@@ -224,8 +225,15 @@ def file_upload(request):
             #     return JsonResponse(
             #         {"error": f"Invalid upload target {target}"}, status=404
             #     )
+            for k in request.GET.keys():
+                logger.debug(f"{k}: {request.GET[k]}")
             data = json.loads(request.body)
             if target == "pipeline":
+                data_type = request.GET.get("data_name", None)
+                if data_type is None:
+                    return JsonResponse(
+                        {"error": "Data type for model must be specified"}
+                    )
                 # Logged-in user is required for launching the pipeline
                 user = request.user
                 if not user.is_authenticated:
@@ -234,42 +242,60 @@ def file_upload(request):
                         safe=False,
                         status=403,
                     )
-                logger.debug(
-                    f"Uploading file with algorithm method: {request.GET['method']}"
-                )
+                model_mode = request.GET["method"]
+                logger.debug(f"Uploading file with algorithm mode: {model_mode}")
                 other_args = ""
+
+                site_user = SiteUser.objects.filter(user=user).first()
+
                 for arg in request.GET.keys():
                     logger.debug(
                         f"---> Request received arg: {arg} -- {request.GET[arg]}"
                     )
-                    if arg == "q":
+                    if arg == "q" or arg == "data_type":
                         continue
                     other_args += f"&{arg}={request.GET[arg]}"
-                response = requests.post(
-                    f"{lookup_backend(target)}/upload?q={target}{other_args}", json=data
-                )
-                response = json.loads(response._content.decode("utf-8"))
-                logger.debug("=" * 80)
-                site_user = SiteUser.objects.filter(user=user).first()
-                logger.debug(f"---> Modeling: Found user {site_user.user.email}")
-                for p in response["pickles"]:
-                    logger.debug(
-                        f"Name: {p['name']} -- base64 size: {len(p['encoded_object'])}"
-                    )
-                    # trained_model = TrainedModel(
-                    #     model_name=p["name"],
-                    #     serialized_model=b64decode(p["encoded_object"].encode("utf-8")),
-                    #     siteuser=site_user,
-                    # )
-                    # trained_model.objects.update_or_create()
-                    TrainedModel.objects.update_or_create(
-                        model_name=p["name"],
-                        serialized_model=b64decode(p["encoded_object"].encode("utf-8")),
-                        siteuser=site_user,
-                    )
 
-                logger.debug("=" * 80)
-                return JsonResponse(response["results"], status=200, safe=False)
+                match model_mode:
+                    case "training":
+                        logger.debug("=" * 80)
+                        logger.debug(
+                            f"---> Modeling: Found user {site_user.user.email}"
+                        )
+                        arg_dict = {"label": "", "drop": ""}
+                        for arg in arg_dict.keys():
+                            other_args += f"&{arg}={request.GET[arg]}"
+                            arg_dict[arg] = request.GET[arg]
+                        response = requests.post(
+                            f"{lookup_backend(target)}/upload?q={target}{other_args}",
+                            json=data,
+                        )
+                        response = json.loads(response._content.decode("utf-8"))
+                        for p in response["pickles"]:
+                            serialized_model = b64decode(
+                                p["encoded_object"].encode("utf-8")
+                            )
+                            logger.debug(
+                                f"Name: {p['name']} -- base64 size: {len(p['encoded_object'])}"
+                            )
+                            TrainedModel.objects.create(
+                                model_name=p["name"],
+                                data_name=data_type,
+                                label_field=request.GET.get("label"),
+                                drop_fields=request.GET.get("drop"),
+                                serialized_model=serialized_model,
+                                siteuser=site_user,
+                            )
+                        logger.debug("=" * 80)
+                        return JsonResponse(response["results"], status=200, safe=False)
+                    case "newSample":
+                        for arg in ["data_name", "model_ids"]:
+                            ...
+                        logger.debug("Attempting to run models with a new sample!")
+                        return JsonResponse(
+                            {"results": "complete"}, status=200, safe=False
+                        )
+
             else:
                 response = requests.post(
                     f"{lookup_backend(target)}/upload?q={target}", json=data
