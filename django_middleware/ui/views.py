@@ -13,7 +13,10 @@ from django.core import serializers
 
 from .models import ReleasedModel, PendingModel, Condition, Intervention, InputDataType
 
+from utilities.internal_routing import lookup_backend
+
 from users.models import SiteUser, TrainedModel
+from users.serializers import TrainedModelFullSerializer
 
 from base64 import b64decode
 
@@ -36,29 +39,29 @@ def binary_response_to_json(response):
     return json.loads(response.content.decode("utf-8"))
 
 
-def get_anlaysis_urls():
-    try:
-        models = ReleasedModel.objects.all()
-        return {m.name: f"http://{m.backend}:4243" for m in models}
-    except Exception as e:
-        logger.critical("=" * 80)
-        logger.critical(f"Exception: {e}")
-        logger.critical("=" * 80)
-        return {"None": "No models found in database"}
+# def get_anlaysis_urls():
+#     try:
+#         models = ReleasedModel.objects.all()
+#         return {m.name: f"http://{m.backend}:4243" for m in models}
+#     except Exception as e:
+#         logger.critical("=" * 80)
+#         logger.critical(f"Exception: {e}")
+#         logger.critical("=" * 80)
+#         return {"None": "No models found in database"}
 
 
-ANALYSIS_BACKENDS = get_anlaysis_urls()
+# ANALYSIS_BACKENDS = get_anlaysis_urls()
 
 
-def lookup_backend(model_name: str):
-    if settings.DJANGO_MODE == "dev":
-        return "http://localhost:5000"
-    de_modified_model_name = model_name.replace("-", " ")
-    logger.debug("-" * 40)
-    logger.debug(f"ANALYSIS BACKENDS: {ANALYSIS_BACKENDS}")
-    logger.debug(f"Searching for {de_modified_model_name}")
-    logger.debug("-" * 40)
-    return ANALYSIS_BACKENDS.get(de_modified_model_name, None)
+# def lookup_backend(model_name: str):
+#     if settings.DJANGO_MODE == "dev":
+#         return "http://localhost:5000"
+#     de_modified_model_name = model_name.replace("-", " ")
+#     logger.debug("-" * 40)
+#     logger.debug(f"ANALYSIS BACKENDS: {ANALYSIS_BACKENDS}")
+#     logger.debug(f"Searching for {de_modified_model_name}")
+#     logger.debug("-" * 40)
+#     return ANALYSIS_BACKENDS.get(de_modified_model_name, None)
 
 
 # XXX - Sanity check
@@ -262,39 +265,60 @@ def file_upload(request):
                         logger.debug(
                             f"---> Modeling: Found user {site_user.user.email}"
                         )
+                        user = site_user.user.email
                         arg_dict = {"label": "", "drop": ""}
                         for arg in arg_dict.keys():
                             other_args += f"&{arg}={request.GET[arg]}"
                             arg_dict[arg] = request.GET[arg]
                         response = requests.post(
-                            f"{lookup_backend(target)}/upload?q={target}{other_args}",
+                            f"{lookup_backend(target)}/upload?q={target}&user={user}{other_args}",
                             json=data,
                         )
                         response = json.loads(response._content.decode("utf-8"))
-                        for p in response["pickles"]:
-                            serialized_model = b64decode(
-                                p["encoded_object"].encode("utf-8")
-                            )
+                        for model in response:
                             logger.debug(
-                                f"Name: {p['name']} -- base64 size: {len(p['encoded_object'])}"
+                                f"Name: {model['name']} -- flask_id: {model['flask_id']}"
                             )
                             TrainedModel.objects.create(
-                                model_name=p["name"],
+                                flask_id=model["flask_id"],
+                                model_name=model["name"],
                                 data_name=data_type,
                                 label_field=request.GET.get("label"),
                                 drop_fields=request.GET.get("drop"),
-                                serialized_model=serialized_model,
                                 siteuser=site_user,
                             )
                         logger.debug("=" * 80)
-                        return JsonResponse(response["results"], status=200, safe=False)
+                        return JsonResponse(response, status=200, safe=False)
                     case "newSample":
-                        for arg in ["data_name", "model_ids"]:
-                            ...
-                        logger.debug("Attempting to run models with a new sample!")
-                        return JsonResponse(
-                            {"results": "complete"}, status=200, safe=False
+                        model_ids = json.loads(request.GET.get("model_ids", None))
+                        logger.debug(f"Collected model IDs: {model_ids}")
+
+                        models = TrainedModel.objects.filter(id__in=set(model_ids))
+
+                        flask_ids = [m.flask_id for m in models]
+                        m = models[0]
+                        # models = []
+                        # for m in model_ids:
+                        #     # XXX - Shipping models this way is almost physically painful
+                        #     models.append()
+
+                        payload = {
+                            "models": flask_ids,
+                            "data": data,
+                            "label": m.label_field,
+                            "drop": m.drop_fields,
+                        }
+
+                        response = requests.post(
+                            f"{lookup_backend(target)}/upload?q={target}&new_sample=true",
+                            json=payload,
                         )
+
+                        response_json = response.json()
+
+                        logger.debug(f"---> Got a response! {response_json}")
+
+                        return JsonResponse(response_json, status=200, safe=False)
 
             else:
                 response = requests.post(
