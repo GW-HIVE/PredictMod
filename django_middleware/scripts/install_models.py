@@ -14,10 +14,10 @@ if IN_DJANGO:
         InputDataType,
     )
 
-    with open("./utilities/released_models.toml", "rb") as fp:
+    with open("./scripts/released_models.toml", "rb") as fp:
         released_configs = tomli.load(fp)
 
-    with open("./utilities/pending_models.toml", "rb") as fp:
+    with open("./scripts/pending_models.toml", "rb") as fp:
         pending_configs = tomli.load(fp)
     BCO_DIR = os.path.abspath("../flask_backend/models")
     MODELS_DIR = os.path.abspath("../flask_backend/models")
