@@ -23,8 +23,10 @@ from .serializers import (
     TrainedModelPartialSerializer,
 )
 from .models import SiteUser, TrainedModel
+from utilities.internal_routing import lookup_backend
 
 import logging
+import requests
 
 logger = logging.getLogger()
 
@@ -213,6 +215,71 @@ class ModelListView(APIView):
 
         if not logged_in:
             return JsonResponse({"models_available": []})
+
+        if "action" in request.GET.keys():
+            action = request.GET["action"]
+            target = request.GET.get("target", None)
+            if action == "delete_model_family":
+                family_model_name = request.GET.get("data_type", None)
+                if not family_model_name or not target:
+                    return JsonResponse(
+                        {
+                            "error": "Malformed request. Missing family model name or target parameter"
+                        },
+                        status=400,
+                    )
+                logger.debug(
+                    f"---> Looking to delete models of family {family_model_name}"
+                )
+                models_to_delete = TrainedModel.objects.filter(
+                    siteuser__user=user
+                ).filter(data_name=family_model_name)
+                flask_ids = []
+                for m in models_to_delete:
+                    flask_ids.append(m.flask_id)
+                response = requests.post(
+                    f"{lookup_backend(target)}/delete",
+                    json=flask_ids,
+                )
+
+                complete_response = response.json()
+
+                logger.debug(f"Found deletion response: {complete_response}")
+
+                if "deleted" not in complete_response.keys():
+                    # Error handling
+                    ...
+                    return JsonResponse({"error": "Error on delete, investigate"})
+
+                models_to_delete.delete()
+
+                return JsonResponse({"deleted": family_model_name})
+            elif action == "delete_model":
+
+                model_to_delete = request.GET.get("model_id", None)
+                if not model_to_delete:
+                    return JsonResponse({"error": "No model found for deletion"})
+
+                model = TrainedModel.objects.filter(id=model_to_delete).first()
+
+                flask_id = model.flask_id
+
+                response = requests.post(
+                    f"{lookup_backend(target)}/delete",
+                    json=[flask_id],
+                )
+
+                complete_response = response.json()
+
+                logger.debug(f"---> Got complete response {complete_response}")
+
+                model.delete()
+
+                return JsonResponse({"deleted": model_to_delete})
+            else:
+                return JsonResponse(
+                    {"error": f"Unhandled arg '{action}' detected"}, status=400
+                )
 
         data_type_query = request.GET.get("q", None)
         user_models = TrainedModel.objects.filter(siteuser__user=user).all()
