@@ -32,7 +32,7 @@
   </v-container>
   <v-row>
     <v-col cols="3">
-      <v-radio-group v-model="action" v-on:change="getModels">
+      <v-radio-group v-model="action">
         <v-radio label="Train new models" value="training"></v-radio>
         <v-radio label="New sample with trained model" value="newSample"></v-radio>
       </v-radio-group>
