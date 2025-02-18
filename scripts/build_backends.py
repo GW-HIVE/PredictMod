@@ -74,7 +74,13 @@ def check_or_build_image(client, image_name, context_path):
         print(f"Found base image {image_name}")
     else:
         print(f"Did not find base image name {image_name} - building")
-        client.images.build(path=".", dockerfile="./dockerfile.base", tag=image_name)
+        if os.path.isfile("./dockerfile.base"):
+            client.images.build(
+                path=".", dockerfile="./dockerfile.base", tag=image_name
+            )
+        else:
+            # Not using old-style build descriptions, ignore this result
+            pass
     os.chdir(tmp_cwd)
 
 
@@ -102,15 +108,23 @@ for docker_path, docker_files in docker_host_locations.items():
     print(f"{docker_path}: {docker_files}")
     os.chdir(docker_path)
     contained_models = get_child_model_configs(docker_path)
+    print(f"---> Contained models: {contained_models}")
     for model, config in contained_models.items():
         print(f"\t{model}: {config}")
+        # Original definition
         config_path = os.path.join(docker_path, model, config[0])
+        # Failover to automated pipeline
+        if not os.path.isfile(config_path):
+            config_path = os.path.join(docker_path, config[0])
         with open(config_path, "rb") as config_p:
             details = tomli.load(config_p)
         # print(f"\t=====\n{details}\n\t====")
     with open(os.path.join(docker_path, "docker_config.toml"), "rb") as docker_config_p:
         docker_config = tomli.load(docker_config_p)
     image_name = docker_config["basename"]
+    if "automated" not in image_name:
+        print(f"---> Skipping image {image_name}")
+        continue
     base_image_name = image_name + ".base"
     container_name = image_name
 
