@@ -4,7 +4,7 @@
     Models to use: {{ modelsToUse.toString() }}
   <v-card flat>
     <v-card-title>Your models</v-card-title>
-    <v-card v-if="availableDataTypes.length == 0">
+    <v-card v-if="availableDataTypes.length == 0" :key="availableDataTypes">
       No models found
     </v-card>
     <v-row dense>
@@ -13,35 +13,52 @@
         style="max-height: 500px" 
         class="overflow-y-auto" 
         v-if="availableDataTypes.length > 0"
+        :key="availableDataTypes"
       >
       <v-list-item
         v-for="obj in availableDataTypes"
-        :key="obj.name"
+        :key="availableDataTypes"
         v-model="selectedDataType"
       >
       <v-card 
         class="text-left pa-0" 
         variant="outlined" 
         style="border: 1px solid lightgrey"
-        dense
       >
         <v-row>
         <v-card-title>
-          {{ obj.name }}
+          {{ padName(obj.name) }}
         </v-card-title>
       </v-row>
         <!-- <v-row>
           <v-card-text>TBD</v-card-text>
         </v-row> -->
         <!-- <v-row class="align-left"> -->
-          <template v-slot:actions>
+            <v-card-actions>
             <v-btn variant="flat" class="pa-2 ma-0" @click.prevent="getModels(obj.name)">
               {{ selectedDataType == obj.name ? "Deselect  " : "Select" }}
             </v-btn>
             <!-- <v-btn variant="flat" class="pa-2 ma-0" onclick="alert('Moar')">More details</v-btn> -->
-            <v-btn variant="flat" class="pa-2 ma-0" onclick="alert('delete!')">Delete</v-btn>
-          </template>
+            <v-btn variant="flat" class="pa-2 ma-0" @click.prevent="deleteClicked.push(obj.name)">Delete</v-btn>
+          </v-card-actions>
         <!-- </v-row> -->
+        <v-expand-transition>
+          <v-alert
+            v-if="deleteClicked.includes(obj.name)"
+            class="position-absolute w-100"
+            height="100%"
+            style="bottom: 0;"
+            type="warning"
+            density="compact"
+            closable
+            @click.close="deleteClicked.splice(deleteClicked.indexOf(obj.name), 1)"
+          >
+          <!-- <v-alert-text @click.prevent="deleteFamily(obj.name)" hover>
+            Warning - Confirm? 
+          </v-alert-text> -->
+          <v-btn size="small" block @click.prevent="deleteFamily(obj.name)" variant="outlined">Confirm?</v-btn>
+          </v-alert>
+        </v-expand-transition>
       </v-card>
     </v-list-item>
     </v-list>
@@ -57,7 +74,7 @@
         :key="obj.model_name"
       >
       <v-card class="text-left mx-auto" variant="outlined" hover style="border: 1px solid lightgrey">
-        <v-card-title>{{ obj.model_name + ": " + obj.id + " (Trained at " + obj.created + ")" }}
+        <v-card-title>{{ obj.model_name + ": (Trained on " + obj.created + ")" }}
         </v-card-title>
         <!-- <v-card-text>{{ obj.model_name + ":" + obj.id }}</v-card-text> -->
         <v-card-actions>
@@ -95,11 +112,14 @@
           height="100%"
           style="bottom: 0;"
           type="warning"
+          density="compact"
+          closeable
+          @click.close="deleteClicked.splice(deleteClicked.indexOf(obj.id), 1)"
         >
         <v-alert-title>
           Warning - this cannot be undone. 
         </v-alert-title>
-        <v-btn @click.prevent="deleteClicked.splice(deleteClicked.indexOf(obj.id), 1);" variant="outlined">Proceed?</v-btn>
+        <v-btn @click.prevent="deleteModel(obj.id);" variant="outlined">Confirm?</v-btn>
         </v-alert>
       </v-expand-transition>
       </v-card>
@@ -195,9 +215,41 @@ export default {
     clearError() {
       this.error = ""
     },
+    padName(name) {
+      if (name.length < 25) {
+        return (name + "                         ").substring(0, 25)
+      } else {
+        return name
+      }
+    },
     tbd() {alert("TBD")},
     async deleteModel(modelID) {
-      const fullURL = this.baseURL + "/" + `${this.modelsURL}?q=delete_model&model_id=${modelID}`
+      const modelsURL = this.baseURL + "/" + `${this.modelsURL}?action=delete_model&model_id=${modelID}&target=pipeline`
+      console.log("---> Called get models. Collecting from " + modelsURL)
+      const response = await fetch(modelsURL, {
+          credentials: "include",
+        })
+      const result = await response.json()
+      console.log("Deleting model: Found response " + JSON.stringify(result))
+      this.getModels()
+      this.deleteClicked.splice(this.deleteClicked.indexOf(modelID), 1);
+    },
+    async deleteFamily(modelFamilyName) {
+      alert("Now deleting family of models: " + modelFamilyName)
+      const modelsURL = this.baseURL + '/' + this.modelsURL + `?action=delete_model_family&data_type=${modelFamilyName}&target=pipeline`
+      console.log("---> Called get models. Collecting from " + modelsURL)
+      const response = await fetch(modelsURL, {
+          credentials: "include",
+        })
+      const deletedFamilyResponse = await response.json()
+      console.log("Got deleted family response " + JSON.stringify(deletedFamilyResponse))
+      this.availableDataTypes = this.availableDataTypes.filter((adt) => {
+        console.log("Filtering name: " + adt.name + " by filter " + JSON.stringify(deletedFamilyResponse))
+        return adt.name !== deletedFamilyResponse
+      })
+      this.getDataTypes()
+      this.getModels()
+      this.deleteClicked.splice(this.deleteClicked.indexOf(deletedFamilyResponse), 1);
     },
     getSaveString(obj) {
       if (obj.save) {
