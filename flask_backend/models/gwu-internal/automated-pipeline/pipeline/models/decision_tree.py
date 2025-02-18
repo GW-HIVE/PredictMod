@@ -36,6 +36,7 @@ class DecisionTreeClassifierHandler:
         cm = confusion_matrix(self.labels, train_predictions)
 
         image = CMtoCMDisplay(cm)
+        shap_beeswarm = ...  # TODO? c.f. https://stackoverflow.com/a/76083743 for beeswarm example
 
         self.classifier = classifier
 
@@ -49,15 +50,28 @@ class DecisionTreeClassifierHandler:
         }
 
     def sample_prediction(self, new_data):
+
         prediction = self.classifier.predict(new_data)
+        # print(f"DTC ---> New sample output is {prediction}")
         output_string = f"The patient is expected to be a {'non-' if prediction == 0 else ''}responder"
 
-        explainer = shap.TreeExplainer(self.classifier)
-        explanation = explainer(new_data)
+        # print(f"Got new data {new_data}\nAttempting to create a SHAP force plot")
 
-        image = shap.plots.beeswarm(explanation)
+        # TODO?
+        # explainer = shap.TreeExplainer(self.classifier)
+        # explanation = explainer(new_data)
 
-        return {"output": output_string, "image": image}
+        # image = shap.plots.force(
+        #     explainer.expected_value[0],
+        #     explanation[0][0,:],
+        #     new_data,
+        #     matplotlib=True,
+        #     )
+
+        # XXX?
+        image = "TBD"
+
+        return {"Prediction": output_string, "image": image}
 
     def save_model(self):
         raise NotImplementedError
