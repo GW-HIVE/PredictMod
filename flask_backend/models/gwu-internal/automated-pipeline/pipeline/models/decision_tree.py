@@ -9,6 +9,7 @@ from sklearn.metrics import (
 
 from .utilities import CMtoCMDisplay
 
+import shap
 import time
 
 
@@ -48,7 +49,15 @@ class DecisionTreeClassifierHandler:
         }
 
     def sample_prediction(self, new_data):
-        return self.classifier.predict(new_data)
+        prediction = self.classifier.predict(new_data)
+        output_string = f"The patient is expected to be a {'non-' if prediction == 0 else ''}responder"
+
+        explainer = shap.TreeExplainer(self.classifier)
+        explanation = explainer(new_data)
+
+        image = shap.plots.beeswarm(explanation)
+
+        return {"output": output_string, "image": image}
 
     def save_model(self):
         raise NotImplementedError
