@@ -49,7 +49,28 @@ class RandomForestClassifierHandler:
         }
 
     def sample_prediction(self, new_data):
-        return self.classifier.predict(new_data)
+        prediction = self.classifier.predict(new_data)
+        # print(f"RFC ---> New sample output is {prediction}")
+        output_string = f"The patient is expected to be a {'non-' if prediction == 0 else ''}responder"
+
+        # print(f"Got new data {new_data}\nAttempting to create a SHAP force plot")
+
+        # TODO?
+        # explainer = shap.TreeExplainer(self.classifier)
+        # explanation = explainer(new_data)
+
+        # image = shap.plots.force(
+        #     explainer.expected_value[0],
+        #     explanation[0][0,:],
+        #     new_data,
+        #     matplotlib=True,
+        #     )
+
+        # XXX?
+        image = "TBD"
+
+        return {"Prediction": output_string, "image": image}
+
 
     def save_model(self):
         raise NotImplementedError

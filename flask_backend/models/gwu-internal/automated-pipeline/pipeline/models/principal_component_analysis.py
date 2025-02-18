@@ -23,13 +23,12 @@ class PCAHandler:
         colors = self.modeled_data["colors"]
 
         if new_point is not None:
-            print(f"Concatenating! Colors is {colors}")
-            print(f"Data is {data}")
-            print(f"New point is {new_point}")
-            np.concatenate((data, new_point), axis=0)
-            # fmt: off
-            np.append(colors, 2)
-            # fmt: on
+            data = np.concatenate((data, new_point), axis=0)
+            colors = np.append(colors, 2)
+            labels = self.labels.unique()
+            labels = np.append(labels, "New sample")
+        else:
+            labels = self.labels.unique()
 
         scatter = ax.scatter(data[:, 0], data[:, 1], data[:, 2], c=colors, s=40)
 
@@ -41,7 +40,7 @@ class PCAHandler:
         ax.set_zlabel("3rd component")
 
         _ = ax.legend(
-            scatter.legend_elements()[0], self.labels.unique(), loc="upper right"
+            scatter.legend_elements()[0], labels, loc="upper right"
         )
 
         buf = io.BytesIO()
@@ -96,7 +95,7 @@ class PCAHandler:
         b64_image = self.create_image(new_point=new_point)
         return {
             "image": b64_image,
-            "point": new_point,
+            "point": new_point.tolist(),
         }
 
     def save_model(self):
