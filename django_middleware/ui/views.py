@@ -316,7 +316,7 @@ def file_upload(request):
 
                         response_json = response.json()
 
-                        logger.debug(f"---> Got a response! {response_json}")
+                        # logger.debug(f"---> Got a response! {response_json}")
 
                         return JsonResponse(response_json, status=200, safe=False)
 
