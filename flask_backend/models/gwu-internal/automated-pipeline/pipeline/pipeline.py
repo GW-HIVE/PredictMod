@@ -17,7 +17,7 @@ from .models import (
 def package_for_shipping(name, model_obj):
     return {
         "name": name,
-        "encoded_object": b64encode(pickle.dumps(model_obj)).decode("utf-8"),
+        "encoded_object": pickle.dumps(model_obj),
     }
 
 
