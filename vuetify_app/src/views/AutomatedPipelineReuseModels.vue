@@ -1,7 +1,9 @@
 <template>
   <v-container fluid>
+    <!-- 
     Models to toggle: {{ modelsToSave.toString() }}
-    Models to use: {{ modelsToUse.toString() }}
+    Models to use: {{ modelsToUse.toString() }} 
+    -->
   <v-card flat>
     <v-card-title>Your models</v-card-title>
     <v-card v-if="availableDataTypes.length == 0" :key="availableDataTypes">
@@ -142,6 +144,7 @@
     >
     {{ modelsToSave.length == 0 ? 'Use selected models' : 'Submit selected saves and use selected models' }}
   </v-btn>
+  <v-btn @click.submit="clearResults" color="primary" variant="flat">Clear previous results</v-btn>
   <!-- <v-row v-if="error"> -->
     <v-alert
           v-if="error"
@@ -168,6 +171,13 @@
     <!-- </v-row> -->
   </div>
 </v-card>
+</v-container>
+<v-container>
+  <v-row class="pa-5" v-if="response">
+        <PipelineResultsCard 
+          :data="response"
+        />
+    </v-row>
 </v-container>
 </template>
 
@@ -223,6 +233,9 @@ export default {
       }
     },
     tbd() {alert("TBD")},
+    clearResults() {
+      this.response = null
+    },
     async deleteModel(modelID) {
       const modelsURL = this.baseURL + "/" + `${this.modelsURL}?action=delete_model&model_id=${modelID}&target=pipeline`
       console.log("---> Called get models. Collecting from " + modelsURL)
@@ -398,9 +411,10 @@ export default {
         this.modelsToUse.forEach((m) => {
           models.ids.push(m)
         })
-        console.log("DataTypeName: " + this.selectedDataType)
-        console.log("Uploading to target URL: " + this.uploadTargetURL)
-        console.log("Sending models information: " + JSON.stringify(models))
+        // XXX
+        // console.log("DataTypeName: " + this.selectedDataType)
+        // console.log("Uploading to target URL: " + this.uploadTargetURL)
+        // console.log("Sending models information: " + JSON.stringify(models))
 
         UploadService.upload(this.data, this.uploadTargetURL, (event) => {
           this.progress = Math.round((100 * event.loaded) / event.total);

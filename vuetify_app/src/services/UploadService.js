@@ -69,7 +69,7 @@ class UploadFilesService {
 
     const response = await res.json();
   
-    console.log("---> Got response %s", JSON.stringify(response));
+    // console.log("---> Got response %s", JSON.stringify(response));
 
     return response;
 

@@ -27,9 +27,9 @@
 
   <v-container>
 
-    <v-container :key="action">
+  <!-- <v-container :key="action">
     Current key: {{ action }}
-  </v-container>
+  </v-container> -->
   <v-row>
     <v-col cols="3">
       <v-radio-group v-model="action">

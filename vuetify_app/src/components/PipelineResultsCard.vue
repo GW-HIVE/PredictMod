@@ -1,6 +1,7 @@
 <template>
   <v-col>
   <v-row v-for="obj in data">
+    <v-container fluid>
     <v-card 
       variant="flat"
       class="text-left"
@@ -25,24 +26,31 @@
   <!-- <v-icon ></v-icon> -->
   <v-card-text>
       <!-- {{ obj['Confusion Matrix'] ? "Confusion Matrix" + obj['Confusion Matrix'] : null }}<br> -->
-      <v-img 
-        v-if="obj['Confusion Matrix']"
+    <v-container v-if="obj['Confusion Matrix']">
+      <!-- v-if="obj['Confusion Matrix']" -->
+       Confusion Matrix - From Training Set
+      <v-img
+        title="From model training"
         :src="'data:image/png; base64, ' + obj['Confusion Matrix']"
-        :height="300"
+        :height="400"
         :width="800"
       >
       </v-img>
+    </v-container>
       <v-img
-        v-if="obj.image"
+        v-if="obj.image && obj.image !== 'TBD'"
         :src="'data:image/png; base64, ' + obj.image"
-        :height="300"
+        :height="400"
         :width="800"
       ></v-img>
-      
+      <!-- NB: See S/O for notes on rendering HTML (to avoid empty lines with the `<br>` tags) - https://stackoverflow.com/a/56882737 -->
       {{ obj['Explained Variance'] ? "Explained Variance: " + JSON.stringify(obj['Explained Variance']) : null }}<br>
       {{ obj.Accuracy ? "Accuracy: " + obj.Accuracy*100 + "%" : null }}<br>
+      {{ obj.Prediction ? "Model Prediction: " + obj.Prediction: null }}<br>
+
   </v-card-text>
   </v-card>
+</v-container>
 </v-row>
 </v-col>
 </template>
