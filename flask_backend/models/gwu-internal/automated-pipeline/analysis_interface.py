@@ -144,17 +144,17 @@ def upload():
     target = request.args.get("q", None)
     if "new_sample" in request.args.keys():
         # This is a new sample, pickles need to be ingested from disk & used
-        app.logger.debug("Upload: Handling a new sample! URL args were:")
-        for k, v in request.args.items():
-            app.logger.debug(f"---> {k}: {v}")
+        # app.logger.debug("Upload: Handling a new sample! URL args were:")
+        # for k, v in request.args.items():
+        #     app.logger.debug(f"---> {k}: {v}")
 
         request_data = request.get_json()
         data = pd.DataFrame(request_data["data"][1:])
         data.columns = request_data["data"][0]
-        app.logger.debug(f"Got a data frame: {data}")
+        # app.logger.debug(f"Got a data frame: {data}")
 
         label_column = request_data["label"]
-        app.logger.debug(f"Found label column: {label_column}")
+        # app.logger.debug(f"Found label column: {label_column}")
         label_data = data[label_column]
         data = data.drop(columns=[label_column])
         drop_columns = request_data["drop"]
@@ -165,6 +165,7 @@ def upload():
             data = data.drop(columns=drop_columns)
         except KeyError as ke:
             # Columns weren't found, ignore
+            app.logger.error(f"Error dropping columns: {ke}. Ignoring and continuing")
             pass
 
         models_to_get = tuple(request_data["models"])
@@ -173,15 +174,27 @@ def upload():
 
         # Models were trained on signature "label_data, raw_data". Drop columns were dropped prior to training
 
+        results = []
+
         for m in models:
-            app.logger.debug(f"Found model with filepath {m.file_path}")
+            # app.logger.debug(f"Found model with filepath {m.file_path}")
             # Unpickle the model
             with open(m.file_path, "rb") as pickle_pointer:
                 model = pickle.load(pickle_pointer)
             # Make a prediction, collect results
             prediction = model.sample_prediction(data)
-            app.logger.debug(f"{m.name}: {prediction}")
-        return {"results": "complete"}
+            training_results = m.training_results
+            if "Accuracy" in training_results.keys():
+                prediction["Accuracy"] = training_results["Accuracy"]
+            if "Confusion Matrix" in training_results.keys():
+                prediction["Confusion Matrix"] = training_results["Confusion Matrix"]
+            results.append({
+                "Method": m.name,
+                **prediction,
+            })
+        return jsonify(results)
+
+    # Training on a new set, not using a new sample
     label_column = request.args.get("label", None)
     drop_columns = request.args.get("drop", None)
     user = request.args.get("user", None)
