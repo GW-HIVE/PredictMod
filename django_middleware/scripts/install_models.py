@@ -56,6 +56,10 @@ for model in model_definitions:
         config = tomli.load(fp)
     # Get BCO information
     model_root = os.path.dirname(model)
+    # Carve-out for the automated pipeline
+    # Provide a non-"model" representation of that tool
+    if "automated" in model_root:
+        continue
     with open(os.path.join(model_root, config["BCO"]), "r") as fp:
         bco = json.load(fp)
     bco_info = handle_BCO(bco)

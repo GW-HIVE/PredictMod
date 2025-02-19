@@ -10,7 +10,10 @@ from ui.models import ReleasedModel
 def get_anlaysis_urls():
     try:
         models = ReleasedModel.objects.all()
-        return {m.name: f"http://{m.backend}:4243" for m in models}
+        model_routing = {m.name: f"http://{m.backend}:4243" for m in models}
+        # Shim for the pipeline
+        model_routing["pipeline"] = "http://automated-pipeline:4243"
+        return model_routing
     except Exception as e:
         logger.critical("=" * 80)
         logger.critical(f"Exception: {e}")
