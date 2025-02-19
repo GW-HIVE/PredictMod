@@ -36,17 +36,23 @@ class DecisionTreeClassifierHandler:
         cm = confusion_matrix(self.labels, train_predictions)
 
         image = CMtoCMDisplay(cm)
-        shap_beeswarm = ...  # TODO? c.f. https://stackoverflow.com/a/76083743 for beeswarm example
+        shap_beeswarm = (
+            ...
+        )  # TODO? c.f. https://stackoverflow.com/a/76083743 for beeswarm example
+
+        # It appears sklearn has changed function return signatures, again...
+        mae = mae if type(mae) is float else mae.tolist()
 
         self.classifier = classifier
 
         return {
             "Method": "Decision Tree (Classifier)",
             "Accuracy": accuracy,
-            "Mean Absolute Error": mae.tolist(),
+            "Mean Absolute Error": mae,
             "Classification Report": report,
             "Confusion Matrix": image,
             "Training Time": train_time,
+            "Help URL": "https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html",
         }
 
     def sample_prediction(self, new_data):

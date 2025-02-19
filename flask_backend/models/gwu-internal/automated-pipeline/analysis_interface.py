@@ -188,10 +188,14 @@ def upload():
                 prediction["Accuracy"] = training_results["Accuracy"]
             if "Confusion Matrix" in training_results.keys():
                 prediction["Confusion Matrix"] = training_results["Confusion Matrix"]
-            results.append({
-                "Method": m.name,
-                **prediction,
-            })
+            if "Help URL" in training_results.keys():
+                prediction["Help URL"] = training_results["Help URL"]
+            results.append(
+                {
+                    "Method": m.name,
+                    **prediction,
+                }
+            )
         return jsonify(results)
 
     # Training on a new set, not using a new sample

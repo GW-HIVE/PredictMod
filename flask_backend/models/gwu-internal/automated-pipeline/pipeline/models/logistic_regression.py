@@ -39,13 +39,16 @@ class LogisticRegressionHandler:
 
         self.classifier = classifier
 
+        mae = mae if type(mae) is float else mae.tolist()
+
         return {
             "Method": "Logistic Regression",
             "Accuracy": accuracy,
-            "Mean Absolute Error": mae.tolist(),
+            "Mean Absolute Error": mae,
             "Classification Report": report,
             "Confusion Matrix": image,
             "Train Time": train_time,
+            "Help URL": "https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html",
         }
 
     def sample_prediction(self, new_data):

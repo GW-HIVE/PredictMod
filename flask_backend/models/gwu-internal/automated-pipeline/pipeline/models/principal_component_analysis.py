@@ -39,9 +39,7 @@ class PCAHandler:
         # ax.yaxis.set_ticklabels([])
         ax.set_zlabel("3rd component")
 
-        _ = ax.legend(
-            scatter.legend_elements()[0], labels, loc="upper right"
-        )
+        _ = ax.legend(scatter.legend_elements()[0], labels, loc="upper right")
 
         buf = io.BytesIO()
 
@@ -88,6 +86,7 @@ class PCAHandler:
             "Principal Components": report_df.to_dict(),
             "image": b64_image,
             "Solution Time": solve_time,
+            "Help URL": "https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html",
         }
 
     def sample_prediction(self, new_data):

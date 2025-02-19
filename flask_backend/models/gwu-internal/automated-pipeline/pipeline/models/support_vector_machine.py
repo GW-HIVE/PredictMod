@@ -36,15 +36,19 @@ class SupportVectorMachineHandler:
 
         image = CMtoCMDisplay(cm)
 
+        # It appears sklearn has changed function return signatures, again...
+        mae = mae if type(mae) is float else mae.tolist()
+
         self.classifier = classifier
 
         return {
             "Method": "Support Vector Machine Classifier",
             "Accuracy": accuracy,
-            "Mean Absolute Error": mae.tolist(),
+            "Mean Absolute Error": mae,
             "Classification Report": report,
             "Confusion Matrix": image,
             "Training Time": training_time,
+            "Help URL": "https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html",
         }
 
     def sample_prediction(self, new_data):

@@ -37,15 +37,19 @@ class RandomForestClassifierHandler:
         cm = confusion_matrix(self.labels, train_predictions)
         image = CMtoCMDisplay(cm)
 
+        # It appears sklearn has changed function return signatures, again...
+        mae = mae if type(mae) is float else mae.tolist()
+
         self.classifier = classifier
 
         return {
             "Method": "Random Forest",
             "Accuracy": accuracy,
-            "Mean Absolute Error": mae.tolist(),
+            "Mean Absolute Error": mae,
             "Classification Report": report,
             "Confusion Matrix": image,
             "Train Time": train_time,
+            "Help URL": "https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html",
         }
 
     def sample_prediction(self, new_data):
@@ -70,7 +74,6 @@ class RandomForestClassifierHandler:
         image = "TBD"
 
         return {"Prediction": output_string, "image": image}
-
 
     def save_model(self):
         raise NotImplementedError
