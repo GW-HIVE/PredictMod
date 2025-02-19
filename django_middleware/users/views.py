@@ -16,10 +16,17 @@ from rest_framework.views import APIView
 
 from rest_framework.renderers import JSONRenderer
 
-from .serializers import SiteUserSerializer, UserSerializer
-from .models import SiteUser
+from .serializers import (
+    SiteUserSerializer,
+    UserSerializer,
+    TrainedModelDataTypeSerializer,
+    TrainedModelPartialSerializer,
+)
+from .models import SiteUser, TrainedModel
+from utilities.internal_routing import lookup_backend
 
 import logging
+import requests
 
 logger = logging.getLogger()
 
@@ -152,6 +159,158 @@ class UpdateUser(APIView):
             )
 
         return JsonResponse({"update": user.get_username()}, status=200)
+
+
+# class ModelsByDataTypeView(APIView):
+#     def get(self, request):
+#         user = request.user
+#         logged_in = request.user.is_authenticated
+
+#         if not logged_in:
+#             return JsonResponse({"models_by_data_type": []})
+#         user_models = TrainedModel.objects.filter(siteuser__user=user.all())
+
+#
+
+
+def model_updates(request):
+    try:
+        logger.debug("-" * 80)
+        logger.debug("Model updates: Got request")
+        logger.debug("-" * 80)
+
+        if request.method != "POST":
+            return JsonResponse(
+                {"error": f"Method {request.method} is not support on update"},
+                safe=False,
+            )
+
+        query = request.GET.get("q", None)
+        if not query:
+            return JsonResponse({"error": "Invalid request URL arguments"})
+        if query == "model_updates":
+            updates = {}
+            # Get the body and validate
+            updated_models = json.loads(request.body)
+            tm_manager = TrainedModel.objects
+
+            for m in updated_models:
+                tm = tm_manager.filter(id=m["id"]).first()
+                tm.to_save = m["save"]
+                tm.save()
+                updates[tm.id] = TrainedModelPartialSerializer(tm).data
+
+            return JsonResponse(updates, safe=False)
+
+    except Exception as e:
+        return JsonResponse({"error": f"Unknwon error {e}"}, safe=False)
+
+
+class ModelListView(APIView):
+    def get(self, request):
+        user = request.user
+        logged_in = request.user.is_authenticated
+
+        logger.debug(f"Found user {user} ({'not ' if not logged_in else ''}logged in)")
+
+        if not logged_in:
+            return JsonResponse({"models_available": []})
+
+        if "action" in request.GET.keys():
+            action = request.GET["action"]
+            target = request.GET.get("target", None)
+            if action == "delete_model_family":
+                family_model_name = request.GET.get("data_type", None)
+                if not family_model_name or not target:
+                    return JsonResponse(
+                        {
+                            "error": "Malformed request. Missing family model name or target parameter"
+                        },
+                        status=400,
+                    )
+                logger.debug(
+                    f"---> Looking to delete models of family {family_model_name}"
+                )
+                models_to_delete = TrainedModel.objects.filter(
+                    siteuser__user=user
+                ).filter(data_name=family_model_name)
+                flask_ids = []
+                for m in models_to_delete:
+                    flask_ids.append(m.flask_id)
+                response = requests.post(
+                    f"{lookup_backend(target)}/delete",
+                    json=flask_ids,
+                )
+
+                complete_response = response.json()
+
+                logger.debug(f"Found deletion response: {complete_response}")
+
+                if "deleted" not in complete_response.keys():
+                    # Error handling
+                    ...
+                    return JsonResponse({"error": "Error on delete, investigate"})
+
+                models_to_delete.delete()
+
+                return JsonResponse({"deleted": family_model_name})
+            elif action == "delete_model":
+
+                model_to_delete = request.GET.get("model_id", None)
+                if not model_to_delete:
+                    return JsonResponse({"error": "No model found for deletion"})
+
+                model = TrainedModel.objects.filter(id=model_to_delete).first()
+
+                flask_id = model.flask_id
+
+                response = requests.post(
+                    f"{lookup_backend(target)}/delete",
+                    json=[flask_id],
+                )
+
+                complete_response = response.json()
+
+                logger.debug(f"---> Got complete response {complete_response}")
+
+                model.delete()
+
+                return JsonResponse({"deleted": model_to_delete})
+            else:
+                return JsonResponse(
+                    {"error": f"Unhandled arg '{action}' detected"}, status=400
+                )
+
+        data_type_query = request.GET.get("q", None)
+        user_models = TrainedModel.objects.filter(siteuser__user=user).all()
+
+        if data_type_query:
+            data_types = [TrainedModelDataTypeSerializer(m).data for m in user_models]
+            unique_data_types = sorted(list(set(dt["data_name"] for dt in data_types)))
+            logger.debug("-" * 80)
+            logger.debug(unique_data_types)
+            logger.debug("-" * 80)
+
+            data_types = [{"name": str(dt)} for dt in unique_data_types]
+            logger.debug(f"---> Returning data types {data_types}")
+            return JsonResponse(data_types, safe=False)
+
+        data_type_name = request.GET.get("data_type", None)
+        if data_type_name is None:
+            return JsonResponse({"error": "Unsupported request parameters"}, safe=False)
+
+        selected_models = user_models.filter(data_name=data_type_name)
+
+        logger.debug(f"Model list view: Accessing models for user {user}")
+        logger.debug(f"Found user models {selected_models}")
+
+        models = {
+            "models_available": [
+                TrainedModelPartialSerializer(m).data for m in selected_models
+            ]
+        }
+
+        return JsonResponse(models, safe=False)
 
 
 class UserListView(APIView):

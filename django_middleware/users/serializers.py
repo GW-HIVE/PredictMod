@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 
-from .models import SiteUser
+from .models import SiteUser, TrainedModel
 
 from rest_framework import serializers
 
@@ -22,4 +22,25 @@ class SiteUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SiteUser
+        fields = "__all__"
+
+
+class TrainedModelDataTypeSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = TrainedModel
+        fields = ["data_name"]
+
+
+class TrainedModelPartialSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = TrainedModel
+        fields = ["model_name", "id", "created", "updated", "to_save"]
+
+
+class TrainedModelFullSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = TrainedModel
         fields = "__all__"

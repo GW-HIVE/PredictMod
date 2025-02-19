@@ -1,0 +1,11 @@
+flask
+flask-cors
+Flask-SQLAlchemy
+gunicorn
+matplotlib
+numpy
+openpyxl
+pandas
+scikit-learn
+xgboost
+shap 

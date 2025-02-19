@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
+from django.utils.http import urlsafe_base64_decode
 from django.template.response import TemplateResponse
 from django.views.decorators.csrf import (
     requires_csrf_token,
@@ -11,6 +12,13 @@ from django.conf import settings
 from django.core import serializers
 
 from .models import ReleasedModel, PendingModel, Condition, Intervention, InputDataType
+
+from utilities.internal_routing import lookup_backend
+
+from users.models import SiteUser, TrainedModel
+from users.serializers import TrainedModelFullSerializer
+
+from base64 import b64decode
 
 import json
 import logging
@@ -31,29 +39,29 @@ def binary_response_to_json(response):
     return json.loads(response.content.decode("utf-8"))
 
 
-def get_anlaysis_urls():
-    try:
-        models = ReleasedModel.objects.all()
-        return {m.name: f"http://{m.backend}:4243" for m in models}
-    except Exception as e:
-        logger.critical("=" * 80)
-        logger.critical(f"Exception: {e}")
-        logger.critical("=" * 80)
-        return {"None": "No models found in database"}
+# def get_anlaysis_urls():
+#     try:
+#         models = ReleasedModel.objects.all()
+#         return {m.name: f"http://{m.backend}:4243" for m in models}
+#     except Exception as e:
+#         logger.critical("=" * 80)
+#         logger.critical(f"Exception: {e}")
+#         logger.critical("=" * 80)
+#         return {"None": "No models found in database"}
 
 
-ANALYSIS_BACKENDS = get_anlaysis_urls()
+# ANALYSIS_BACKENDS = get_anlaysis_urls()
 
 
-def lookup_backend(model_name: str):
-    if settings.DJANGO_MODE == "dev":
-        return "http://localhost:5000"
-    de_modified_model_name = model_name.replace("-", " ")
-    logger.debug("-" * 40)
-    logger.debug(f"ANALYSIS BACKENDS: {ANALYSIS_BACKENDS}")
-    logger.debug(f"Searching for {de_modified_model_name}")
-    logger.debug("-" * 40)
-    return ANALYSIS_BACKENDS.get(de_modified_model_name, None)
+# def lookup_backend(model_name: str):
+#     if settings.DJANGO_MODE == "dev":
+#         return "http://localhost:5000"
+#     de_modified_model_name = model_name.replace("-", " ")
+#     logger.debug("-" * 40)
+#     logger.debug(f"ANALYSIS BACKENDS: {ANALYSIS_BACKENDS}")
+#     logger.debug(f"Searching for {de_modified_model_name}")
+#     logger.debug("-" * 40)
+#     return ANALYSIS_BACKENDS.get(de_modified_model_name, None)
 
 
 # XXX - Sanity check
@@ -220,13 +228,105 @@ def file_upload(request):
             #     return JsonResponse(
             #         {"error": f"Invalid upload target {target}"}, status=404
             #     )
+            for k in request.GET.keys():
+                logger.debug(f"{k}: {request.GET[k]}")
             data = json.loads(request.body)
-            # logger.debug(f"---> Request received data: {data}")
-            response = requests.post(
-                f"{lookup_backend(target)}/upload?q={target}", json=data
-            )
-            response = json.loads(response._content.decode("utf-8"))
-            return JsonResponse(response, status=200, safe=False)
+            if target == "pipeline":
+                data_type = request.GET.get("data_name", None)
+                if data_type is None:
+                    return JsonResponse(
+                        {"error": "Data type for model must be specified"}
+                    )
+                # Logged-in user is required for launching the pipeline
+                user = request.user
+                if not user.is_authenticated:
+                    return JsonResponse(
+                        {"error": "Login required to use the automated pipeline"},
+                        safe=False,
+                        status=403,
+                    )
+                model_mode = request.GET["method"]
+                logger.debug(f"Uploading file with algorithm mode: {model_mode}")
+                other_args = ""
+
+                site_user = SiteUser.objects.filter(user=user).first()
+
+                for arg in request.GET.keys():
+                    logger.debug(
+                        f"---> Request received arg: {arg} -- {request.GET[arg]}"
+                    )
+                    if arg == "q" or arg == "data_type":
+                        continue
+                    other_args += f"&{arg}={request.GET[arg]}"
+
+                match model_mode:
+                    case "training":
+                        logger.debug("=" * 80)
+                        logger.debug(
+                            f"---> Modeling: Found user {site_user.user.email}"
+                        )
+                        user = site_user.user.email
+                        arg_dict = {"label": "", "drop": ""}
+                        for arg in arg_dict.keys():
+                            other_args += f"&{arg}={request.GET[arg]}"
+                            arg_dict[arg] = request.GET[arg]
+                        response = requests.post(
+                            f"{lookup_backend(target)}/upload?q={target}&user={user}{other_args}",
+                            json=data,
+                        )
+                        response = json.loads(response._content.decode("utf-8"))
+                        for model in response:
+                            logger.debug(
+                                f"Name: {model['name']} -- flask_id: {model['flask_id']}"
+                            )
+                            TrainedModel.objects.create(
+                                flask_id=model["flask_id"],
+                                model_name=model["name"],
+                                data_name=data_type,
+                                label_field=request.GET.get("label"),
+                                drop_fields=request.GET.get("drop"),
+                                siteuser=site_user,
+                            )
+                        logger.debug("=" * 80)
+                        return JsonResponse(response, status=200, safe=False)
+                    case "newSample":
+                        model_ids = json.loads(request.GET.get("model_ids", None))
+                        logger.debug(f"Collected model IDs: {model_ids}")
+
+                        models = TrainedModel.objects.filter(id__in=set(model_ids))
+
+                        flask_ids = [m.flask_id for m in models]
+                        m = models[0]
+                        # models = []
+                        # for m in model_ids:
+                        #     # XXX - Shipping models this way is almost physically painful
+                        #     models.append()
+
+                        payload = {
+                            "models": flask_ids,
+                            "data": data,
+                            "label": m.label_field,
+                            "drop": m.drop_fields,
+                        }
+
+                        response = requests.post(
+                            f"{lookup_backend(target)}/upload?q={target}&new_sample=true",
+                            json=payload,
+                        )
+
+                        response_json = response.json()
+
+                        # logger.debug(f"---> Got a response! {response_json}")
+
+                        return JsonResponse(response_json, status=200, safe=False)
+
+            else:
+                response = requests.post(
+                    f"{lookup_backend(target)}/upload?q={target}", json=data
+                )
+                response = json.loads(response._content.decode("utf-8"))
+                return JsonResponse(response, status=200, safe=False)
+
         except ConnectionRefusedError:
             return JsonResponse(
                 {"error": f"Flask error: Is the Flask server running?"},

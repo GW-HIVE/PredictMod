@@ -18,14 +18,14 @@ python manage.py migrate
 
 # Install query builder database
 echo Updating database with clinical query information
-python manage.py shell < ./utilities/install_clinical_information.py
+python manage.py shell < ./scripts/install_clinical_information.py
 
 # Initialize users
 echo Creating initial users
-python manage.py shell < ./utilities/create_users.py
+python manage.py shell < ./scripts/create_users.py
 
 # Install model information
 echo Updating database with model information
-python manage.py shell < ./utilities/install_models.py
+python manage.py shell < ./scripts/install_models.py
 
 popd 2>&1 > /dev/null

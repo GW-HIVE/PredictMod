@@ -6,7 +6,7 @@ import time
 import tomli
 
 
-with open("./utilities/clinical_information.toml", "rb") as fp:
+with open("./scripts/clinical_information.toml", "rb") as fp:
     clinical_configs = tomli.load(fp)
 
 
