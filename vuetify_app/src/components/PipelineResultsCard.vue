@@ -12,12 +12,15 @@
         <v-spacer></v-spacer>
       <v-btn 
         icon 
-        href="https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html" 
+        :href="obj['Help URL']"
         target="_blank"
       >
         <v-icon>mdi-help-box</v-icon>
       </v-btn>
-      <v-icon icon="mdi-help mdi-spin"></v-icon>
+      <!-- 
+      Fun, spinning icon but no practical use for this here yet....
+      <v-icon icon="mdi-help mdi-spin"></v-icon> 
+      -->
     </v-toolbar>
   <v-card-title>
     <!-- {{ obj.Method }} -->
