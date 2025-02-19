@@ -259,67 +259,59 @@ def file_upload(request):
                         continue
                     other_args += f"&{arg}={request.GET[arg]}"
 
-                match model_mode:
-                    case "training":
-                        logger.debug("=" * 80)
+                if model_mode == "training":
+                    logger.debug("=" * 80)
+                    logger.debug(f"---> Modeling: Found user {site_user.user.email}")
+                    user = site_user.user.email
+                    arg_dict = {"label": "", "drop": ""}
+                    for arg in arg_dict.keys():
+                        other_args += f"&{arg}={request.GET[arg]}"
+                        arg_dict[arg] = request.GET[arg]
+                    response = requests.post(
+                        f"{lookup_backend(target)}/upload?q={target}&user={user}{other_args}",
+                        json=data,
+                    )
+                    response = json.loads(response._content.decode("utf-8"))
+                    for model in response:
                         logger.debug(
-                            f"---> Modeling: Found user {site_user.user.email}"
+                            f"Name: {model['name']} -- flask_id: {model['flask_id']}"
                         )
-                        user = site_user.user.email
-                        arg_dict = {"label": "", "drop": ""}
-                        for arg in arg_dict.keys():
-                            other_args += f"&{arg}={request.GET[arg]}"
-                            arg_dict[arg] = request.GET[arg]
-                        response = requests.post(
-                            f"{lookup_backend(target)}/upload?q={target}&user={user}{other_args}",
-                            json=data,
+                        TrainedModel.objects.create(
+                            flask_id=model["flask_id"],
+                            model_name=model["name"],
+                            data_name=data_type,
+                            label_field=request.GET.get("label"),
+                            drop_fields=request.GET.get("drop"),
+                            siteuser=site_user,
                         )
-                        response = json.loads(response._content.decode("utf-8"))
-                        for model in response:
-                            logger.debug(
-                                f"Name: {model['name']} -- flask_id: {model['flask_id']}"
-                            )
-                            TrainedModel.objects.create(
-                                flask_id=model["flask_id"],
-                                model_name=model["name"],
-                                data_name=data_type,
-                                label_field=request.GET.get("label"),
-                                drop_fields=request.GET.get("drop"),
-                                siteuser=site_user,
-                            )
-                        logger.debug("=" * 80)
-                        return JsonResponse(response, status=200, safe=False)
-                    case "newSample":
-                        model_ids = json.loads(request.GET.get("model_ids", None))
-                        logger.debug(f"Collected model IDs: {model_ids}")
-
-                        models = TrainedModel.objects.filter(id__in=set(model_ids))
-
-                        flask_ids = [m.flask_id for m in models]
-                        m = models[0]
-                        # models = []
-                        # for m in model_ids:
-                        #     # XXX - Shipping models this way is almost physically painful
-                        #     models.append()
-
-                        payload = {
-                            "models": flask_ids,
-                            "data": data,
-                            "label": m.label_field,
-                            "drop": m.drop_fields,
-                        }
-
-                        response = requests.post(
-                            f"{lookup_backend(target)}/upload?q={target}&new_sample=true",
-                            json=payload,
-                        )
-
-                        response_json = response.json()
-
-                        # logger.debug(f"---> Got a response! {response_json}")
-
-                        return JsonResponse(response_json, status=200, safe=False)
-
+                    logger.debug("=" * 80)
+                    return JsonResponse(response, status=200, safe=False)
+                elif model_mode == "newSample":
+                    model_ids = json.loads(request.GET.get("model_ids", None))
+                    logger.debug(f"Collected model IDs: {model_ids}")
+                    models = TrainedModel.objects.filter(id__in=set(model_ids))
+                    flask_ids = [m.flask_id for m in models]
+                    m = models[0]
+                    # models = []
+                    # for m in model_ids:
+                    #     # XXX - Shipping models this way is almost physically painful
+                    #     models.append()
+                    payload = {
+                        "models": flask_ids,
+                        "data": data,
+                        "label": m.label_field,
+                        "drop": m.drop_fields,
+                    }
+                    response = requests.post(
+                        f"{lookup_backend(target)}/upload?q={target}&new_sample=true",
+                        json=payload,
+                    )
+                    response_json = response.json()
+                    # logger.debug(f"---> Got a response! {response_json}")
+                    return JsonResponse(response_json, status=200, safe=False)
+                else:
+                    # Default, error
+                    logger.debug(f"---> model_mode fatal error: {model_mode}")
             else:
                 response = requests.post(
                     f"{lookup_backend(target)}/upload?q={target}", json=data
