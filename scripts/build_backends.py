@@ -122,9 +122,6 @@ for docker_path, docker_files in docker_host_locations.items():
     with open(os.path.join(docker_path, "docker_config.toml"), "rb") as docker_config_p:
         docker_config = tomli.load(docker_config_p)
     image_name = docker_config["basename"]
-    if "automated" not in image_name:
-        print(f"---> Skipping image {image_name}")
-        continue
     base_image_name = image_name + ".base"
     container_name = image_name
 
