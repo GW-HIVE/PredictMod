@@ -3,3 +3,4 @@ from .MG_Exercise import MGTreeHandler
 from .Diabetes_EHR import Diabetes_EHR_Handler
 from .Epilepsy_microbiome import Epilepsy_Microbiome_Handler
 from .Epic_Cosmos_EHR_Keto import EC_EHR_Keto_ModelHandler
+from .ovarian_cancer_methylation import OCMethylationPredictor

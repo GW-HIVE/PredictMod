@@ -11,6 +11,7 @@ from model_handlers import (
     Diabetes_EHR_Handler,
     Epilepsy_Microbiome_Handler,
     EC_EHR_Keto_ModelHandler,
+    OCMethylationPredictor,
 )
 
 # TODO: Documentation
@@ -26,6 +27,7 @@ DETAIL_LOOKUP = {
     "Diabetes_EHR": "Diabetes_EHR_v1/README.md",
     "Epilepsy_classifier": "Epilepsy_microbiome_v1/README.md",
     "Predictmod_EHR_Keto": "PredictMod_EHR_Keto_v1.0/README.md",
+    "Ovarian-Cancer": "ovarian_cancer_methylation/README.md",
 }
 
 DOWNLOAD_LOOKUP = {
@@ -34,6 +36,7 @@ DOWNLOAD_LOOKUP = {
     "Diabetes_EHR": "Diabetes_EHR_v1/single_patient_input.xlsx",
     "Epilepsy_classifier": "Epilepsy_microbiome_v1/single_patient_sample.xlsx",
     "Predictmod_EHR_Keto": "PredictMod_EHR_Keto_v1.0/svm_sample.csv",
+    "Ovarian-Cancer": "ovarian_cancer_methylation/methyl_single_patient.csv",
 }
 
 HANDLERS = {
@@ -42,6 +45,7 @@ HANDLERS = {
     "Diabetes_EHR": Diabetes_EHR_Handler(),
     "Epilepsy_classifier": Epilepsy_Microbiome_Handler(),
     "Predictmod_EHR_Keto": EC_EHR_Keto_ModelHandler(),
+    "Ovarian-Cancer": OCMethylationPredictor(),
 }
 
 app = Flask(__name__)
