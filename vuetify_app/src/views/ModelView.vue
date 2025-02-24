@@ -9,6 +9,13 @@
   >
   <v-col pa="2">
       <v-row class="justify-end">
+        <v-alert
+          v-if="this.previewMessage"
+          type="warning"
+          v-text="this.previewMessage"
+          fluid
+        ></v-alert>
+        <!-- <v-spacer></v-spacer> -->
         <v-btn color="primary" @click.prevent="downloadFromPreview">
           Download
         </v-btn>
@@ -128,6 +135,7 @@
     data() {
         return {
             modelsURL: modelsURL,
+            previewMessage: "",
             showDetails: false,
             modelDetails: null,
         }
@@ -139,6 +147,11 @@
           return [];
         }
         const data = JSON.parse(this.queryState.filePreviewData);
+        if (data.length > 500) {
+          this.previewMessage = "Download file too large to display, preview is truncated"
+          console.log("Truncating data - length was " + data.length)
+          return data.slice(0, 500)
+        }
         console.log("Got data:\n", data);
         return data;
       },
@@ -166,8 +179,9 @@
           // Error handling
           return false;
         }
-        const data = this.gridData;
-        console.log("Downloading data:\n%s", data);
+        // const data = this.gridData;
+        const data = JSON.parse(this.queryState.filePreviewData);
+        // console.log("Downloading data:\n%s", data);
         const sampleName = this.name + ".xlsx";
         // Write the response to a file
         const worksheet = XLSX.utils.json_to_sheet(data);
