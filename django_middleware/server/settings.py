@@ -59,6 +59,8 @@ CSRF_TRUSTED_ORIGINS = [
     "https://hivelab.tst.biochemistry.gwu.edu",
     "https://hivelab.biochemistry.gwu.edu",
 ]
+# XXX?
+DATA_UPLOAD_MAX_MEMORY_SIZE = 52428800
 
 LOGIN_URL = None
 
