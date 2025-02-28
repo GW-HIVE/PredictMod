@@ -24,6 +24,7 @@ export const useAppStore = defineStore('app', {
       },
       async getModels() {
         console.log("---> App Store: Getting models! <---")
+        // console.log("---> Models URL is: " + this.modelsURL)
         const response = await axios.get(this.modelsURL);
         if (!response.status === 200) {
           console.log("---> Error!\n%s", response.status);

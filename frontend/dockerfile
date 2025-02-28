@@ -3,6 +3,7 @@ FROM predictmod:frontend-base
 
 
 COPY ./static/ /var/www/html/predictmod/
+RUN chmod -R 744 /var/www/html/predictmod/ && chown -R www-data:www-data /var/www/html/predictmod/
 COPY ./default /etc/nginx/sites-available/default
 
 CMD ["nginx", "-g", "daemon off;"]

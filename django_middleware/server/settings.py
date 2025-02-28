@@ -23,6 +23,12 @@ with open(BASE_DIR / "server/.env", "rb") as config_p:
 
 DJANGO_MODE = config["mode"]
 
+if DJANGO_MODE == "dev":
+    SHARED_FILE_LOCATION = BASE_DIR.parent / "user_data"  # PredictMod base directory
+else:
+    SHARED_FILE_LOCATION = "/user_data"
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
@@ -59,6 +65,8 @@ CSRF_TRUSTED_ORIGINS = [
     "https://hivelab.tst.biochemistry.gwu.edu",
     "https://hivelab.biochemistry.gwu.edu",
 ]
+# XXX?
+DATA_UPLOAD_MAX_MEMORY_SIZE = 52428800
 
 LOGIN_URL = None
 

@@ -6,12 +6,14 @@ if [[ ! $BUILD_ENV ]]; then
     exit 0
 fi
 
+pushd .. 2>&1 > /dev/null
+
 case $BUILD_ENV in
     'shell_testing'|'development')
     echo Build environment found $BUILD_ENV. Launch backend manually.
     ;;
     'production'|'beta')
-    docker run -d --restart=always --network predictmod --name predict-backend predictmod:v0.3.1-backend
+    docker run -d --restart=always -v $(pwd)/user_data:/user_data --network predictmod --name predict-backend predictmod:v0.3.1-backend
     ;;
     'docker-dev')
     docker run -d --restart=always -p 5000:5000 --network predictmod --name predict-backend predictmod:v0.3.1-backend
@@ -20,3 +22,5 @@ case $BUILD_ENV in
     echo Please update your "env.sh" file appropriately.
     ;;
 esac
+
+popd 2>&1 > /dev/null

@@ -77,3 +77,21 @@ input_data_type = "EHR-Epic-Cosmos"
 Patients = 308
 Features = 26
 #################################################
+
+########### Ovarian_Cancer_Methylation_1.0 ###############
+["Ovarian-Cancer-Methylation"]
+BCO = "ovarian_cancer_methylation/BCO.json"
+# Unclear from the README
+data_type = "Methylation"
+model_type = "Decision Tree"
+backend = "predict-backend"
+condition = "Ovarian Cancer"
+# Unclear intervention
+intervention = "Observational"
+input_data_type = "Methylation profiles"
+
+["Ovarian-Cancer-Methylation".data_meta]
+# Again, unclear what features of the data set exist
+# Patients = 308
+# Features = 26
+#################################################

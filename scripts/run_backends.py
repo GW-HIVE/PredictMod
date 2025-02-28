@@ -2,9 +2,14 @@ import docker
 import os
 import tomli
 
-cwd = os.getcwd()
+from pathlib import Path
 
-os.chdir("../flask_backend/models")
+cwd = Path(os.getcwd()).resolve()
+
+MODEL_DIR = cwd.parent / "flask_backend/models"
+PREDICTMOD_HOME_DIR = cwd.parent
+
+os.chdir(MODEL_DIR)
 
 docker_config_names = {"docker_config.toml"}
 
@@ -20,9 +25,17 @@ def get_parent_directories(dir_path):
 
 
 def start_docker(client, image_name, container_name):
+    os.chdir(PREDICTMOD_HOME_DIR)
     client.containers.run(
-        image_name, name=container_name, network="predictmod", detach=True
+        image_name,
+        name=container_name,
+        volumes={
+            "/user_data": {"bind": str(PREDICTMOD_HOME_DIR / "user_data"), "mode": "rw"}
+        },
+        network="predictmod",
+        detach=True,
     )
+    os.chdir(MODEL_DIR)
 
 
 def remove_container(client, container_name):

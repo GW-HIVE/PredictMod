@@ -1,70 +1,81 @@
+import axios from "axios";
 import axiosUtility from "./AxiosUtils";
 
 import { useUserStore } from "@/store/user";
+
+const userStore = useUserStore()
+
+axios.defaults.headers.common['X-CSRFToken'] = userStore.token
+
 class UploadFilesService {
 
-  async upload(json, target, onUploadProgress, labelColumn, columnsToDrop, mode, modelName) {
+  // Old signature
+  // async upload(file, target, onUploadProgress, labelColumn, columnsToDrop, mode, modelName) {
+  // New signature
+  async upload(uploadFile, target, axiosConfig, actionConfig) {
     const userStore = useUserStore();
-    const baseURL = import.meta.env.DEV ? import.meta.env.VITE_DEV_MIDDLEWARE_BASE + '/api': "/predictmod/api";
-    // const formData = new FormData();
-    // console.log("...Uploading?")
-    // const urlDest = "/".concat(target, "-upload/");
-    let fullURL = baseURL + `/upload/?q=${target}`;
-    // console.log("Target: " + fullURL)
-    if (labelColumn) {
-      fullURL = fullURL + `&label=${labelColumn}`
-    }
-    if (mode) {
-      if (!modelName) {
-        alert("Error: modelName not completed when using `mode` toggle")
-        return {"Error": "modelName not completed when using `mode` toggle"}
+    let baseURL = ""
+    if (import.meta.env.DEV) {
+      baseURL = import.meta.env.VITE_DEV_MIDDLEWARE_BASE + '/api'
+    } else if (import.meta.env.PROD) {
+      if (import.meta.env.VITE_PRODUCTION_HOST == 'local'){
+        baseURL = import.meta.env.VITE_DOCKER_MIDDLEWARE_BASE + '/api'
+      } else {
+        baseURL = import.meta.env.VITE_PROD_MIDDLEWARE_BASE + '/api'
       }
-        switch (mode) {
+    }
+    console.log("---> Got a file, with name " + uploadFile.name)
+    console.log("---> Using baseURL: " + baseURL)
+    let fullURL = baseURL + `/upload/?q=${target}&name=${uploadFile.name}`;
+    if (actionConfig) {
+      console.log("Running action with config " + JSON.stringify(actionConfig))
+      const mode = actionConfig.action
+      if (!actionConfig.modelName) {
+          alert("Error: modelName not completed when using `mode` toggle")
+          return {"Error": "modelName not completed when using `mode` toggle"}
+        }
+      switch (mode) {
         case 'training':
-          fullURL += `&method=${mode}&data_name=${modelName}`
+          fullURL += `&method=${mode}&data_name=${actionConfig.modelName}&label=${actionConfig.labelColumn}`
+          const arrayArg = actionConfig.columnsToDrop.split(",")
+          fullURL = fullURL + `&drop=${arrayArg}`
           break;
         case 'newSample':
-          fullURL += `&method=${mode}&data_name=${modelName.data_name}`
-          fullURL += `&model_ids=${JSON.stringify(modelName.ids)}`
+          fullURL += `&method=${mode}&data_name=${actionConfig.modelName}&model_ids=${JSON.stringify(actionConfig.modelIDs)}`
+      }
     }
-    }
-    // XXX?
-    // if (modelName) {
-    //   fullURL += `&data_name=${modelName}`
-    // }
-    // console.log("Target: " + fullURL)
+    console.log("---> Uploading file to %s", fullURL);
+    console.log("---> File contents:\n%s", uploadFile);
+    console.log("---> File TYPE:\n%s", typeof(uploadFile));
+    console.log("---> Token: " + userStore.token)
 
-    if (columnsToDrop) {
-      const arrayArg = columnsToDrop.split(",")
-      fullURL = fullURL + `&drop=${arrayArg}`
-    }
-    // console.log("Target: " + fullURL)
-    // const headers = {
-    //   "Content-type": "application/json",
-    //   "X-CSRFToken": userStore.token,
-      // "X-CSRFToken": document.querySelector('[name=csrfmiddlewaretoken]').value(),
-    // }
+    // const res = await axios.post(fullURL, uploadFile, {headers: 
+    //   {
+    //     "Content-Type": "multipart/form-data",
+    //     "X-CSRFToken": userStore.token,
+    //   }
+    // });
 
-    // XXX
-    // console.log("---> Uploading file to %s", fullURL);
-    // console.log("---> File contents:\n%s", json);
-    // console.log("---> File TYPE:\n%s", typeof(json));
-    // console.log("XLS? >>>\n%s", JSON.stringify(xlsFile));
+    // const file = uploadFile.files[0]
+    // const formData = new FormData()
+    // formData.append('file', file)
 
-    // formData.append("json", json);
+    console.log("Issuing request to URL" + fullURL)
 
     const res = await fetch(fullURL, {
       method: "POST",
       credentials: "include",
       headers: {
-        "Accept": "application/json",
+        // "Accept": "application/json",
+        // "Content-Type": "multipart/form-data",
         "X-CSRFToken": userStore.token,
       },
-      body: json,
+      body: uploadFile,
     })
 
     if (!res.ok) {
       // Error handling
+      console.log("Is this where I am....?")
     }
 
     const response = await res.json();
@@ -73,9 +84,6 @@ class UploadFilesService {
 
     return response;
 
-    // return axiosUtlity.post(urlDest, formData, headers, {
-    //   onUploadProgress
-    // });
   }
 
 }

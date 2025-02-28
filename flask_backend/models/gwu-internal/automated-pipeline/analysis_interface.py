@@ -10,6 +10,7 @@ import json
 import os
 import logging
 import pickle
+import tomli
 import uuid
 
 from pipeline import Pipeline
@@ -19,7 +20,21 @@ from pipeline import Pipeline
 import numpy as np
 import pandas as pd
 
+from pathlib import Path
+
 MODELS_DIR = "./"
+
+with open(".env", "rb") as config_p:
+    config = tomli.load(config_p)
+
+FLASK_MODE = config["mode"]
+
+if FLASK_MODE == "dev":
+    SHARED_DIR = (
+        Path(__file__).resolve().parent.parent.parent.parent.parent / "user_data"
+    )
+else:
+    SHARED_DIR = "/user_data"
 
 DETAIL_LOOKUP = {
     "Pipeline": "TBD",
@@ -142,6 +157,22 @@ def delete_models():
 @app.route("/upload", methods=["POST"])
 def upload():
     target = request.args.get("q", None)
+    file_name = request.args.get("file_name", None)
+    user = request.args.get("user", None)
+    file_path = os.path.join(SHARED_DIR, f"{user}/{file_name}")
+
+    if file_name is None or user is None:
+        return jsonify({"error": "No file path or user found in request"})
+    app.logger.debug(f"---> Reading data from {file_path}")
+
+    file_extension = file_name.split(".")[1]
+    if file_extension == "csv":
+        data = pd.read_csv(file_path)
+    elif file_extension == "xlsx" or file_extension == "xls":
+        data = pd.read_excel(file_path)
+    elif file_extension == "tsv":
+        data = pd.read_csv(file_path, sep="\t")
+
     if "new_sample" in request.args.keys():
         # This is a new sample, pickles need to be ingested from disk & used
         # app.logger.debug("Upload: Handling a new sample! URL args were:")
@@ -149,8 +180,8 @@ def upload():
         #     app.logger.debug(f"---> {k}: {v}")
 
         request_data = request.get_json()
-        data = pd.DataFrame(request_data["data"][1:])
-        data.columns = request_data["data"][0]
+        # data = pd.DataFrame(request_data["data"][1:])
+        # data.columns = request_data["data"][0]
         # app.logger.debug(f"Got a data frame: {data}")
 
         label_column = request_data["label"]
@@ -212,10 +243,9 @@ def upload():
         app.logger.debug(f"Found target: {target}")
         app.logger.debug(f"Found label column: {label_column}")
         app.logger.debug(f"Found drop columns: {drop_columns}")
-        raw_data = request.get_json()
 
         combined_results = HANDLERS[target].train_models(
-            raw_data, label_column, drop_columns
+            data, label_column, drop_columns
         )
 
         pickled_models = combined_results["pickles"]

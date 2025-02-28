@@ -142,7 +142,6 @@ import * as XLSX from 'xlsx';
     data() {
       return {
         currentFile: null,
-        data: null,
         chartData: null,
         imageData: null,
         toggleOverlay: false,
@@ -169,19 +168,8 @@ import * as XLSX from 'xlsx';
                 this.error = "Please select a file for upload!"
                 return;
             }
-            // console.log("---> Now attempting to read file");
-            const reader = new FileReader();
-            reader.readAsArrayBuffer(this.currentFile);
-            // console.log("---> Reader has read the file!");
-            reader.onload = (event) => {
-                const rawData = reader.result;
-                const workbook = XLSX.read(rawData);
-                const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
-                const arrayedData = XLSX.utils.sheet_to_json(firstSheet, {header: 1});
-                this.data = JSON.stringify(arrayedData);
-                // console.log("Now we have data:\n%s", this.data);
-                this.uploadSuccess = this.upload();
-            }
+            console.log("---> Now attempting to read file: " + this.currentFile);
+            this.uploadSuccess = this.upload();
         },
   
       upload() {
@@ -190,15 +178,21 @@ import * as XLSX from 'xlsx';
           this.error = "Please select a file for upload!";
           return false;
         }
-        if (!this.data) {
-          this.message = null;
-          this.error = "Please upload a data file!";
-          return false;
-        }
   
-        UploadService.upload(this.data, this.uploadTargetURL, (event) => {
-          this.progress = Math.round((100 * event.loaded) / event.total);
-        })
+        // TODO
+        // const onUploadProgress = (event) => {
+        //   this.progress = Math.round((100 * event.loaded) / event.total)
+        // }
+
+        // const config = {
+        //   // onUploadProgress: onUploadProgress ^^^
+        //   headers: {
+        //     "Content-Type": "multipart/form-data",
+        //     "X-CSRFToken": this.userStore.token,
+        //   }
+        // }
+
+        UploadService.upload(this.currentFile, this.uploadTargetURL, {})
           .then((response) => {
             // this.message = response.data.message;
             // console.log("Got response:\n", response);
@@ -225,7 +219,6 @@ import * as XLSX from 'xlsx';
             this.message = null;
             this.error = "Could not upload the file!";
             // this.currentFile = null;
-            // this.data = null;
             return false;
           });
       },

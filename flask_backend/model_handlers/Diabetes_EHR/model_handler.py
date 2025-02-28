@@ -14,11 +14,11 @@ class Diabetes_EHR_Handler:
             self.feature_names = pickled_objects["feature_names"]
         fp.close()
 
-    def make_prediction(self, raw_data):
+    def make_prediction(self, patient_data):
 
-        headers, data = raw_data[0], np.array([raw_data[1]])
-        patient_data = pd.DataFrame(data, columns=headers)
-        # patient_data = patient_data.reindex(sorted(patient_data.columns), axis=1)
+        # headers, data = raw_data[0], np.array([raw_data[1]])
+        # patient_data = pd.DataFrame(data, columns=headers)
+        patient_data = patient_data.reindex(sorted(patient_data.columns), axis=1)
 
         # Check for missing columns in the new data
         missing_cols = set(self.feature_names) - set(patient_data.columns)

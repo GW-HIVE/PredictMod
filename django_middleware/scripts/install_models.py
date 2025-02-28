@@ -49,9 +49,10 @@ def find_models(model_definition_string, parent_dir):
 
 # Ingest self-defined model information (new method)
 print(f"====\tCreating MODELS\t====")
+
 model_definitions = find_models("model.toml", MODELS_DIR)
 for model in model_definitions:
-    print(f"===> Using model definition from {model}")
+    print(f"===> Using 'model.toml' definition from {model}")
     with open(model, "rb") as fp:
         config = tomli.load(fp)
     # Get BCO information
@@ -65,13 +66,14 @@ for model in model_definitions:
     bco_info = handle_BCO(bco)
     ### XXX: Duplicated code is expedient, but needs to be trimmed once
     ### the previous model definitions have been fully deprecated
+
     if not IN_DJANGO:
         continue
+
     # Merge name, version, release date from BCO
     config = config | bco_info
     link = "{}".format(config["name"].replace(" ", "-"))
-
-    print(f"XXX Model {config['name']} ::: {link}")
+    print(f"===> BCO-based model {config['name']} ::: {link}")
 
     # Now (possibly) providing support for multiples of condition, intervention, or data types
     condition_names = config["conditions"]
@@ -142,17 +144,16 @@ for k, v in released_configs.items():
         # BCOs previously only provided name, version, and release date
         # These will be automatically parsed on model submission in
         # future iterations of the model submission pipeline
-    if not IN_DJANGO:
-        continue
-    link = "{}".format(v["name"].replace(" ", "-"))
 
-    print(f"XXX Model {config['name']} ::: {link}")
-
+    link = v["name"].replace(" ", "-")
     condition_name = v["condition"]
     intervention_name = v["intervention"]
     input_data_type_name = v["input_data_type"]
 
     print(f"===> Creating LEGACY model definition for {v['name']}")
+
+    if not IN_DJANGO:
+        continue
 
     ReleasedModel.objects.create(
         name=v["name"],
