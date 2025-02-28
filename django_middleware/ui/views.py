@@ -224,13 +224,35 @@ def file_upload(request):
 
         try:
             target = request.GET.get("q", None)
+            file_name = request.GET.get("name", None)
+            user = request.user
             # if not target or target not in UPLOAD_ENDPOINTS:
             #     return JsonResponse(
             #         {"error": f"Invalid upload target {target}"}, status=404
             #     )
             for k in request.GET.keys():
                 logger.debug(f"{k}: {request.GET[k]}")
-            data = json.loads(request.body)
+            file = request.body
+            logger.debug(
+                f"---> USER {user}: Got a request with file (type {type(file)})"
+            )
+            logger.debug(
+                f"---> Attempting to write to shared folder: {settings.SHARED_FILE_LOCATION} | {user} | {file_name}"
+            )
+
+            user_storage_folder = os.path.join(settings.SHARED_FILE_LOCATION, f"{user}")
+
+            if not os.path.exists(user_storage_folder):
+                os.makedirs(user_storage_folder)
+
+            full_file_path = os.path.join(user_storage_folder, file_name)
+            if os.path.exists(full_file_path):
+                os.remove(full_file_path)
+
+            with open(full_file_path, "wb") as fp:
+                fp.write(file)
+            fp.close()
+
             if target == "pipeline":
                 data_type = request.GET.get("data_name", None)
                 if data_type is None:
@@ -268,8 +290,7 @@ def file_upload(request):
                         other_args += f"&{arg}={request.GET[arg]}"
                         arg_dict[arg] = request.GET[arg]
                     response = requests.post(
-                        f"{lookup_backend(target)}/upload?q={target}&user={user}{other_args}",
-                        json=data,
+                        f"{lookup_backend(target)}/upload?q={target}&user={user}&file_name={file_name}{other_args}",
                     )
                     response = json.loads(response._content.decode("utf-8"))
                     for model in response:
@@ -298,12 +319,11 @@ def file_upload(request):
                     #     models.append()
                     payload = {
                         "models": flask_ids,
-                        "data": data,
                         "label": m.label_field,
                         "drop": m.drop_fields,
                     }
                     response = requests.post(
-                        f"{lookup_backend(target)}/upload?q={target}&new_sample=true",
+                        f"{lookup_backend(target)}/upload?q={target}&new_sample=true&user={user}&file_name={file_name}",
                         json=payload,
                     )
                     response_json = response.json()
@@ -312,9 +332,11 @@ def file_upload(request):
                 else:
                     # Default, error
                     logger.debug(f"---> model_mode fatal error: {model_mode}")
+
             else:
+
                 response = requests.post(
-                    f"{lookup_backend(target)}/upload?q={target}", json=data
+                    f"{lookup_backend(target)}/upload?q={target}&user={user}&file_name={file_name}"
                 )
                 response = json.loads(response._content.decode("utf-8"))
                 return JsonResponse(response, status=200, safe=False)

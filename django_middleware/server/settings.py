@@ -23,6 +23,12 @@ with open(BASE_DIR / "server/.env", "rb") as config_p:
 
 DJANGO_MODE = config["mode"]
 
+if DJANGO_MODE == "dev":
+    SHARED_FILE_LOCATION = BASE_DIR.parent / "user_data"  # PredictMod base directory
+else:
+    SHARED_FILE_LOCATION = "/user_data"
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
