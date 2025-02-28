@@ -357,10 +357,10 @@ export default {
         console.log("First saving selected models")
         this.submitSaves()
       }
-      console.log("Submitting data to the following models")
-      this.modelsToUse.forEach((m) => {
-        console.log("Submitting model ---> ", m)
-      })
+      // console.log("Submitting data to the following models")
+      // this.modelsToUse.forEach((m) => {
+      //   console.log("Submitting model ---> ", m)
+      // })
       this.importFileAndScan();
       // const runningURL = this.baseURL + `/run-user-models/?q=run-samples&model_ids${}`
       // const response = await fetch(runningURL,
@@ -376,19 +376,7 @@ export default {
                 this.error = "Please select a file for upload!"
                 return;
             }
-            // console.log("---> Now attempting to read file");
-            const reader = new FileReader();
-            reader.readAsArrayBuffer(this.currentFile);
-            // console.log("---> Reader has read the file!");
-            reader.onload = (event) => {
-                const rawData = reader.result;
-                const workbook = XLSX.read(rawData);
-                const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
-                const arrayedData = XLSX.utils.sheet_to_json(firstSheet, {header: 1});
-                this.data = JSON.stringify(arrayedData);
-                // console.log("Now we have data:\n%s", this.data);
-                this.uploadSuccess = this.upload();
-            }
+            this.uploadSuccess = this.upload();
         },
   
       upload() {
@@ -397,28 +385,35 @@ export default {
           this.error = "Please select a file for upload!";
           return false;
         }
-        if (!this.data) {
-          this.message = null;
-          this.error = "Please upload a data file!";
-          return false;
-        }
   
         this.error = null
 
         // Create a "Model Name" + IDs object for shipping...
-        const models = { data_name: this.selectedDataType, ids: [] }
+        // const models = { data_name: this.selectedDataType, ids: [] }
 
-        this.modelsToUse.forEach((m) => {
-          models.ids.push(m)
-        })
+        // this.modelsToUse.forEach((m) => {
+        //   models.ids.push(m)
+        // })
         // XXX
         // console.log("DataTypeName: " + this.selectedDataType)
         // console.log("Uploading to target URL: " + this.uploadTargetURL)
         // console.log("Sending models information: " + JSON.stringify(models))
 
-        UploadService.upload(this.data, this.uploadTargetURL, (event) => {
-          this.progress = Math.round((100 * event.loaded) / event.total);
-        }, this.labelColumn, this.columnsToDrop, 'newSample', models)
+        // TODO: Axios progress on upload
+        // const onProgressBar = (event) => {
+        //   this.progress = Math.round((100 * event.loaded) / event.total);
+        // }
+
+        const ids = []
+        this.modelsToUse.forEach((m) => ids.push(m))
+
+        UploadService.upload(this.currentFile, this.uploadTargetURL, {}, {
+          action: "newSample",
+          labelColumn: this.labelColumn,
+          columnsToDrop: this.columnsToDrop,
+          modelName: this.selectedDataType,
+          modelIDs: ids,
+        })
           .then((response) => {
             // this.message = response.data.message;
             // console.log("Got response:\n", response);

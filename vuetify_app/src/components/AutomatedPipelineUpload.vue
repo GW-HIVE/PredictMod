@@ -112,32 +112,15 @@ import * as XLSX from 'xlsx';
             if (!this.currentFile) {
                 this.message = null;
                 this.error = "Please select a file for upload!"
-                return;
+                return
             }
-            // console.log("---> Now attempting to read file");
-            const reader = new FileReader();
-            reader.readAsArrayBuffer(this.currentFile);
-            // console.log("---> Reader has read the file!");
-            reader.onload = (event) => {
-                const rawData = reader.result;
-                const workbook = XLSX.read(rawData);
-                const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
-                const arrayedData = XLSX.utils.sheet_to_json(firstSheet, {header: 1});
-                this.data = JSON.stringify(arrayedData);
-                // console.log("Now we have data:\n%s", this.data);
-                this.uploadSuccess = this.upload();
-            }
+            this.uploadSuccess = this.upload();
         },
   
       upload() {
         if (!this.currentFile) {
           this.message = null;
           this.error = "Please select a file for upload!";
-          return false;
-        }
-        if (!this.data) {
-          this.message = null;
-          this.error = "Please upload a data file!";
           return false;
         }
         if (!this.labelColumn) {
@@ -148,9 +131,17 @@ import * as XLSX from 'xlsx';
   
         this.error = null
 
-        UploadService.upload(this.data, this.uploadTargetURL, (event) => {
-          this.progress = Math.round((100 * event.loaded) / event.total);
-        }, this.labelColumn, this.columnsToDrop, 'training', this.modelName)
+        // TODO: Axios progress on upload
+        // const onProgressBar = (event) => {
+        //   this.progress = Math.round((100 * event.loaded) / event.total);
+        // }
+
+        UploadService.upload(this.currentFile, this.uploadTargetURL, {}, {
+          action: "training",
+          labelColumn: this.labelColumn,
+          columnsToDrop: this.columnsToDrop,
+          modelName: this.modelName,
+        })
           .then((response) => {
             // this.message = response.data.message;
             // console.log("Got response:\n", response);
