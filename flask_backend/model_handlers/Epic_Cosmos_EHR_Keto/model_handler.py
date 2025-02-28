@@ -18,10 +18,10 @@ class EC_EHR_Keto_ModelHandler:
         self.model = model
         # self.explainer = shap.Explainer(model)
 
-    def make_prediction(self, raw_data):
+    def make_prediction(self, df):
 
-        headers, data = raw_data[0], np.array([raw_data[1]])
-        df = pd.DataFrame(data, columns=headers)
+        # headers, data = raw_data[0], np.array([raw_data[1]])
+        # df = pd.DataFrame(data, columns=headers)
 
         prediction = self.model.predict(df)[0]
         # shap_values = self.explainer.shap_values(df)

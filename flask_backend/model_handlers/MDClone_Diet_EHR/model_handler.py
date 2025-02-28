@@ -21,10 +21,10 @@ class MDClone_EHRTreeHandler:
         self.explainer = shap.Explainer(pickled_tree)
         # For shipping images
 
-    def make_prediction(self, raw_data):
+    def make_prediction(self, df):
 
-        headers, data = raw_data[0], np.array([raw_data[1]])
-        df = pd.DataFrame(data, columns=headers)
+        # headers, data = raw_data[0], np.array([raw_data[1]])
+        # df = pd.DataFrame(data, columns=headers)
 
         prediction = self.pickled_tree.predict(df)[0]
         shap_values = self.explainer.shap_values(df)

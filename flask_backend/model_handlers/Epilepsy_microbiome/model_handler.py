@@ -39,10 +39,10 @@ class Epilepsy_Microbiome_Handler:
             )
         return patient_data_sort
 
-    def make_prediction(self, raw_data):
+    def make_prediction(self, df):
 
-        headers, data = raw_data[0], np.array([raw_data[1]])
-        df = pd.DataFrame(data, columns=headers)
+        # headers, data = raw_data[0], np.array([raw_data[1]])
+        # df = pd.DataFrame(data, columns=headers)
 
         # Make a prediction
         prediction = self.classifier.predict(df)

@@ -11,14 +11,15 @@ class OCMethylationPredictor:
         self.classifier = bundled_info["model"]
         self.bundled_info = bundled_info
 
-    def make_prediction(self, raw_data):
+    def make_prediction(self, df):
 
-        headers, data = raw_data[0], np.array([raw_data[1]])
-        df = pd.DataFrame(data, columns=headers)
+        # headers, data = raw_data[0], np.array([raw_data[1]])
+        # df = pd.DataFrame(data, columns=headers)
 
         print(f"---> Received length: {df['Value'].__len__()}")
 
         data = np.array(df["Value"].values.tolist())
+        data = np.reshape(data, (1, -1))
         # data = np.reshape(data, (-1, 2))
         print(f"{data}")
 
