@@ -30,8 +30,8 @@ Performance Evaluation: Accuracy, Confusion Matrix, and Classification Report ar
 #### Prediction
 - Make Prediction: The loaded classifier predicts the label for the new patient data.
 Intervention & Outcomes
-Responder: Patient data suggests positive response to Palbociclib prior to intervention treatment
-Non-Responder: Patient data suggests resistance to Palbociclib prior to intervention treatment
+- Responder: Patient data suggests positive response to Palbociclib prior to intervention treatment
+- Non-Responder: Patient data suggests resistance to Palbociclib prior to intervention treatment
 ### Algorithm & Model Performance
 - Algorithm: RandomForestClassifier
 - Model Accuracy: 0.93
