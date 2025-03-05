@@ -1,0 +1,289 @@
+{
+    "object_id": "",
+    "spec_version": "https://w3id.org/ieee/ieee-2791-schema/2791object.json",
+    "etag": "",
+    "provenance_domain": {
+        "name": "Synthea_Exercise",
+        "version": "1.1",
+        "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+        "created": "2025-03-05T19:54:02",
+        "modified": "2025-03-05T20:12:14",
+        "derived_from": "",
+        "contributors": [
+            {
+                "name": "Miguel Mazumder",
+                "affiliation": "HIVE lab",
+                "email": "mfmmazumder@gwmail.gwu.edu",
+                "contribution": [
+                    "contributedBy"
+                ],
+                "orcid": ""
+            },
+            {
+                "name": "Urnisha Bhuiyan",
+                "affiliation": "HIVE lab",
+                "email": "sbhuiyan28@email.gwu.edu",
+                "contribution": [
+                    "contributedBy"
+                ],
+                "orcid": ""
+            },
+            {
+                "name": "Lori Krammer",
+                "affiliation": "HIVE lab",
+                "email": "lorikrammer@email.gwu.edu",
+                "contribution": [
+                    "contributedBy"
+                ],
+                "orcid": ""
+            },
+            {
+                "name": "Patrick McNeely",
+                "affiliation": "HIVE lab",
+                "email": "pmcneely@email.gwu.edu",
+                "contribution": [
+                    "contributedBy"
+                ],
+                "orcid": ""
+            }
+        ],
+        "review": []
+    },
+    "usability_domain": [
+        "Synthetic Electronic Health Record (EHR) generation utilizing Generative Adversial Network (GAN)\n\nUsage\nItem 1: Load_and_format.py: Responsible for taking input patient data and diagnosis and format into an mxn matrix where each row is a unique patient and each column is a measurable biomarker\nItem 2: Synthetic_EHR_data_diabetes.py: Takes formatted data produced from Load_and_format.py and trains a generator and discriminator to upscale original diabetic data using a Generative Adversial Network (GAN) To generate synthetic data, first run Load_and_format.py, then Synthetic_EHR_data_diabetes.py\nItem 3: sample_synthetic_EHR_data_1000patients.xlsx contains 1000 synthetic patients with measurments for Diastolic Blood Pressure, Systolic Blood Pressure, Urea, Nitrogen, Creatinine, Calcium, Sodium\nItem 4: Classifier Folder: Decision Tree Classifier to show how single patient EHR data (Patient from 1000 Synthetic EHR xlsx file) will predict response or non-response to standard diabetes treatment. Requires console user input to determine which patient (1-1000) to predict treatment outcome\nNotes\nLoad_and_format.py and Synthetic_EHR_data_diabetes currently are hard coded for take only Diastolic Blood Pressure, Systolic Blood Pressure, Urea, Nitrogen, Creatinine, Calcium, Sodium. Future progress on this will include a dynamic approach to pre-select variables for training the GAN"
+    ],
+    "description_domain": {
+        "keywords": [
+            "predictive intervention",
+            "python",
+            "scikit"
+        ],
+        "xref": [],
+        "platform": [],
+        "pipeline_steps": [
+            {
+                "step_number": 1,
+                "name": "Load Python Libraries",
+                "description": "import tensorflow as tf\nimport glob\n#import imageio\nimport matplotlib.pyplot as plt\nimport numpy as np\nimport pandas as pd\nimport os\nimport PIL\nfrom tensorflow.keras import layers\nimport time\nfrom IPython import display",
+                "version": "1.0",
+                "prerequisite": [
+                    {
+                        "name": "tensorflow ",
+                        "uri": {
+                            "filename": "TensorFlow 2",
+                            "access_time": "2025-03-05T05:00:00.000Z",
+                            "uri": "https://www.tensorflow.org/learn",
+                            "sha1_checksum": ""
+                        }
+                    },
+                    {
+                        "name": "pandas library",
+                        "uri": {
+                            "filename": "pandas 2.2.1",
+                            "access_time": "2025-03-05T05:00:00.000Z",
+                            "uri": "https://pypi.org/project/pandas/",
+                            "sha1_checksum": ""
+                        }
+                    },
+                    {
+                        "name": "matplotlib",
+                        "uri": {
+                            "filename": "matplotlib",
+                            "access_time": "2025-03-05T05:02:00.000Z",
+                            "uri": "https://matplotlib.org/",
+                            "sha1_checksum": ""
+                        }
+                    }
+                ]
+            },
+            {
+                "step_number": 2,
+                "name": "Read Input Data",
+                "description": "data = pd.read_excel('data.xlsx')\nlabels = pd.read_excel('label.xlsx')\nheaders = pd.read_excel('var_list_.xlsx')",
+                "version": "1.0",
+                "input_list": [
+                    {
+                        "filename": "data.xlsx",
+                        "access_time": "2025-03-05T05:00:00.000Z",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/Synthea_Exercise_v1.1/data.xlsx",
+                        "sha1_checksum": ""
+                    },
+                    {
+                        "filename": "label.xlsx",
+                        "access_time": "2025-03-05T05:59:00.000Z",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/Synthea_Exercise_v1.1/label.xlsx",
+                        "sha1_checksum": ""
+                    },
+                    {
+                        "filename": "observe",
+                        "access_time": "2025-03-05T05:00:00.000Z",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/Synthea_Exercise_v1.1/label.xlsx",
+                        "sha1_checksum": ""
+                    },
+                    {
+                        "filename": "patients_xl",
+                        "access_time": "2025-03-05T05:59:00.000Z",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/Synthea_Exercise_v1.1/patients_xl.xlsx",
+                        "sha1_checksum": ""
+                    },
+                    {
+                        "filename": "var_list",
+                        "access_time": "2025-03-05T05:01:00.000Z",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/Synthea_Exercise_v1.1/var_list",
+                        "sha1_checksum": ""
+                    }
+                ],
+                "output_list": [
+                    {
+                        "filename": "X_train, Y_train",
+                        "access_time": "2025-03-05T05:59:00.000Z",
+                        "uri": "file:///dev/tmpfs",
+                        "sha1_checksum": ""
+                    }
+                ]
+            },
+            {
+                "step_number": 3,
+                "name": "Train ML model to create synthetic diabetic exercise patientdata",
+                "description": "",
+                "version": "1.0",
+                "input_list": [
+                    {
+                        "filename": "X_train, Y_train",
+                        "access_time": "",
+                        "uri": "file:///dev/tmpfs",
+                        "sha1_checksum": ""
+                    }
+                ],
+                "output_list": [
+                    {
+                        "filename": "Classifier",
+                        "access_time": "",
+                        "uri": "file:///dev/tmpfs",
+                        "sha1_checksum": ""
+                    }
+                ]
+            },
+            {
+                "step_number": 4,
+                "name": "Save discriminator generator model",
+                "description": "checkpoint.restore(tf.train.latest_checkpoint(checkpoint_dir))",
+                "version": "1.0",
+                "output_list": [
+                    {
+                        "filename": "Diabetes_patient_generator",
+                        "access_time": "",
+                        "uri": "file:///dev/tmpfs",
+                        "sha1_checksum": ""
+                    }
+                ],
+                "input_list": [
+                    {
+                        "filename": "tmpfs",
+                        "access_time": "",
+                        "uri": "file:///dev/tmpfs",
+                        "sha1_checksum": ""
+                    }
+                ]
+            }
+        ]
+    },
+    "parametric_domain": [
+        {
+            "step": "3",
+            "param": "train_test_split",
+            "value": "test_size=0.2"
+        }
+    ],
+    "io_domain": {
+        "input_subdomain": [
+            {
+                "uri": {
+                    "filename": "Data.xlsx",
+                    "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/Synthea_Exercise_v1.1/data.xlsx",
+                    "access_time": "2025-03-05T05:00:00.000Z"
+                }
+            },
+            {
+                "uri": {
+                    "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/Synthea_Exercise_v1.1/var_list_.xlsx",
+                    "filename": "var_list_.xlsx",
+                    "access_time": "2025-03-05T05:00:00.000Z"
+                }
+            },
+            {
+                "uri": {
+                    "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/Synthea_Exercise_v1.1/label.xlsx",
+                    "filename": "label.xlsx",
+                    "access_time": "2025-03-05T05:02:00.000Z"
+                }
+            }
+        ],
+        "output_subdomain": [
+            {
+                "mediatype": "Checkpoint folder",
+                "uri": {
+                    "filename": "Diabetes Exercise patient generator",
+                    "uri": "file:///dev/tmpfs",
+                    "access_time": "2025-03-12T04:01:00.000Z"
+                }
+            }
+        ]
+    },
+    "execution_domain": {
+        "script": [
+            {
+                "uri": {
+                    "filename": "Synthetic_EHR_data_diabetes.py",
+                    "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/Synthea_Exercise_v1.1/Synthetic_EHR_data_diabetes.py",
+                    "access_time": "2025-03-05T11:30:00.000Z",
+                    "sha1_checksum": ""
+                }
+            }
+        ],
+        "script_driver": "Python",
+        "software_prerequisites": [
+            {
+                "name": "Python",
+                "version": "3.11.4",
+                "uri": {
+                    "filename": "python3.11.exe",
+                    "uri": "https://www.python.org/downloads/release/python-3114/",
+                    "access_time": "2025-03-05T05:00:00.000Z",
+                    "sha1_checksum": ""
+                }
+            },
+            {
+                "name": "Tensorflow library",
+                "version": "2",
+                "uri": {
+                    "filename": "Tensorflow 2.0",
+                    "uri": "https://www.tensorflow.org/",
+                    "access_time": "2025-03-05T05:00:00.000Z",
+                    "sha1_checksum": ""
+                }
+            },
+            {
+                "name": "Matplotlib",
+                "version": "0.15.4",
+                "uri": {
+                    "filename": "Matplotlib 0.15.4",
+                    "uri": "https://matplotlib.org/stable/users/index.html",
+                    "access_time": "2025-03-05T05:59:00.000Z",
+                    "sha1_checksum": ""
+                }
+            }
+        ],
+        "external_data_endpoints": [],
+        "environment_variables": {}
+    },
+    "extension_domain": [],
+    "error_domain": {
+        "empirical_error": {
+            "empirical_error": ".13"
+        },
+        "algorithmic_error": {
+            "algorithmic_error": "0.17"
+        }
+    }
+}
