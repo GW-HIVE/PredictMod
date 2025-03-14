@@ -311,7 +311,7 @@
         },
         "algorithmic_error": {
             "algorithmic_error": "0.25"
-        }
+        },
         "ROC-AUC": {
             "ROC-AUC": "0.87"
         }
