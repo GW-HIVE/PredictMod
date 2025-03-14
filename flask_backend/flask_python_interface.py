@@ -20,6 +20,7 @@ from model_handlers import (
     Epilepsy_Microbiome_Handler,
     EC_EHR_Keto_ModelHandler,
     OCMethylationPredictor,
+    OCRNASeqPredictor,
 )
 
 # TODO: Documentation
@@ -35,7 +36,8 @@ DETAIL_LOOKUP = {
     "Diabetes_EHR": "Diabetes_EHR_v1/README.md",
     "Epilepsy_classifier": "Epilepsy_microbiome_v1/README.md",
     "Predictmod_EHR_Keto": "PredictMod_EHR_Keto_v1.0/README.md",
-    "Ovarian-Cancer": "ovarian_cancer_methylation/README.md",
+    "Ovarian-Cancer-Methylation": "ovarian_cancer_methylation/README.md",
+    "Ovarian-Cancer-RNAseq": "ovarian_rnaseq/README.md",
 }
 
 DOWNLOAD_LOOKUP = {
@@ -44,7 +46,7 @@ DOWNLOAD_LOOKUP = {
     "Diabetes_EHR": "Diabetes_EHR_v1/single_patient_input.xlsx",
     "Epilepsy_classifier": "Epilepsy_microbiome_v1/single_patient_sample.xlsx",
     "Predictmod_EHR_Keto": "PredictMod_EHR_Keto_v1.0/svm_sample.csv",
-    "Ovarian-Cancer": "ovarian_cancer_methylation/methyl_single_patient.csv",
+    "Ovarian-Cancer-RNAseq": "ovarian_rnaseq/ovarian_RNAseq_single_patient.xlsx",
 }
 
 HANDLERS = {
@@ -53,7 +55,8 @@ HANDLERS = {
     "Diabetes_EHR": Diabetes_EHR_Handler(),
     "Epilepsy_classifier": Epilepsy_Microbiome_Handler(),
     "Predictmod_EHR_Keto": EC_EHR_Keto_ModelHandler(),
-    "Ovarian-Cancer": OCMethylationPredictor(),
+    "Ovarian-Cancer-Methlyation": OCMethylationPredictor(),
+    "Ovarian-Cancer-RNAseq": OCRNASeqPredictor(),
 }
 
 
