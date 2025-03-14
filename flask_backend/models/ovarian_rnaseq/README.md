@@ -56,9 +56,9 @@ Gene expression used for final Model have appeared to pick up genes that could p
 ---
 
 ## **Intervention & Outcomes**  
-- **Responder Status:**  
+- **Responder Status (1):**  
   Patients who are predicted to respond positively to treatment, with a significant reduction in tumor size.  
-- **Non-Responder Status:**  
+- **Non-Responder Status (0):**  
   Patients who are predicted to show minimal or no reduction in tumor size.  
 
 ---
