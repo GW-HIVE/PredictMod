@@ -16,16 +16,16 @@ class OCMethylationPredictor:
         # headers, data = raw_data[0], np.array([raw_data[1]])
         # df = pd.DataFrame(data, columns=headers)
 
-        print(f"---> Received length: {df['Value'].__len__()}")
+        # print(f"---> Received length: {df['Value'].__len__()}")
 
         data = np.array(df["Value"].values.tolist())
         data = np.reshape(data, (1, -1))
         # data = np.reshape(data, (-1, 2))
-        print(f"{data}")
+        # print(f"{data}")
 
         prediction = self.classifier.predict(data)
         return {
-            "result": "This patient {} expected to respond to the intervention based on Metagenomic input".format(
+            "result": "This patient {} expected to respond to the intervention ".format(
                 "is" if prediction == "R" else "is not"
-            )
+            ) + "based on methylation input"
         }
