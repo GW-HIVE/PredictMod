@@ -7,6 +7,12 @@ This script processes methylation data from an Excel file to classify patient ou
 ## Results
 The workflow demonstrates successful balancing of class distributions, enabling robust classification of patient outcomes. Key outputs include a trained classification model and associated feature names, stored for future analysis and deployment. The model achieves reliable performance metrics, supporting its use in clinical or research settings.
 
+## **Intervention & Outcomes**  
+- **Responder Status (1):**  
+  Patients who are predicted to respond positively to treatment, with a significant reduction in tumor size.  
+- **Non-Responder Status (0):**  
+  Patients who are predicted to show minimal or no reduction in tumor size.  
+
 ## How the Results Can Be Used/Interpreted
 The trained model provides a tool for predicting whether a treatment is likely to reduce tumor size in ovarian cancer patients, based on methylation profiles. This supports clinical decision-making, biomarker discovery, and personalized medicine approaches by leveraging methylation data to evaluate therapeutic efficacy.
 
