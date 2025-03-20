@@ -17,5 +17,7 @@ data = data[expected_features]  # Keep only necessary features
 # Make prediction
 prediction = model.predict(data)
 
-# Print the prediction
-print("Predicted outcome:", prediction[0])
+# Save prediction to a text file
+output_filename = "prediction_result.txt"
+with open(output_filename, 'w') as output_file:
+    output_file.write(f"Predicted outcome: {prediction[0]}\n")
