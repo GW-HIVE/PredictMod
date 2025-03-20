@@ -10,7 +10,7 @@ with open(model_filename, 'rb') as file:
 csv_filename = "prediabetes_proteomics_single_patient.csv"
 data = pd.read_csv(csv_filename)
 
-# Ensure data has the right features (assuming the model was trained on specific columns)
+# Ensure data has the right features 
 expected_features = model.feature_names_in_  # Requires scikit-learn 1.0+
 data = data[expected_features]  # Keep only necessary features
 
