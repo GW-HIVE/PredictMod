@@ -1,0 +1,174 @@
+{
+  "object_id": "https://biocomputeobject.org/BCO_000503/DRAFT",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/2791object.json",
+  "etag": "",
+  "provenance_domain": {
+    "name": "prediabetes_proteomics",
+    "version": "1.1",
+    "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+    "created": "2024-07-03T17:26:28",
+    "modified": "2025-03-20T15:06:06",
+    "derived_from": "",
+    "contributors": [
+      {
+        "name": "Urnisha Bhuiyan",
+        "affiliation": "George Washington University",
+        "email": "sbhuiyan28@email.gwu.edu",
+        "contribution": [
+          "createdBy"
+        ],
+        "orcid": ""
+      },
+      {
+        "name": "Miguel Mazumder",
+        "affiliation": "George Washington University",
+        "email": "mfmmazumder@gwmail.gwu.edu",
+        "contribution": [
+          "createdBy"
+        ],
+        "orcid": ""
+      },
+      {
+        "name": "Patrick McNeely ",
+        "affiliation": "George Washington University",
+        "email": "pmcneely@email.gwu.edu",
+        "contribution": [
+          "createdBy"
+        ],
+        "orcid": ""
+      },
+      {
+        "name": "Lori Krammer",
+        "affiliation": "George Washington University ",
+        "email": "lorikrammer@email.gwu.edu",
+        "contribution": [
+          "createdBy"
+        ],
+        "orcid": ""
+      }
+    ],
+    "review": []
+  },
+  "usability_domain": [
+    "This dataset was retrieved from a publication interested in identifying the protein-related predictors for exercise. The training dataset included 48 patients and 688 variables. PMID: 36787735"
+  ],
+  "description_domain": {
+    "keywords": [
+      "Python",
+      "Machine Learning",
+      "keto",
+      "prediabetes"
+    ],
+    "xref": [],
+    "platform": [
+      "VS Code"
+    ],
+    "pipeline_steps": [
+      {
+        "step_number": 1,
+        "name": "model_evaluation",
+        "description": "The following script performs model evaluation by conducting the following: \n1. Upload pickle file \n2. Make prediction for single patient data ",
+        "version": "1.1",
+        "input_list": [
+          {
+            "filename": "prediabetes_proteomics_model.pkl",
+            "access_time": "2024-06-14T04:00:00.000Z",
+            "uri": "https://github.com/GW-HIVE/PredictMod/blob/05fc5c6be51ce63197b9c0cc38d6add9e8df24f6/flask_backend/models/prediabetes_proteomics/prediabetes_proteomics_model.pkl"
+          },
+          {
+            "filename": "prediabetes_proteomics_single_patient.csv",
+            "access_time": "2024-06-14T04:00:00.000Z",
+            "uri": "https://github.com/GW-HIVE/PredictMod/blob/05fc5c6be51ce63197b9c0cc38d6add9e8df24f6/flask_backend/models/prediabetes_proteomics/prediabetes_proteomics_single_patient.csv"
+          },
+          {
+            "filename": "prediabetes_proteomics_predict.py",
+            "access_time": "",
+            "uri": "https://github.com/GW-HIVE/PredictMod/blob/4c781d733be8dc9aa86425f23a4ec61de945c743/flask_backend/models/prediabetes_proteomics/prediabetes_proteomics_predict.py",
+            "sha1_checksum": ""
+          }
+        ],
+        "output_list": [
+          {
+            "filename": "prediction_result.txt",
+            "access_time": "2024-08-27T04:00:00.000Z",
+            "uri": "https://github.com/GW-HIVE/PredictMod/blob/b5d68a640daec271257acc1c295cdaa2fe37e51e/flask_backend/models/prediabetes_proteomics/prediction_result.txt",
+            "sha1_checksum": ""
+          }
+        ]
+      }
+    ]
+  },
+  "parametric_domain": [],
+  "io_domain": {
+    "input_subdomain": [
+      {
+        "uri": {
+          "filename": "prediabetes_proteomics_model.pkl",
+          "uri": "https://github.com/GW-HIVE/PredictMod/blob/b5d68a640daec271257acc1c295cdaa2fe37e51e/flask_backend/models/prediabetes_proteomics/prediabetes_proteomics_model.pkl"
+        }
+      },
+      {
+        "uri": {
+          "filename": "prediabetes_proteomics_single_patient.csv",
+          "uri": "https://github.com/GW-HIVE/PredictMod/blob/b5d68a640daec271257acc1c295cdaa2fe37e51e/flask_backend/models/prediabetes_proteomics/prediabetes_proteomics_single_patient.csv"
+        }
+      },
+      {
+        "uri": {
+          "filename": "prediabetes_proteomics_predict.py",
+          "uri": "https://github.com/GW-HIVE/PredictMod/blob/b5d68a640daec271257acc1c295cdaa2fe37e51e/flask_backend/models/prediabetes_proteomics/prediabetes_proteomics_predict.py"
+        }
+      }
+    ],
+    "output_subdomain": [
+      {
+        "mediatype": "txt",
+        "uri": {
+          "filename": "prediction_result.txt",
+          "uri": "https://github.com/GW-HIVE/PredictMod/blob/b5d68a640daec271257acc1c295cdaa2fe37e51e/flask_backend/models/prediabetes_proteomics/prediction_result.txt"
+        }
+      }
+    ]
+  },
+  "execution_domain": {
+    "script": [],
+    "script_driver": "",
+    "software_prerequisites": [
+      {
+        "name": "Python",
+        "version": "3.9.5",
+        "uri": {
+          "uri": "https://www.python.org/",
+          "access_time": "2024-06-14T04:00:00.000Z"
+        }
+      },
+      {
+        "name": "pandas",
+        "version": "1.4.1",
+        "uri": {
+          "uri": "https://pandas.pydata.org/",
+          "access_time": "2024-06-14T04:00:00.000Z"
+        }
+      },
+      {
+        "name": "numpy",
+        "version": "1.22.3",
+        "uri": {
+          "uri": "https://numpy.org/",
+          "access_time": "2024-06-14T04:00:00.000Z"
+        }
+      },
+      {
+        "name": "sklearn",
+        "version": "1.2.2",
+        "uri": {
+          "uri": "https://scikit-learn.org/stable/"
+        }
+      }
+    ],
+    "external_data_endpoints": [],
+    "environment_variables": {}
+  },
+  "extension_domain": [],
+  "error_domain": {}
+}
