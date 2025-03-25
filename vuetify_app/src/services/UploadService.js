@@ -76,13 +76,16 @@ class UploadFilesService {
     if (!res.ok) {
       // Error handling
       console.log("Is this where I am....?")
+      return {
+        networkError: "Error " + res.status + ":" + res.statusText,
+      }
     }
 
     const response = await res.json();
   
     // console.log("---> Got response %s", JSON.stringify(response));
 
-    return response;
+    return response
 
   }
 
