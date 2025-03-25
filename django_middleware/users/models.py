@@ -36,5 +36,6 @@ class TrainedModel(models.Model):
     label_field = models.CharField(max_length=100)
     drop_fields = models.JSONField(blank=True)
     to_save = models.BooleanField(default=False)
+    all_user_shared = models.BooleanField(default=False)
     siteuser = models.ForeignKey(SiteUser, on_delete=models.CASCADE, null=True)
     flask_id = models.IntegerField()
