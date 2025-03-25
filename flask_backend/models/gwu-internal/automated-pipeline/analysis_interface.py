@@ -69,6 +69,7 @@ class CustomModel(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(unique=False)
     file_path: Mapped[str] = mapped_column(unique=True)
+    model_bco: Mapped[str] = mapped_column(unique=False)
     training_results: Mapped[JSON] = mapped_column(type_=JSON, unique=False)
 
 
