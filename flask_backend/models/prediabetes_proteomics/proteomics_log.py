@@ -46,9 +46,9 @@ print("F1 Train Score:", f1_train)
 print("AUC Score:", auc)
 print("Classification Report:\n", classification_report(y_test, y_test_pred))
 
-# Pickle the trained model
-with open('prediabetes_proteomics_model.pkl', 'wb') as model_file:
-    pickle.dump(logreg_pipeline, model_file)
+# Pickle the trained model - uncomment if you'd like to create your own pickle. 
+# with open('prediabetes_proteomics_model.pkl', 'wb') as model_file:
+#     pickle.dump(logreg_pipeline, model_file)
 
-print('Model has been saved as prediabetes_proteomics_model.pkl')
+# print('Model has been saved as prediabetes_proteomics_model.pkl')
 # %%
