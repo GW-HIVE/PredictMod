@@ -13,8 +13,10 @@ The intervention consisted of a 12-week high-intensity interval exercise trainin
 A Random Forest Classifier was employed, with data preprocessing incorporating the Synthetic Minority Oversampling Technique (SMOTE) and Leave-One-Out Cross-Validation (LOOCV) to address class imbalance and the relatively small dataset size.
 
 ## Algorithm Stats
-**Overall Accuracy:** 0.8971
+**Overall Accuracy:** 0.9
 
-**Overall F1 Score:** 0.8971
+**Overall F1 Score:** 0.92
+
+**Overall AUC:** 0.93
 
 
