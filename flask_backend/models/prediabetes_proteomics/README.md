@@ -10,7 +10,7 @@ PMID: 36787735
 The intervention consisted of a 12-week high-intensity interval exercise training program for medication-naïve overweight or obese men with prediabetes.
 
 ## Algorithm & Model Performance 
-A Random Forest Classifier was employed, with data preprocessing incorporating the Synthetic Minority Oversampling Technique (SMOTE) and Leave-One-Out Cross-Validation (LOOCV) to address class imbalance and the relatively small dataset size.
+A Logistic Regression was employed, with data preprocessing incorporating augmented noise for synthetic resampling of both classes. This improved the LR performance and mitigated overfitting that was previously an issue with this model. 
 
 ## Algorithm Stats
 **Overall Accuracy:** 0.9
