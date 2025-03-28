@@ -286,50 +286,31 @@ class ModelListView(APIView):
                 )
 
         data_type_query = request.GET.get("q", None)
-        user_models = TrainedModel.objects.filter(siteuser__user=user).all()
-        shared_models = TrainedModel.objects.filter(all_user_shared=True).all()
-
-        logger.debug(f"---> User models: {user_models}")
-        logger.debug(f"---> Shared models: {shared_models}")
-
-        shared_not_user = shared_models.difference(user_models)
-
-        logger.debug(f"---> Shared not user: {shared_not_user}")
+        shared_models = request.GET.get("shared", None)
+        if shared_models:
+            models = TrainedModel.objects.filter(all_user_shared=True).all()
+        else:
+            models = TrainedModel.objects.filter(siteuser__user=user).all()
 
         if data_type_query:
-            data_types = [TrainedModelDataTypeSerializer(m).data for m in user_models]
-            shared_data_types = [TrainedModelDataTypeSerializer(m).data for m in shared_models]
-            
+            data_types = [TrainedModelDataTypeSerializer(m).data for m in models]
             unique_data_types = sorted(list(set(dt["data_name"] for dt in data_types)))
-            unique_shared_data_types = sorted(list(set(dt["data_name"] for dt in shared_data_types)))
-
-            logger.debug("-" * 80)
-            logger.debug(f"User data types: {unique_data_types}")
-            logger.debug(f"Shared data types: {unique_shared_data_types}")
-            logger.debug("-" * 80)
-
             data_types = [{"name": str(dt)} for dt in unique_data_types]
-            shared_data_types = [{"name": str(dt)} for dt in unique_shared_data_types]
-            combined_data_types = {"user": data_types, "shared": shared_data_types}
-            logger.debug(f"---> Returning data types {combined_data_types}")
-            return JsonResponse(combined_data_types, safe=False)
+            return JsonResponse(data_types, safe=False)
 
         data_type_name = request.GET.get("data_type", None)
         if data_type_name is None:
             return JsonResponse({"error": "Unsupported request parameters"}, safe=False)
 
-        selected_models = user_models.filter(data_name=data_type_name)
-
-        logger.debug(f"Model list view: Accessing models for user {user}")
-        logger.debug(f"Found user models {selected_models}")
-
-        models = {
+        model_to_return = {
             "models_available": [
-                TrainedModelPartialSerializer(m).data for m in selected_models
+                TrainedModelPartialSerializer(m).data for m in models.filter(data_name=data_type_name)
             ]
         }
+        # logger.debug(f"Model list view: Accessing models for user {user}")
+        # logger.debug(f"Found user models {selected_models}")
 
-        return JsonResponse(models, safe=False)
+        return JsonResponse(model_to_return, safe=False)
 
 
 class UserListView(APIView):
