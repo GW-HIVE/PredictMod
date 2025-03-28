@@ -272,6 +272,8 @@ def file_upload(request):
                 other_args = ""
 
                 site_user = SiteUser.objects.filter(user=user).first()
+                username = f"{site_user.user.first_name} {site_user.user.last_name}"
+                user_email = site_user.user.email
 
                 for arg in request.GET.keys():
                     logger.debug(
@@ -283,16 +285,18 @@ def file_upload(request):
 
                 if model_mode == "training":
                     logger.debug("=" * 80)
-                    logger.debug(f"---> Modeling: Found user {site_user.user.email}")
-                    user = site_user.user.email
+                    logger.debug(f"---> Modeling: Found user {user_email}")
                     arg_dict = {"label": "", "drop": ""}
                     for arg in arg_dict.keys():
                         other_args += f"&{arg}={request.GET[arg]}"
                         arg_dict[arg] = request.GET[arg]
                     response = requests.post(
-                        f"{lookup_backend(target)}/upload?q={target}&user={user}&file_name={file_name}{other_args}",
+                        f"{lookup_backend(target)}/upload?q={target}&user={username}&email={user_email}&file_name={file_name}{other_args}",
                     )
                     response = json.loads(response._content.decode("utf-8"))
+                    if type(response) is dict and "error" in response.keys():
+                        logger.debug(f"---> Found response: {response}")
+                        return JsonResponse(response, status=500)
                     for model in response:
                         logger.debug(
                             f"Name: {model['name']} -- flask_id: {model['flask_id']}"
