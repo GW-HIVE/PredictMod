@@ -226,6 +226,10 @@ def file_upload(request):
             target = request.GET.get("q", None)
             file_name = request.GET.get("name", None)
             user = request.user
+
+            site_user = SiteUser.objects.filter(user=user).first()
+            username = f"{site_user.user.first_name} {site_user.user.last_name}"
+            user_email = site_user.user.email
             # if not target or target not in UPLOAD_ENDPOINTS:
             #     return JsonResponse(
             #         {"error": f"Invalid upload target {target}"}, status=404
@@ -270,10 +274,6 @@ def file_upload(request):
                 model_mode = request.GET["method"]
                 logger.debug(f"Uploading file with algorithm mode: {model_mode}")
                 other_args = ""
-
-                site_user = SiteUser.objects.filter(user=user).first()
-                username = f"{site_user.user.first_name} {site_user.user.last_name}"
-                user_email = site_user.user.email
 
                 for arg in request.GET.keys():
                     logger.debug(
@@ -327,7 +327,7 @@ def file_upload(request):
                         "drop": m.drop_fields,
                     }
                     response = requests.post(
-                        f"{lookup_backend(target)}/upload?q={target}&new_sample=true&user={user}&file_name={file_name}",
+                        f"{lookup_backend(target)}/upload?q={target}&new_sample=true&user={username}&email={user_email}&file_name={file_name}",
                         json=payload,
                     )
                     response_json = response.json()
@@ -340,7 +340,7 @@ def file_upload(request):
             else:
 
                 response = requests.post(
-                    f"{lookup_backend(target)}/upload?q={target}&user={user}&file_name={file_name}"
+                    f"{lookup_backend(target)}/upload?q={target}&user={user}&email={user_email}&file_name={file_name}"
                 )
                 response = json.loads(response._content.decode("utf-8"))
                 return JsonResponse(response, status=200, safe=False)
