@@ -1,13 +1,13 @@
 <template>
   <v-container fluid>
     <!-- 
-    Models to toggle: {{ modelsToSave.toString() }}
+    Models to toggle: {{ modelsToShare.toString() }}
     Models to use: {{ modelsToUse.toString() }} 
     -->
   <v-card flat>
     <v-card-title>Your models</v-card-title>
     <v-card v-if="availableDataTypes.length == 0" :key="availableDataTypes">
-      No models found
+      No user models found
     </v-card>
     <v-row dense>
     <v-col md="5" class="d-flex pa-0 h-25" dense>
@@ -90,9 +90,9 @@
           <v-row d-flex nowrap class="align-left px-0 ma-0">
             <!-- :label="`${getSaveString(obj)}`" -->
             <v-checkbox
-            v-model="modelsToSave"
+            v-model="modelsToShare"
             class="shrink pa-0 ma-0"
-            :label="`${obj.save ? 'Mark for removal' : 'Save model'}`"
+            :label="`${obj.allUserShared ? 'Make model private' : 'Share model with all users'}`"
             :value="obj.id"
             :messages="`${getSaveString(obj)}`"
           ></v-checkbox>
@@ -131,18 +131,18 @@
   </v-row>
   <v-card variant="flat" v-slot:actions>
     <v-btn
-      @click="submitSaves" 
+      @click="submitShares" 
       color="primary"
       variant="flat"
     >
-    Submit model saves
+    Submit model shares
   </v-btn>
   <v-btn 
       @click="sumbitModelsForUse"
       color="primary"
       variant="flat"
     >
-    {{ modelsToSave.length == 0 ? 'Use selected models' : 'Submit selected saves and use selected models' }}
+    {{ modelsToShare.length == 0 ? 'Use selected models' : 'Submit selected shares and use selected models' }}
   </v-btn>
   <v-btn @click.submit="clearResults" color="primary" variant="flat">Clear previous results</v-btn>
   <!-- <v-row v-if="error"> -->
@@ -164,7 +164,7 @@
   <!-- <v-row class="pa-0"> -->
     <v-file-input
       show-size
-      label="Select a new sample to use (xls or xlsx)"
+      label="Select a new sample to use (csv, tsv, xlsx, xls)"
       type="File"
       v-model="currentFile"
     ></v-file-input>
@@ -195,7 +195,7 @@ export default {
     uploadTargetURL: String,
     modelsURL: String,
   },
-  components: {PipelineResultsCard, UploadService },
+  components: { PipelineResultsCard, UploadService },
   setup() {
     const userStore = useUserStore()
     return { userStore }
@@ -216,7 +216,7 @@ export default {
       availableDataTypes: [],
       availableModels: [],
       selectedDataType: "",
-      modelsToSave: [],
+      modelsToShare: [],
       modelsToUse: [],
       deleteClicked: [],
     }
@@ -280,7 +280,7 @@ export default {
         credentials: "include",
       })
       const adt = await response.json()
-      // console.log("Got response ", typeof(adt), "--> ", adt)
+      console.log("Got response ", typeof(adt), "-->\n", JSON.stringify(adt))
 
       this.availableDataTypes = adt
       // console.log("---> Data types available: ", typeof(this.availableDataTypes))
@@ -305,7 +305,7 @@ export default {
         } else {
         this.selectedDataType = dataTypeName
         this.availableModels = Array.from(models.models_available).map((model) => {
-            // console.log("Model: " + JSON.stringify(model))
+            console.log("Model: " + JSON.stringify(model))
             const createdDate = new Date(model.created)
             const updatedDate = new Date(model.updated)
             // console.log("Date: " + date + " (type " + typeof(date) + ")")
@@ -314,19 +314,20 @@ export default {
               "id": model.id,
               "created": createdDate.toLocaleDateString("en-US", options),
               "updated": updatedDate.toLocaleDateString("en-US", options),
-              "save": model.to_save ? true : false
+              "save": model.to_save ? true : false,
+              "allUserShared": model.all_user_shared ? true : false,
             }
           })
       }
     },
-    async submitSaves() {
-      if (this.modelsToSave.length == 0) {
-        alert("No models selected to adjust save feature")
+    async submitShares() {
+      if (this.modelsToShare.length == 0) {
+        alert("No models selected to adjust sharing feature")
       } else {
         const toggledModelIDs = [];
         this.availableModels.forEach((model) => {
-          if (this.modelsToSave.includes(model.id)) {
-            model.save = !model.save
+          if (this.modelsToShare.includes(model.id)) {
+            model.allUserShared = !model.allUserShared
             toggledModelIDs.push(model)
           }
         })
@@ -348,14 +349,14 @@ export default {
               m = modelsToUpdate[m.id];
             }
           })
-          this.modelsToSave = [];
+          this.modelsToShare = [];
         }
       }
     },
     async sumbitModelsForUse() {
-      if (this.modelsToSave.length > 0){ 
+      if (this.modelsToShare.length > 0){ 
         console.log("First saving selected models")
-        this.submitSaves()
+        this.submitShares()
       }
       // console.log("Submitting data to the following models")
       // this.modelsToUse.forEach((m) => {
@@ -417,7 +418,12 @@ export default {
           .then((response) => {
             // this.message = response.data.message;
             // console.log("Got response:\n", response);
-            this.message = "Success";
+            if (response.networkError) {
+              this.message = null
+              this.error = "Error on upload: Response code " + response.error
+              return false
+            }
+            this.message = response.result ? response.result : "Successfully uploaded";
             this.response = response;
             if (response.error) {
               console.log("ERROR: ", response.error);

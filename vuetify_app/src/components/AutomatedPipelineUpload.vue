@@ -145,7 +145,12 @@ import * as XLSX from 'xlsx';
           .then((response) => {
             // this.message = response.data.message;
             // console.log("Got response:\n", response);
-            this.message = "Success";
+            if (response.networkError) {
+              this.message = null
+              this.error = "Error on upload: " + response.networkError
+              return false
+            }
+            this.message = response.result ? response.result : "Successfully uploaded";
             this.response = response;
             if (response.error) {
               console.log("ERROR: ", response.error);

@@ -178,7 +178,24 @@ import * as XLSX from 'xlsx';
           this.error = "Please select a file for upload!";
           return false;
         }
-  
+
+        if (this.currentFile.size > 31457280) { // ~30 MB Hardlimit. Apache/nginx configured for 50 MB
+          this.message = null;
+          this.error = "Maximum file upload size is 25 MB. Please contact mazumder_lab@gwu.edu for additional support"
+          this.currentFile = null
+          return false
+        }
+
+        const fileType = this.currentFile.name.split(".").at(-1)
+
+        if ((fileType == "xlsx" || fileType == "xls") && this.currentFile.size > 2097152) {
+          // Excel over 2 MB is too slow to support on the backend, accept only csv or tsv at this size
+          this.message = null
+          this.error = "Excel files over 2 MB are not supported; please convert to csv or tsv formats"
+          this.currentFile = null
+          return false
+        }
+
         // TODO
         // const onUploadProgress = (event) => {
         //   this.progress = Math.round((100 * event.loaded) / event.total)
@@ -196,6 +213,11 @@ import * as XLSX from 'xlsx';
           .then((response) => {
             // this.message = response.data.message;
             // console.log("Got response:\n", response);
+            if (response.networkError) {
+              this.message = null
+              this.error = "Error on upload: Response code " + response.error
+              return false
+            }
             this.message = response.result ? response.result : null;
             if (response.plot) {
               this.chartData = JSON.parse(response.plot);

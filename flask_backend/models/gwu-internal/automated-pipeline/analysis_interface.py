@@ -2,9 +2,8 @@ from flask import Flask, request, Response, send_from_directory, jsonify
 from flask_cors import CORS, cross_origin
 
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Column
+from sqlalchemy import Column, JSON, func, select, create_engine
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
-from sqlalchemy import JSON
 
 import json
 import os
@@ -12,6 +11,8 @@ import logging
 import pickle
 import tomli
 import uuid
+
+from datetime import datetime
 
 from pipeline import Pipeline
 
@@ -48,6 +49,9 @@ HANDLERS = {
     "pipeline": Pipeline(),
 }
 
+with open("./bco_template.json", "r") as fp:
+    TEMPLATE_BCO = json.load(fp)
+
 
 class Base(DeclarativeBase):
     pass
@@ -64,12 +68,40 @@ db.init_app(app)
 
 app.logger.setLevel(logging.DEBUG)
 
-
 class CustomModel(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(unique=False)
     file_path: Mapped[str] = mapped_column(unique=True)
+    model_bco: Mapped[JSON] = mapped_column(type_=JSON, unique=False)
     training_results: Mapped[JSON] = mapped_column(type_=JSON, unique=False)
+
+
+
+class Counter:
+
+    def __init__(self, init_value):
+        self.value = init_value
+
+    def GetCount(self):
+        self.value += 1
+        return self.value - 1
+
+with app.app_context():
+    db.create_all()
+    BCO_ID = db.session.scalar(select(func.max(CustomModel.id)))
+
+BCO_COUNT = BCO_ID if BCO_ID is not None else 1
+app.logger.debug(f"---> BCO COUNT was {BCO_COUNT}")
+
+bco_name_counter = Counter(BCO_COUNT)
+
+def create_model_bco(email, name):
+    base_bco = TEMPLATE_BCO
+    base_bco["object_id"] = f"PredictMod-{bco_name_counter.GetCount():08}"
+    base_bco["etag"] = str(uuid.uuid4())
+    base_bco["provenance_domain"]["contributors"][0]["name"] = name
+    base_bco["provenance_domain"]["contributors"][0]["email"] = email
+    return base_bco
 
 
 with app.app_context():
@@ -158,10 +190,11 @@ def delete_models():
 def upload():
     target = request.args.get("q", None)
     file_name = request.args.get("file_name", None)
-    user = request.args.get("user", None)
-    file_path = os.path.join(SHARED_DIR, f"{user}/{file_name}")
+    user_name = request.args.get("user", None)
+    user_email = request.args.get("email", None)
+    file_path = os.path.join(SHARED_DIR, f"{user_email}/{file_name}")
 
-    if file_name is None or user is None:
+    if file_name is None or user_email is None or user_name is None:
         return jsonify({"error": "No file path or user found in request"})
     app.logger.debug(f"---> Reading data from {file_path}")
 
@@ -232,7 +265,6 @@ def upload():
     # Training on a new set, not using a new sample
     label_column = request.args.get("label", None)
     drop_columns = request.args.get("drop", None)
-    user = request.args.get("user", None)
     if target not in HANDLERS.keys():
         app.logger.debug("*" * 40)
         app.logger.debug(f"Target: {target}")
@@ -253,7 +285,7 @@ def upload():
 
         family_dir_name = uuid.uuid4()
         family_dir_path = os.path.join(
-            os.path.abspath(f"./instance/{user}/{family_dir_name}")
+            os.path.abspath(f"./instance/{user_email}/{family_dir_name}")
         )
         if not os.path.exists(family_dir_path):
             os.makedirs(family_dir_path)
@@ -262,8 +294,37 @@ def upload():
             app.logger.debug(f"---> Model keys {m.keys()}")
             # app.logger.debug(f"Got results {results}")
             model_path = os.path.join(family_dir_path, m["name"])
+            model_bco = create_model_bco(user_email, user_name)
+
+            model_bco["usability_domain"][0] = model_bco["usability_domain"][0].format(
+                file_name, m["name"]
+            )
+            model_bco["io_domain"]["input_subdomain"][0]["mediatype"] = model_bco[
+                "io_domain"
+            ]["input_subdomain"][0]["mediatype"].format(
+                "text/plain"
+                if file_extension in {"csv", "tsv"}
+                else "application/octet-stream"
+            )
+            model_bco["io_domain"]["input_subdomain"][0]["uri"][
+                "uri"
+            ] = f"{user_email}/{family_dir_name}/{file_name}"
+            model_bco["io_domain"]["input_subdomain"][0]["uri"][
+                "upload_time"
+            ] = str(datetime.now())
+
+            model_bco["io_domain"]["output_subdomain"][0]["uri"][
+                "uri"
+            ] = f"{user_email}/{family_dir_name}/{m['name']}"
+            model_bco["io_domain"]["output_subdomain"][0]["uri"][
+                "upload_time"
+            ] = str(datetime.now())
+
             model = CustomModel(
-                name=m["name"], file_path=model_path, training_results=r
+                name=m["name"],
+                file_path=model_path,
+                training_results=r,
+                model_bco=model_bco,
             )
             # Create the model and save it to the database
             db.session.add(model)

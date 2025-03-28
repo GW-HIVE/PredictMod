@@ -192,13 +192,17 @@ def model_updates(request):
             updates = {}
             # Get the body and validate
             updated_models = json.loads(request.body)
+            logger.debug(f"---> UPDATING {updated_models}")
             tm_manager = TrainedModel.objects
 
             for m in updated_models:
                 tm = tm_manager.filter(id=m["id"]).first()
-                tm.to_save = m["save"]
+                tm.all_user_shared = m["allUserShared"]
                 tm.save()
                 updates[tm.id] = TrainedModelPartialSerializer(tm).data
+
+            for id, data in updates.items():
+                logger.debug(f"{id}: New data: {data}")
 
             return JsonResponse(updates, safe=False)
 
@@ -282,35 +286,31 @@ class ModelListView(APIView):
                 )
 
         data_type_query = request.GET.get("q", None)
-        user_models = TrainedModel.objects.filter(siteuser__user=user).all()
+        shared_models = request.GET.get("shared", None)
+        if shared_models:
+            models = TrainedModel.objects.filter(all_user_shared=True).all()
+        else:
+            models = TrainedModel.objects.filter(siteuser__user=user).all()
 
         if data_type_query:
-            data_types = [TrainedModelDataTypeSerializer(m).data for m in user_models]
+            data_types = [TrainedModelDataTypeSerializer(m).data for m in models]
             unique_data_types = sorted(list(set(dt["data_name"] for dt in data_types)))
-            logger.debug("-" * 80)
-            logger.debug(unique_data_types)
-            logger.debug("-" * 80)
-
             data_types = [{"name": str(dt)} for dt in unique_data_types]
-            logger.debug(f"---> Returning data types {data_types}")
             return JsonResponse(data_types, safe=False)
 
         data_type_name = request.GET.get("data_type", None)
         if data_type_name is None:
             return JsonResponse({"error": "Unsupported request parameters"}, safe=False)
 
-        selected_models = user_models.filter(data_name=data_type_name)
-
-        logger.debug(f"Model list view: Accessing models for user {user}")
-        logger.debug(f"Found user models {selected_models}")
-
-        models = {
+        model_to_return = {
             "models_available": [
-                TrainedModelPartialSerializer(m).data for m in selected_models
+                TrainedModelPartialSerializer(m).data for m in models.filter(data_name=data_type_name)
             ]
         }
+        # logger.debug(f"Model list view: Accessing models for user {user}")
+        # logger.debug(f"Found user models {selected_models}")
 
-        return JsonResponse(models, safe=False)
+        return JsonResponse(model_to_return, safe=False)
 
 
 class UserListView(APIView):

@@ -36,7 +36,7 @@ class TrainedModelPartialSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = TrainedModel
-        fields = ["model_name", "id", "created", "updated", "to_save"]
+        fields = ["model_name", "id", "created", "updated", "to_save", "all_user_shared"]
 
 
 class TrainedModelFullSerializer(serializers.ModelSerializer):

@@ -46,6 +46,7 @@ DOWNLOAD_LOOKUP = {
     "Diabetes_EHR": "Diabetes_EHR_v1/single_patient_input.xlsx",
     "Epilepsy_classifier": "Epilepsy_microbiome_v1/single_patient_sample.xlsx",
     "Predictmod_EHR_Keto": "PredictMod_EHR_Keto_v1.0/svm_sample.csv",
+    "Ovarian-Cancer-Methylation": "ovarian_cancer_methylation/Ovarian-Cancer-Methylation.csv",
     "Ovarian-Cancer-RNAseq": "ovarian_rnaseq/ovarian_RNAseq_single_patient.xlsx",
 }
 
@@ -55,7 +56,7 @@ HANDLERS = {
     "Diabetes_EHR": Diabetes_EHR_Handler(),
     "Epilepsy_classifier": Epilepsy_Microbiome_Handler(),
     "Predictmod_EHR_Keto": EC_EHR_Keto_ModelHandler(),
-    "Ovarian-Cancer-Methlyation": OCMethylationPredictor(),
+    "Ovarian-Cancer-Methylation": OCMethylationPredictor(),
     "Ovarian-Cancer-RNAseq": OCRNASeqPredictor(),
 }
 
@@ -196,17 +197,17 @@ def upload():
     # XXX
     # return jsonify({"status": "output complete"})
     if target not in HANDLERS.keys():
-        if FLASK_MODE == "dev":
-            return jsonify(
-                {
-                    "error": f"Flask mode is {FLASK_MODE}; uploads to {target} aren't supported"
-                }
-            )
+        # if FLASK_MODE == "dev":
+        #     return jsonify(
+        #         {
+        #             "error": f"Flask mode is {FLASK_MODE}; uploads to {target} aren't supported"
+        #         }
+        #     )
         app.logger.debug("*" * 40)
         app.logger.debug(f"Target: {target}")
         app.logger.debug(f"Keys: {[k for k in HANDLERS.keys()]}")
         app.logger.debug("*" * 40)
-        return jsonify({"error": "Illegal upload target error"})
+        return jsonify({"error": f"Illegal upload target error: Missing handler for {target}"})
     else:
         # raw_data = request.get_json()
         return jsonify(HANDLERS[target].make_prediction(data))
