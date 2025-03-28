@@ -34,7 +34,8 @@
     <v-col cols="3">
       <v-radio-group v-model="action">
         <v-radio label="Train new models" value="training"></v-radio>
-        <v-radio label="New sample with trained model" value="newSample"></v-radio>
+        <v-radio label="New sample with your models" value="newSamplePersonal"></v-radio>
+        <v-radio label="New sample with shared models" value="newSampleShared"></v-radio>
       </v-radio-group>
     <!-- <v-card flat :key="action" v-if="action === 'newSample'">
       <v-card-title>Your models</v-card-title>
@@ -63,7 +64,12 @@
           :upload-target-u-r-l="'pipeline'"
         />
         <AutomatedPipelineReuseModels
-          v-if="action == 'newSample'"
+          v-if="action == 'newSamplePersonal'"
+          :upload-target-u-r-l="'pipeline'"
+          :models-u-r-l="'user-models/'" 
+        />
+        <AutomatedPipelineSharedModels
+          v-if="action == 'newSampleShared'"
           :upload-target-u-r-l="'pipeline'"
           :models-u-r-l="'user-models/'" 
         />
@@ -98,6 +104,7 @@ import NotFound from './NotFound.vue';
 import LicenseShow from './LicenseShow.vue';
 import AutomatedPipelineUpload from '@/components/AutomatedPipelineUpload.vue';
 import AutomatedPipelineReuseModels from './AutomatedPipelineReuseModels.vue';
+import AutomatedPipelineSharedModels from './AutomatedPipelineSharedModels.vue';
 
 export default {
 
@@ -108,6 +115,6 @@ export default {
         action: "training",
 			}
     },
-  components: { DisclaimerShow, LicenseShow, AutomatedPipelineUpload, AutomatedPipelineReuseModels }
+  components: { DisclaimerShow, LicenseShow, AutomatedPipelineUpload, AutomatedPipelineReuseModels, AutomatedPipelineSharedModels }
 }
 </script>
