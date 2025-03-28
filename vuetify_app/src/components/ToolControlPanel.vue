@@ -18,7 +18,7 @@
 </v-col>
 <v-col cols="11">
 <v-row class="justify-center pa-2" v-if="loggedIn">
-    <FileUpload :upload-target-u-r-l="targetURL ? modelName : queryState.targetURL" />
+    <FileUpload :upload-target-u-r-l="targetURL ? modelName : `${queryState.targetURL}`" />
 </v-row>
 </v-col>
 <v-col cols="11">
