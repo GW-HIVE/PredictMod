@@ -1,0 +1,87 @@
+{
+  "object_id": "{}",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/2791object.json",
+  "etag": "",
+  "provenance_domain": {
+    "name": "PredictMod - Automated Pipeline",
+    "version": "1.0",
+    "license": "https://opensource.org/license/mit",
+    "created": "",
+    "modified": "",
+    "contributors": [
+      {
+        "name": "{}",
+        "affiliation": "The George Washington University",
+        "email": "{}",
+        "contribution": [
+          "createdBy"
+        ],
+        "orcid": ""
+      }
+    ]
+  },
+  "usability_domain": [
+    "The PredictMod automated ML pipeline was used with dataset {} to train model {}"
+  ],
+  "description_domain": {
+    "keywords": [
+    ],
+    "platform": [
+      "Linux Rocky 8"
+    ],
+    "pipeline_steps": [
+      {
+      }
+    ]
+  },
+  "parametric_domain": [
+  ],
+  "io_domain": {
+    "input_subdomain": [
+      {
+        "mediatype": "application/{}",
+        "uri": {
+          "uri": "{}/{}",
+          "upload_time": ""
+        }
+      }
+    ],
+    "output_subdomain": [
+      {
+        "mediatype": "application/octet-stream",
+        "uri": {
+          "uri": "{}/{}",
+          "access_time": ""
+        }
+      }
+    ]
+  },
+  "execution_domain": {
+    "language": "python",
+    "software_prerequisites": [
+      {
+        "name": "requires-python",
+        "version": ">=3.10",
+        "requirements": [
+          "flask",
+          "flask-cors",
+          "Flask-SQLAlchemy",
+          "gunicorn",
+          "matplotlib",
+          "numpy",
+          "openpyxl",
+          "pandas",
+          "scikit-learn",
+          "xgboost",
+          "shap",
+          "tomli"
+        ]
+      }
+    ],
+    "environment_variables": {}
+  },
+  "extension_domain": [
+    {
+    }
+  ]
+}
