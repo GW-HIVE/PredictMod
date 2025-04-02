@@ -1,1 +1,319 @@
-test
+{
+    "object_id": "https://biocomputeobject.org/BCO_000472/DRAFT",
+    "spec_version": "https://w3id.org/ieee/ieee-2791-schema/2791object.json",
+    "etag": "fc8bd954fec83b7d7c5fac2e7d8409599e22d7882fbd5791a46af4823dfa43ed",
+    "provenance_domain": {
+        "name": "MDclone_semaglutide",
+        "version": "1.1",
+        "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+        "created": "2024-04-01T14:55:28",
+        "modified": "2025-04-02T19:07:05",
+        "derived_from": [],
+        "contributors": [
+            {
+                "name": "Miguel Mazumder",
+                "affiliation": "HIVE lab",
+                "email": "mfmmazumder@gwmail.gwu.edu",
+                "contribution": [
+                    "createdBy"
+                ],
+                "orcid": ""
+            },
+            {
+                "name": "Urnisha Bhuiyan",
+                "affiliation": "HIVE lab",
+                "email": "sbhuiyan28@email.gwu.edu",
+                "contribution": [
+                    "createdBy"
+                ],
+                "orcid": ""
+            },
+            {
+                "name": "Lori Krammer",
+                "affiliation": "HIVE lab",
+                "email": "lorikrammer@email.gwu.edu",
+                "contribution": [
+                    "createdBy"
+                ],
+                "orcid": ""
+            },
+            {
+                "name": "Patrick McNeely",
+                "affiliation": "HIVE lab",
+                "email": "pmcneely@email.gwu.edu",
+                "contribution": [
+                    "createdBy"
+                ],
+                "orcid": ""
+            },
+            {
+                "name": "Kate Warner",
+                "affiliation": "The George Washington University",
+                "contribution": [
+                    "createdBy"
+                ],
+                "email": "k.warner1@gwu.edu"
+            }
+        ],
+        "review": []
+    },
+    "usability_domain": [
+        "Using a curated dataset of semaglutide-treated patients, the pipeline applies oversampling techniques to balance responder and non-responder groups, followed by normalization and model training using a decision tree classifier. Feature importance is assessed to identify which clinical or molecular attributes most influence prediction. The final model, along with its scaler and feature header map, is exported to allow for reproducible predictions on new patient input.\nThe result is a trained classifier that can assess a new patient's profile and predict the likelihood of response to semaglutide. This supports clinicians in making data-informed decisions about initiating semaglutide therapy. Predictions can also inform trial stratification or retrospective cohort analysis.\nThis object is intended for use in translational research, clinical decision support systems, or real-world evidence generation studies where patient-specific prediction of semaglutide efficacy is relevant.\n\n"
+    ],
+    "description_domain": {
+        "keywords": [
+            "machine learning",
+            "python",
+            "predictive intervention"
+        ],
+        "xref": [],
+        "platform": [],
+        "pipeline_steps": [
+            {
+                "step_number": 1,
+                "name": "Load Python Libraries",
+                "description": "from sklearn.model_selection import train_test_split\nfrom sklearn.tree import DecisionTreeClassifier\nfrom sklearn.metrics import accuracy_score, mean_absolute_error\nimport joblib\nimport pandas as pd",
+                "version": "1.1",
+                "prerequisite": [
+                    {
+                        "name": "sklearn library",
+                        "uri": {
+                            "filename": "scikit-learn 1.4.1",
+                            "access_time": "2024-04-01T14:51:00.000Z",
+                            "uri": "https://scikit-learn.org/stable/install.html#installation-instructions",
+                            "sha1_checksum": ""
+                        }
+                    },
+                    {
+                        "name": "joblib library",
+                        "uri": {
+                            "filename": "joblib 1.3.2",
+                            "access_time": "2024-04-01T14:50:00.000Z",
+                            "uri": "https://pypi.org/project/joblib/#downloads",
+                            "sha1_checksum": ""
+                        }
+                    },
+                    {
+                        "name": "pandas library",
+                        "uri": {
+                            "filename": "pandas 2.2.1",
+                            "access_time": "2024-04-01T14:51:00.000Z",
+                            "uri": "https://pypi.org/project/pandas/",
+                            "sha1_checksum": ""
+                        }
+                    }
+                ]
+            },
+            {
+                "step_number": 2,
+                "name": "Read Input Data",
+                "description": "- Read the data.xlsx file to pandas dataframe that contains the patient data using pd.read_excel\n- Extract features from the pandas dataframe",
+                "version": "1.1",
+                "input_list": [
+                    {
+                        "filename": "Semaglutide_curated.xlsx",
+                        "access_time": "2025-04-02T14:49:00.000Z",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/mdclone_semaglutide/Semaglutide_curated.xlsx",
+                        "sha1_checksum": ""
+                    }
+                ],
+                "output_list": [
+                    {
+                        "filename": "tmpfs",
+                        "access_time": "2025-04-02T04:00:00.000Z",
+                        "uri": "file:///dev/tmpfs",
+                        "sha1_checksum": ""
+                    }
+                ]
+            },
+            {
+                "step_number": 3,
+                "name": "Train ML model with Data",
+                "description": "- Create a decision tree classifier\n- Train the classifier on the training data\n- Make predictions on the testing data\n- return metrics of trained model",
+                "version": "1.1",
+                "input_list": [
+                    {
+                        "filename": "X_train",
+                        "access_time": "2025-04-02T04:00:00.000Z",
+                        "uri": "file:///dev/tmpfs",
+                        "sha1_checksum": ""
+                    }
+                ],
+                "output_list": [
+                    {
+                        "filename": "trained_model",
+                        "access_time": "2025-04-02T04:00:00.000Z",
+                        "uri": "file:///dev/tmpfs",
+                        "sha1_checksum": ""
+                    }
+                ]
+            },
+            {
+                "step_number": 4,
+                "name": "Save model to Pickle File",
+                "description": "- Save trained ML model to pickle file to be utilized in future patient input data",
+                "version": "1.1",
+                "output_list": [
+                    {
+                        "filename": "Diabetes_EHR_classifier_and_features.pickle",
+                        "access_time": "2024-04-01T14:50:00.000Z",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/mdclone_semaglutide/Diabetes_EHR_classifier_and_features.pickle",
+                        "sha1_checksum": ""
+                    }
+                ],
+                "input_list": [
+                    {
+                        "filename": "trained_model",
+                        "access_time": "",
+                        "uri": "file:///dev/tmpfs",
+                        "sha1_checksum": ""
+                    }
+                ]
+            },
+            {
+                "step_number": 5,
+                "name": "Load pickle file for single patient",
+                "description": "Loads a trained model and feature list from a .pickle file (Semaglutide_EHR_classifier_and_features.pickle)\nReads a new patient's data from an Excel file (single_patient_semaglutide.xlsx)\n\nEnsures compatibility by:\n\nAdding any missing features with default values (0)\n\nRemoving extra columns not used during model training\n\nReordering features to match the model's expected input\n\nRuns a prediction using the trained classifier on the processed patient data\n\nPrints the result, indicating whether the patient is likely or unlikely to respond to Semaglutide treatment",
+                "version": "1.1",
+                "input_list": [
+                    {
+                        "filename": "Diabetes_EHR_classifier_and_features.pickle",
+                        "access_time": "2025-04-02T04:00:00.000Z",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/mdclone_semaglutide/Diabetes_EHR_classifier_and_features.pickle",
+                        "sha1_checksum": ""
+                    },
+                    {
+                        "filename": "semaglutide_predictor_v1.0.py",
+                        "access_time": "2025-04-02T04:59:00.000Z",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/mdclone_semaglutide/semaglutide_predictor_v1.0.py",
+                        "sha1_checksum": ""
+                    }
+                ],
+                "output_list": [
+                    {
+                        "filename": "prediction",
+                        "access_time": "2025-04-02T04:00:00.000Z",
+                        "uri": "file:///dev/tmpfs",
+                        "sha1_checksum": ""
+                    }
+                ]
+            }
+        ]
+    },
+    "parametric_domain": [
+        {
+            "step": "3",
+            "param": "train_test_split",
+            "value": "test_size=0.3"
+        },
+        {
+            "step": "4",
+            "param": "SMOTE Patient Number",
+            "value": "Upscale()"
+        }
+    ],
+    "io_domain": {
+        "input_subdomain": [
+            {
+                "uri": {
+                    "filename": "Diabetes_EHR_classifier_and_features.pickle",
+                    "uri": "https://github.com/GW-HIVE/PredictMod/tree/main/flask_backend/models/mdclone_semaglutide/Diabetes_EHR_classifier_and_features.pickle/Diabetes_EHR_classifier_and_features.pickle",
+                    "access_time": "2025-04-02T04:00:00.000Z"
+                }
+            },
+            {
+                "uri": {
+                    "filename": "Single_patient_semaglutide.xlsx",
+                    "uri": "https://github.com/GW-HIVE/PredictMod/tree/main/flask_backend/models/mdclone_semaglutide/Diabetes_EHR_classifier_and_features.pickle/Single_patient_semaglutide.xlsx",
+                    "access_time": "2025-04-02T04:00:00.000Z"
+                }
+            }
+        ],
+        "output_subdomain": [
+            {
+                "mediatype": "Plain Text",
+                "uri": {
+                    "filename": "Outcome_prediction",
+                    "uri": "file:///dev/tmpfs",
+                    "access_time": "2025-04-02T04:01:00.000Z"
+                }
+            }
+        ]
+    },
+    "execution_domain": {
+        "script": [
+            {
+                "uri": {
+                    "filename": "semaglutide_predictor_v1.0.py",
+                    "uri": "https://github.com/GW-HIVE/PredictMod/tree/main/flask_backend/models/mdclone_semaglutide/semaglutide_predictor_v1.0.py",
+                    "access_time": "2025-04-02T04:00:00.000Z",
+                    "sha1_checksum": ""
+                }
+            }
+        ],
+        "script_driver": "Python",
+        "software_prerequisites": [
+            {
+                "name": "Python",
+                "version": "3.11.4",
+                "uri": {
+                    "filename": "python3.11.exe",
+                    "uri": "https://www.python.org/downloads/release/python-3114/",
+                    "access_time": "2025-04-02T04:59:00.000Z",
+                    "sha1_checksum": ""
+                }
+            },
+            {
+                "name": "sklearn library",
+                "version": "1.4.1",
+                "uri": {
+                    "filename": "sklearn ",
+                    "uri": "https://scikit-learn.org/stable/install.html#installation-instructions",
+                    "access_time": "2025-04-02T04:01:00.000Z",
+                    "sha1_checksum": ""
+                }
+            },
+            {
+                "name": "joblib library\t",
+                "version": "1.3.2",
+                "uri": {
+                    "filename": "joblib",
+                    "uri": "https://pypi.org/project/joblib/",
+                    "access_time": "2025-04-02T04:00:00.000Z",
+                    "sha1_checksum": ""
+                }
+            },
+            {
+                "name": "pandas library",
+                "version": "2.2.1",
+                "uri": {
+                    "filename": "pandas",
+                    "uri": "https://pypi.org/project/pandas/",
+                    "access_time": "2025-04-02T04:00:00.000Z",
+                    "sha1_checksum": ""
+                }
+            },
+            {
+                "name": "numpy library",
+                "version": "1.26.4",
+                "uri": {
+                    "filename": "numpy",
+                    "uri": "https://pypi.org/project/numpy/",
+                    "access_time": "2025-04-02T04:00:00.000Z",
+                    "sha1_checksum": ""
+                }
+            }
+        ],
+        "external_data_endpoints": [],
+        "environment_variables": {}
+    },
+    "extension_domain": [],
+    "error_domain": {
+        "empirical_error": {
+            "empirical_error": "0.35"
+        },
+        "algorithmic_error": {
+            "algorithmic_error": "0.64"
+        }
+    }
+}
