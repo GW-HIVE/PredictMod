@@ -217,14 +217,14 @@
             {
                 "uri": {
                     "filename": "Diabetes_EHR_classifier_and_features.pickle",
-                    "uri": "https://github.com/GW-HIVE/PredictMod/tree/main/flask_backend/models/mdclone_semaglutide/Diabetes_EHR_classifier_and_features.pickle/Diabetes_EHR_classifier_and_features.pickle",
+                    "uri": "https://github.com/GW-HIVE/PredictMod/tree/main/flask_backend/models/mdclone_semaglutide/Diabetes_EHR_classifier_and_features.pickle",
                     "access_time": "2025-04-02T04:00:00.000Z"
                 }
             },
             {
                 "uri": {
                     "filename": "Single_patient_semaglutide.xlsx",
-                    "uri": "https://github.com/GW-HIVE/PredictMod/tree/main/flask_backend/models/mdclone_semaglutide/Diabetes_EHR_classifier_and_features.pickle/Single_patient_semaglutide.xlsx",
+                    "uri": "https://github.com/GW-HIVE/PredictMod/tree/main/flask_backend/models/mdclone_semaglutide/Single_patient_semaglutide.xlsx",
                     "access_time": "2025-04-02T04:00:00.000Z"
                 }
             }
@@ -313,7 +313,7 @@
             "empirical_error": "0.35"
         },
         "algorithmic_error": {
-            "algorithmic_error": "0.64"
+            "algorithmic_error": "0.36"
         }
     }
 }
