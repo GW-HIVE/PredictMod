@@ -3,10 +3,9 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score, mean_absolute_error
 import joblib
 import pandas as pd
-import uuid
 
 def run_training():
-    df = pd.read_excel('Semaglutide_synthetic_curate2.xlsx')
+    df = pd.read_excel('Semaglutide_curated.xlsx')
     # Extract features (X) and labels (y)
     feature_names = df.columns[:-1]  # Exclude the last column for Y_data
     X_data = df.iloc[:, :-1]  # All columns except the last one for features
