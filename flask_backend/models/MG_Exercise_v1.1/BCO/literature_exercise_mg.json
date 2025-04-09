@@ -151,6 +151,13 @@
           "filename": "literature_mg.pkl",
           "uri": "https://github.com/GW-HIVE/PredictMod/blob/6f0cb567472c70d5c4ef31544e688cab058d0e77/flask_backend/models/MG_Exercise_v1.1/literature_mg_v1.1.pkl",
           "access_time": "2024-07-03T04:00:00.000Z"
+        },
+        {
+        "mediatype": "PNG",
+        "uri": {
+          "filename": "feature_importance.png",
+          "uri": "https://github.com/GW-HIVE/PredictMod/blob/b0efb7b5d1237a276b2400bafec558ff126f26d5/flask_backend/models/MG_Exercise_v1.1/feature_importance.png",
+          "access_time": "2024-07-03T04:00:00.000Z"
         }
       }
     ]
