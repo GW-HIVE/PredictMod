@@ -19,6 +19,6 @@ A Logistic Regression was employed, with data preprocessing incorporating augmen
 
 **Overall AUC:** 0.93
 
-Linke to Tutorial: https://colab.research.google.com/drive/17CY4BGcd1X8G0vASqbSk6g94ZrNBVsYS#scrollTo=CfRWitgHfVlG
+Link to Tutorial: https://colab.research.google.com/drive/17CY4BGcd1X8G0vASqbSk6g94ZrNBVsYS#scrollTo=CfRWitgHfVlG
 
 
