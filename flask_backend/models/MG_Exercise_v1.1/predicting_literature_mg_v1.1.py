@@ -1,6 +1,7 @@
 #%%
 import pickle
 import pandas as pd
+import matplotlib.pyplot as plt
 
 #%%
 # Open the pickle file
@@ -29,5 +30,16 @@ if hasattr(model, 'feature_importances_'):
     
     print("\nTop 10 Features by Importance:")
     print(feature_importance_df)
+    
+    # Plot the top 10 feature importances
+    plt.figure(figsize=(10, 6))
+    plt.barh(feature_importance_df['Feature'], feature_importance_df['Importance'], color='skyblue')
+    plt.xlabel('Importance')
+    plt.title('Top 10 Features by Importance')
+    plt.gca().invert_yaxis()  # To display the most important feature at the top
+
+    # Save the plot as a PNG file
+    plt.savefig('mg_feature_imp.png', format='png')
+    print("\nFeature importance plot saved as mg_feature_imp.png")
 else:
     print("The model does not support feature importance extraction.")
