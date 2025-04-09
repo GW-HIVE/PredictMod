@@ -95,7 +95,7 @@
       {
         "step_number": 2,
         "name": "predicting_mg ",
-        "description": "The following script performs model evaluation by conducting the following: \n1. Load the pickled model \n2. Make a prediction using stored model on unknown sample ",
+        "description": "The following script performs model evaluation by conducting the following: \n1. Load the pickled model \n2. Make a prediction using stored model on unknown sample \n3. Display the top 10 features ",
         "version": "v1.1 ",
         "input_list": [
           {
@@ -117,9 +117,12 @@
             "access_time": "2024-07-03T04:00:00.000Z",
             "uri": "https://github.com/GW-HIVE/PredictMod/tree/main/flask_backend/models/MG_Exercise_v1.1",
             "sha1_checksum": ""
-          }
-        ]
-      }
+          },
+          {
+            "filename": "feature_importance.png",
+            "access_time": "2024-07-03T04:00:00.000Z",
+            "uri": "XXX",
+            "sha1_checksum": ""
     ]
   },
   "parametric_domain": [],
