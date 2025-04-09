@@ -123,8 +123,9 @@
             "access_time": "2024-07-03T04:00:00.000Z",
             "uri": "XXX",
             "sha1_checksum": ""
-    ]
-  },
+          }
+        ]
+      },
   "parametric_domain": [],
   "io_domain": {
     "input_subdomain": [
