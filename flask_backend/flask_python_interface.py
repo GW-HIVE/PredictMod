@@ -21,6 +21,7 @@ from model_handlers import (
     EC_EHR_Keto_ModelHandler,
     OCMethylationPredictor,
     OCRNASeqPredictor,
+    MDClone_Exercise_Classifier,
 )
 
 # TODO: Documentation
@@ -38,6 +39,7 @@ DETAIL_LOOKUP = {
     "Predictmod_EHR_Keto": "PredictMod_EHR_Keto_v1.0/README.md",
     "Ovarian-Cancer-Methylation": "ovarian_cancer_methylation/README.md",
     "Ovarian-Cancer-RNAseq": "ovarian_rnaseq/README.md",
+    "MDClone-Exercise": "mdclone_exercise/README.md",
 }
 
 DOWNLOAD_LOOKUP = {
@@ -48,6 +50,7 @@ DOWNLOAD_LOOKUP = {
     "Predictmod_EHR_Keto": "PredictMod_EHR_Keto_v1.0/svm_sample.csv",
     "Ovarian-Cancer-Methylation": "ovarian_cancer_methylation/Ovarian-Cancer-Methylation.csv",
     "Ovarian-Cancer-RNAseq": "ovarian_rnaseq/ovarian_RNAseq_single_patient.xlsx",
+    "MDClone-Exercise": "mdclone_exercise/single_patient_mdclone_exercise.csv",
 }
 
 HANDLERS = {
@@ -58,6 +61,7 @@ HANDLERS = {
     "Predictmod_EHR_Keto": EC_EHR_Keto_ModelHandler(),
     "Ovarian-Cancer-Methylation": OCMethylationPredictor(),
     "Ovarian-Cancer-RNAseq": OCRNASeqPredictor(),
+    "MDClone-Exercise": MDClone_Exercise_Classifier(),
 }
 
 
