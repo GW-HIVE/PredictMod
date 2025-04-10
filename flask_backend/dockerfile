@@ -4,5 +4,5 @@ FROM predictmod:backend-base
 COPY . /backend
 WORKDIR /backend
 
-CMD ["gunicorn", "--bind", "0.0.0.0:4243", "--access-logfile", "/var/log/gunicorn/dev.log", "wsgi:app"]
+CMD ["gunicorn", "--bind", "0.0.0.0:4243", "--timeout", "120", "--access-logfile", "/var/log/gunicorn/dev.log", "wsgi:app"]
 # CMD ["gunicorn", "-c", "gunicorn_conf.py"]
