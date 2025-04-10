@@ -9,3 +9,5 @@ The intervention of interest for this model is the ketogenic diet. A responder s
 
 **Algorithm & Model Performance**  
 Support Vector Machine (SVM) is a type of supervised ML that aims to classify objects into two or more categories. The SVM with sigmoid kernel performed the best (65% accuracy) compared to all other kernels. This is likely due to the sigmoid kernel being used for binary classification problems where the data points are not linearly separable in the input space.
+
+Link to Tutorial: https://colab.research.google.com/drive/1dkZRwe_4EPduPkYBVWYOfjt6JBaQhjwu#scrollTo=it3WkUydjEmv
