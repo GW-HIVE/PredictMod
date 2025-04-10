@@ -22,17 +22,20 @@ const routes = [
     //   }
     // }
   },
-  {
-    path: '/predictmod/about',
-    component: () => import('../views/About.vue'),
-  },
-  {
-    path: '/predictmod/faq',
-    component: () => import('../views/FAQ.vue'),
-  }, {
-    path: '/predictmod/contact',
-    component: () => import('../views/Contact.vue'),
-  },
+  // {
+  //   path: '/predictmod/about',
+  //   beforeEnter() {location.href = 'https://hivelab.biochemistry.gwu.edu/wiki/About_PredictMod'}
+  //   // component: () => import('../views/About.vue'),
+  // },
+  // {
+  //   path: '/predictmod/faq',
+  //   beforeEnter() {location.href = 'https://hivelab.biochemistry.gwu.edu/wiki/PredictMod_Frequently_Asked_Questions'}
+  //   // component: () => import('../views/FAQ.vue'),
+  // }, {
+  //   path: '/predictmod/contact',
+  //   beforeEnter() {location.href = 'https://hivelab.biochemistry.gwu.edu/wiki/PredictMod_Contact_Us'}
+  //   // component: () => import('../views/Contact.vue'),
+  // },
     // {
     //   path: '/predictmod/ehr-home', 
     //   component: () => import('../views/EHRHome.vue'),
@@ -74,16 +77,18 @@ const routes = [
       component: () => import('../views/ModelView.vue'),
       props: true,
     },
-    {
-      path: '/predictmod/new-models', 
-      component: () => import('../views/NewModelView.vue'),
-      props: true,
-    },
-    {
-      path: '/predictmod/tutorial', 
-      component: () => import('../views/TutorialView.vue'),
-      props: true,
-    },
+    // {
+    //   path: '/predictmod/new-models', 
+    //   beforeEnter() {location.href = 'https://hivelab.biochemistry.gwu.edu/wiki/PredictMod_Model_Submission'}
+    //   // component: () => import('../views/NewModelView.vue'),
+    //   // props: true,
+    // },
+    // {
+    //   path: '/predictmod/tutorial',
+    //   beforeEnter() {location.href = 'https://hivelab.biochemistry.gwu.edu/wiki/PredictMod_ML_Pipeline_Tutorial'}
+    //   // component: () => import('../views/TutorialView.vue'),
+    //   // props: true,
+    // },
     {
       path: '/predictmod/automated-pipeline', 
       component: () => import('../views/AutomatedPipeline.vue'),

@@ -3,12 +3,21 @@
     <!-- Also see SO at https://stackoverflow.com/questions/49721710/how-to-use-vuetify-tabs-with-vue-router -->
     <!-- <template v-slot:extension> -->
       <v-tabs height="48">
+      <!-- <v-tabs> -->
+        <div v-for="link in links">
+          <v-tab
+            v-if="link.to.startsWith('http')"
+            :text="link.name"
+            :href="link.to"
+          ></v-tab>
+          <v-tab
+            v-if="!link.to.startsWith('http')"
+            :text="link.name"
+            :to="link.to"
+          >
+          </v-tab>
 
-        <v-tab
-          v-for="link in links"
-          :text="link.name"
-          :to="link.to"
-        ></v-tab>
+        </div>
 
         <v-menu>
           <template v-slot:activator="{ props }">
@@ -71,9 +80,9 @@ export default {
     data: () => ({
       links: [
         { name: "Home", to: "/predictmod/" },
-        { name: "About", to:  "/predictmod/about" },
-        { name: "FAQ", to: "/predictmod/faq" },
-        { name: "Contact", to:  "/predictmod/contact" },
+        { name: "About", to:  "https://hivelab.biochemistry.gwu.edu/wiki/About_PredictMod" },
+        { name: "FAQ", to: "https://hivelab.biochemistry.gwu.edu/wiki/PredictMod_Frequently_Asked_Questions" },
+        { name: "Contact", to:  "https://hivelab.biochemistry.gwu.edu/wiki/PredictMod_Contact_Us" },
         { name: "Query Builder", to: "/predictmod/query-builder" },
         { name: "Models", to:  "/predictmod/models" },
         { name: "Users", to:  "/predictmod/users" },
@@ -81,8 +90,8 @@ export default {
       ],
       modelMenu: [
         { name: "Automated Pipeline", to: "/predictmod/automated-pipeline" },
-        { name: "AI/ML Tutorial", to: "/predictmod/tutorial" },
-        { name: "New Models", to: "/predictmod/new-models" },
+        { name: "AI/ML Tutorial", to: "https://hivelab.biochemistry.gwu.edu/wiki/PredictMod_ML_Pipeline_Tutorial" },
+        { name: "New Models", to: "https://hivelab.biochemistry.gwu.edu/wiki/PredictMod_Model_Submission" },
       ]
     }),
     mounted() {
@@ -93,7 +102,11 @@ export default {
     },
     methods: {
       routeTo(newLocation) {
-        this.$router.push(newLocation);
+        if (newLocation.startsWith('http')) {
+          location.href = newLocation
+        } else {
+          this.$router.push(newLocation)
+        }
       }
     },
     components: { SearchInput },
