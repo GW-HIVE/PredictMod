@@ -112,3 +112,17 @@ input_data_type = "RNA Seq"
 Samples = 29
 Features = 17
 #################################################
+########### MDClone_Exercise ###############
+[MDClone_Exercise]
+name = "MDClone Exercise"
+version = "1.0"
+release_date = 2025-04-11
+model_type = "Decision Tree Classifier (DTC)"
+data_type = "MDClone Exercise"
+backend = "predict-backend"
+condition = "Prediabetes"
+intervention = "Exercise"
+input_data_type = "EHR"
+
+[MDClone_Exercise.data_meta]
+#################################################
