@@ -19,3 +19,5 @@ Use/updates by the PredictMod interface requires manually copying the pickled ob
 
 # NB
 In general, binary objects (including Excel files, pdfs, etc.) should not be stored in GitHub. In line with that, the pickle must be created locally using `create_tree.py`. The `.gitignore` file has been updated to ignore `*.pickle` files, generally.
+
+Link to Tutorial: https://colab.research.google.com/drive/19rnmXsoNknPqmPUPxundeA8V1xRYWL24#scrollTo=pT424odKPzi1
