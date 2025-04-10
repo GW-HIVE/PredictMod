@@ -15,7 +15,8 @@
      
           <v-card flat color="transparent">
             <v-card-title class="title text-center font-weight-bold">
-              <h1>Welcome to PredictMod <font size="-1">BETA</font></h1>
+              <!-- <h1>Welcome to PredictMod <font size="-1">BETA</font></h1> -->
+              <h1>Welcome to PredictMod</h1>
             </v-card-title>
             <v-card-text class="text-center">
               <h4>Welcome to PredictMod! PredictMod is a machine-learning-based platform that predicts whether 
