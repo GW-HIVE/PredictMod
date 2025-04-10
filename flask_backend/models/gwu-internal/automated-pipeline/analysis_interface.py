@@ -221,7 +221,7 @@ def upload():
         # app.logger.debug(f"Found label column: {label_column}")
         label_data = data[label_column]
         data = data.drop(columns=[label_column])
-        drop_columns = request_data["drop"]
+        drop_columns = request_data.get("drop", None)
         if type(drop_columns) is str:
             drop_columns = [drop_columns]
         app.logger.debug(f"Found drop column(s): {drop_columns}")
