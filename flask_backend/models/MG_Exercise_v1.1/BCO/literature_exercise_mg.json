@@ -1,208 +1,206 @@
 {
-  "object_id": "https://biocomputeobject.org/BCO_000503/DRAFT",
-  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/2791object.json",
-  "etag": "",
-  "provenance_domain": {
-    "name": "literature_exercise_mg ",
-    "version": "1.1",
-    "license": "https://spdx.org/licenses/CC-BY-4.0.html",
-    "created": "2024-07-03T17:26:28",
-    "modified": "2024-07-03T18:35:25",
-    "derived_from": "",
-    "contributors": [
-      {
-        "name": "Urnisha Bhuiyan",
-        "affiliation": "George Washington University",
-        "email": "sbhuiyan28@email.gwu.edu",
-        "contribution": [
-          "createdBy"
-        ],
-        "orcid": ""
-      },
-      {
-        "name": "Miguel Mazumder",
-        "affiliation": "George Washington University",
-        "email": "mfmmazumder@gwmail.gwu.edu",
-        "contribution": [
-          "createdBy"
-        ],
-        "orcid": ""
-      },
-      {
-        "name": "Patrick McNeely ",
-        "affiliation": "George Washington University",
-        "email": "pmcneely@email.gwu.edu",
-        "contribution": [
-          "createdBy"
-        ],
-        "orcid": ""
-      },
-      {
-        "name": "Lori Krammer",
-        "affiliation": "George Washington University ",
-        "email": "lorikrammer@email.gwu.edu",
-        "contribution": [
-          "createdBy"
-        ],
-        "orcid": ""
-      }
-    ],
-    "review": []
-  },
-  "usability_domain": [
-    "Data Source\nOur MG_Exercise Model is trained on metagenomic whole-genome sequencing (WGS) reads stored within the National Center for Biotechnology Information’s (NCBI) Sequence Read Archive (SRA). These reads were submitted by authors of a publication (PMID 31786155) interested in identifying alterations within gut microbiome profiles of medication-naïve prediabetes male volunteers. The training dataset included 40 patients and 281 variables.\n\nIntervention & Outcomes \nThe volunteers of this study were separated into a sedentary and an exercise group, where the exercise group underwent a 12-week high-intensity exercise regimen. The authors observed a varied response to the intervention within their experimental group, with some individuals experiencing a favorable outcome (a 2-fold or greater reduction in Homeostatic Model Assessment for Insulin Resistance (HOMA-IR)), while others showed little to no improvement in HOMA-IR. Those who were able to improve their HOMA-IR were deemed responders in this study, while those who were unable to improve their condition were deemed non-responders."
-  ],
-  "description_domain": {
-    "keywords": [
-      "machine learning",
-      "metagenomic ",
-      "gut microbiome",
-      "exercise"
-    ],
-    "xref": [],
-    "platform": [
-      "Python"
-    ],
-    "pipeline_steps": [
-      {
-        "step_number": 1,
-        "name": "training_mg ",
-        "description": "This script conducts the following steps: \n1. Load cleaned and curated MG relative abundance dataset - pre-processing steps for raw SRA files provided by KI_Keto_Protocol_Final.pdf \n2. Run dataset through Random Forest Classifier \n3. Save the trained model as a pickle file ",
+    "object_id": "https://biocomputeobject.org/BCO_000587/DRAFT",
+    "spec_version": "https://w3id.org/ieee/ieee-2791-schema/2791object.json",
+    "etag": "d9e96d02b590cf278eb361be52284b4daa09c040df24e1a7a2bdcd2e7bff52a1",
+    "provenance_domain": {
+        "name": "MG_Exercise",
         "version": "1.1",
-        "input_list": [
-          {
-            "filename": "cleaned_literature_mg.csv",
-            "access_time": "2024-07-03T04:00:00.000Z",
-            "uri": "https://github.com/GW-HIVE/PredictMod/blob/e50477504e2e5de41ab7ac459a4126f7cc35c676/flask_backend/models/MG_Exercise_v1.1/cleaned_literature_mg_v1.1.csv",
-            "sha1_checksum": ""
-          },
-          {
-            "filename": "training_ literature_mg.py",
-            "access_time": "2024-07-03T04:00:00.000Z",
-            "uri": "https://github.com/GW-HIVE/PredictMod/blob/e50477504e2e5de41ab7ac459a4126f7cc35c676/flask_backend/models/MG_Exercise_v1.1/training_%20literature_mg_v1.1.py",
-            "sha1_checksum": ""
-          }
+        "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+        "created": "2024-07-03T17:26:28",
+        "modified": "2025-04-10T15:26:03",
+        "derived_from": "",
+        "contributors": [
+            {
+                "name": "Urnisha Bhuiyan",
+                "affiliation": "George Washington University",
+                "email": "sbhuiyan28@email.gwu.edu",
+                "contribution": [
+                    "createdBy"
+                ],
+                "orcid": ""
+            },
+            {
+                "name": "Miguel Mazumder",
+                "affiliation": "George Washington University",
+                "email": "mfmmazumder@gwmail.gwu.edu",
+                "contribution": [
+                    "createdBy"
+                ]
+            },
+            {
+                "name": "Patrick McNeely",
+                "affiliation": "George Washington University",
+                "email": "pmcneely@email.gwu.edu",
+                "contribution": [
+                    "createdBy"
+                ]
+            },
+            {
+                "name": "Lori Krammer",
+                "affiliation": "George Washington University",
+                "email": "lorikrammer@email.gwu.edu",
+                "contribution": [
+                    "createdBy"
+                ]
+            }
         ],
-        "output_list": [
-          {
-            "filename": "literature_mg_v1.1.pkl ",
-            "access_time": "2024-07-03T04:00:00.000Z",
-            "uri": "https://github.com/GW-HIVE/PredictMod/blob/6f0cb567472c70d5c4ef31544e688cab058d0e77/flask_backend/models/MG_Exercise_v1.1/literature_mg_v1.1.pkl",
-            "sha1_checksum": ""
-          }
-        ]
-      },
-      {
-        "step_number": 2,
-        "name": "predicting_mg ",
-        "description": "The following script performs model evaluation by conducting the following: \n1. Load the pickled model \n2. Make a prediction using stored model on unknown sample \n3. Display the top 10 features ",
-        "version": "v1.1 ",
-        "input_list": [
-          {
-            "filename": "literature_mg_v1.1.pkl",
-            "access_time": "2024-07-03T04:00:00.000Z",
-            "uri": "https://github.com/GW-HIVE/PredictMod/blob/6f0cb567472c70d5c4ef31544e688cab058d0e77/flask_backend/models/MG_Exercise_v1.1/literature_mg_v1.1.pkl",
-            "sha1_checksum": ""
-          },
-          {
-            "filename": "predicting_literature_mg_v1.1.py",
-            "access_time": "2024-07-03T04:00:00.000Z",
-            "uri": "https://github.com/GW-HIVE/PredictMod/blob/5ac875f6fa5cc83ecbf75e811d63cd423d1101f8/flask_backend/models/MG_Exercise_v1.1/predicting_literature_mg_v1.1.py",
-            "sha1_checksum": ""
-          }
-        ],
-        "output_list": [
-          {
-            "filename": "prediction_literature_mg_v1.1.csv",
-            "access_time": "2024-07-03T04:00:00.000Z",
-            "uri": "https://github.com/GW-HIVE/PredictMod/tree/main/flask_backend/models/MG_Exercise_v1.1",
-            "sha1_checksum": ""
-          },
-          {
-            "filename": "feature_importance.png",
-            "access_time": "2024-07-03T04:00:00.000Z",
-            "uri": "https://github.com/GW-HIVE/PredictMod/blob/b0efb7b5d1237a276b2400bafec558ff126f26d5/flask_backend/models/MG_Exercise_v1.1/feature_importance.png",
-            "sha1_checksum": ""
-          }
-        ]
-      },
-  "parametric_domain": [],
-  "io_domain": {
-    "input_subdomain": [
-      {
-        "uri": {
-          "filename": "cleaned_literature_mg.csv",
-          "uri": "https://github.com/GW-HIVE/PredictMod/blob/e50477504e2e5de41ab7ac459a4126f7cc35c676/flask_backend/models/MG_Exercise_v1.1/cleaned_literature_mg_v1.1.csv"
-        }
-      }
+        "review": []
+    },
+    "usability_domain": [
+        "The MG_Exercise Model was developed using metagenomic whole-genome sequencing (WGS) data sourced from the NCBI Sequence Read Archive (PMID: 31786155). This dataset included samples from 40 medication-naïve prediabetic male volunteers and contained 281 microbial features. Participants were divided into sedentary and exercise groups, with the latter completing a 12-week high-intensity training program. Based on changes in insulin resistance (measured by HOMA-IR), individuals were classified as either responders (R) or non-responders (NR).\n\nA Random Forest Classifier was trained to distinguish between responders and non-responders. The model achieved perfect accuracy on the training data (1.0) and performed well on the test set, with an accuracy of 0.90. The classification report revealed strong predictive ability, with an F1-score of 0.86 for non-responders and 0.92 for responders. Precision and recall were 0.75 and 1.00 for non-responders, and 1.00 and 0.86 for responders, respectively. These results highlight the model’s robustness in identifying differential responses to exercise based on gut microbiome profiles.\n\nTop 10 Feature Importances:\nFP929061.1_Anaerostipes_hadrus - 0.031161\n\nPUEC01000000.1_Duncaniella_muris_DSM103720 - 0.028354\n\nAP019004.1_Phascolarctobacterium_faecium_JCM_30894 - 0.028335\n\nCP036491.1_Bacteroides_sp_A1C1 - 0.024377\n\nFP929054.1_Ruminococcus_obeum_A2-162 - 0.023533\n\nFP929038.1_Coprococcus_catus_GD/7 - 0.022253\n\nCP024960.1_Collinsella_aerofaciens_C11 - 0.020793\n\nCP022479.1_Faecalibacterium_prausnitzii_A2165 - 0.020308\n\nCP027234.1_Bacteroides_heparinolyticus_F0111 - 0.020037\n\nAP019734.1_Alistipes_onderdonkii_subsp_vulgaris_3BBH6 - 0.019394"
     ],
-{
-  "output_subdomain": [
-    {
-      "mediatype": "csv",
-      "uri": {
-        "filename": "prediction_literature_mg_v1.1.csv",
-        "uri": "https://github.com/GW-HIVE/PredictMod/tree/main/flask_backend/models/MG_Exercise_v1.1",
-        "access_time": "2024-07-03T04:00:00.000Z"
-      }
-    },
-    {
-      "mediatype": "pickle",
-      "uri": {
-        "filename": "literature_mg.pkl",
-        "uri": "https://github.com/GW-HIVE/PredictMod/blob/6f0cb567472c70d5c4ef31544e688cab058d0e77/flask_backend/models/MG_Exercise_v1.1/literature_mg_v1.1.pkl",
-        "access_time": "2024-07-03T04:00:00.000Z"
-      }
-    },
-    {
-      "mediatype": "PNG",
-      "uri": {
-        "filename": "feature_importance.png",
-        "uri": "https://github.com/GW-HIVE/PredictMod/blob/b0efb7b5d1237a276b2400bafec558ff126f26d5/flask_backend/models/MG_Exercise_v1.1/feature_importance.png",
-        "access_time": "2024-07-03T04:00:00.000Z"
-      }
+    "description_domain": {
+        "keywords": [
+            "machine learning",
+            "metagenomic",
+            "gut microbiome",
+            "exercise"
+        ],
+        "xref": [],
+        "platform": [
+            "Python"
+        ],
+        "pipeline_steps": [
+            {
+                "step_number": 1,
+                "name": "training_mg",
+                "description": "This script conducts the following steps: \n1. Load cleaned and curated MG relative abundance dataset - pre-processing steps for raw SRA files provided by KI_Keto_Protocol_Final.pdf \n2. Run dataset through Random Forest Classifier \n3. Save the trained model as a pickle file",
+                "version": "1.1",
+                "input_list": [
+                    {
+                        "filename": "cleaned_literature_mg.csv",
+                        "access_time": "2024-07-03T04:00:00.000Z",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/blob/e50477504e2e5de41ab7ac459a4126f7cc35c676/flask_backend/models/MG_Exercise_v1.1/cleaned_literature_mg_v1.1.csv",
+                        "sha1_checksum": ""
+                    },
+                    {
+                        "filename": "training_literature_mg.py",
+                        "access_time": "2024-07-03T04:00:00.000Z",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/blob/e50477504e2e5de41ab7ac459a4126f7cc35c676/flask_backend/models/MG_Exercise_v1.1/training_literature_mg_v1.1.py",
+                        "sha1_checksum": ""
+                    }
+                ],
+                "output_list": [
+                    {
+                        "filename": "literature_mg_v1.1.pkl",
+                        "access_time": "2024-07-03T04:00:00.000Z",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/blob/6f0cb567472c70d5c4ef31544e688cab058d0e77/flask_backend/models/MG_Exercise_v1.1/literature_mg_v1.1.pkl",
+                        "sha1_checksum": ""
+                    }
+                ]
+            },
+            {
+                "step_number": 2,
+                "name": "predicting_mg",
+                "description": "The following script performs model evaluation by conducting the following: \n1. Load the pickled model \n2. Make a prediction using stored model on unknown sample \n3. Display the top 10 features",
+                "version": "v1.1",
+                "input_list": [
+                    {
+                        "filename": "literature_mg_v1.1.pkl",
+                        "access_time": "2024-07-03T04:00:00.000Z",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/blob/6f0cb567472c70d5c4ef31544e688cab058d0e77/flask_backend/models/MG_Exercise_v1.1/literature_mg_v1.1.pkl",
+                        "sha1_checksum": ""
+                    },
+                    {
+                        "filename": "predicting_literature_mg_v1.1.py",
+                        "access_time": "2024-07-03T04:00:00.000Z",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/blob/5ac875f6fa5cc83ecbf75e811d63cd423d1101f8/flask_backend/models/MG_Exercise_v1.1/predicting_literature_mg_v1.1.py",
+                        "sha1_checksum": ""
+                    }
+                ],
+                "output_list": [
+                    {
+                        "filename": "prediction_literature_mg_v1.1.csv",
+                        "access_time": "2024-07-03T04:00:00.000Z",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/tree/main/flask_backend/models/MG_Exercise_v1.1",
+                        "sha1_checksum": ""
+                    },
+                    {
+                        "filename": "feature_importance.png",
+                        "access_time": "2024-07-03T04:00:00.000Z",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/blob/b0efb7b5d1237a276b2400bafec558ff126f26d5/flask_backend/models/MG_Exercise_v1.1/feature_importance.png",
+                        "sha1_checksum": ""
+                    }
+                ]
+            }
+        ],
+        "parametric_domain": [],
+        "io_domain": {
+            "input_subdomain": [
+                {
+                    "uri": {
+                        "filename": "cleaned_literature_mg.csv",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/blob/e50477504e2e5de41ab7ac459a4126f7cc35c676/flask_backend/models/MG_Exercise_v1.1/cleaned_literature_mg_v1.1.csv"
+                    }
+                }
+            ],
+            "output_subdomain": [
+                {
+                    "mediatype": "csv",
+                    "uri": {
+                        "filename": "prediction_literature_mg_v1.1.csv",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/tree/main/flask_backend/models/MG_Exercise_v1.1",
+                        "access_time": "2024-07-03T04:00:00.000Z"
+                    }
+                },
+                {
+                    "mediatype": "pickle",
+                    "uri": {
+                        "filename": "literature_mg.pkl",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/blob/6f0cb567472c70d5c4ef31544e688cab058d0e77/flask_backend/models/MG_Exercise_v1.1/literature_mg_v1.1.pkl",
+                        "access_time": "2024-07-03T04:00:00.000Z"
+                    }
+                },
+                {
+                    "mediatype": "PNG",
+                    "uri": {
+                        "filename": "feature_importance.png",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/blob/b0efb7b5d1237a276b2400bafec558ff126f26d5/flask_backend/models/MG_Exercise_v1.1/feature_importance.png",
+                        "access_time": "2024-07-03T04:00:00.000Z"
+                    }
+                }
+            ]
+        },
+        "execution_domain": {
+            "script": [],
+            "script_driver": "",
+            "software_prerequisites": [
+                {
+                    "name": "Python",
+                    "version": "3.9.5",
+                    "uri": {
+                        "uri": "https://www.python.org/",
+                        "access_time": "2024-06-14T04:00:00.000Z"
+                    }
+                },
+                {
+                    "name": "pandas",
+                    "version": "1.4.1",
+                    "uri": {
+                        "uri": "https://pandas.pydata.org/",
+                        "access_time": "2024-06-14T04:00:00.000Z"
+                    }
+                },
+                {
+                    "name": "numpy",
+                    "version": "1.22.3",
+                    "uri": {
+                        "uri": "https://numpy.org/",
+                        "access_time": "2024-06-14T04:00:00.000Z"
+                    }
+                },
+                {
+                    "name": "sklearn",
+                    "version": "1.4.1.post1",
+                    "uri": {
+                        "uri": "https://scikit-learn.org/stable/"
+                    }
+                }
+            ],
+            "external_data_endpoints": [],
+            "environment_variables": {}
+        },
+        "extension_domain": [],
+        "error_domain": {}
     }
-  ]
-}
-  "execution_domain": {
-    "script": [],
-    "script_driver": "",
-    "software_prerequisites": [
-      {
-        "name": "Python",
-        "version": "3.9.5",
-        "uri": {
-          "uri": "https://www.python.org/",
-          "access_time": "2024-06-14T04:00:00.000Z"
-        }
-      },
-      {
-        "name": "pandas",
-        "version": "1.4.1",
-        "uri": {
-          "uri": "https://pandas.pydata.org/",
-          "access_time": "2024-06-14T04:00:00.000Z"
-        }
-      },
-      {
-        "name": "numpy",
-        "version": "1.22.3",
-        "uri": {
-          "uri": "https://numpy.org/",
-          "access_time": "2024-06-14T04:00:00.000Z"
-        }
-      },
-      {
-        "name": "sklearn",
-        "version": "1.4.1.post1",
-        "uri": {
-          "uri": "https://scikit-learn.org/stable/"
-        }
-      }
-    ],
-    "external_data_endpoints": [],
-    "environment_variables": {}
-  },
-  "extension_domain": [],
-  "error_domain": {}
 }
