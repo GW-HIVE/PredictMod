@@ -24,4 +24,4 @@ case $BUILD_ENV in
     ;;
 esac
 
-popd .. 2>&1 > /dev/null
+popd 2>&1 > /dev/null
