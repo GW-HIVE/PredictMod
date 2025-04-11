@@ -9,10 +9,5 @@ name = "MDClone_Semaglutide"
 version = "1.0"
 data_type = "EHR"
 
-[MDClone_Exercise]
-name = "MDClone_Exercise"
-version = "1.0"
-data_type = "EHR"
-
 
 
