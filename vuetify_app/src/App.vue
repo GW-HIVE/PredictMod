@@ -86,7 +86,7 @@ export default {
         { name: "Query Builder", to: "/predictmod/query-builder" },
         { name: "Models", to:  "/predictmod/models" },
         { name: "Users", to:  "/predictmod/users" },
-        { name: "Help", to: "/predictmod/help" },
+        { name: "Help", to: "https://hivelab.biochemistry.gwu.edu/wiki/PredictMod_User_Guide" },
       ],
       modelMenu: [
         { name: "Automated Pipeline", to: "/predictmod/automated-pipeline" },

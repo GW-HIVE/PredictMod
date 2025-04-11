@@ -106,8 +106,8 @@ import NotFound from './NotFound.vue';
 import LicenseShow from './LicenseShow.vue';
 
 const modelsURL = 'models/';
-const newModelsURL = 'new-models/'
-const tutorialURL = 'tutorial/'
+const newModelsURL = 'https://hivelab.biochemistry.gwu.edu/wiki/PredictMod_Model_Submission'
+const tutorialURL = 'https://hivelab.biochemistry.gwu.edu/wiki/PredictMod_ML_Pipeline_Tutorial'
 
 export default {
 
