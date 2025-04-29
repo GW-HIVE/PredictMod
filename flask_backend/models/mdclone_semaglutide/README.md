@@ -9,7 +9,7 @@ The training dataset contains structured data from semaglutide-treated patients,
 ## Classifier and Predictor
 
 ### Classifier Code:
-The classifier code reads the patient dataset and corresponding response labels, applies oversampling with `RandomOverSampler` to address class imbalance, and scales the features using `StandardScaler`. A **Decision Tree Classifier (DTC)** is trained on the processed data, and its performance is evaluated using accuracy and mean absolute error metrics. The final model, along with the scaler and feature names, is saved as a `.pkl` file using `joblib` for use in future predictions. The model achieved an accuracy of **70%** during evaluation on the test set.
+The classifier code reads the patient dataset and corresponding response labels, scales the features using `StandardScaler`. A **XGBoost Classifier ** is trained on the processed data, and its performance is evaluated using accuracy and ROC metrics. The final model, along with the scaler and feature names, is saved as a `.pkl` file using `joblib` for use in future predictions. The model achieved an accuracy of **70%** during evaluation on the test set.
 
 ### Predictor Code:
 The predictor script loads the saved `.pkl` file containing the trained classifier, scaler, and feature names. It reads a new patient's data from an Excel file, verifies that all required features are present (adding any missing ones with a default value), drops any extraneous columns, and ensures the feature order matches the training data. The data is then scaled using the same scaler, and the classifier is used to predict whether the patient is likely or unlikely to respond to Semaglutide treatment. The result is printed to the console.
@@ -22,4 +22,13 @@ Patients in the training set were prescribed Semaglutide as part of a therapeuti
 ## Algorithm & Model Performance
 - **Algorithm**: Decision Tree Classifier (DTC)  
 - **Model Accuracy**: 0.70
+- **Top 5 Predictive Features**:
+
+| Feature                                      | Importance |
+|----------------------------------------------|------------|
+| platelet count-result numeric (original)     | 0.0696     |
+| hematocrit-result numeric (original)         | 0.0659     |
+| heart rate-heart rate                        | 0.0635     |
+| chloride_copy-result numeric (original)      | 0.0592     |
+| total cholesterol-result numeric (original)  | 0.0555     |
 
