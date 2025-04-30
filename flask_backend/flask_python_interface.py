@@ -23,6 +23,7 @@ from model_handlers import (
     OCRNASeqPredictor,
     MDClone_Exercise_Classifier,
     MDCloneSemaglutideHandler,
+    PrediabetesProteomicsHandler,
 )
 
 # TODO: Documentation
@@ -42,6 +43,7 @@ DETAIL_LOOKUP = {
     "Ovarian-Cancer-RNAseq": "ovarian_rnaseq/README.md",
     "MDClone-Exercise": "mdclone_exercise/README.md",
     "MDClone-Semaglutide": "mdclone_semaglutide/README.md",
+    "Prediabetes-Proteomics": "prediabetes_proteomics/README.md",
 }
 
 DOWNLOAD_LOOKUP = {
@@ -54,6 +56,7 @@ DOWNLOAD_LOOKUP = {
     "Ovarian-Cancer-RNAseq": "ovarian_rnaseq/ovarian_RNAseq_single_patient.xlsx",
     "MDClone-Exercise": "mdclone_exercise/single_patient_mdclone_exercise.csv",
     "MDClone-Semaglutide": "mdclone_semaglutide/Single_patient_semaglutide.csv",
+    "Prediabetes-Proteomics": "prediabetes_proteomics/prediabetes_proteomics_single_patient.csv",
 }
 
 HANDLERS = {
@@ -66,6 +69,7 @@ HANDLERS = {
     "Ovarian-Cancer-RNAseq": OCRNASeqPredictor(),
     "MDClone-Exercise": MDClone_Exercise_Classifier(),
     "MDClone-Semaglutide": MDCloneSemaglutideHandler(),
+    "Prediabetes-Proteomics": PrediabetesProteomicsHandler(),
 }
 
 
