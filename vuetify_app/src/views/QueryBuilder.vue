@@ -203,25 +203,29 @@ export default {
     },
     gridData() {
       if (!this.queryState.filePreviewData) {
-        return [];
-      }
-      // console.log("---> Computing worksheet <---")
-      const data = JSON.parse(this.queryState.filePreviewData);
-
-      // const wb = XLSX.read(data);
-      // const ws = wb.Sheets[wb.SheetNames[0]];
-      // const sheetData = XLSX.utils.sheet_to_json(ws, { header:1 });
-      
-      // if (!this.cdg) {
-      //   this.cdg = canvasDatagrid({
-      //     parentNode: this.$refs.gridContainer.$el,
-      //     data
-      //   })
-      // } else {
-      //   this.cdg.data = data;
-      // }
-
-      return data;
+          console.log("Query State: no file preview!!!")
+          return [];
+        }
+        const data = JSON.parse(this.queryState.filePreviewData);
+        if (data.length > 500) {
+          this.previewMessage = "Download file too large to display, preview is truncated"
+          console.log("Truncating data - length was " + data.length)
+          return data.slice(0, 500)
+        }
+        const keys = Object.keys(data[0])
+        const dataWidth = keys.length
+        const maxWidth = 100
+        if (dataWidth > maxWidth) {
+          this.previewMessage = `Downloaded file too wide to display, only first row and ${maxWidth} columns shown`
+          const newArray = new Array()
+          const newDataObject = {}
+          for (const key of keys.slice(0, maxWidth)) {
+            newDataObject[key] = data[0][key]
+          }
+          newArray.push(newDataObject)
+          return newArray
+        }
+        return data;
     },
     // columns() {
     //   if (!this.queryState.filePreviewData) {

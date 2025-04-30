@@ -152,7 +152,19 @@
           console.log("Truncating data - length was " + data.length)
           return data.slice(0, 500)
         }
-        console.log("Got data:\n", data);
+        const keys = Object.keys(data[0])
+        const dataWidth = keys.length
+        const maxWidth = 100
+        if (dataWidth > maxWidth) {
+          this.previewMessage = `Downloaded file too wide to display, only first row and ${maxWidth} columns shown`
+          const newArray = new Array()
+          const newDataObject = {}
+          for (const key of keys.slice(0, maxWidth)) {
+            newDataObject[key] = data[0][key]
+          }
+          newArray.push(newDataObject)
+          return newArray
+        }
         return data;
       },
       convertedModelName() {
