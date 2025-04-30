@@ -1,8 +1,12 @@
 from flask import Flask, request, Response, send_from_directory, jsonify
 from flask_cors import CORS, cross_origin
 
+import tomli
 import os
 import logging
+import uuid
+
+from pathlib import Path
 
 from Diabetes_glycomic import Diabetes_Glycomic_Handler
 from ccRCC_glycoproteomic import ccRCC_ClassifierHandler
@@ -35,6 +39,16 @@ app.config["CORS_HEADERS"] = "Content-Type"
 
 app.logger.setLevel(logging.DEBUG)
 
+with open(".env", "rb") as config_p:
+    config = tomli.load(config_p)
+
+FLASK_MODE = config["mode"]
+
+if FLASK_MODE == "dev":
+    SHARED_DIR = Path(__file__).resolve().parent.parent.parent.parent.parent / "user_data"
+    app.logger.debug(f"\n---> Shared dir: {SHARED_DIR}\n")
+else:
+    SHARED_DIR = "/user_data"
 
 @app.route("/model-details", methods=["GET"])
 def model_details():
@@ -106,6 +120,22 @@ def ping():
 @app.route("/upload", methods=["POST"])
 def upload():
     target = request.args.get("q", None)
+    file_name = request.args.get("file_name", None)
+    user = request.args.get("user", None)
+    file_path = os.path.join(SHARED_DIR, f"{user}/{file_name}")
+
+    if file_name is None or user is None:
+        return jsonify({"error": "No file path or user found in request"})
+    app.logger.debug(f"---> Reading data from {file_path}")
+
+    file_extension = file_name.split(".")[1]
+    if file_extension == "csv":
+        data = pd.read_csv(file_path)
+    elif file_extension == "xlsx" or file_extension == "xls":
+        data = pd.read_excel(file_path)
+    elif file_extension == "tsv":
+        data = pd.read_csv(file_path, sep="\t")
+
     if target not in HANDLERS.keys():
         app.logger.debug("*" * 40)
         app.logger.debug(f"Target: {target}")
@@ -113,5 +143,4 @@ def upload():
         app.logger.debug("*" * 40)
         return jsonify({"error": "Illegal upload target error"})
     else:
-        raw_data = request.get_json()
-        return jsonify(HANDLERS[target].make_prediction(raw_data))
+        return jsonify(HANDLERS[target].make_prediction(data))

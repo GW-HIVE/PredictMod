@@ -43,10 +43,10 @@ class Diabetes_Glycomic_Handler:
 
         return df_out
 
-    def make_prediction(self, raw_data):
+    def make_prediction(self, df):
 
-        headers, data = raw_data[0], np.array([raw_data[1]])
-        df = pd.DataFrame(data, columns=headers)
+        # headers, data = raw_data[0], np.array([raw_data[1]])
+        # df = pd.DataFrame(data, columns=headers)
         processed_df = self.preprocess_input(df)
 
         prediction = self.pickled_model.predict(processed_df)
