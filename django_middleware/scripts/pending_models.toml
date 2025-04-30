@@ -4,10 +4,6 @@ name = "MDClone_Diet_Counseling"
 version = "1.2"
 data_type = "EHR"
 
-[MDClone_Semaglutide]
-name = "MDClone_Semaglutide"
-version = "1.0"
-data_type = "EHR"
 
 
 

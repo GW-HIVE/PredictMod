@@ -22,6 +22,7 @@ from model_handlers import (
     OCMethylationPredictor,
     OCRNASeqPredictor,
     MDClone_Exercise_Classifier,
+    MDCloneSemaglutideHandler,
 )
 
 # TODO: Documentation
@@ -40,6 +41,7 @@ DETAIL_LOOKUP = {
     "Ovarian-Cancer-Methylation": "ovarian_cancer_methylation/README.md",
     "Ovarian-Cancer-RNAseq": "ovarian_rnaseq/README.md",
     "MDClone-Exercise": "mdclone_exercise/README.md",
+    "MDClone-Semaglutide": "mdclone_semaglutide/README.md",
 }
 
 DOWNLOAD_LOOKUP = {
@@ -51,6 +53,7 @@ DOWNLOAD_LOOKUP = {
     "Ovarian-Cancer-Methylation": "ovarian_cancer_methylation/Ovarian-Cancer-Methylation.csv",
     "Ovarian-Cancer-RNAseq": "ovarian_rnaseq/ovarian_RNAseq_single_patient.xlsx",
     "MDClone-Exercise": "mdclone_exercise/single_patient_mdclone_exercise.csv",
+    "MDClone-Semaglutide": "mdclone_semaglutide/Single_patient_semaglutide.csv",
 }
 
 HANDLERS = {
@@ -62,6 +65,7 @@ HANDLERS = {
     "Ovarian-Cancer-Methylation": OCMethylationPredictor(),
     "Ovarian-Cancer-RNAseq": OCRNASeqPredictor(),
     "MDClone-Exercise": MDClone_Exercise_Classifier(),
+    "MDClone-Semaglutide": MDCloneSemaglutideHandler(),
 }
 
 
