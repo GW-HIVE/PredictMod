@@ -23,3 +23,5 @@ xgboost==2.1.1
 #   locally and run with that
 # See: https://github.com/shap/shap/releases/tag/v0.45.0
 shap==0.44.1 
+tomli
+
