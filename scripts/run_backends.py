@@ -30,7 +30,7 @@ def start_docker(client, image_name, container_name):
         image_name,
         name=container_name,
         volumes={
-            "/user_data": {"bind": str(PREDICTMOD_HOME_DIR / "user_data"), "mode": "rw"}
+            str(PREDICTMOD_HOME_DIR / "user_data"): {"bind": "/user_data", "mode": "rw"}
         },
         network="predictmod",
         detach=True,
