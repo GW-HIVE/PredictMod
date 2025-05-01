@@ -6,3 +6,5 @@ from .Epic_Cosmos_EHR_Keto import EC_EHR_Keto_ModelHandler
 from .ovarian_cancer_methylation import OCMethylationPredictor
 from .ovarian_cancer_rnaseq import OCRNASeqPredictor
 from .mdclone_exercise import MDClone_Exercise_Classifier
+from .mdclone_semaglutide import MDCloneSemaglutideHandler
+from .prediabetes_proteomics import PrediabetesProteomicsHandler

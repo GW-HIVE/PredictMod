@@ -44,7 +44,7 @@ class ccRCC_ClassifierHandler:
     def __init__(self):
         self.classifier = joblib.load(CLASSIFIER_PICKLE)
 
-    def make_prediction(self, raw_data):
+    def make_prediction(self, df):
 
         if self.classifier is None:
             return {
@@ -53,8 +53,8 @@ class ccRCC_ClassifierHandler:
 
         print(f"===> ccRCC Handler - Got a request! <===")
 
-        headers, data = raw_data[0], np.array([raw_data[1]])
-        df = pd.DataFrame(data, columns=headers)
+        # headers, data = raw_data[0], np.array([raw_data[1]])
+        # df = pd.DataFrame(data, columns=headers)
 
         start = time.time()
         processed_df = get_glycoforms(df)

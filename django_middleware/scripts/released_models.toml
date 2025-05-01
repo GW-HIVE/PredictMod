@@ -126,3 +126,33 @@ input_data_type = "EHR"
 
 [MDClone_Exercise.data_meta]
 #################################################
+########### MDClone_Semaglutide ###############
+[MDClone_Semaglutide]
+name = "MDClone Semaglutide"
+version = "1.0"
+release_date = 2025-04-30
+model_type = "XGBoost Decision Trees"
+data_type = "MDClone Semaglutide"
+backend = "predict-backend"
+condition = "Prediabetes"
+intervention = "Semaglutide"
+input_data_type = "EHR"
+
+[MDClone_Semaglutide.data_meta]
+#################################################
+########### Prediabetes_Proteomics ###############
+[Prediabetes_Proteomics]
+name = "Prediabetes Proteomics"
+version = "1.0"
+release_date = 2025-04-30
+model_type = "Logistic Regression"
+data_type = "Proteomics"
+backend = "predict-backend"
+condition = "Prediabetes"
+intervention = "HIIT Exercise"
+input_data_type = "EHR"
+
+[Prediabetes_Proteomics.data_meta]
+Patients = 48
+Features = 688
+#################################################

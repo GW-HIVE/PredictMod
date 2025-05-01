@@ -173,12 +173,14 @@ def query_model_endpoints(request):
     )
     models = ReleasedModel.objects.all()
     all_models = serializers.serialize("json", models)
+    # TODO/XXX logger.debug(all_models)
     models = (
         models.filter(condition__name=condition_name)
         .filter(intervention__name=intervention_name)
         .filter(input_type__name=input_data_type)
     )
     # Should only be one model now
+    # TODO/XXX logger.debug(f"---> Found models: {models}")
     models_available = serializers.serialize("json", models)
     return JsonResponse(models_available, safe=False)
 

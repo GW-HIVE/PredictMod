@@ -32,8 +32,8 @@ users = {
         "is_staff": True,
     },
     4: {  # Admin + superuser
-        "username": "a@a.a",
-        "email": "a@a.a",
+        "username": "a",
+        "email": "a",
         "password": "a",
         "first_name": "a",
         "last_name": "a",

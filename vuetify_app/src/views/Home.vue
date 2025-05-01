@@ -6,20 +6,20 @@
       src="../assets/Welcome_Header.jpg"
       id="intro-img"
       gradient="to bottom, rgba(119, 119, 119, 0.25), rgba(0, 0, 0, 0.75)"
-      :height="400" 
+      :height="400"
       :cover="true"
       >
-       
+
         <div class="d-flex fill-height" style="flex-direction:column">
-          <div class="d-flex fill-height align-center justify-center"> 
-     
+          <div class="d-flex fill-height align-center justify-center">
+
           <v-card flat color="transparent">
             <v-card-title class="title text-center font-weight-bold">
               <!-- <h1>Welcome to PredictMod <font size="-1">BETA</font></h1> -->
               <h1>Welcome to PredictMod</h1>
             </v-card-title>
             <v-card-text class="text-center">
-              <h4>Welcome to PredictMod! PredictMod is a machine-learning-based platform that predicts whether 
+              <h4>Welcome to PredictMod! PredictMod is a machine-learning-based platform that predicts whether
 	      a patient will respond to an intervention based on electronic health records (EHR) or -omic data.</h4>
             </v-card-text>
             <v-card-actions class="justify-center">
@@ -43,7 +43,7 @@
   </router-link> -->
 
   <v-container>
- 
+
 
     <v-row no-gutters>
       <v-col cols="7">
@@ -59,7 +59,7 @@
               <v-btn color="primary">Login</v-btn>
         </router-link>
 
-        <v-card flat color="transparent"> 
+        <v-card flat color="transparent">
           <v-card-title class="title text-center font-weight-bold">
             Guest User
           </v-card-title>
@@ -70,7 +70,7 @@
         <router-link to="/predictmod/query-builder">
               <v-btn color="primary">Try it out</v-btn>
         </router-link>
-        <v-card flat color="transparent"> 
+        <v-card flat color="transparent">
           <v-card-title class="title text-center font-weight-bold">
             Explore models in the PredictMod platform
           </v-card-title>
@@ -91,7 +91,7 @@
           <h3>Version</h3>
         </v-card-title>
         <v-card-text class="text-center">
-          User Interface v1.10.1 (11 Apr 2025)
+          User Interface v1.11 (30 Apr 2025)
         </v-card-text>
       </v-card>
       <v-card outlined flex>
@@ -185,11 +185,11 @@
       </v-card>
     </v-col>
   </v-row>
-        
+
 
 
     <!-- </v-row> -->
-  
+
 
     <v-row>
       <v-col>
@@ -263,7 +263,7 @@ export default {
 }
 /* :gradient="linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.75))" */
 /*
-Broken css: 
+Broken css:
 #intro-img {
   background-image: linear-gradient(to bottom, rgba(119, 119, 119, 0), rgb(0, 0, 0));
 }
