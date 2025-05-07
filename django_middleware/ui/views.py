@@ -150,6 +150,7 @@ def query_interventions(request):
         logger.debug(f"Got request for interventions of {condition_name}")
     condition = Condition.objects.filter(name=condition_name).first()
     interventions_set = serializers.serialize("json", condition.interventions.all())
+    # logger.debug(f"Found interventions: {interventions_set}")
     return JsonResponse(interventions_set, safe=False)
 
 
@@ -158,9 +159,13 @@ def query_input_data(request):
     if condition_name is None:
         return JsonResponse({"error": f"Condition was not found in query"}, safe=False)
     else:
-        logger.debug(f"Got request for interventions of {condition_name}")
+        logger.debug(f"Got request for input data types of {condition_name}")
     condition = Condition.objects.filter(name=condition_name).first()
+    # logger.debug("*"*80)
+    # logger.debug(f"{condition}")
+    # logger.debug("*"*80)
     input_types_set = serializers.serialize("json", condition.input_data_types.all())
+    # logger.debug(f"Found data types: {input_types_set}")
     return JsonResponse(input_types_set, safe=False)
 
 
@@ -171,16 +176,21 @@ def query_model_endpoints(request):
     logger.debug(
         f"===> Attempting to filter models based on: Condition {condition_name} Intervention: {intervention_name} Data Type: {input_data_type}"
     )
-    models = ReleasedModel.objects.all()
-    all_models = serializers.serialize("json", models)
+    all_models = ReleasedModel.objects.all()
+
     # TODO/XXX logger.debug(all_models)
     models = (
-        models.filter(condition__name=condition_name)
+        all_models.filter(condition__name=condition_name)
         .filter(intervention__name=intervention_name)
         .filter(input_type__name=input_data_type)
     )
     # Should only be one model now
-    # TODO/XXX logger.debug(f"---> Found models: {models}")
+    # TODO/XXX 
+    # logger.debug(f"---> Found models: {models}")
+    # for m in all_models:
+    #     logger.debug("*"*80)
+    #     logger.debug(f"Condition: {m.condition.name} Intervention: {m.intervention.name} Data type: {m.data_type}")
+    #     logger.debug("*"*80)
     models_available = serializers.serialize("json", models)
     return JsonResponse(models_available, safe=False)
 
