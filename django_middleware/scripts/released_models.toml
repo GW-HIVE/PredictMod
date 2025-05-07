@@ -85,9 +85,9 @@ BCO = "ovarian_cancer_methylation/BCO.json"
 data_type = "Methylation"
 model_type = "Decision Tree"
 backend = "predict-backend"
-condition = "Ovarian Cancer (Methylation data)"
+condition = "Ovarian Cancer"
 # Unclear intervention
-intervention = "Observational"
+intervention = "None"
 input_data_type = "Methylation profiles"
 
 ["Ovarian-Cancer-Methylation".data_meta]
@@ -100,12 +100,12 @@ input_data_type = "Methylation profiles"
 ["Ovarian-Cancer-RNASeq"]
 BCO = "ovarian_rnaseq/BCO.json"
 # Unclear from the README
-data_type = "RNASeq"
+data_type = "RNA Seq"
 model_type = "Random Forest Classifier"
 backend = "predict-backend"
-condition = "Ovarian Cancer (RNASeq data)"
+condition = "Ovarian Cancer"
 # Unclear intervention
-intervention = "Observational"
+intervention = "None"
 input_data_type = "RNA Seq"
 
 ["Ovarian-Cancer-RNASeq".data_meta]
