@@ -6,6 +6,7 @@ from flask_cors import CORS, cross_origin
 # from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 # from sqlalchemy import JSON
 
+import json
 import tomli
 import os
 import logging
@@ -34,16 +35,16 @@ import pandas as pd
 MODELS_DIR = "models"
 
 DETAIL_LOOKUP = {
-    "MDClone-Diet-Counseling": "MDClone_Diet_Counseling_v1.1/README.md",
-    "MG-Exercise": "MG_Exercise_v1.1/README.md",
-    "Diabetes_EHR": "Diabetes_EHR_v1/README.md",
-    "Epilepsy_classifier": "Epilepsy_microbiome_v1/README.md",
-    "Predictmod_EHR_Keto": "PredictMod_EHR_Keto_v1.0/README.md",
-    "Ovarian-Cancer-Methylation": "ovarian_cancer_methylation/README.md",
-    "Ovarian-Cancer-RNAseq": "ovarian_rnaseq/README.md",
-    "MDClone-Exercise": "mdclone_exercise/README.md",
-    "MDClone-Semaglutide": "mdclone_semaglutide/README.md",
-    "Prediabetes-Proteomics": "prediabetes_proteomics/README.md",
+    "MDClone-Diet-Counseling": "MDClone_Diet_Counseling_v1.1/",
+    "MG-Exercise": "MG_Exercise_v1.1/",
+    "Diabetes_EHR": "Diabetes_EHR_v1/",
+    "Epilepsy_classifier": "Epilepsy_microbiome_v1/",
+    "Predictmod_EHR_Keto": "PredictMod_EHR_Keto_v1.0/",
+    "Ovarian-Cancer-Methylation": "ovarian_cancer_methylation/",
+    "Ovarian-Cancer-RNAseq": "ovarian_rnaseq/",
+    "MDClone-Exercise": "mdclone_exercise/",
+    "MDClone-Semaglutide": "mdclone_semaglutide/",
+    "Prediabetes-Proteomics": "prediabetes_proteomics/",
 }
 
 DOWNLOAD_LOOKUP = {
@@ -124,10 +125,16 @@ def model_details():
                 "details": f"## Flask mode {FLASK_MODE} detected; models may be incorrectly shown as 'missing'"
             }
         )
-    details_path = os.path.join(MODELS_DIR, DETAIL_LOOKUP[query])
-    with open(details_path, "r") as fp:
+    readme_path = os.path.join(MODELS_DIR, DETAIL_LOOKUP[query], "README.md")
+    metadata_path = os.path.join(MODELS_DIR, DETAIL_LOOKUP[query], "metadata.json")
+    with open(readme_path, "r") as fp:
         raw_markdown = fp.read()
-    return jsonify({"details": raw_markdown})
+    try:
+        with open(metadata_path, "r") as fp:
+            metadata = json.load(fp)
+    except:
+        return jsonify({"details": raw_markdown})
+    return jsonify({"details": raw_markdown, "metadata": metadata})
 
 
 @app.route("/query", methods=["GET"])

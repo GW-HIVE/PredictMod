@@ -1,6 +1,7 @@
 from flask import Flask, request, Response, send_from_directory, jsonify
 from flask_cors import CORS, cross_origin
 
+import json
 import tomli
 import os
 import logging
@@ -19,8 +20,8 @@ import pandas as pd
 MODELS_DIR = "./"
 
 DETAIL_LOOKUP = {
-    "ccRCC-Glycoproteomic": "ccRCC_glycoproteomic/README.md",
-    "Diabetes-Glycomic": "Diabetes_glycomic/README.md",
+    "ccRCC-Glycoproteomic": "ccRCC_glycoproteomic/",
+    "Diabetes-Glycomic": "Diabetes_glycomic/",
 }
 
 DOWNLOAD_LOOKUP = {
@@ -57,10 +58,13 @@ def model_details():
     if query not in DETAIL_LOOKUP.keys():
         return jsonify({"details": f"## _Model details for {query} are coming soon!_"})
     try:
-        details_path = os.path.join(MODELS_DIR, DETAIL_LOOKUP[query])
+        details_path = os.path.join(MODELS_DIR, DETAIL_LOOKUP[query], "README.md")
+        metadata_path = os.path.join(MODELS_DIR, DETAIL_LOOKUP[query], "metadata.json")
         with open(details_path, "r") as fp:
             raw_markdown = fp.read()
-        return jsonify({"details": raw_markdown})
+        with open(metadata_path, "r") as fp:
+            metadata = json.load(fp)
+        return jsonify({"details": raw_markdown, "metadata": metadata})
     except Exception as e:
         app.logger.critical(f"---> Exception {e} <---")
         app.logger.critical(f"Query: {query}")
