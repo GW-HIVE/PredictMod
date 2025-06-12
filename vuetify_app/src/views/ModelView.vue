@@ -69,6 +69,10 @@
     <div v-html="modelDetails" v-if="showDetails" style="text-align: justify">
     </div>
   </v-container>
+  <v-container v-if="modelMetaData">
+    <MetadataDashboard :metadata=modelMetaData />
+  </v-container>
+
 <!-- <v-btn @click.submit="getMarkDown()">Test getting markdown</v-btn> -->
 <v-container>
 
@@ -111,6 +115,7 @@
   
   import { marked } from "marked";
   import * as XLSX from 'xlsx';
+import MetadataDashboard from '@/components/MetadataDashboard.vue';
 
   const modelsURL = import.meta.env.DEV ? import.meta.env.VITE_DEV_MIDDLEWARE_BASE + '/api/model-details/': "/predictmod/api/model-details/";
   
@@ -138,6 +143,7 @@
             previewMessage: "",
             showDetails: false,
             modelDetails: null,
+            modelMetaData: null,
         }
       },
     computed: {
@@ -184,6 +190,9 @@
         const response = await res.json();
         // console.log("Received response:\n", JSON.stringify(response));
         this.modelDetails = marked.parse(response.details);
+        if (response.metadata) {
+          this.modelMetaData = response.metadata
+        }
         this.showDetails = true;
       },
       downloadFromPreview() {
@@ -203,7 +212,7 @@
         return true;
       },
     },
-    components: { ToolControlPanel, Spreadsheet, DisclaimerShow, LicenseShow }
+    components: { MetadataDashboard, ToolControlPanel, Spreadsheet, DisclaimerShow, LicenseShow }
   }
   </script>
   
