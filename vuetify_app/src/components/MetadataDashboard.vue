@@ -2,7 +2,9 @@
 <v-container fluid>
     <v-row>
         <v-col v-if="props.metadata.confusion_matrix">
-            <v-img :src="'data:image/png;base64,'+props.metadata.confusion_matrix" width="100%">
+            <v-img :src="'data:image/png;base64,'+props.metadata.confusion_matrix" v-if="!props.metadata.feature_importance" width="50%">
+            </v-img>
+            <v-img :src="'data:image/png;base64,'+props.metadata.confusion_matrix" v-if="props.metadata.feature_importance" width="100%">
             </v-img>
         </v-col>
         <v-col v-if="props.metadata.feature_importance">
