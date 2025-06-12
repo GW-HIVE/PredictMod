@@ -13,7 +13,9 @@ if [[ ! -f "db.sqlite3" ]]; then
 fi
 
 # Make a backup. See SO for handy cheatsheet: https://stackoverflow.com/a/20362039
-CURRENT_TIME=$(date +"%F %r")
+RAW_TIME="$(date +'%F %r')"
+CURRENT_TIME=$(echo ${RAW_TIME// /-})
+echo $CURRENT_TIME
 
 cp db.sqlite db.sqlite.bak$CURRENT_TIME
 if [[ $? != 0 ]]; then

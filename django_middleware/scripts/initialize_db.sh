@@ -7,12 +7,12 @@ python --version 2>&1 > /dev/null
 
 pushd .. 2>&1 > /dev/null
 
-if [[ -f "db.sqlite3" ]]; then
-    echo Found an old database, aborting. If you *REALLY* want it deleted, you will have to do so or change my code. 
-    exit 0
-    # echo Found an old database, removing it now...
-    # rm db.sqlite3
-fi
+# if [[ -f "db.sqlite3" ]]; then
+#     echo Found an old database, aborting. If you *REALLY* want it deleted, you will have to do so or change my code. 
+#     exit 0
+#     # echo Found an old database, removing it now...
+#     # rm db.sqlite3
+# fi
 
 # Initialize the database
 echo Initializing database
