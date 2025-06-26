@@ -9,10 +9,12 @@
         </v-col>
         <v-col v-if="props.metadata.feature_importance">
           <v-container style="text-align: left">
-            <b>Top feature imporatances</b>
+            <b>Top feature importances</b>
+            <div justify="left">
             <li v-for="feature in props.metadata.feature_importance.slice(0,10)">
-                <div justify="left">{{ feature[0] }}: <b>{{ parseFloat(feature[1]).toFixed(4) }}</b></div>
+                {{ feature[0] }}: <b>{{ parseFloat(feature[1]).toFixed(4) }}</b>
             </li>
+            </div>
             </v-container>
         </v-col>
     </v-row>
