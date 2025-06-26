@@ -8,6 +8,7 @@
       gradient="to bottom, rgba(119, 119, 119, 0.25), rgba(0, 0, 0, 0.75)"
       :height="400"
       :cover="true"
+      fluid
       >
 
         <div class="d-flex fill-height" style="flex-direction:column">
@@ -91,7 +92,7 @@
           <h3>Version</h3>
         </v-card-title>
         <v-card-text class="text-center">
-          User Interface v1.11 (30 Apr 2025)
+          User Interface v1.12 (31 May 2025)
         </v-card-text>
       </v-card>
       <v-card outlined flex>
