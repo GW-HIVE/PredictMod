@@ -79,7 +79,9 @@
   <ToolControlPanel target-u-r-l="modelsURL" :model-name="name" :model-view=true />
 
 </v-container>
-
+<v-container>
+  <AIInterface :model-name="name"/>
+</v-container>
 <v-container>
       <!-- <v-btn @click.submit="logModels()">Click to log models to console</v-btn> -->
   
@@ -116,6 +118,7 @@
   import { marked } from "marked";
   import * as XLSX from 'xlsx';
 import MetadataDashboard from '@/components/MetadataDashboard.vue';
+import AIInterface from '@/components/AIInterface.vue';
 
   const modelsURL = import.meta.env.DEV ? import.meta.env.VITE_DEV_MIDDLEWARE_BASE + '/api/model-details/': "/predictmod/api/model-details/";
   
@@ -212,7 +215,7 @@ import MetadataDashboard from '@/components/MetadataDashboard.vue';
         return true;
       },
     },
-    components: { MetadataDashboard, ToolControlPanel, Spreadsheet, DisclaimerShow, LicenseShow }
+    components: { AIInterface, MetadataDashboard, ToolControlPanel, Spreadsheet, DisclaimerShow, LicenseShow }
   }
   </script>
   
