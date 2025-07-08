@@ -16,6 +16,7 @@ urlpatterns = [
         views.query_model_endpoints,
         name="query-model-endpoints",
     ),
+    path("query-ai/", views.query_ai_backend, name="AI-support"),
     path("models/", views.models, name="models"),
     path("model-details/", views.model_details, name="model-details"),
     path("search/", views.search, name="search"),

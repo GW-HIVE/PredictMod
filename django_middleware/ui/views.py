@@ -25,6 +25,7 @@ import logging
 import os
 import pandas
 import requests
+import time
 
 logger = logging.getLogger()
 
@@ -128,6 +129,31 @@ def png_response(request):
     data = {"Factor 1": 42, "Factor 2": 25, "Factor 3": -12}
     return JsonResponse(data=data, safe=False)
 
+SHIM_DATA_DIR = os.path.join(settings.BASE_DIR, "ui/assets")
+
+def read_md(filename):
+    with open(os.path.join(SHIM_DATA_DIR, filename), 'r') as fp:
+        text = fp.read()
+    return text
+
+CACHED_AI_VALUES = {
+    "initial_response": read_md("llama_response.md"),
+    "parsed_topics": [
+        read_md("parsed_topics_1.md"), 
+        read_md("parsed_topics_2.md"),
+        read_md("parsed_topics_3.md")
+        ],
+    "resource_results": "STANDIN for API calls to NCBI, BiomarkerKB, other resources...", 
+}
+
+def query_ai_backend(request):
+    # sleep = 3
+    # logger.debug(f"===> Stubbing out an AI response, sleeping {sleep} seconds in simulation <===")
+    # time.sleep(sleep)
+    logger.debug(f"SHIM DATA: {SHIM_DATA_DIR}")
+    return JsonResponse(
+        CACHED_AI_VALUES, safe=False
+    )
 
 def models(request):
     released_models = ReleasedModel.objects.all()
