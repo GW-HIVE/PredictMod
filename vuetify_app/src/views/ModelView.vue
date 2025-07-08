@@ -80,7 +80,10 @@
 
 </v-container>
 <v-container>
-  <AIInterface :model-name="name"/>
+  <v-btn color="primary" type="submit" @click.prevent="toggleQueryAI()">
+    Query AI interface for more information?
+  </v-btn>
+  <AIInterface v-if="aiGenResponse" :ai-gen-text="aiGenResponse" :model-name="name"/>
 </v-container>
 <v-container>
       <!-- <v-btn @click.submit="logModels()">Click to log models to console</v-btn> -->
@@ -136,6 +139,7 @@ import AIInterface from '@/components/AIInterface.vue';
         this.appStore.getModels();
       };
       this.getMarkDown();
+      this.getAiResponse();
     },
     props: {
         name: String,
@@ -147,6 +151,8 @@ import AIInterface from '@/components/AIInterface.vue';
             showDetails: false,
             modelDetails: null,
             modelMetaData: null,
+            queryAI: false,
+            aiGenResponse: "",
         }
       },
     computed: {
@@ -181,6 +187,28 @@ import AIInterface from '@/components/AIInterface.vue';
       },
     },
     methods: {
+      async getAiResponse(){
+
+          console.log("Running mode? " + process.env.NODE_ENV)
+          console.log("Vite values? " + import.meta.env.VITE_DEV_MIDDLEWARE_BASE)
+
+          let middlewareURL = process.env.NODE_ENV == "production" ?
+              import.meta.env.VITE_DOCKER_MIDDLEWARE_BASE
+                  :
+              import.meta.env.VITE_DEV_MIDDLEWARE_BASE
+          middlewareURL += "/api/query-ai/"
+
+          console.log("===> Querying endpoint at " + middlewareURL)
+
+          const middlewareResponse = await fetch(
+              middlewareURL
+          )
+          const responseContents = await middlewareResponse.json()
+          console.log("Got response: ", responseContents)
+
+          this.aiGenResponse = responseContents
+          console.log("===> New value?: " + JSON.stringify(this.aiGenResponse))
+      },
       async getMarkDown() {
         const localURL = `${this.modelsURL}?q=${this.name}`
         // console.log("Getting details for: ", localURL);
