@@ -42,6 +42,8 @@ intervention = "Exercise"
 input_data_type = "EHR-Synthea"
 
 [Diabetes_EHR.data_meta]
+Samples = 364
+Features = 6
 #################################################
 
 ########### Epilepsy_classifier_1.1 ###############
@@ -91,9 +93,9 @@ intervention = "None"
 input_data_type = "Methylation profiles"
 
 ["Ovarian-Cancer-Methylation".data_meta]
-# Again, unclear what features of the data set exist
+# Unclear what features of the data set exist
 # Patients = 308
-# Features = 26
+Features = "742,726"
 #################################################
 
 ########### Ovarian_Cancer_Methylation_1.0 ###############
@@ -125,6 +127,8 @@ intervention = "Exercise"
 input_data_type = "EHR"
 
 [MDClone_Exercise.data_meta]
+Samples = "117 (*some synthetic, see model)"
+Features = 25
 #################################################
 ########### MDClone_Semaglutide ###############
 [MDClone_Semaglutide]
@@ -139,6 +143,8 @@ intervention = "Semaglutide"
 input_data_type = "EHR"
 
 [MDClone_Semaglutide.data_meta]
+Samples = 266
+Features = 25
 #################################################
 ########### Prediabetes_Proteomics ###############
 [Prediabetes_Proteomics]

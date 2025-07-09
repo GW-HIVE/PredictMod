@@ -13,4 +13,6 @@ interventions = { None = """\
 An observational study of patients, sourced from 'Integrated glycoproteomic characterization of clear \
 cell renal cell carcinoma.' Cell reports vol. 42,5 (2023): 112409. doi:10.1016/j.celrep.2023.112409\
 """ }
-data_meta = ""
+[data_meta] 
+"Samples" = 183
+"Features" = 10814
