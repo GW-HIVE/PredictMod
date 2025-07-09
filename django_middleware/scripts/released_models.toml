@@ -156,3 +156,18 @@ input_data_type = "EHR"
 Patients = 48
 Features = 688
 #################################################
+########### PredictMod_Track2Better ###############
+[PredictMod_Track2Better]
+BCO = "Predictmod_Track2Better/BCO.json"
+model_type = "LSTM"
+data_type = "Real-time tracking (CGM)"
+backend = "predict-backend"
+condition = "Prediabetes"
+intervention = "Observational"
+input_data_type = "Continuous Glucose Monitoring"
+
+[PredictMod_Track2Better.data_meta]
+Participants = 784
+"Monitioring Duration" = "7 days"
+"Monitoring Intervals" = "5 minutes"
+#################################################
