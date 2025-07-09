@@ -92,7 +92,7 @@
           <h3>Version</h3>
         </v-card-title>
         <v-card-text class="text-center">
-          User Interface v1.12 (31 May 2025)
+          User Interface v1.13 (9 July 2025)
         </v-card-text>
       </v-card>
       <v-card outlined flex>
