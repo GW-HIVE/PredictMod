@@ -1,7 +1,7 @@
 # CGM_TrueHealthy_Study_v1.0
 
 ## Data Source
-This project uses the AI-READI dataset focused on continuous glucose monitoring (CGM) data collected using Dexcom G6 sensors. Each participant has time-series blood glucose data recorded every 5 minutes, across ~7 days (~2138 records). The dataset originally included 1049 participants, with 784 selected for clean and consistent glucose records.
+This project uses the AI-READI dataset focused on continuous glucose monitoring (CGM) data collected using Dexcom G6 sensors. Each participant has time-series blood glucose data recorded every 5 minutes, across \~7 days (\~2138 records). The dataset originally included 1049 participants, with 784 selected for clean and consistent glucose records.
 
 ## Intervention & Outcomes
 We observed that the "healthy" group included misclassified individuals. By using unsupervised learning (K-Means clustering), we identified a subset of participants whose glucose patterns aligned with clinical expectations for truly healthy individuals. These were labeled as "true_healthy". We then trained supervised models to identify similar patterns in other study groups and relabeled iteratively.
