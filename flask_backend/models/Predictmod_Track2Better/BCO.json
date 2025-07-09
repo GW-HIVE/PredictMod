@@ -1,0 +1,188 @@
+{
+    "object_id": "https://biocomputeobject.org/HIVE_000006/DRAFT",
+    "spec_version": "https://w3id.org/ieee/ieee-2791-schema/2791object.json",
+    "etag": "",
+    "provenance_domain": {
+        "name": "Predictmod_Track2Better",
+        "version": "1.0",
+        "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+        "created": "2025-07-08T19:01:57",
+        "modified": "2025-07-08T19:42:32",
+        "derived_from": "",
+        "contributors": [
+            {
+                "name": "Nikhil Arethiya",
+                "affiliation": "George Washington University",
+                "email": "n.arethiya@gwu.edu",
+                "contribution": [
+                    "createdBy"
+                ],
+                "orcid": ""
+            },
+            {
+                "name": "Patrick McNeely",
+                "affiliation": "George Washington University",
+                "email": "pmcneely@email.gwu.edu",
+                "contribution": [
+                    "createdBy"
+                ],
+                "orcid": ""
+            },
+            {
+                "name": "Urnisha Bhuiyan",
+                "affiliation": "George Washington University",
+                "email": "sbhuiyan28@email.gwu.edu",
+                "contribution": [
+                    "createdBy"
+                ],
+                "orcid": ""
+            },
+            {
+                "name": "Lori Krammer",
+                "affiliation": "George Washington University",
+                "email": "lorikrammer@email.gwu.edu",
+                "contribution": [
+                    "createdBy"
+                ],
+                "orcid": ""
+            }
+        ],
+        "review": []
+    },
+    "usability_domain": [
+        "This pipeline is intended to support biomedical researchers, data scientists, and clinical informaticians interested in: Extracting true responders (true_healthy participants) from large-scale continuous glucose monitoring (CGM) datasets, Refining noisy labels (e.g., AI-READI “healthy” study group) using data-driven clustering, Classifying glucose dynamics using supervised learning (e.g., XGBoost) and time-series deep learning (e.g., LSTM) and Evaluating intervention efficacy or natural remission in metabolic states by detecting patterns resembling healthy glucose regulation."
+    ],
+    "description_domain": {
+        "keywords": [
+            "python",
+            "machine learning",
+            "Continuous Glucose Monitoring (CGM)"
+        ],
+        "xref": [],
+        "platform": [
+            "VS Code"
+        ],
+        "pipeline_steps": [
+            {
+                "step_number": 1,
+                "name": "model evaluation",
+                "description": "Runs inference on a new participant’s 7-day CGM time-series using a pre-trained LSTM model. Identifies if participant from Group 2 (pre_diabetes) shows true_healthy CGM pattern.",
+                "version": "1.0",
+                "input_list": [
+                    {
+                        "filename": "lstm_binary_model.h5",
+                        "access_time": "2025-07-08T04:00:00.000Z",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/Predictmod_Track2Better/lstm_binary_model.h5",
+                        "sha1_checksum": ""
+                    },
+                    {
+                        "filename": "lstm_model_predictor.py",
+                        "access_time": "2025-07-08T04:00:00.000Z",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/Predictmod_Track2Better/lstm_model_predictor.py",
+                        "sha1_checksum": ""
+                    },
+                    {
+                        "filename": "test_set.csv",
+                        "access_time": "2025-07-08T04:00:00.000Z",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/Predictmod_Track2Better/test_set.csv",
+                        "sha1_checksum": ""
+                    }
+                ],
+                "output_list": [
+                    {
+                        "filename": "prediction.txt",
+                        "access_time": "2025-07-08T04:00:00.000Z",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/Predictmod_Track2Better",
+                        "sha1_checksum": ""
+                    }
+                ]
+            }
+        ]
+    },
+    "parametric_domain": [],
+    "io_domain": {
+        "input_subdomain": [
+            {
+                "uri": {
+                    "filename": "lstm_binary_model.h5",
+                    "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/Predictmod_Track2Better/lstm_binary_model.h5",
+                    "access_time": "2025-07-08T04:00:00.000Z"
+                }
+            },
+            {
+                "uri": {
+                    "filename": "lstm_model_predictor.py",
+                    "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/Predictmod_Track2Better/lstm_model_predictor.py",
+                    "access_time": "2025-07-08T04:00:00.000Z"
+                }
+            },
+            {
+                "uri": {
+                    "filename": "test_set.csv",
+                    "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/Predictmod_Track2Better/test_set.csv",
+                    "access_time": "2025-07-08T04:00:00.000Z"
+                }
+            }
+        ],
+        "output_subdomain": [
+            {
+                "mediatype": "txt",
+                "uri": {
+                    "filename": "prediction.txt",
+                    "uri":"https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/Predictmod_Track2Better",
+                    "access_time": "2025-07-08T04:00:00.000Z"
+                }
+            }
+        ]
+    },
+    "execution_domain": {
+        "script": [],
+        "script_driver": "",
+        "software_prerequisites": [
+            {
+                "name": "Python",
+                "version": "3.11.13",
+                "uri": {
+                    "filename": "",
+                    "uri": "https://www.python.org/",
+                    "access_time": "2025-07-08T04:00:00.000Z",
+                    "sha1_checksum": ""
+                }
+            },
+            {
+                "name": "pandas",
+                "version": "2.2.2",
+                "uri": {
+                    "filename": "",
+                    "uri": "https://pandas.pydata.org/",
+                    "access_time": "2025-07-08T04:00:00.000Z",
+                    "sha1_checksum": ""
+                }
+            },
+            {
+                "name": "numpy",
+                "version": "2.0.2",
+                "uri": {
+                    "filename": "",
+                    "uri": "https://numpy.org/",
+                    "access_time": "2025-07-08T04:00:00.000Z",
+                    "sha1_checksum": ""
+                }
+            },
+            {
+                "name": "tensorflow",
+                "version": "2.18.0",
+                "uri": {
+                    "filename": "",
+                    "uri": "https://www.tensorflow.org/",
+                    "access_time": "2025-07-08T04:00:00.000Z",
+                    "sha1_checksum": ""
+                }
+            }
+        ],
+        "external_data_endpoints": [],
+        "environment_variables": {}
+    },
+    "extension_domain": [],
+    "error_domain": {}
+}

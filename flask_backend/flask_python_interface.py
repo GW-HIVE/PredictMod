@@ -25,6 +25,7 @@ from model_handlers import (
     MDClone_Exercise_Classifier,
     MDCloneSemaglutideHandler,
     PrediabetesProteomicsHandler,
+    Track2Better_Handler,
 )
 
 # TODO: Documentation
@@ -45,6 +46,7 @@ DETAIL_LOOKUP = {
     "MDClone-Exercise": "mdclone_exercise/",
     "MDClone-Semaglutide": "mdclone_semaglutide/",
     "Prediabetes-Proteomics": "prediabetes_proteomics/",
+    "Predictmod_Track2Better": "Predictmod_Track2Better/", 
 }
 
 DOWNLOAD_LOOKUP = {
@@ -58,6 +60,7 @@ DOWNLOAD_LOOKUP = {
     "MDClone-Exercise": "mdclone_exercise/single_patient_mdclone_exercise.csv",
     "MDClone-Semaglutide": "mdclone_semaglutide/Single_patient_semaglutide.csv",
     "Prediabetes-Proteomics": "prediabetes_proteomics/prediabetes_proteomics_single_patient.csv",
+    "Predictmod_Track2Better": "Predictmod_Track2Better/test_set.csv", 
 }
 
 HANDLERS = {
@@ -71,6 +74,7 @@ HANDLERS = {
     "MDClone-Exercise": MDClone_Exercise_Classifier(),
     "MDClone-Semaglutide": MDCloneSemaglutideHandler(),
     "Prediabetes-Proteomics": PrediabetesProteomicsHandler(),
+    "Predictmod_Track2Better": Track2Better_Handler(), 
 }
 
 

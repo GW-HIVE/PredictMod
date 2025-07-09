@@ -11,6 +11,7 @@ openpyxl
 pandas
 scikit-learn==1.4.2
 tomli
+tensorflow
 xgboost
 # NB - As of Mar 2024, there are 1256 open bugs reported on SHAP
 # - they attempted to update the format of SHAP outputs between

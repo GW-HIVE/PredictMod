@@ -19,6 +19,7 @@ is disturbed, causing seizures. Prediction outcomes are based on [TBD].
 "HIIT Exercise" = "Content TBD"
 "Medication - Semaglutide" = "Medication management of prediabetes using an increasingly popular GLP1-agonist."
 "No Intervention" = "Predictions based on existing biomarkers. These predictions do not involve a specific intervention."
+"Observational" = "An observational study of a sample cohort"
 "Semaglutide" = "Content TBD"
 
 [interventions.Epilepsy]
@@ -48,6 +49,7 @@ None = "[TBD]"
 "Gut-Microbiome" = "Microflora population and diversity information measured via High Throughput Sequencing"
 "Glycoproteomics" = "TBD"
 "Glycomics" = "TBD"
+"CGM" = "Continuous Glucose Monitoring"
 "Proteomics" = "TBD"
 
 [input_data_types.Epilepsy]
