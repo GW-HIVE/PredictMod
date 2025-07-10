@@ -102,12 +102,12 @@
         <ReleasedModels :data="this.appStore.releasedModels" v-if="show_models" />
 
       </v-card>
-      <v-card outlined>
+      <!-- <v-card outlined>
         <v-card-title class="title text-center font-weight-bold">
           <h3>Anticipated Future Models</h3>
         </v-card-title>
         <PendingModels :data="this.appStore.pendingModels" v-if="show_models" />
-      </v-card>
+      </v-card> -->
     </v-col>
   </v-row>
 
