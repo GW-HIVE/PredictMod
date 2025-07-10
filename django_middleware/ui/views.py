@@ -74,20 +74,20 @@ def ping(request):
 def search(request):
     logger.debug("Received request for MENU items")
     released_models = ReleasedModel.objects.all()
-    pending_models = PendingModel.objects.all()
+    # pending_models = PendingModel.objects.all()
     complete_list = [
         {"name": k.name.replace("-", " ").replace("_", " "), "link": k.link}
         for k in released_models
     ]
-    complete_list.extend(
-        [
-            {
-                "name": k.name.replace("-", " ").replace("_", " ") + " (Anticipated)",
-                "link": k.link,
-            }
-            for k in pending_models
-        ]
-    )
+    # complete_list.extend(
+    #     [
+    #         {
+    #             "name": k.name.replace("-", " ").replace("_", " ") + " (Anticipated)",
+    #             "link": k.link,
+    #         }
+    #         for k in pending_models
+    #     ]
+    # )
 
     return JsonResponse(complete_list, safe=False)
 
