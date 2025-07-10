@@ -24,11 +24,16 @@
 	      a patient will respond to an intervention based on electronic health records (EHR) or -omic data.</h4>
             </v-card-text>
             <v-card-actions class="justify-center">
+        <!-- 
         <router-link to="/predictmod/help">
-              <v-btn variant="tonal" color="#efefef">
-        Learn More
-        </v-btn>
-        </router-link>
+          <v-btn variant="tonal" color="#efefef">
+            Learn More
+          </v-btn>
+        </router-link> 
+        -->
+          <v-btn variant="tonal" color="#efefef" href="https://hivelab.biochemistry.gwu.edu/wiki/PredictMod">
+            Learn More
+          </v-btn>
         </v-card-actions>
          </v-card>
           </div>
