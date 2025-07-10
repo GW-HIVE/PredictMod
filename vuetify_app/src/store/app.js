@@ -46,7 +46,7 @@ export const useAppStore = defineStore('app', {
       async retrieveModelInfo() {
         const modelResponse = await axios.get(this.searchURL);
         this.modelInitialSearch = modelResponse.data;
-        console.log("---> Retrieved model information: %s", JSON.stringify(modelResponse.data));
+        // console.log("---> Retrieved model information: %s", JSON.stringify(modelResponse.data));
       },
     },
 });
