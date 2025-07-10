@@ -36,17 +36,17 @@ export const useAppStore = defineStore('app', {
           });
           this.releasedModels = releasedModels;
 
-          const pendingModels = JSON.parse(response.data.pending_models);
-          pendingModels.forEach(model => {
-            model.fields.name = convertModelName(model.fields.name)
-          })
-          this.pendingModels = pendingModels;
+          // const pendingModels = JSON.parse(response.data.pending_models);
+          // pendingModels.forEach(model => {
+          //   model.fields.name = convertModelName(model.fields.name)
+          // })
+          // this.pendingModels = pendingModels;
         }
       },
       async retrieveModelInfo() {
         const modelResponse = await axios.get(this.searchURL);
         this.modelInitialSearch = modelResponse.data;
-        // console.log("---> Retrieved model information: %s", JSON.stringify(modelResponse.data));
+        console.log("---> Retrieved model information: %s", JSON.stringify(modelResponse.data));
       },
     },
 });
