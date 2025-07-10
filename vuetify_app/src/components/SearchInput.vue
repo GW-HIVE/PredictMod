@@ -91,7 +91,7 @@ export default {
       const item = this.items.filter((i) => i.name === this.selection)[0];
       this.results = this.items;
       this.selection = [],
-      this.$router.push("models/" + item.link);
+      this.$router.push({ path: "/predictmod/models/" + item.link});
     },
 
   },
