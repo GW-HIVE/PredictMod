@@ -4,6 +4,7 @@
   :items="results"
   v-model="selection"
   prepend-inner-icon="mdi-magnify"
+  @click:prepend-inner="submitSelection"
   style="max-width: 350px;"
   menu-icon=""
   item-title="name"
