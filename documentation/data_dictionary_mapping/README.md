@@ -1,1 +1,2 @@
-
+# Data Dictionary & Mapping
+The data dictionaries developed for PredictMod utilize Logical Observation Identifiers Names and Codes (LOINC) as their primary ontological identifier, given its wide use regarding health measurements, alongside the ICD-10, Systemized Nomenclature of Medicine (SNOMED), and Current Procedural Terminology (CPT) codes. Recognizing the potential for multiple terminologies for a single measurement, we engaged in thorough research and collaborated closely with clinical professionals to identify the most appropriate code for each measurement. The data mapping file helps maintain consistency by clearly defining relationships between data elements from different sources or formats to ensure accurate integration and interpretation across datasets.
