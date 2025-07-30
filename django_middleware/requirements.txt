@@ -1,9 +1,11 @@
+aiohttp
 black
 Django<5.1
 django-cors-headers
 django-filter
 django-guardian
 djangorestframework
+ollama
 openpyxl
 pandas
 gunicorn
