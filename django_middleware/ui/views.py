@@ -20,6 +20,12 @@ from users.serializers import TrainedModelFullSerializer
 
 from base64 import b64decode
 
+## AI-GENERATED
+import asyncio
+import aiohttp
+##############
+# from ollama import AsyncClient
+import ollama
 import json
 import logging
 import os
@@ -29,6 +35,7 @@ import time
 
 logger = logging.getLogger()
 
+client = ollama.Client()
 
 # UPLOAD_ENDPOINTS = {
 #     "mg",
@@ -147,13 +154,30 @@ CACHED_AI_VALUES = {
 }
 
 def query_ai_backend(request):
-    # sleep = 3
-    # logger.debug(f"===> Stubbing out an AI response, sleeping {sleep} seconds in simulation <===")
-    # time.sleep(sleep)
-    logger.debug(f"SHIM DATA: {SHIM_DATA_DIR}")
-    return JsonResponse(
-        CACHED_AI_VALUES, safe=False
-    )
+
+    query_content = request.GET.get("q", None)
+    content = None
+    if query_content is None:
+        content = "What is the answer to life, the universe, and everything?"
+    else:
+        content = query_content
+
+    logger.debug("===> Calling to Ollama server <===")
+    logger.debug(f"Query content is: {content}")
+    message = {
+        "role": "user",
+        "content": content,
+    }
+    try:
+        response = client.chat(model="llama3.2", messages=[message])
+        logger.debug(f"========== RESPONSE ==========\n{response.message.content}")
+        # logger.debug(f"---> Response type: {type(response)}")
+        return JsonResponse({"response": response.message.content}, safe=False)
+    except Exception as e:
+        logger.debug(f"="*80)
+        logger.debug(f"{e}")
+        logger.debug(f"="*80)
+
 
 def models(request):
     released_models = ReleasedModel.objects.all()
