@@ -6,16 +6,25 @@
     Query AI interface for more information?
   </v-btn> -->
 
-<v-card outlined>
-    <v-card-title>AI Chat Assistant</v-card-title>
-    
+<v-card outlined elevation="3">
+    <v-card-title>AI Chat Assist</v-card-title>
+    <b>Querying: {{ initialQuery }}</b>
     <v-card v-for="response in aiGenResponses"
         v-html="response"
-        class="text-left"    
+        class="text-left ma-5 pa-5"
+        outlined
+        elevation="3"
     >
 </v-card>
 </v-card>
-    <v-text-field
+<v-icon icon="mdi-loading" 
+  v-if="aiLoading"
+  size="100"
+  class="mdi-spin"
+  title="Loading..."
+/>
+
+<v-text-field
         label="Enter query for AI assistant"
         v-model="currentInput" 
         @input="logEvent()"
@@ -34,6 +43,7 @@ export default {
   data() {
     return {
       nextInput: '',
+      aiLoading: false,
       aiGenResponses: [],
       currentInput: ''
     }
@@ -54,6 +64,8 @@ export default {
       console.log("Running mode? " + process.env.NODE_ENV);
       console.log("Vite values? " + import.meta.env.VITE_DEV_MIDDLEWARE_BASE);
 
+      this.aiLoading = true
+
       let middlewareURL = (process.env.NODE_ENV === 'production') ?
         import.meta.env.VITE_DOCKER_MIDDLEWARE_BASE :
         import.meta.env.VITE_DEV_MIDDLEWARE_BASE;
@@ -69,6 +81,8 @@ export default {
         .then(response => response.json())
         .then(data => {
           this.aiGenResponses.push(marked.parse(data.response));
+          this.aiLoading = false;
+          this.currentInput = "";
         });
     }
   },
@@ -80,10 +94,14 @@ export default {
     NODE_ENV: process.env.NODE_ENV,
     VITE_DEV_MIDDLEWARE_BASE: import.meta.env.VITE_DEV_MIDDLEWARE_BASE,
     VITE_DOCKER_MIDDLEWARE_BASE: import.meta.env.VITE_DOCKER_MIDDLEWARE_BASE
-  }
+  },
+  components: {},
 }
 </script>
 
+<style>
+
+</style>
 <!-- 
  Composition API appears to break the v-text-field in Vuetify,
  reverting to Options API. NB: Sourced directly from a Llama3.2 query 
