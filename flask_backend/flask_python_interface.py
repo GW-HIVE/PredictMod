@@ -203,13 +203,21 @@ def upload():
     target = request.args.get("q", None)
     file_name = request.args.get("file_name", None)
     user = request.args.get("user", None)
-    file_path = os.path.join(SHARED_DIR, f"{user}/{file_name}")
 
-    if file_name is None or user is None:
+    app.logger.debug(f"---> Got target ID {target}")
+
+    if file_name is None:
         return jsonify({"error": "No file path or user found in request"})
-    app.logger.debug(f"---> Reading data from {file_path}")
+    file_path = ""
+    file_extension = ""
+    if file_name == "example":
+        file_path = os.path.join(MODELS_DIR, DOWNLOAD_LOOKUP[target])
+        file_extension = file_path.split(".")[-1]
+    else:
+        file_path = os.path.join(SHARED_DIR, f"{user}/{file_name}")
+        file_extension = file_name.split(".")[1]
+    app.logger.debug(f"---> Reading data from {file_path} (found file extension {file_extension})")
 
-    file_extension = file_name.split(".")[1]
     if file_extension == "csv":
         data = pd.read_csv(file_path)
     elif file_extension == "xlsx" or file_extension == "xls":

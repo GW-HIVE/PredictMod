@@ -36,26 +36,14 @@
 </v-col>
 <v-col cols="11" v-if="loggedIn">
 <v-row class="justify-center pa-2">
-    <FileUpload :upload-target-u-r-l="targetURL ? modelName : `${queryState.targetURL}`" />
+    <FileUpload :upload-target-u-r-l="modelView ? modelName : `${queryState.targetURL.link}`" />
 </v-row>
 </v-col>
 <v-col cols="11" v-if="!loggedIn">
 <v-row class="justify-center pa-8">
-    <v-btn color="primary" type="submit" @click.prevent="alertTBD(source=`Default submission`)">
-        Example Analysis
-    </v-btn>
+  <FileUpload :upload-target-u-r-l="modelView ? modelName : `${queryState.targetURL.link}`" />
 </v-row>
 </v-col>
-<v-btn @click.prevent="showQueryState()">
-    Show state?
-</v-btn>
-<!-- 
-    <v-row>
-    <v-btn color="primary" @click="alertTBD(source=`Analysis`)">
-        {{ loggedIn ? "Launch Analysis" : "See output from example file" }}
-    </v-btn>
-</v-row>
--->
 </template>
 
 <script setup>
@@ -82,13 +70,7 @@ const props = defineProps({
 function alertTBD(source) {
     alert(source + " functionality is under construction");
 }
-function showQueryState() {
-    console.log("===> Present query state 'model anchor': " + queryState.modelAnchor)
-    console.log("===> Present query state 'targetURL': " + queryState.targetURL)
-}
-function handleMenuClick() {
-  console.log("===> Handling event?: ");
-}
+
 async function downloadPreview() {
     const targetName = props.modelName ? props.modelName : queryState.targetURL.link;
     // console.log("TCP: Downloading from target ", targetName);
