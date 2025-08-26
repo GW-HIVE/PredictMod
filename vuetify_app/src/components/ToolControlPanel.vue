@@ -1,11 +1,14 @@
 <template>
-<h4>Current Model: {{ queryState.targetURL.name }}</h4>
+<v-container v-if="!modelView">
+  <h4>Current Model: {{ queryState.targetURL.name }}</h4>
+</v-container>
 <v-col cols="11">
 <v-row class="justify-center">
 <!-- <v-btn type="submit" @click="alertTBD(source=`Review`)"> -->
-<v-btn ref="button">
+<v-btn ref="button" v-if="!modelView">
     Review Available Models
 </v-btn>
+<!-- See https://stackoverflow.com/a/76930390 -->
 <v-select
   :items="queryState.targetURLs"
   item-title="name"
@@ -18,7 +21,7 @@
 >
   <!-- v-model="selectedModel" -->
 </v-select>
-<router-link :to="'models/' + queryState.targetURL.link" v-if="!targetURL">
+<router-link :to="'models/' + queryState.targetURL.link" v-if="!modelView">
     <v-btn>
         Learn More About The Model
     </v-btn>
@@ -73,6 +76,7 @@ const queryState = useQueryState()
 const props = defineProps({
   targetURL: {type: String},
   modelName: {type: String},
+  modelView: {type: Boolean, default: false},
 })
 
 function alertTBD(source) {
@@ -86,7 +90,7 @@ function handleMenuClick() {
   console.log("===> Handling event?: ");
 }
 async function downloadPreview() {
-    const targetName = modelName ? modelName : queryState.targetURL;
+    const targetName = props.modelName ? props.modelName : queryState.targetURL.link;
     // console.log("TCP: Downloading from target ", targetName);
     const response = await DownloadService.download(targetName, () => {
     });
