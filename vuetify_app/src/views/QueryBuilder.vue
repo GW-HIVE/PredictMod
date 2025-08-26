@@ -307,6 +307,7 @@ export default {
       // console.log("---> Resetting query state");
       this.queryState.resetState();
       this.queryState.filePreviewData = null;
+      this.unconfirmCondition('condition');
     },
     // XXX
     reportData() {
