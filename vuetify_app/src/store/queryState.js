@@ -99,7 +99,7 @@ export const useQueryState = defineStore("query", {
         this.datatype !== null
       ) {
         // this.targetURL = this.urlTargets[this.condition][this.datatype];
-        
+        this.targetURLs = [];
         const response = await fetch(this.queriesURL+`/api/query-model-endpoints/?c=${this.condition}&i=${this.intervention}&dt=${this.datatype}`);
         const endpoints = JSON.parse(await response.json());
         // console.log("Got response: ", JSON.stringify(endpoints));
