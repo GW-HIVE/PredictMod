@@ -1,4 +1,5 @@
 <template>
+<h4>Current Model: {{ queryState.targetURL.name }}</h4>
 <v-col cols="11">
 <v-row class="justify-center">
 <!-- <v-btn type="submit" @click="alertTBD(source=`Review`)"> -->
@@ -9,15 +10,17 @@
   :items="queryState.targetURLs"
   item-title="name"
   item-value="link"
-  return-object
   hide-details
+  return-object
+  v-model="queryState.targetURL"
   :menu-props="{activator: button, openOnClick: true}"
   v-show="false"
 >
+  <!-- v-model="selectedModel" -->
 </v-select>
-<router-link :to="'models/' + queryState.targetURL" v-if="!targetURL">
+<router-link :to="'models/' + queryState.targetURL.link" v-if="!targetURL">
     <v-btn>
-        Learn More About This Model
+        Learn More About The Model
     </v-btn>
 </router-link>
     <!-- <FileDownload :download-target-u-r-l="queryState.targetURL" /> -->
@@ -62,6 +65,7 @@ import DownloadService from '@/services/DownloadService';
 import FileUpload from '@/components/FileUpload.vue';
 
 const button = ref()
+// const selectedModel = ref()
 
 const userStore = useUserStore()
 const queryState = useQueryState()
@@ -75,15 +79,14 @@ function alertTBD(source) {
     alert(source + " functionality is under construction");
 }
 function showQueryState() {
-    console.log("===> Present query state 'model anchor': " + this.queryState.modelAnchor)
-    console.log("===> Present query state 'targetURL': " + this.queryState.targetURL)
+    console.log("===> Present query state 'model anchor': " + queryState.modelAnchor)
+    console.log("===> Present query state 'targetURL': " + queryState.targetURL)
 }
-function toggleMenu() {
-  this.showMenu = !this.showMenu;
-  console.log("Show menu is now: " + this.showMenu)
+function handleMenuClick() {
+  console.log("===> Handling event?: ");
 }
 async function downloadPreview() {
-    const targetName = this.modelName ? this.modelName : this.queryState.targetURL;
+    const targetName = modelName ? modelName : queryState.targetURL;
     // console.log("TCP: Downloading from target ", targetName);
     const response = await DownloadService.download(targetName, () => {
     });
@@ -92,8 +95,8 @@ async function downloadPreview() {
         console.log("Download experienced an error: ", response.error);
         alert("Download experienced an error: " + response.error);
     } else {
-    this.queryState.filePreviewData = response;
-    this.queryState.downloadDrawer = true;
+    queryState.filePreviewData = response;
+    queryState.downloadDrawer = true;
     }
 }
 

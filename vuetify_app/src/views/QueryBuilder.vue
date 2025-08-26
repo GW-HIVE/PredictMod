@@ -268,7 +268,7 @@ export default {
       this.queryState.setState(condition, selection);
       if (this.queryCompleted) {
         this.queryState.registerURL();
-        this.queryState.setTargetAnchor();
+        // this.queryState.setTargetAnchor();
       }
     },
     unconfirmCondition(condition) {
@@ -286,23 +286,23 @@ export default {
       }
       if (!this.queryCompleted) {
         this.queryState.registerURL();
-        this.queryState.setTargetAnchor;
+        // this.queryState.setTargetAnchor;
       }
     },
 
-    setTargetAnchor() {
-      const baseString = "/predictmod/help#current-models"
-      switch (this.myTargetURL) {
-          case "mg":
-              this.modelAnchor = baseString + "-mg-exercise";
-              break;
-          case "ehr":
-              this.modelAnchor = baseString + "-ehr-diet-counseling";
-              break;
-          default:
-              this.modelAnchor = "/predictmod/NotFound";
-      }
-    },
+    // setTargetAnchor() {
+    //   const baseString = "/predictmod/help#current-models"
+    //   switch (this.myTargetURL) {
+    //       case "mg":
+    //           this.modelAnchor = baseString + "-mg-exercise";
+    //           break;
+    //       case "ehr":
+    //           this.modelAnchor = baseString + "-ehr-diet-counseling";
+    //           break;
+    //       default:
+    //           this.modelAnchor = "/predictmod/NotFound";
+    //   }
+    // },
     resetState() {
       // console.log("---> Resetting query state");
       this.queryState.resetState();
