@@ -227,23 +227,6 @@ export default {
         }
         return data;
     },
-    // columns() {
-    //   if (!this.queryState.filePreviewData) {
-    //     return [];
-    //   }
-    //   return Object.keys((JSON.parse(this.queryState.filePreviewData))[0]).forEach(k => {
-    //     console.log("Computing name %s", k)
-    //     return { field: k, label: k }
-    //   })
-    // },
-    // rows() {
-    //   if (!this.queryState.filePreviewData) {
-    //     return [];
-    //   }
-    //   return Object.values((JSON.parse(this.queryState.filePreviewData))[0]).forEach(v => {
-    //     return { name: v }
-    //   })
-    // },
   },
   data() {
 			return {
@@ -252,83 +235,7 @@ export default {
         inputTypeSet: false,
         showToolbar: false,
         cdg: null,
-        // conditions: [],
-        // interventions: [],
-        // dataInputTypes: {},
-			// 	home: false,
-      //   interventionRelay: {},
-      //   dataTypeRelay: {},
-      //   selections: {},
         myTargetURL: "",
-      //   modelAnchor: "",
-        
-      // conditions: [
-      //     {
-      //       name: "Prediabetes",
-      //       description: `A precursor to Type 2 Diabetes Mellitus (T2DM), where blood sugars are higher than normal, 
-      //       but not high enough to be considered T2DM. Prediction outcomes are based 
-      //       on a 5% reduction in weight, HOMA-IR, or a diagnosis of T2DM.`
-      //     },
-      //     {
-      //       name: "Epilepsy",
-      //       description: 
-      //           `A neurological disorder in which nerve cell activity in the brain 
-      //           is disturbed, causing seizures. Prediction outcomes are based on [TBD].`
-      //     },
-      //     {
-      //       name: "Renal Carcinoma",
-      //       description: `[TBD]`,
-      //     },
-      //   ],
-
-        // interventions:
-      //   {
-          // 'Prediabetes':
-          //   [
-          //     {name: "Diet - Dietary Counseling", description: "Involves following a physician-recommended diet for the management of prediabetes."},
-          //     {name: "Diet - Keto Diet", description: "A low-carb, ketogenic diet commonly recommended for the management of prediabetes."},
-          //     {name: "Exercise", description: "Involves following a physician-recommended exercise regimen for the management of prediabetes."},
-          //     {name: "Medication - Semaglutide", description: "Medication management of prediabetes using an increasingly popular GLP1-agonist."},
-          //     {name: "No Intervention", description: "Predictions based on existing biomarkers. These predictions do not involve a specific intervention."},
-          //   ],
-          // 'Epilepsy':
-          // [
-          //   {name: "TBD", description: "TBD"},
-          // ],
-          // 'Renal Carcinoma':
-          // [
-          //   {name: "TBD", description: "TBD"},
-          // ],
-      //   },
-
-      // urlTargets: {
-        // "Prediabetes": 
-        //   {
-        //     "EHR": "ehr",
-        //     "Gut Microbiome": "mg",
-        //   },
-        // "Epilepsy": {},
-        // "Renal Carcinoma": {},
-      // },
-
-      // dataInputTypes:
-      //   {
-        //   'Prediabetes': 
-        //   [
-        //     {name: "EHR", description: "Data sourced from clinical Electronic Health Records ,e.g. EPIC-COSMOS or MDClone"},
-        //     {name: "Gut Microbiome", description: "Microflora population and diversity information measured via High Throughput Sequencing"},
-        //     {name: "Glycoproteomics", description: "TBD"},
-        //     {name: "Glycomics", description: "TBD"},
-        //   ],
-        //  'Epilepsy':
-        //   [
-        //     {name: "TBD", description: "TBD"},
-        //   ],
-        //   'Renal Carcinoma':
-        // [
-        //   {name: "TBD", description: "TBD"},
-        // ],
-      // },
 		}
   },
   methods: {
@@ -359,32 +266,11 @@ export default {
     confirmCondition(condition, selection) {
       // console.log("Handling message from query: %s", selection);
       this.queryState.setState(condition, selection);
-      // this.interventionRelay = this.interventions[selection];
-      // this.dataTypeRelay = this.dataInputTypes[selection];
-      // this.selections['Condition'] = selection;
-      // this.conditionSet = true;
       if (this.queryCompleted) {
         this.queryState.registerURL();
         this.queryState.setTargetAnchor();
       }
     },
-    // confirmIntervention(selection) {
-    //   if (!this.interventionSet){
-    //     // console.log("Confirmed intervention: %s", selection);
-    //     this.selections['Intervention'] = selection;
-    //     this.interventionSet = true;
-    //   }
-    // },
-    // confirmDataType(selection) {
-    //   if (!this.inputTypeSet){
-    //       // console.log("Confirmed data type: %s", selection);
-    //       this.selections['DataType'] = selection;
-    //       this.myTargetURL = this.urlTargets[this.selections['Condition']][selection]
-    //       this.setTargetAnchor();
-    //       // console.log("Now targeting download/upload URLs of", this.myTargetURL);
-    //       this.inputTypeSet = true;
-    //     }
-    // },
     unconfirmCondition(condition) {
       switch (condition) {
         case 'condition':
