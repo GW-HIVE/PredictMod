@@ -139,7 +139,7 @@ def upload():
         file_extension = file_name.split(".")[1]
     # app.logger.debug(f"---> Reading data from {file_path} (found file extension {file_extension})")
 
-    file_extension = file_name.split(".")[1]
+    # file_extension = file_name.split(".")[1]
     if file_extension == "csv":
         data = pd.read_csv(file_path)
     elif file_extension == "xlsx" or file_extension == "xls":
