@@ -4,6 +4,7 @@
   :items="results"
   v-model="selection"
   prepend-inner-icon="mdi-magnify"
+  @click:prepend-inner="submitSelection"
   style="max-width: 350px;"
   menu-icon=""
   item-title="name"
@@ -72,7 +73,7 @@ export default {
       const search = event.data;
       // TODO: Search on alphanumerics works as expected, but not on backspace, etc.
       if (search) {
-        console.log("Filtering results over %s", search);
+        // console.log("Filtering results over %s", search);
         this.results = this.items.filter(
           item => item.name.toLowerCase().indexOf(search.toLowerCase()) > -1)
         .map(item => item.name);
@@ -90,7 +91,7 @@ export default {
       const item = this.items.filter((i) => i.name === this.selection)[0];
       this.results = this.items;
       this.selection = [],
-      this.$router.push(item.link);
+      this.$router.push({ path: "/predictmod/models/" + item.link});
     },
 
   },

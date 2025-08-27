@@ -15,7 +15,8 @@ export const useQueryState = defineStore("query", {
     dataTypeOptions: [],
     // selections: {},
     targetURL: "",
-    modelAnchor: "",    
+    targetURLs: [],
+    modelName: "",    
     // targetURL: import.meta.env.DEV ? import.meta.env.VITE_DEV_MIDDLEWARE_BASE + '/api' : '/predictmod/api',
     queriesURL: import.meta.env.DEV ? import.meta.env.VITE_DEV_MIDDLEWARE_BASE: "/predictmod/",
     conditions: [],
@@ -98,15 +99,15 @@ export const useQueryState = defineStore("query", {
         this.datatype !== null
       ) {
         // this.targetURL = this.urlTargets[this.condition][this.datatype];
-        
+        this.targetURLs = [];
         const response = await fetch(this.queriesURL+`/api/query-model-endpoints/?c=${this.condition}&i=${this.intervention}&dt=${this.datatype}`);
-        const endpoint = JSON.parse(await response.json());
-        console.log("Got response: ", JSON.stringify(endpoint));
-        endpoint.forEach(model => {
-          this.targetURL = model.fields.link;
+        const endpoints = JSON.parse(await response.json());
+        // console.log("Got response: ", JSON.stringify(endpoints));
+        endpoints.forEach(model => {
+          this.targetURLs.push({name: model.fields.name, link: model.fields.link});
         });
-
-        // console.log("---> Found target URL %s", this.targetURL)
+        this.targetURL = this.targetURLs[0];
+        // console.log("---> Found target URL: ", JSON.stringify(this.targetURL))
       } else {
         this.targetURL = "";
       }
@@ -129,23 +130,23 @@ export const useQueryState = defineStore("query", {
       }
     },
     
-    setTargetAnchor() {
-      if (!this.targetURL) {
-        this.modelAnchor = "";
-        return;
-      }
-      const baseString = "/predictmod/help#current-models"
-      switch (this.targetURL) {
-          case "mg":
-              this.modelAnchor = baseString + "-mg-exercise";
-              break;
-          case "ehr":
-              this.modelAnchor = baseString + "-ehr-diet-counseling";
-              break;
-          default:
-              this.modelAnchor = "/predictmod/NotFound";
-        }
-    },
+    // setTargetAnchor() {
+    //   if (!this.targetURL) {
+    //     this.modelAnchor = "";
+    //     return;
+    //   }
+    //   const baseString = "/predictmod/help#current-models"
+    //   switch (this.targetURL) {
+    //       case "mg":
+    //           this.modelAnchor = baseString + "-mg-exercise";
+    //           break;
+    //       case "ehr":
+    //           this.modelAnchor = baseString + "-ehr-diet-counseling";
+    //           break;
+    //       default:
+    //           this.modelAnchor = "/predictmod/NotFound";
+    //     }
+    // },
 
 
     clearError() {

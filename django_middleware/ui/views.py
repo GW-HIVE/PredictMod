@@ -74,20 +74,25 @@ def ping(request):
 def search(request):
     logger.debug("Received request for MENU items")
     released_models = ReleasedModel.objects.all()
-    pending_models = PendingModel.objects.all()
+    # pending_models = PendingModel.objects.all()
+
     complete_list = [
-        {"name": k.name.replace("-", " ").replace("_", " "), "link": k.link}
-        for k in released_models
+        {"name": r.name.replace("-", " ").replace("_", " "), "link": r.link}
+        for r in released_models
     ]
-    complete_list.extend(
-        [
-            {
-                "name": k.name.replace("-", " ").replace("_", " ") + " (Anticipated)",
-                "link": k.link,
-            }
-            for k in pending_models
-        ]
-    )
+
+    for c in complete_list:
+        logger.debug(f"{c['name']}: {c['link']}")
+
+    # complete_list.extend(
+    #     [
+    #         {
+    #             "name": k.name.replace("-", " ").replace("_", " ") + " (Anticipated)",
+    #             "link": k.link,
+    #         }
+    #         for k in pending_models
+    #     ]
+    # )
 
     return JsonResponse(complete_list, safe=False)
 
@@ -230,7 +235,7 @@ def file_download(request):
         return JsonResponse(json.loads(response.content.decode("utf-8")), safe=False)
     return JsonResponse({"error": f"Unknown model name: {model_name}"}, status=500)
 
-
+@csrf_exempt
 def file_upload(request):
     if request.method == "POST":
 
@@ -238,6 +243,13 @@ def file_upload(request):
             target = request.GET.get("q", None)
             file_name = request.GET.get("name", None)
             user = request.user
+
+            if file_name == "example":
+                response = requests.post(
+                    f"{lookup_backend(target)}/upload?q={target}&file_name=example"
+                )
+                response = json.loads(response._content.decode("utf-8"))
+                return JsonResponse(response, status=200, safe=False)
 
             site_user = SiteUser.objects.filter(user=user).first()
             username = f"{site_user.user.first_name} {site_user.user.last_name}"

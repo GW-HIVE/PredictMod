@@ -1,12 +1,29 @@
 <template>
+<v-container v-if="!modelView">
+  <h4>Current Model: {{ queryState.targetURL.name }}</h4>
+</v-container>
 <v-col cols="11">
 <v-row class="justify-center">
-<v-btn type="submit" @click="alertTBD(source=`Review`)">
+<!-- <v-btn type="submit" @click="alertTBD(source=`Review`)"> -->
+<v-btn ref="button" v-if="!modelView">
     Review Available Models
 </v-btn>
-<router-link :to="queryState.modelAnchor" v-if="!targetURL">
+<!-- See https://stackoverflow.com/a/76930390 -->
+<v-select
+  :items="queryState.targetURLs"
+  item-title="name"
+  item-value="link"
+  hide-details
+  return-object
+  v-model="queryState.targetURL"
+  :menu-props="{activator: button, openOnClick: true}"
+  v-show="false"
+>
+  <!-- v-model="selectedModel" -->
+</v-select>
+<router-link :to="'models/' + queryState.targetURL.link" v-if="!modelView">
     <v-btn>
-        Learn More
+        Learn More About The Model
     </v-btn>
 </router-link>
     <!-- <FileDownload :download-target-u-r-l="queryState.targetURL" /> -->
@@ -15,75 +32,62 @@
             <!-- <v-icon right dark>mdi-cloud-upload</v-icon> -->
     </v-btn>
 </v-row>
+
 </v-col>
-<v-col cols="11">
-<v-row class="justify-center pa-2" v-if="loggedIn">
-    <FileUpload :upload-target-u-r-l="targetURL ? modelName : `${queryState.targetURL}`" />
+<v-col cols="11" v-if="loggedIn">
+<v-row class="justify-center pa-2">
+    <FileUpload :upload-target-u-r-l="modelView ? modelName : `${queryState.targetURL.link}`" />
 </v-row>
 </v-col>
-<v-col cols="11">
-<v-row class="justify-center pa-8" v-if="!loggedIn">
-    <v-btn color="primary" type="submit" @click.prevent="alertTBD(source=`Default submission`)">
-        Example Analysis
-    </v-btn>
+<v-col cols="11" v-if="!loggedIn">
+<v-row class="justify-center pa-8">
+  <FileUpload :upload-target-u-r-l="modelView ? modelName : `${queryState.targetURL.link}`" />
 </v-row>
 </v-col>
-<!-- 
-    <v-row>
-    <v-btn color="primary" @click="alertTBD(source=`Analysis`)">
-        {{ loggedIn ? "Launch Analysis" : "See output from example file" }}
-    </v-btn>
-</v-row>
--->
 </template>
 
-<script>
+<script setup>
+import { computed, ref } from 'vue';
+
 import { useUserStore } from '@/store/user';
 import { useQueryState } from '@/store/queryState';
 // import FileDownload from '@/components/FileDownload.vue';
 import DownloadService from '@/services/DownloadService';
 import FileUpload from '@/components/FileUpload.vue';
 
-export default {
+const button = ref()
+// const selectedModel = ref()
 
-    name: 'ToolControlPanel',
-    setup() {
-        const userStore = useUserStore();
-        const queryState = useQueryState();
-        return { userStore, queryState };
-    },
-    computed: {
-        loggedIn: function() {
-            // console.log("User store has value %s", this.userStore.user);
-            return this.userStore.user ? true : false
-        },
-    },
-    props: {
-        targetURL: String,
-        modelName: String,
-        // modelAnchor: String,
-    },
-    methods: {
-        alertTBD(source) {
-            alert(source + " functionality is under construction");
-        },
-        async downloadPreview() {
-            const targetName = this.modelName ? this.modelName : this.queryState.targetURL;
-            // console.log("TCP: Downloading from target ", targetName);
-            const response = await DownloadService.download(targetName, () => {
-            });
-            // console.log("TCP: Collected data:\n%s", response);
-            if (response.error) {
-                console.log("Download experienced an error: ", response.error);
-                alert("Download experienced an error: " + response.error);
-            } else {
-            this.queryState.filePreviewData = response;
-            this.queryState.downloadDrawer = true;
-            }
-        },
-    },
-    components: { DownloadService, FileUpload },
+const userStore = useUserStore()
+const queryState = useQueryState()
 
+const props = defineProps({
+  targetURL: {type: String},
+  modelName: {type: String},
+  modelView: {type: Boolean, default: false},
+})
 
+function alertTBD(source) {
+    alert(source + " functionality is under construction");
 }
+
+async function downloadPreview() {
+    const targetName = props.modelName ? props.modelName : queryState.targetURL.link;
+    // console.log("TCP: Downloading from target ", targetName);
+    const response = await DownloadService.download(targetName, () => {
+    });
+    // console.log("TCP: Collected data:\n%s", response);
+    if (response.error) {
+        console.log("Download experienced an error: ", response.error);
+        alert("Download experienced an error: " + response.error);
+    } else {
+    queryState.filePreviewData = response;
+    queryState.downloadDrawer = true;
+    }
+}
+
+const loggedIn = computed(() => {
+  return userStore.user ? true : false
+})
+
 </script>

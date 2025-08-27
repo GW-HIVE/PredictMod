@@ -30,6 +30,7 @@
              -->
           <v-file-input
             show-size
+            v-if="this.checkUser()"
             label="Select a PredictMod-formatted xls or xlsx file"
             type="File"
             v-model="currentFile"
@@ -48,9 +49,16 @@
             color="primary"
             :key="uploadSuccess" 
             @click="importFileAndAnalyze" 
-            v-if="!uploadSuccess">
+            v-if="this.checkUser() && !uploadSuccess">
             Submit & Analyze
             <!-- <v-icon right dark>mdi-cloud-upload</v-icon> -->
+          </v-btn>
+          <v-btn 
+            color="primary"
+            v-if="!this.checkUser()"
+            @click="exampleAnalysis"
+          >
+            Example Analysis
           </v-btn>
         </v-col>
         <!-- <v-col>
@@ -68,10 +76,10 @@
       <v-alert v-if="message" color="blue-grey" class="pa-5" dark>
         {{ message }}
       </v-alert>
-      <v-row class="pa-5" v-if="showChart && this.checkUser()">
+      <v-row class="pa-5" v-if="showChart">
         <StandinChart v-if="standIn" />
         <SHAPForcePlot 
-          v-if="chartData" 
+          v-if="chartData"
           :chart-data="chartData" 
           :key="counterToken"
         />
@@ -98,7 +106,7 @@
         
       </v-row>
     </v-container>
-        <v-container v-if="this.checkUser()">
+        <v-container>
         <v-overlay
           v-model="toggleOverlay"
           @click.prevent="toggleOverlay = !toggleOverlay"
@@ -157,11 +165,71 @@ import * as XLSX from 'xlsx';
     methods: {
         checkUser() {
           // console.log("Checking user ROLE: ", this.userStore.role);
-          return this.userStore.role > 2;
+          return this.userStore.role > 0;
         },
         forceRedraw() {
           this.counterToken += 1;
         },
+    async exampleAnalysis() {
+      console.log("===> Launching pre-loaded example analysis")
+        let baseURL = ""
+        if (import.meta.env.DEV) {
+          baseURL = import.meta.env.VITE_DEV_MIDDLEWARE_BASE + '/api'
+        } else if (import.meta.env.PROD) {
+          if (import.meta.env.VITE_PRODUCTION_HOST == 'local'){
+            baseURL = import.meta.env.VITE_DOCKER_MIDDLEWARE_BASE + '/api'
+          } else {
+            baseURL = import.meta.env.VITE_PROD_MIDDLEWARE_BASE + '/api'
+          }
+        }
+        const model = this.uploadTargetURL
+        const exampleURL = baseURL + `/upload/?q=${model}&name=example`
+        console.log("===> Requesting analysis from " + exampleURL)
+        const res = await fetch(exampleURL, {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            // "Accept": "application/json",
+            // "Content-Type": "multipart/form-data",
+            "X-CSRFToken": this.userStore.token,
+          },
+          body: {},
+        })
+
+        if (!res.ok) {
+          // Error handling
+          // console.log("Result was not OK:\n" + JSON.stringify(res))
+          const response = await res.json()
+          if (response) {
+            // console.log("Got a response in error: " + JSON.stringify(response))
+            return { networkError: response.error }
+          }
+          return {
+            networkError: "Error " + res.status + ":" + res.statusText,
+          }
+        }
+
+        const response = await res.json();
+        // console.log("===> Got response: " + JSON.stringify(response))
+        
+        this.message = response.result ? response.result : null;
+        if (response.plot) {
+          this.chartData = JSON.parse(response.plot);
+          this.showChart = true;
+        }
+        else if (response.image) {
+          this.imageData = "data:image/png; base64, " + response.image;
+          this.showChart = true;
+          // console.log("Image data is now: %s", this.imageData)
+        }
+        else if (response.error) {
+          console.log("ERROR: ", response.error);
+          this.error = response.error;
+          this.showChart = false;
+          // this.standIn = true;
+        }
+
+    },
         importFileAndAnalyze() {
             if (!this.currentFile) {
                 this.message = null;

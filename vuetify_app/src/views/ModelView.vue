@@ -76,7 +76,7 @@
 <!-- <v-btn @click.submit="getMarkDown()">Test getting markdown</v-btn> -->
 <v-container>
 
-  <ToolControlPanel target-u-r-l="modelsURL" :model-name="name" />
+  <ToolControlPanel target-u-r-l="modelsURL" :model-name="name" :model-view=true />
 
 </v-container>
 

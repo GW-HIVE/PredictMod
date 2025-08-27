@@ -24,11 +24,16 @@
 	      a patient will respond to an intervention based on electronic health records (EHR) or -omic data.</h4>
             </v-card-text>
             <v-card-actions class="justify-center">
+        <!-- 
         <router-link to="/predictmod/help">
-              <v-btn variant="tonal" color="#efefef">
-        Learn More
-        </v-btn>
-        </router-link>
+          <v-btn variant="tonal" color="#efefef">
+            Learn More
+          </v-btn>
+        </router-link> 
+        -->
+          <v-btn variant="tonal" color="#efefef" href="https://hivelab.biochemistry.gwu.edu/wiki/PredictMod">
+            Learn More
+          </v-btn>
         </v-card-actions>
          </v-card>
           </div>
@@ -100,90 +105,14 @@
           <h3>Model Statistics</h3>
         </v-card-title>
         <ReleasedModels :data="this.appStore.releasedModels" v-if="show_models" />
-        <!--- <v-card-text>
-        <v-row>
-        <v-col cols="6" class="text-left">
-          <b>MG_Exercise</b><br>
-          Release Date<br>
-          Data Type<br>
-          Patients<br>
-          Genomes<br>
-          Model Type<br>
-        </v-col>
-        <v-col cols="6" class="text-center">
-          <b>v1.1</b><br>
-          31 May 2023<br>
-          Metagenomic<br>
-          40<br>
-          281<br>
-          Decision Tree Classifier (DTC)<br>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="6" class="text-left ma=2 pa=2">
-          <b>MDClone_Diet_Counseling</b><br>
-          Release Date<br>
-          Data Type<br>
-          Patients<br>
-          Data Features<br>
-          Model Type<br>
-        </v-col>
-        <v-col cols="6" class="text-center">
-          <b>v1.1</b><br>
-          11 Dec 2023<br>
-          EHR<br>
-          19,842<br>
-          19<br>
-          Decision Tree Classifier (DTC)<br>
-        </v-col>
-      </v-row>
-      </v-card-text> -->
+
       </v-card>
-      <v-card outlined>
+      <!-- <v-card outlined>
         <v-card-title class="title text-center font-weight-bold">
           <h3>Anticipated Future Models</h3>
         </v-card-title>
-
         <PendingModels :data="this.appStore.pendingModels" v-if="show_models" />
-
-        <!-- <v-card-text class="text-center">
-          <v-row>
-          <v-col cols="6" class="text-left">
-            <b>Model Name</b><br>
-            PredictMod_EHR_Keto<br>
-            Glycomics_PreDM<br>
-            Glycoproteomics_RC<br>
-            Epilepsy_Keto<br>
-            Synthea_Exercise<br>
-            MDClone_Diet_Counseling<br>
-            MDClone_Semaglutide<br>
-            MDClone_Exercise<br>
-          </v-col>
-          <v-col cols="2" class="text-center">
-            <b>Version</b><br>
-            1.0<br>
-            1.0<br>
-            1.0<br>
-            1.0<br>
-            1.1<br>
-            1.2<br>
-            1.0<br>
-            1.0<br>
-          </v-col>
-          <v-col cols="4" class="text-center">
-            <b>Data Type</b><br>
-            EHR<br>
-            Glycomic<br>
-            Glycoproteomic<br>
-            Metagenomic<br>
-            EHR<br>
-            EHR<br>
-            EHR<br>
-            EHR<br>
-          </v-col>
-        </v-row>
-        </v-card-text> -->
-      </v-card>
+      </v-card> -->
     </v-col>
   </v-row>
 
