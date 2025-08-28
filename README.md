@@ -9,7 +9,7 @@ To run the PredictMod system locally, Python and JavaScript runtimes must be ava
 `node`: >= 10.8.2  
 `python3`: >= 3.10.2  
 
-Additionally, to run PredictMod as Docker containers, docker (>= 26.1.3) must also be available.
+Additionally, to run PredictMod as Docker containers, `docker` (>= 26.1.3) must also be available.
 
 ## Setup
 #### Cloning the repository
