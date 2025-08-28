@@ -1,2 +1,5 @@
 **/*.csv
 **/*.xls*
+**/*.pkl
+**/*.pickle
+**/*.json
