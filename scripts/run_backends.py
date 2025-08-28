@@ -13,10 +13,13 @@ os.chdir(MODEL_DIR)
 
 docker_config_names = {"docker_config.toml"}
 
+IS_EXAMPLE = False
 
 def get_parent_directories(dir_path):
     parents = dict()
     for parent, dirnames, filenames in os.walk(dir_path):
+        if not IS_EXAMPLE and "new_model_example" in set(dirnames):
+            continue
         if set(filenames).intersection(docker_config_names):
             parents[parent] = sorted(
                 list(set(filenames).intersection(docker_config_names))

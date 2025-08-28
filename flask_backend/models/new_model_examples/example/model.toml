@@ -1,0 +1,17 @@
+BCO = "example_1_BCO.json"
+data_types = { TBD = """\
+This is an example of how data types \ 
+ may be enumerated.\
+ """ }
+model_type = "Logistic Regression Classifier"
+backend = "example-backend-for-docker-DNS-resolution"
+conditions = { "TBD" = """\
+[TBD]
+""" }
+interventions = { Example = """\
+An exemplar intervention \
+Spread across lines\
+""" }
+[data_meta] 
+"Samples" = 10
+"Features" = "Additional metadata"

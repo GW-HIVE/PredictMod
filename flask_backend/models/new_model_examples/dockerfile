@@ -1,0 +1,15 @@
+# docker build -t new_model_example -f dockerfile .
+FROM python:3.11-slim-buster AS new-model-base
+
+COPY ./requirements.txt /
+
+RUN pip3 install -r requirements.txt && \
+    mkdir -p /var/log/gunicorn
+
+FROM new-model-base
+
+COPY . /backend
+WORKDIR /backend
+
+CMD ["gunicorn", "--bind", "0.0.0.0:4243", "--access-logfile", "/var/log/gunicorn/dev.log", "wsgi:app"]
+

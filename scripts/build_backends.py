@@ -7,6 +7,8 @@ cwd = os.getcwd()
 
 os.chdir("../flask_backend/models")
 
+IS_EXAMPLE = False
+
 model_config_names = {
     "model.toml",
 }
@@ -16,6 +18,8 @@ docker_config_names = {"dockerfile", "dockerfile.base", "docker_config.toml"}
 def get_parent_directories(dir_path):
     parents = dict()
     for parent, dirnames, filenames in os.walk(dir_path):
+        if not IS_EXAMPLE and "new_model_examples" in set(dirnames):
+            continue
         if set(filenames).intersection(docker_config_names):
             parents[parent] = sorted(
                 list(set(filenames).intersection(docker_config_names))
@@ -26,6 +30,8 @@ def get_parent_directories(dir_path):
 def get_child_model_configs(dir_path):
     model_configs = dict()
     for parent, dirnames, filenames in os.walk(dir_path):
+        if not IS_EXAMPLE and "example" in set(dirnames):
+            continue
         if set(filenames).intersection(model_config_names):
             model_configs[os.path.basename(parent)] = sorted(
                 list(set(filenames).intersection(model_config_names))
