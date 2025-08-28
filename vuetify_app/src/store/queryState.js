@@ -73,6 +73,10 @@ export const useQueryState = defineStore("query", {
       //   this.interventionOptions = this.interventions[this.condition];
       //   this.dataTypeOptions = this.dataInputTypes[this.condition];
       // }
+      if (!this.condition) {
+        // console.log("Found falsey condition " + this.condition + ": returning")
+        return
+      }
       const iResponse = await fetch(this.queriesURL+`/api/query-interventions/?c=${this.condition}`);
       const interventions = JSON.parse(await iResponse.json());
       // console.log("New interventions: ", interventions);
