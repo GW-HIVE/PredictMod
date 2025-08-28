@@ -6,11 +6,11 @@
       src="../assets/Welcome_Header.jpg"
       id="intro-img"
       gradient="to bottom, rgba(119, 119, 119, 0.25), rgba(0, 0, 0, 0.75)"
-      :height="400" 
+      :height="400"
       :cover="true"
       >
       <div class="d-flex fill-height" style="flex-direction:column">
-          <div class="d-flex fill-height align-center justify-center"> 
+          <div class="d-flex fill-height align-center justify-center">
             <v-card flat color="transparent">
             <v-card-title class="title text-center font-weight-bold">
               <h1>PredictMod Models</h1>
@@ -41,9 +41,10 @@
         <v-card-text>Version: {{ model.fields.version }} </v-card-text>
       </v-card>
       </v-col>
-    
+
     </v-row>
 </v-container>
+<!--
 <v-container fluid>
     <h1>Upcoming Models</h1>
     <v-row dense>
@@ -51,7 +52,7 @@
         v-for="model in this.appStore.pendingModels"
         :key="model.fields.name"
       >
-      <!-- :cols="model.flex" -->
+      //!-- :cols="model.flex" -//->
 
       <v-card :href="this.modelsURL+model.fields.name">
         <v-card-title v-text="model.fields.name"></v-card-title>
@@ -59,10 +60,10 @@
       </v-card>
 
       </v-col>
-    
+
     </v-row>
 </v-container>
-
+-->
 <v-container fluid>
     <h1>Contribute to the PredictMod Platform</h1>
     <v-card :href="newModelsURL">
@@ -93,7 +94,7 @@
 </v-container>
 
 <!-- <v-img src="../assets/Footer.png">
-  
+
 </v-img> -->
 
 
