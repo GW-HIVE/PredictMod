@@ -45,7 +45,8 @@ export default {
       nextInput: '',
       aiLoading: false,
       aiGenResponses: [],
-      currentInput: ''
+      currentInput: '',
+      messages: [],
     }
   },
   mounted() {
@@ -71,12 +72,19 @@ export default {
         import.meta.env.VITE_DEV_MIDDLEWARE_BASE;
 
       if (!queryText) {
+        // this.messages.push({
+
+        // })
         queryText = this.initialQuery;
       }
       middlewareURL += `/api/query-ai/?q=${queryText}`;
 
       console.log("===> Querying endpoint at " + middlewareURL);
 
+      // fetch(middlewareURL, {
+      //   method: 'POST',
+      //   body: {}
+      // })
       fetch(middlewareURL)
         .then(response => response.json())
         .then(data => {

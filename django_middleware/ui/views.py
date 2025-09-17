@@ -156,6 +156,8 @@ CACHED_AI_VALUES = {
 def query_ai_backend(request):
 
     query_content = request.GET.get("q", None)
+    # TODO: messages = request.body.json()
+    
     content = None
     if query_content is None:
         content = "What is the answer to life, the universe, and everything?"
