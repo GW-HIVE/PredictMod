@@ -64,6 +64,8 @@ if __name__ == "__main__":
     
     feature_importance = []
     for item in zip(feature_names, importances):
+        if item[0] == "Status":
+            continue
         feature_importance.append((item[0], item[1]))
 
     feature_importance.sort(key=lambda x: x[1], reverse=True)
