@@ -1,0 +1,199 @@
+{
+    "object_id": "https://biocomputeobject.org/HIVE_000006/DRAFT",
+    "spec_version": "https://w3id.org/ieee/ieee-2791-schema/2791object.json",
+    "etag": "",
+    "provenance_domain": {
+        "name": "BreastCancer_SVM",
+        "version": "1.0",
+        "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+        "created": "2025-12-15T19:01:57",
+        "modified": "2025-12-15T19:42:32",
+        "derived_from": "",
+        "contributors": [
+            {
+                "name": "Vishal Bakshi",
+                "affiliation": "George Washington University",
+                "email": "vishal.bakshi@gwu.edu",
+                "contribution": [
+                    "createdBy"
+                ],
+                "orcid": ""
+            },
+            {
+                "name": "Patrick McNeely",
+                "affiliation": "George Washington University",
+                "email": "pmcneely@email.gwu.edu",
+                "contribution": [
+                    "createdBy"
+                ],
+                "orcid": ""
+            },
+            {
+                "name": "Lori Krammer",
+                "affiliation": "George Washington University",
+                "email": "lorikrammer@email.gwu.edu",
+                "contribution": [
+                    "createdBy"
+                ],
+                "orcid": ""
+            }
+        ],
+        "review": []
+    },
+    "usability_domain": [
+        "This pipeline is intended to support biomedical researchers, data scientists, and clinical informaticians interested in: Extracting the response percentage of breast cancer patients to chemotherapy and combo therapy using a pre-trained SVM model."
+    ],
+    "description_domain": {
+        "keywords": [
+            "python",
+            "machine learning",
+            "single-cell RNA-seq"
+        ],
+        "xref": [],
+        "platform": [
+            "VS Code"
+        ],
+        "pipeline_steps": [
+            {
+                "step_number": 1,
+                "name": "model inference",
+                "description": "Run inference on the new participant's single-cell RNA-seq data using a pre-trained SVM model.",
+                "version": "1.0",
+                "input_list": [
+                    {
+                        "filename": "chemo_model.pkl",
+                        "access_time": "2025-12-15T04:00:00.000Z",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/BreastCancer_SVM_v1/chemo_model.pkl",
+                        "sha1_checksum": ""
+                    },
+                    {
+                        "filename": "combo_model.pkl",
+                        "access_time": "2025-12-15T04:00:00.000Z",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/BreastCancer_SVM_v1/combo_model.pkl",
+                        "sha1_checksum": ""
+                    },
+                    {
+                        "filename": "test_script.py",
+                        "access_time": "2025-12-15T04:00:00.000Z",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/BreastCancer_SVM_v1/test_script.py",
+                        "sha1_checksum": ""
+                    },
+                    {
+                        "filename": "testset_P020.csv",
+                        "access_time": "2025-12-15T04:00:00.000Z",
+                        "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/BreastCancer_SVM_v1/testset_P020.csv",
+                        "sha1_checksum": ""
+                    }
+                ],
+                "output_file": [
+                    {
+                        "filename": "NA",
+                        "access_time": "2025-12-15T04:00:00.000Z",
+                        "uri": "NA",
+                        "sha1_checksum": ""
+                    }
+                ]
+            }
+        ]
+    },
+    "parametric_domain": [],
+    "io_domain": {
+        "input_subdomain": [
+            {
+                "uri": {
+                    "filename": "chemo_model.pkl",
+                    "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/BreastCancer_SVM_v1/chemo_model.pkl",
+                    "access_time": "2025-12-15T04:00:00.000Z"
+                }
+            },
+            {
+                "uri": {
+                    "filename": "combo_model.pkl",
+                    "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/BreastCancer_SVM_v1/combo_model.pkl",
+                    "access_time": "2025-12-15T04:00:00.000Z"
+                }
+            },
+            {
+                "uri": {
+                    "filename": "test_script.py",
+                    "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/BreastCancer_SVM_v1/test_script.py",
+                    "access_time": "2025-12-15T04:00:00.000Z"
+                }
+            },
+            {
+                "uri": {
+                    "filename": "testset_P020.csv",
+                    "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/BreastCancer_SVM_v1/testset_P020.csv",
+                    "access_time": "2025-12-15T04:00:00.000Z"
+                }
+            },
+            {
+                "uri": {
+                    "filename": "testset_P025.csv",
+                    "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/BreastCancer_SVM_v1/testset_P025.csv",
+                    "access_time": "2025-12-15T04:00:00.000Z"
+                }
+            }
+        ],
+        "output_subdomain": [
+            {
+                "mediatype": "string",
+                "uri": {
+                    "filename": "NA",
+                    "uri": "NA",
+                    "access_time": "2025-12-15T04:00:00.000Z"
+                }
+            }
+        ]
+    },
+    "execution_domain": {
+        "script": [],
+        "script_driver": "",
+        "software_prerequisites": [
+            {
+                "name": "Python",
+                "version": "3.11.13",
+                "uri": {
+                    "filename": "",
+                    "uri": "https://www.python.org/",
+                    "access_time": "2025-12-15T04:00:00.000Z",
+                    "sha1_checksum": ""
+                }
+            },
+            {
+                "name": "pandas",
+                "version": "2.2.2",
+                "uri": {
+                    "filename": "",
+                    "uri": "https://pandas.pydata.org/",
+                    "access_time": "2025-12-15T04:00:00.000Z",
+                    "sha1_checksum": ""
+                }
+            },
+            {
+                "name": "numpy",
+                "version": "2.0.2",
+                "uri": {
+                    "filename": "",
+                    "uri": "https://numpy.org/",
+                    "access_time": "2025-12-15T04:00:00.000Z",
+                    "sha1_checksum": ""
+                }
+            },
+            {
+                "name": "scikit-learn",
+                "version": "2.4.2",
+                "uri": {
+                    "filename": "",
+                    "uri": "https://scikit-learn.org/",
+                    "access_time": "2025-12-15T04:00:00.000Z",
+                    "sha1_checksum": ""
+                }
+            }
+        ],
+        "external_data_endpoints": [],
+        "environment_variables": {}
+    },
+    "extension_domain": [],
+    "error_domain": {}
+}
