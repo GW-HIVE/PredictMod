@@ -79,7 +79,10 @@
   <ToolControlPanel target-u-r-l="modelsURL" :model-name="name" :model-view=true />
 
 </v-container>
+<v-container v-if="aiEnabled">
 
+  <AIInterface v-if="modelInitialQuery" :initial-query="modelInitialQuery" :model-name="name"/>
+</v-container>
 <v-container>
       <!-- <v-btn @click.submit="logModels()">Click to log models to console</v-btn> -->
   
@@ -116,6 +119,7 @@
   import { marked } from "marked";
   import * as XLSX from 'xlsx';
 import MetadataDashboard from '@/components/MetadataDashboard.vue';
+import AIInterface from '@/components/AIInterface.vue';
 
   const modelsURL = import.meta.env.DEV ? import.meta.env.VITE_DEV_MIDDLEWARE_BASE + '/api/model-details/': "/predictmod/api/model-details/";
   
@@ -133,6 +137,7 @@ import MetadataDashboard from '@/components/MetadataDashboard.vue';
         this.appStore.getModels();
       };
       this.getMarkDown();
+      // this.getAiResponse();
     },
     props: {
         name: String,
@@ -144,6 +149,9 @@ import MetadataDashboard from '@/components/MetadataDashboard.vue';
             showDetails: false,
             modelDetails: null,
             modelMetaData: null,
+            modelInitialQuery: "",
+            aiEnabled: import.meta.env.VITE_AI_ENABLED,
+            queryAI: false,
         }
       },
     computed: {
@@ -192,6 +200,9 @@ import MetadataDashboard from '@/components/MetadataDashboard.vue';
         this.modelDetails = marked.parse(response.details);
         if (response.metadata) {
           this.modelMetaData = response.metadata
+          response.metadata?.search_terms 
+            // console.log("Got search terms\n" + JSON.stringify(response.metadata.search_terms))
+            this.modelInitialQuery = response.metadata.search_terms
         }
         this.showDetails = true;
       },
@@ -212,7 +223,7 @@ import MetadataDashboard from '@/components/MetadataDashboard.vue';
         return true;
       },
     },
-    components: { MetadataDashboard, ToolControlPanel, Spreadsheet, DisclaimerShow, LicenseShow }
+    components: { AIInterface, MetadataDashboard, ToolControlPanel, Spreadsheet, DisclaimerShow, LicenseShow }
   }
   </script>
   

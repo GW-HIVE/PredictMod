@@ -20,14 +20,22 @@ from users.serializers import TrainedModelFullSerializer
 
 from base64 import b64decode
 
+## AI-GENERATED
+import asyncio
+import aiohttp
+##############
+# from ollama import AsyncClient
+import ollama
 import json
 import logging
 import os
 import pandas
 import requests
+import time
 
 logger = logging.getLogger()
 
+client = ollama.Client()
 
 # UPLOAD_ENDPOINTS = {
 #     "mg",
@@ -127,6 +135,50 @@ def png_response(request):
     logger.debug("===> Serving data request <===")
     data = {"Factor 1": 42, "Factor 2": 25, "Factor 3": -12}
     return JsonResponse(data=data, safe=False)
+
+SHIM_DATA_DIR = os.path.join(settings.BASE_DIR, "ui/assets")
+
+def read_md(filename):
+    with open(os.path.join(SHIM_DATA_DIR, filename), 'r') as fp:
+        text = fp.read()
+    return text
+
+CACHED_AI_VALUES = {
+    "initial_response": read_md("llama_response.md"),
+    "parsed_topics": [
+        read_md("parsed_topics_1.md"), 
+        read_md("parsed_topics_2.md"),
+        read_md("parsed_topics_3.md")
+        ],
+    "resource_results": "STANDIN for API calls to NCBI, BiomarkerKB, other resources...", 
+}
+
+def query_ai_backend(request):
+
+    query_content = request.GET.get("q", None)
+    # TODO: messages = request.body.json()
+    
+    content = None
+    if query_content is None:
+        content = "What is the answer to life, the universe, and everything?"
+    else:
+        content = query_content
+
+    logger.debug("===> Calling to Ollama server <===")
+    logger.debug(f"Query content is: {content}")
+    message = {
+        "role": "user",
+        "content": content,
+    }
+    try:
+        response = client.chat(model="llama3.2", messages=[message])
+        logger.debug(f"========== RESPONSE ==========\n{response.message.content}")
+        # logger.debug(f"---> Response type: {type(response)}")
+        return JsonResponse({"response": response.message.content}, safe=False)
+    except Exception as e:
+        logger.debug(f"="*80)
+        logger.debug(f"{e}")
+        logger.debug(f"="*80)
 
 
 def models(request):
