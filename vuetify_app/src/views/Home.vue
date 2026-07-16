@@ -20,8 +20,10 @@
               <h1>Welcome to PredictMod</h1>
             </v-card-title>
             <v-card-text class="text-center">
-              <h4>Welcome to PredictMod! PredictMod is a machine-learning-based platform that predicts whether
-	      a patient will respond to an intervention based on electronic health records (EHR) or -omic data.</h4>
+              <h4 style="max-width: 600px; margin: 0 auto; white-space: normal; word-wrap: break-word;">
+                Welcome to PredictMod! PredictMod is a machine-learning-based platform that predicts whether
+                a patient will respond to an intervention based on electronic health records (EHR) or -omic data.
+              </h4>
             </v-card-text>
             <v-card-actions class="justify-center">
         <!-- 
