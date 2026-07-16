@@ -79,7 +79,7 @@
   <ToolControlPanel target-u-r-l="modelsURL" :model-name="name" :model-view=true />
 
 </v-container>
-<v-container>
+<v-container v-if="aiEnabled">
 
   <AIInterface v-if="modelInitialQuery" :initial-query="modelInitialQuery" :model-name="name"/>
 </v-container>
@@ -150,6 +150,7 @@ import AIInterface from '@/components/AIInterface.vue';
             modelDetails: null,
             modelMetaData: null,
             modelInitialQuery: "",
+            aiEnabled: import.meta.env.VITE_AI_ENABLED,
             queryAI: false,
         }
       },
