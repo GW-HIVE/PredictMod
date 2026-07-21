@@ -1,0 +1,240 @@
+{
+  "object_id": "https://example.org/bco/breast-cancer-drfs-gse25055",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/2791object.json",
+  "etag": "draft-1",
+  "provenance_domain": {
+    "name": "Breast Cancer DRFS Prediction using GEO GSE25055",
+    "version": "1.0",
+    "review_status": "unreviewed",
+    "derived_from": [],
+    "created": "2026-04-27T00:00:00Z",
+    "modified": "2026-04-27T00:00:00Z",
+    "contributors": [
+      {
+        "name": "SAMPURNA CHAKRAVORTY",
+        "affiliation": "University of Maryland - College Park",
+        "email": "sampurnachakravorty@gmail.com",
+        "contribution": [
+          "createdBy"
+        ],
+        "orcid": ""
+      }
+    ],
+    "license": "https://spdx.org/licenses/CC-BY-4.0.html"
+  },
+  "usability_domain": [
+    "This workflow processes gene expression data from GEO dataset GSE25055 to predict distant relapse-free survival (DRFS) outcomes in breast cancer patients.",
+    "The pipeline extracts metadata and expression values from SOFT files, maps probe IDs to gene symbols, and constructs a labeled dataset.",
+    "A logistic regression model is trained on normalized gene expression data using variance-based feature selection.",
+    "This workflow is intended for exploratory bioinformatics analysis and predictive modeling of cancer outcomes."
+  ],
+  "description_domain": {
+    "keywords": [
+      "breast cancer",
+      "gene expression",
+      "GEO",
+      "machine learning",
+      "logistic regression",
+      "DRFS"
+    ],
+    "pipeline_steps": [
+      {
+        "step_number": 1,
+        "name": "Upload GEO SOFT file",
+        "description": "Upload GSE25055 SOFT file into the environment"
+      },
+      {
+        "step_number": 2,
+        "name": "Parse dataset",
+        "description": "Parse SOFT file using GEOparse"
+      },
+      {
+        "step_number": 3,
+        "name": "Extract metadata",
+        "description": "Extract sample-level metadata"
+      },
+      {
+        "step_number": 4,
+        "name": "Extract expression matrix",
+        "description": "Retrieve VALUE matrix from GEO dataset"
+      },
+      {
+        "step_number": 5,
+        "name": "Transpose matrix",
+        "description": "Convert to samples x features format"
+      },
+      {
+        "step_number": 6,
+        "name": "Map probes to genes",
+        "description": "Use GPL96 annotation to map probe IDs to gene symbols"
+      },
+      {
+        "step_number": 7,
+        "name": "Clean DRFS labels",
+        "description": "Extract and clean DRFS outcome variable"
+      },
+      {
+        "step_number": 8,
+        "name": "Match sample IDs",
+        "description": "Align metadata and expression data"
+      },
+      {
+        "step_number": 9,
+        "name": "Merge dataset",
+        "description": "Combine features and labels"
+      },
+      {
+        "step_number": 10,
+        "name": "Feature selection",
+        "description": "Select top 1000 genes by variance"
+      },
+      {
+        "step_number": 11,
+        "name": "Normalization",
+        "description": "Standardize features using StandardScaler"
+      },
+      {
+        "step_number": 12,
+        "name": "Train-test split",
+        "description": "Split dataset into 80/20 stratified sets"
+      },
+      {
+        "step_number": 13,
+        "name": "Train model",
+        "description": "Train logistic regression classifier"
+      },
+      {
+        "step_number": 14,
+        "name": "Evaluate model",
+        "description": "Compute accuracy, precision, recall, F1, ROC-AUC"
+      },
+      {
+        "step_number": 15,
+        "name": "Feature importance",
+        "description": "Extract most predictive genes"
+      },
+      {
+        "step_number": 16,
+        "name": "Visualization",
+        "description": "Generate ROC, PR curve, and confusion matrix"
+      }
+    ]
+  },
+  "execution_domain": {
+    "script": [
+      {
+        "uri": "https://colab.research.google.com/",
+        "access_time": "2026-04-27T00:00:00Z"
+      }
+    ],
+    "script_driver": "python",
+    "software_prerequisites": [
+      {
+        "name": "Python",
+        "version": "3.x"
+      },
+      {
+        "name": "numpy"
+      },
+      {
+        "name": "pandas"
+      },
+      {
+        "name": "GEOparse"
+      },
+      {
+        "name": "scikit-learn"
+      },
+      {
+        "name": "matplotlib"
+      }
+    ],
+    "external_data_endpoints": [
+      {
+        "name": "GEO",
+        "url": "https://www.ncbi.nlm.nih.gov/geo/"
+      }
+    ],
+    "environment_variables": {}
+  },
+  "parametric_domain": [
+    {
+      "param": "test_size",
+      "value": "0.2"
+    },
+    {
+      "param": "random_state",
+      "value": "42"
+    },
+    {
+      "param": "feature_selection",
+      "value": "top 1000 genes by variance"
+    },
+    {
+      "param": "C",
+      "value": "100"
+    },
+    {
+      "param": "penalty",
+      "value": "l1"
+    },
+    {
+      "param": "solver",
+      "value": "liblinear"
+    },
+    {
+      "param": "max_iter",
+      "value": "500"
+    },
+    {
+      "param": "class_weight",
+      "value": "balanced"
+    }
+  ],
+  "io_domain": {
+    "input_subdomain": [
+      {
+        "filename": "GSE25055_family.soft.gz",
+        "uri": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE25055"
+      },
+      {
+        "filename": "GPL96 annotation",
+        "uri": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GPL96"
+      }
+    ],
+    "output_subdomain": [
+      {
+        "filename": "trained_model",
+        "mediatype": "application/octet-stream"
+      },
+      {
+        "filename": "metrics",
+        "mediatype": "application/json"
+      },
+      {
+        "filename": "roc_curve",
+        "mediatype": "image/png"
+      },
+      {
+        "filename": "precision_recall_curve",
+        "mediatype": "image/png"
+      },
+      {
+        "filename": "confusion_matrix",
+        "mediatype": "image/png"
+      },
+      {
+        "filename": "top_genes",
+        "mediatype": "text/csv"
+      }
+    ]
+  },
+  "error_domain": {
+    "empirical_error": {
+      "comment": "Model performance varies depending on dataset split and feature selection"
+    },
+    "algorithmic_error": {
+      "comment": "Potential overfitting due to high dimensionality of gene expression data"
+    }
+  }
+}
