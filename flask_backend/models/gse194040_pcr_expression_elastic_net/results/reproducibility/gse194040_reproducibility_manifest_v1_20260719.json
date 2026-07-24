@@ -1,0 +1,178 @@
+{
+  "captured_at_utc": "2026-07-24T23:20:43.266639+00:00",
+  "python": {
+    "version": "3.12.13",
+    "distribution": "CPython"
+  },
+  "operating_system": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "system": "Windows",
+    "release": "11",
+    "version": "10.0.26200",
+    "machine": "AMD64",
+    "logical_cpu_count": 12
+  },
+  "major_libraries": {
+    "numpy": "2.5.1",
+    "pandas": "2.2.2",
+    "scipy": "1.18.0",
+    "scikit-learn": "1.9.0",
+    "joblib": "1.5.3",
+    "matplotlib": "3.11.1",
+    "pytest": "9.1.1",
+    "jsonschema": "4.26.0",
+    "referencing": "0.37.0"
+  },
+  "dependency_provenance": {
+    "existing_processed_dataset": {
+      "artifact": "data_processed/gse194040_ml_ready_pcr_expression.csv",
+      "environment_role": "historical preprocessing environment that produced the intentionally excluded artifact",
+      "session_record": "logs/gse194040_session_info.json",
+      "python": "3.12.13 (main, Mar  3 2026, 15:01:35) [MSC v.1944 64 bit (AMD64)]",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "pandas": "3.0.1",
+      "numpy": "2.3.5",
+      "regenerated_under_current_lock": false,
+      "included_in_submission": false,
+      "recreated_by": "scripts/preprocess_gse194040.py"
+    },
+    "current_prediction_testing": {
+      "environment_role": "supported environment for frozen-model prediction, BCO validation, and automated testing",
+      "dependency_source": "requirements-lock.txt",
+      "python": "3.12.13",
+      "distribution": "CPython",
+      "pandas": "2.2.2",
+      "numpy": "2.5.1",
+      "referencing": "0.37.0",
+      "historical_dataset_producer": false
+    }
+  },
+  "lockfile": {
+    "path": "requirements-lock.txt",
+    "sha256": "817adf5b1f239ac0b19f0fa8443150500769677c30912568c09c464e6ea872da",
+    "all_entries_exactly_pinned": true
+  },
+  "python_packages_on_sys_path": false,
+  "canonical_artifacts": [
+    {
+      "path": "results/tables/gse194040_train_test_split.csv",
+      "expected_sha256": "9fe0dcc93812713add7c993516061a52d755038879171cf96ce5d5ca87c50906",
+      "actual_sha256": "9fe0dcc93812713add7c993516061a52d755038879171cf96ce5d5ca87c50906",
+      "matches": true
+    },
+    {
+      "path": "models/gse194040_best_model.joblib",
+      "expected_sha256": "e3bbccac97c4495dbb8e8c66a8f35921ca6ff20cbb9e0b0671aaf0a00504f9d4",
+      "actual_sha256": "e3bbccac97c4495dbb8e8c66a8f35921ca6ff20cbb9e0b0671aaf0a00504f9d4",
+      "matches": true
+    },
+    {
+      "path": "models/gse194040_best_model_metadata.json",
+      "expected_sha256": "4b1e8633bc76d254bd6c9c541a2545bdf7ab08ed8df9df15b71297e605c11781",
+      "actual_sha256": "4b1e8633bc76d254bd6c9c541a2545bdf7ab08ed8df9df15b71297e605c11781",
+      "matches": true
+    },
+    {
+      "path": "results/tables/gse194040_cv_model_comparison.csv",
+      "expected_sha256": "b2ed30e6a01806793814da5a37b3ec2569c20431f1ad9a32c7ca45f21ce6cc14",
+      "actual_sha256": "b2ed30e6a01806793814da5a37b3ec2569c20431f1ad9a32c7ca45f21ce6cc14",
+      "matches": true
+    },
+    {
+      "path": "results/tables/gse194040_final_test_metrics.csv",
+      "expected_sha256": "e37a940e836b9f69575bc6913c8be8926bfc03eba8fafda83092ad4ec8b7a82c",
+      "actual_sha256": "e37a940e836b9f69575bc6913c8be8926bfc03eba8fafda83092ad4ec8b7a82c",
+      "matches": true
+    },
+    {
+      "path": "results/figures/gse194040_final_roc_curve.png",
+      "expected_sha256": "96a79a1c215b63e7486ac20951cdc42c16f09b8eebb67bc78f08d494e25be44f",
+      "actual_sha256": "96a79a1c215b63e7486ac20951cdc42c16f09b8eebb67bc78f08d494e25be44f",
+      "matches": true
+    },
+    {
+      "path": "results/figures/gse194040_final_confusion_matrix.png",
+      "expected_sha256": "759d3df850f4d3a245cae1b571d363b2928f8b4e3dd11d2eb57bb779d319778f",
+      "actual_sha256": "759d3df850f4d3a245cae1b571d363b2928f8b4e3dd11d2eb57bb779d319778f",
+      "matches": true
+    }
+  ],
+  "all_canonical_hashes_match": true,
+  "excluded_recreatable_artifacts": [
+    {
+      "path": "data_processed/gse194040_ml_ready_pcr_expression.csv",
+      "included_in_submission": false,
+      "expected_sha1": "714aacadbdbfecbc882662ad36f578afc398201c",
+      "expected_sha256": "4f00b3fdf4006129ed31835763dfc906245da1c6d383546a7fe354d5069de78a",
+      "rows": 987,
+      "columns": 19143,
+      "expression_features": 19134,
+      "recreated_by": "scripts/preprocess_gse194040.py"
+    },
+    {
+      "path": "GSE194040/GSE194040_ISPY2ResID_AgilentGeneExp_990_FrshFrzn_meanCol_geneLevel_n988.txt.gz",
+      "included_in_submission": false,
+      "expected_sha1": "f84873f85a5ba8ca4a357a414e0b847532ed74d6",
+      "download_url": "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE194nnn/GSE194040/suppl/GSE194040_ISPY2ResID_AgilentGeneExp_990_FrshFrzn_meanCol_geneLevel_n988.txt.gz"
+    },
+    {
+      "path": "GSE194040/GSE194040-GPL20078_series_matrix.txt.gz",
+      "included_in_submission": false,
+      "expected_sha1": "6fdf48178aeb1a1394ae5718b1e13d026987ed86",
+      "download_url": "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE194nnn/GSE194040/matrix/GSE194040-GPL20078_series_matrix.txt.gz"
+    },
+    {
+      "path": "GSE194040/GSE194040-GPL30493_series_matrix.txt.gz",
+      "included_in_submission": false,
+      "expected_sha1": "27a7ad81e2e7ffa42b9f9382928f43ff39312069",
+      "download_url": "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE194nnn/GSE194040/matrix/GSE194040-GPL30493_series_matrix.txt.gz"
+    }
+  ],
+  "selected_model_convergence": {
+    "model_path": "models/gse194040_best_model.joblib",
+    "model_sha256": "e3bbccac97c4495dbb8e8c66a8f35921ca6ff20cbb9e0b0671aaf0a00504f9d4",
+    "classifier_class": "LogisticRegression",
+    "solver": "saga",
+    "n_iter": [
+      495
+    ],
+    "observed_max_iter": 495,
+    "configured_max_iter": 1500,
+    "status": "converged_before_max_iter",
+    "note": "Status is read from the frozen fitted estimator; the model was not refit."
+  },
+  "additional_frozen_model_convergence": [
+    {
+      "model_path": "results/evaluation/gse194040_clinical_expression_comparison_v1_20260719/gse194040_clinical_baseline_model_v1.joblib",
+      "model_sha256": "47290d6b27ec37a6142f128eb5fe29a1a887077473226afaf9e619926534fc8f",
+      "classifier_class": "LogisticRegression",
+      "n_iter": [
+        4
+      ],
+      "observed_max_iter": 4,
+      "configured_max_iter": 2000,
+      "status": "converged_before_max_iter",
+      "note": "Status is read from the frozen fitted estimator; the model was not refit."
+    },
+    {
+      "model_path": "results/evaluation/gse194040_clinical_expression_comparison_v1_20260719/gse194040_clinical_plus_expression_model_v1.joblib",
+      "model_sha256": "ac7057ae7352270f00800c07d16da6b42b253d703ba3ce27fc919aaecaeccb03",
+      "classifier_class": "LogisticRegression",
+      "n_iter": [
+        502
+      ],
+      "observed_max_iter": 502,
+      "configured_max_iter": 1500,
+      "status": "converged_before_max_iter",
+      "note": "Status is read from the frozen fitted estimator; the model was not refit."
+    }
+  ],
+  "cpu_policy": {
+    "training_cli_parameter": "--n-jobs",
+    "accepted_values": "-1 or a positive integer; zero and values below -1 are rejected",
+    "grid_search_owns_parallelism": true,
+    "nested_random_forest_jobs": 1
+  },
+  "methodology_changed": false,
+  "model_refit": false
+}

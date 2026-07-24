@@ -1,0 +1,2 @@
+model,evaluation_split,n,observed_pCR_count,observed_non_pCR_count,roc_auc,pr_auc_average_precision,accuracy,sensitivity,specificity,precision,f1,classification_source,canonical_metrics_verified
+elastic_net_logistic,locked_heldout_test,198,64,134,0.7905783582089553,0.5836372930923563,0.7272727272727273,0.71875,0.7313432835820896,0.5609756097560976,0.6301369863013698,frozen_model_predict,True

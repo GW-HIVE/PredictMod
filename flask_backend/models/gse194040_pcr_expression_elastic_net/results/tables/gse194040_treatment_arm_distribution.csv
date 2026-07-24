@@ -1,0 +1,15 @@
+treatment_arm,n,fraction
+Paclitaxel,179,0.18135764944275581
+Paclitaxel + AMG 386,114,0.11550151975683891
+Paclitaxel + Neratinib,114,0.11550151975683891
+Paclitaxel + Ganitumab,106,0.10739614994934144
+Paclitaxel + Ganetespib,93,0.09422492401215805
+Paclitaxel + ABT 888 + Carboplatin,71,0.07193515704154002
+Paclitaxel + Pembrolizumab,69,0.06990881458966565
+Paclitaxel + MK-2206,60,0.060790273556231005
+T-DM1 + Pertuzumab,52,0.05268490374873354
+Paclitaxel + Pertuzumab + Trastuzumab,44,0.044579533941236066
+Paclitaxel + MK-2206 + Trastuzumab,34,0.034447821681864235
+Paclitaxel + Trastuzumab,31,0.031408308004052685
+Paclitaxel + AMG 386 + Trastuzumab,19,0.019250253292806486
+Paclitaxel + AMG-386,1,0.0010131712259371835

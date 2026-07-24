@@ -1,0 +1,13 @@
+model,params,mean_cv_roc_auc,std_cv_roc_auc,rank_cv_roc_auc,mean_cv_pr_auc_average_precision,std_cv_pr_auc_average_precision,selected
+clinical_baseline,"{""classifier__C"": 0.01, ""classifier__penalty"": ""l1""}",0.5,0.0,8,0.3231939163498099,0.0,False
+clinical_baseline,"{""classifier__C"": 0.01, ""classifier__penalty"": ""l2""}",0.7198281559814937,0.018995286040841556,1,0.5581222946458947,0.026515298600854716,True
+clinical_baseline,"{""classifier__C"": 0.1, ""classifier__penalty"": ""l1""}",0.7092311081736065,0.02096653804128656,7,0.5101685229453231,0.024301627329922998,False
+clinical_baseline,"{""classifier__C"": 0.1, ""classifier__penalty"": ""l2""}",0.7191121392377177,0.01884606730074782,2,0.5552179728882229,0.026339849108506345,False
+clinical_baseline,"{""classifier__C"": 1.0, ""classifier__penalty"": ""l1""}",0.7118858779466842,0.02613097944800911,4,0.54666385970043,0.027633591466535542,False
+clinical_baseline,"{""classifier__C"": 1.0, ""classifier__penalty"": ""l2""}",0.7131967393699052,0.024675889301734606,3,0.5503693316933944,0.03196716707592361,False
+clinical_baseline,"{""classifier__C"": 10.0, ""classifier__penalty"": ""l1""}",0.7117426745979291,0.026900013333614192,5,0.5482793200979245,0.0336758388637634,False
+clinical_baseline,"{""classifier__C"": 10.0, ""classifier__penalty"": ""l2""}",0.7106741573033707,0.025206047293854256,6,0.5443930460384384,0.029008584711975965,False
+clinical_plus_expression,"{""classifier__C"": 0.03, ""classifier__l1_ratio"": 0.2}",0.7473892927957699,0.025288018442628037,3,0.5866792490543328,0.017125409545022077,False
+clinical_plus_expression,"{""classifier__C"": 0.03, ""classifier__l1_ratio"": 0.8}",0.7588014981273409,0.025709366744165553,1,0.5747762315327276,0.043142424687982454,True
+clinical_plus_expression,"{""classifier__C"": 0.1, ""classifier__l1_ratio"": 0.2}",0.7353822427847542,0.02723218260219162,4,0.5766619369288194,0.006457418000888309,False
+clinical_plus_expression,"{""classifier__C"": 0.1, ""classifier__l1_ratio"": 0.8}",0.7478299184842476,0.024210346759882855,2,0.5842733845613628,0.018044177064201805,False

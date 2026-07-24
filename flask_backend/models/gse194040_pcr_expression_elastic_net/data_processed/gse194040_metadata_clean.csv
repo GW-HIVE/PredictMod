@@ -1,0 +1,988 @@
+patient_id,sample_id,gsm,platform,tissue,HR,HER2,MP,pCR,treatment_arm,adjustment_method
+100899,ISPY2_100899,GSM5825900,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganitumab,ComBat Adjust
+102011,ISPY2_102011,GSM5825901,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,1,Paclitaxel + Ganetespib,ComBat Adjust
+102212,ISPY2_102212,GSM5825902,GPL20078,Breast cancer biopsy (pre-treatment),0,0,0,0,Paclitaxel + MK-2206,ComBat Adjust
+103693,ISPY2_103693,GSM5825903,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+103939,ISPY2_103939,GSM5825904,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+104268,ISPY2_104268,GSM5825905,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,ComBat Adjust
+104384,ISPY2_104384,GSM5825906,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+105286,ISPY2_105286,GSM5825907,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganitumab,ComBat Adjust
+105513,ISPY2_105513,GSM5825908,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,1,Paclitaxel + AMG 386,ComBat Adjust
+109623,ISPY2_109623,GSM5825912,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganetespib,ComBat Adjust
+109874,ISPY2_109874,GSM5825913,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + AMG 386,ComBat Adjust
+111004,ISPY2_111004,GSM5825915,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+111344,ISPY2_111344,GSM5825917,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + AMG 386,ComBat Adjust
+111646,ISPY2_111646,GSM5825918,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganetespib,ComBat Adjust
+114087,ISPY2_114087,GSM5825922,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+115638,ISPY2_115638,GSM5825923,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganitumab,ComBat Adjust
+115987,ISPY2_115987,GSM5825924,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganitumab,ComBat Adjust
+116165,ISPY2_116165,GSM5825925,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+116603,ISPY2_116603,GSM5825926,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,ComBat Adjust
+117707,ISPY2_117707,GSM5825928,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Ganetespib,ComBat Adjust
+118307,ISPY2_118307,GSM5825929,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + AMG 386,ComBat Adjust
+119928,ISPY2_119928,GSM5825930,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganetespib,ComBat Adjust
+120422,ISPY2_120422,GSM5825932,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,1,Paclitaxel + Ganitumab,ComBat Adjust
+122287,ISPY2_122287,GSM5825933,GPL20078,Breast cancer biopsy (pre-treatment),1,1,1,1,T-DM1 + Pertuzumab,ComBat Adjust
+122579,ISPY2_122579,GSM5825934,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,Linear Adjustment Factor
+123660,ISPY2_123660,GSM5825936,GPL20078,Breast cancer biopsy (pre-treatment),0,1,0,0,Paclitaxel + Trastuzumab,ComBat Adjust
+125130,ISPY2_125130,GSM5825937,GPL20078,Breast cancer biopsy (pre-treatment),0,1,1,1,T-DM1 + Pertuzumab,ComBat Adjust
+125418,ISPY2_125418,GSM5825939,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganetespib,ComBat Adjust
+127791,ISPY2_127791,GSM5825941,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Pertuzumab + Trastuzumab,ComBat Adjust
+128051,ISPY2_128051,GSM5825942,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,0,T-DM1 + Pertuzumab,ComBat Adjust
+128675,ISPY2_128675,GSM5825943,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,1,Paclitaxel,Linear Adjustment Factor
+130580,ISPY2_130580,GSM5825946,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Ganitumab,ComBat Adjust
+130892,ISPY2_130892,GSM5825947,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,1,Paclitaxel + MK-2206,ComBat Adjust
+131595,ISPY2_131595,GSM5825948,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+131961,ISPY2_131961,GSM5825949,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,1,T-DM1 + Pertuzumab,ComBat Adjust
+132463,ISPY2_132463,GSM5825950,GPL20078,Breast cancer biopsy (pre-treatment),1,1,1,1,Paclitaxel + MK-2206 + Trastuzumab,ComBat Adjust
+133650,ISPY2_133650,GSM5825951,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + Ganetespib,ComBat Adjust
+136536,ISPY2_136536,GSM5825953,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel,ComBat Adjust
+138027,ISPY2_138027,GSM5825954,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganitumab,ComBat Adjust
+138425,ISPY2_138425,GSM5825955,GPL20078,Breast cancer biopsy (pre-treatment),0,1,1,1,T-DM1 + Pertuzumab,ComBat Adjust
+139973,ISPY2_139973,GSM5825958,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+142688,ISPY2_142688,GSM5825960,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,Linear Adjustment Factor
+144302,ISPY2_144302,GSM5825961,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Pertuzumab + Trastuzumab,ComBat Adjust
+145777,ISPY2_145777,GSM5825963,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganitumab,ComBat Adjust
+146033,ISPY2_146033,GSM5825964,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,1,Paclitaxel + Pertuzumab + Trastuzumab,ComBat Adjust
+146987,ISPY2_146987,GSM5825965,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + AMG 386,ComBat Adjust
+147139,ISPY2_147139,GSM5825966,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+148357,ISPY2_148357,GSM5825967,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganitumab,ComBat Adjust
+149654,ISPY2_149654,GSM5825968,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+150547,ISPY2_150547,GSM5825969,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + Ganetespib,ComBat Adjust
+151980,ISPY2_151980,GSM5825972,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,1,Paclitaxel + Ganetespib,ComBat Adjust
+152090,ISPY2_152090,GSM5825973,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,1,Paclitaxel,ComBat Adjust
+152197,ISPY2_152197,GSM5825974,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+153327,ISPY2_153327,GSM5825975,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+156163,ISPY2_156163,GSM5825979,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+157270,ISPY2_157270,GSM5825980,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + AMG 386 + Trastuzumab,ComBat Adjust
+159284,ISPY2_159284,GSM5825982,GPL20078,Breast cancer biopsy (pre-treatment),0,0,0,0,Paclitaxel,Linear Adjustment Factor
+162562,ISPY2_162562,GSM5825985,GPL20078,Breast cancer biopsy (pre-treatment),0,1,1,1,Paclitaxel + Trastuzumab,ComBat Adjust
+164468,ISPY2_164468,GSM5825986,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganetespib,ComBat Adjust
+165925,ISPY2_165925,GSM5825987,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganitumab,ComBat Adjust
+167271,ISPY2_167271,GSM5825990,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,0,T-DM1 + Pertuzumab,ComBat Adjust
+168044,ISPY2_168044,GSM5825991,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+169918,ISPY2_169918,GSM5825993,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+172168,ISPY2_172168,GSM5825994,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,ComBat Adjust
+172366,ISPY2_172366,GSM5825996,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Ganitumab,ComBat Adjust
+174904,ISPY2_174904,GSM5825998,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+177795,ISPY2_177795,GSM5825999,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+179369,ISPY2_179369,GSM5826002,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + MK-2206,ComBat Adjust
+179568,ISPY2_179568,GSM5826003,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + AMG 386,ComBat Adjust
+180663,ISPY2_180663,GSM5826005,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + MK-2206,ComBat Adjust
+181442,ISPY2_181442,GSM5826006,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,Linear Adjustment Factor
+182346,ISPY2_182346,GSM5826008,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganitumab,ComBat Adjust
+188700,ISPY2_188700,GSM5826012,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Ganitumab,ComBat Adjust
+194024,ISPY2_194024,GSM5826015,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,1,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+196024,ISPY2_196024,GSM5826016,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganetespib,ComBat Adjust
+196064,ISPY2_196064,GSM5826017,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,1,Paclitaxel + AMG 386,ComBat Adjust
+199115,ISPY2_199115,GSM5826020,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+199960,ISPY2_199960,GSM5826021,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + AMG 386,ComBat Adjust
+200222,ISPY2_200222,GSM5826022,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + MK-2206,ComBat Adjust
+201831,ISPY2_201831,GSM5826023,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + AMG 386,ComBat Adjust
+202535,ISPY2_202535,GSM5826025,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + AMG 386 + Trastuzumab,ComBat Adjust
+203060,ISPY2_203060,GSM5826028,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Pertuzumab + Trastuzumab,ComBat Adjust
+204939,ISPY2_204939,GSM5826030,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,1,Paclitaxel + Pertuzumab + Trastuzumab,ComBat Adjust
+208303,ISPY2_208303,GSM5826032,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Ganetespib,ComBat Adjust
+208650,ISPY2_208650,GSM5826033,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,0,T-DM1 + Pertuzumab,ComBat Adjust
+209397,ISPY2_209397,GSM5826034,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+209967,ISPY2_209967,GSM5826035,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganitumab,ComBat Adjust
+212307,ISPY2_212307,GSM5826037,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganitumab,ComBat Adjust
+213328,ISPY2_213328,GSM5826038,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel,Linear Adjustment Factor
+213672,ISPY2_213672,GSM5826039,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganetespib,ComBat Adjust
+213913,ISPY2_213913,GSM5826040,GPL20078,Breast cancer biopsy (pre-treatment),0,1,1,1,T-DM1 + Pertuzumab,ComBat Adjust
+215932,ISPY2_215932,GSM5826041,GPL20078,Breast cancer biopsy (pre-treatment),0,1,1,0,Paclitaxel + AMG 386 + Trastuzumab,ComBat Adjust
+218249,ISPY2_218249,GSM5826042,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,Linear Adjustment Factor
+218503,ISPY2_218503,GSM5826043,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + MK-2206,ComBat Adjust
+219545,ISPY2_219545,GSM5826044,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,ComBat Adjust
+220471,ISPY2_220471,GSM5826045,GPL20078,Breast cancer biopsy (pre-treatment),0,1,1,0,Paclitaxel + Trastuzumab,ComBat Adjust
+220925,ISPY2_220925,GSM5826047,GPL20078,Breast cancer biopsy (pre-treatment),0,1,1,0,T-DM1 + Pertuzumab,ComBat Adjust
+221375,ISPY2_221375,GSM5826048,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganetespib,ComBat Adjust
+221686,ISPY2_221686,GSM5826049,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Ganitumab,ComBat Adjust
+223030,ISPY2_223030,GSM5826051,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+227055,ISPY2_227055,GSM5826054,GPL20078,Breast cancer biopsy (pre-treatment),1,1,1,0,Paclitaxel + AMG 386 + Trastuzumab,ComBat Adjust
+228192,ISPY2_228192,GSM5826057,GPL20078,Breast cancer biopsy (pre-treatment),0,0,0,0,Paclitaxel + AMG-386,ComBat Adjust
+229328,ISPY2_229328,GSM5826060,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganitumab,ComBat Adjust
+231633,ISPY2_231633,GSM5826062,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+233191,ISPY2_233191,GSM5826063,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,ComBat Adjust
+235995,ISPY2_235995,GSM5826068,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,1,Paclitaxel + Pertuzumab + Trastuzumab,ComBat Adjust
+236470,ISPY2_236470,GSM5826069,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Ganetespib,ComBat Adjust
+237158,ISPY2_237158,GSM5826070,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,1,Paclitaxel + AMG 386,ComBat Adjust
+239910,ISPY2_239910,GSM5826073,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganitumab,ComBat Adjust
+240035,ISPY2_240035,GSM5826074,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + Ganetespib,ComBat Adjust
+240432,ISPY2_240432,GSM5826075,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+240957,ISPY2_240957,GSM5826076,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+241705,ISPY2_241705,GSM5826077,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganitumab,ComBat Adjust
+241998,ISPY2_241998,GSM5826078,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+242370,ISPY2_242370,GSM5826079,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,1,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+247641,ISPY2_247641,GSM5826083,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,Linear Adjustment Factor
+250274,ISPY2_250274,GSM5826085,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,0,T-DM1 + Pertuzumab,ComBat Adjust
+252748,ISPY2_252748,GSM5826086,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel,ComBat Adjust
+253531,ISPY2_253531,GSM5826087,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,1,T-DM1 + Pertuzumab,ComBat Adjust
+254060,ISPY2_254060,GSM5826088,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + AMG 386,ComBat Adjust
+254273,ISPY2_254273,GSM5826089,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,0,T-DM1 + Pertuzumab,ComBat Adjust
+255577,ISPY2_255577,GSM5826093,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,Linear Adjustment Factor
+257735,ISPY2_257735,GSM5826094,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,Linear Adjustment Factor
+259899,ISPY2_259899,GSM5826096,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,ComBat Adjust
+261304,ISPY2_261304,GSM5826097,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganitumab,ComBat Adjust
+263143,ISPY2_263143,GSM5826099,GPL20078,Breast cancer biopsy (pre-treatment),0,1,1,0,Paclitaxel + MK-2206 + Trastuzumab,ComBat Adjust
+264305,ISPY2_264305,GSM5826100,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Ganitumab,ComBat Adjust
+266509,ISPY2_266509,GSM5826102,GPL20078,Breast cancer biopsy (pre-treatment),0,0,0,1,Paclitaxel + AMG 386,ComBat Adjust
+266840,ISPY2_266840,GSM5826103,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Trastuzumab,ComBat Adjust
+268937,ISPY2_268937,GSM5826105,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,1,T-DM1 + Pertuzumab,ComBat Adjust
+269899,ISPY2_269899,GSM5826106,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,1,Paclitaxel + Ganetespib,ComBat Adjust
+273691,ISPY2_273691,GSM5826107,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,1,Paclitaxel + Pertuzumab + Trastuzumab,ComBat Adjust
+275034,ISPY2_275034,GSM5826109,GPL20078,Breast cancer biopsy (pre-treatment),1,1,1,1,Paclitaxel + AMG 386 + Trastuzumab,ComBat Adjust
+275626,ISPY2_275626,GSM5826110,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + AMG 386,ComBat Adjust
+277888,ISPY2_277888,GSM5826112,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,1,Paclitaxel + Ganitumab,ComBat Adjust
+279902,ISPY2_279902,GSM5826113,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,1,Paclitaxel + Ganetespib,ComBat Adjust
+280375,ISPY2_280375,GSM5826114,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganitumab,ComBat Adjust
+282777,ISPY2_282777,GSM5826117,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganetespib,ComBat Adjust
+283070,ISPY2_283070,GSM5826118,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + AMG 386,ComBat Adjust
+284443,ISPY2_284443,GSM5826120,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + AMG 386 + Trastuzumab,ComBat Adjust
+285339,ISPY2_285339,GSM5826122,GPL20078,Breast cancer biopsy (pre-treatment),0,1,1,1,Paclitaxel + Pertuzumab + Trastuzumab,ComBat Adjust
+287961,ISPY2_287961,GSM5826125,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,1,Paclitaxel + MK-2206 + Trastuzumab,ComBat Adjust
+289107,ISPY2_289107,GSM5826126,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+289420,ISPY2_289420,GSM5826127,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganitumab,ComBat Adjust
+290413,ISPY2_290413,GSM5826128,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + AMG 386 + Trastuzumab,ComBat Adjust
+293142,ISPY2_293142,GSM5826130,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+294265,ISPY2_294265,GSM5826132,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + MK-2206,ComBat Adjust
+294739,ISPY2_294739,GSM5826133,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel,ComBat Adjust
+296123,ISPY2_296123,GSM5826134,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Ganitumab,ComBat Adjust
+296841,ISPY2_296841,GSM5826135,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,1,Paclitaxel + Pertuzumab + Trastuzumab,ComBat Adjust
+299840,ISPY2_299840,GSM5826138,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,Linear Adjustment Factor
+299962,ISPY2_299962,GSM5826139,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganitumab,ComBat Adjust
+300724,ISPY2_300724,GSM5826140,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+301289,ISPY2_301289,GSM5826141,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+301665,ISPY2_301665,GSM5826142,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + AMG 386 + Trastuzumab,ComBat Adjust
+301968,ISPY2_301968,GSM5826143,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + AMG 386,ComBat Adjust
+303685,ISPY2_303685,GSM5826144,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,1,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+306401,ISPY2_306401,GSM5826147,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,1,Paclitaxel + AMG 386,ComBat Adjust
+309830,ISPY2_309830,GSM5826149,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + MK-2206,ComBat Adjust
+311316,ISPY2_311316,GSM5826150,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,0,T-DM1 + Pertuzumab,ComBat Adjust
+311455,ISPY2_311455,GSM5826151,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,Linear Adjustment Factor
+313243,ISPY2_313243,GSM5826152,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,1,Paclitaxel,ComBat Adjust
+313672,ISPY2_313672,GSM5826153,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganetespib,ComBat Adjust
+317131,ISPY2_317131,GSM5826155,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + Ganitumab,ComBat Adjust
+317402,ISPY2_317402,GSM5826156,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + MK-2206,ComBat Adjust
+317641,ISPY2_317641,GSM5826157,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + MK-2206,ComBat Adjust
+318293,ISPY2_318293,GSM5826158,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+318407,ISPY2_318407,GSM5826159,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganitumab,ComBat Adjust
+319324,ISPY2_319324,GSM5826162,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + MK-2206 + Trastuzumab,ComBat Adjust
+320538,ISPY2_320538,GSM5826163,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,ComBat Adjust
+323721,ISPY2_323721,GSM5826164,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + MK-2206,ComBat Adjust
+324021,ISPY2_324021,GSM5826165,GPL20078,Breast cancer biopsy (pre-treatment),1,1,1,0,Paclitaxel + Pertuzumab + Trastuzumab,ComBat Adjust
+326202,ISPY2_326202,GSM5826166,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+326433,ISPY2_326433,GSM5826167,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + AMG 386,ComBat Adjust
+327917,ISPY2_327917,GSM5826170,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganitumab,ComBat Adjust
+328160,ISPY2_328160,GSM5826171,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+329076,ISPY2_329076,GSM5826172,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+329941,ISPY2_329941,GSM5826173,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,1,T-DM1 + Pertuzumab,ComBat Adjust
+330134,ISPY2_330134,GSM5826174,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganitumab,ComBat Adjust
+332655,ISPY2_332655,GSM5826176,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + MK-2206,ComBat Adjust
+333145,ISPY2_333145,GSM5826177,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,1,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+335536,ISPY2_335536,GSM5826179,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+341238,ISPY2_341238,GSM5826181,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+342142,ISPY2_342142,GSM5826182,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Ganetespib,ComBat Adjust
+342959,ISPY2_342959,GSM5826183,GPL20078,Breast cancer biopsy (pre-treatment),0,0,0,1,Paclitaxel + MK-2206,ComBat Adjust
+342996,ISPY2_342996,GSM5826184,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+343898,ISPY2_343898,GSM5826185,GPL20078,Breast cancer biopsy (pre-treatment),0,0,0,0,Paclitaxel + MK-2206,ComBat Adjust
+345460,ISPY2_345460,GSM5826186,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + Ganitumab,ComBat Adjust
+345483,ISPY2_345483,GSM5826187,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganitumab,ComBat Adjust
+345907,ISPY2_345907,GSM5826189,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + MK-2206,ComBat Adjust
+347516,ISPY2_347516,GSM5826190,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+349330,ISPY2_349330,GSM5826193,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + AMG 386,ComBat Adjust
+353318,ISPY2_353318,GSM5826196,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,Linear Adjustment Factor
+355292,ISPY2_355292,GSM5826197,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + Ganetespib,ComBat Adjust
+355942,ISPY2_355942,GSM5826198,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+356399,ISPY2_356399,GSM5826199,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel,Linear Adjustment Factor
+356431,ISPY2_356431,GSM5826200,GPL20078,Breast cancer biopsy (pre-treatment),0,1,1,1,T-DM1 + Pertuzumab,ComBat Adjust
+356684,ISPY2_356684,GSM5826201,GPL20078,Breast cancer biopsy (pre-treatment),1,1,1,0,Paclitaxel + AMG 386 + Trastuzumab,ComBat Adjust
+357034,ISPY2_357034,GSM5826203,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + Ganetespib,ComBat Adjust
+361701,ISPY2_361701,GSM5826205,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + MK-2206,ComBat Adjust
+362150,ISPY2_362150,GSM5826206,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + Ganitumab,ComBat Adjust
+363669,ISPY2_363669,GSM5826208,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+366120,ISPY2_366120,GSM5826209,GPL20078,Breast cancer biopsy (pre-treatment),1,1,1,0,T-DM1 + Pertuzumab,ComBat Adjust
+369040,ISPY2_369040,GSM5826211,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,Linear Adjustment Factor
+371528,ISPY2_371528,GSM5826212,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+375342,ISPY2_375342,GSM5826217,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganitumab,ComBat Adjust
+375954,ISPY2_375954,GSM5826219,GPL20078,Breast cancer biopsy (pre-treatment),0,1,1,0,Paclitaxel + MK-2206 + Trastuzumab,ComBat Adjust
+376676,ISPY2_376676,GSM5826220,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganitumab,ComBat Adjust
+377460,ISPY2_377460,GSM5826221,GPL20078,Breast cancer biopsy (pre-treatment),0,1,1,1,Paclitaxel + Pertuzumab + Trastuzumab,ComBat Adjust
+378885,ISPY2_378885,GSM5826223,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+380972,ISPY2_380972,GSM5826226,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganetespib,ComBat Adjust
+383456,ISPY2_383456,GSM5826228,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,1,Paclitaxel + AMG 386,ComBat Adjust
+384830,ISPY2_384830,GSM5826229,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + MK-2206 + Trastuzumab,ComBat Adjust
+391942,ISPY2_391942,GSM5826232,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+395249,ISPY2_395249,GSM5826234,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganetespib,ComBat Adjust
+396723,ISPY2_396723,GSM5826236,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,0,T-DM1 + Pertuzumab,ComBat Adjust
+397505,ISPY2_397505,GSM5826237,GPL20078,Breast cancer biopsy (pre-treatment),1,1,1,1,T-DM1 + Pertuzumab,ComBat Adjust
+399478,ISPY2_399478,GSM5826238,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + AMG 386,ComBat Adjust
+401215,ISPY2_401215,GSM5826239,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganetespib,ComBat Adjust
+402384,ISPY2_402384,GSM5826241,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + MK-2206,ComBat Adjust
+407539,ISPY2_407539,GSM5826244,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganitumab,ComBat Adjust
+408692,ISPY2_408692,GSM5826245,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel,ComBat Adjust
+409288,ISPY2_409288,GSM5826246,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,ComBat Adjust
+410083,ISPY2_410083,GSM5826247,GPL20078,Breast cancer biopsy (pre-treatment),0,1,0,1,T-DM1 + Pertuzumab,ComBat Adjust
+411008,ISPY2_411008,GSM5826248,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + AMG 386,ComBat Adjust
+411806,ISPY2_411806,GSM5826250,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganetespib,ComBat Adjust
+411950,ISPY2_411950,GSM5826251,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + Ganitumab,ComBat Adjust
+412772,ISPY2_412772,GSM5826252,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganitumab,ComBat Adjust
+413211,ISPY2_413211,GSM5826253,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,0,T-DM1 + Pertuzumab,ComBat Adjust
+413961,ISPY2_413961,GSM5826254,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + MK-2206,ComBat Adjust
+414256,ISPY2_414256,GSM5826255,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganetespib,ComBat Adjust
+414844,ISPY2_414844,GSM5826257,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel,ComBat Adjust
+414971,ISPY2_414971,GSM5826258,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + MK-2206,ComBat Adjust
+416434,ISPY2_416434,GSM5826260,GPL20078,Breast cancer biopsy (pre-treatment),0,1,0,1,Paclitaxel + MK-2206 + Trastuzumab,ComBat Adjust
+417474,ISPY2_417474,GSM5826261,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Ganitumab,ComBat Adjust
+418593,ISPY2_418593,GSM5826263,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+419590,ISPY2_419590,GSM5826264,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganetespib,ComBat Adjust
+421829,ISPY2_421829,GSM5826266,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,Linear Adjustment Factor
+421917,ISPY2_421917,GSM5826267,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,ComBat Adjust
+422454,ISPY2_422454,GSM5826270,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + MK-2206,ComBat Adjust
+423979,ISPY2_423979,GSM5826272,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,Linear Adjustment Factor
+424541,ISPY2_424541,GSM5826273,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,Linear Adjustment Factor
+425173,ISPY2_425173,GSM5826274,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,1,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+429220,ISPY2_429220,GSM5826277,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganitumab,ComBat Adjust
+430441,ISPY2_430441,GSM5826278,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganitumab,ComBat Adjust
+431061,ISPY2_431061,GSM5826279,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+432114,ISPY2_432114,GSM5826280,GPL20078,Breast cancer biopsy (pre-treatment),1,1,1,1,Paclitaxel + Pertuzumab + Trastuzumab,ComBat Adjust
+435279,ISPY2_435279,GSM5826282,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganitumab,ComBat Adjust
+436371,ISPY2_436371,GSM5826284,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel,Linear Adjustment Factor
+437162,ISPY2_437162,GSM5826285,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,0,T-DM1 + Pertuzumab,ComBat Adjust
+439489,ISPY2_439489,GSM5826287,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganetespib,ComBat Adjust
+442669,ISPY2_442669,GSM5826289,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganetespib,ComBat Adjust
+442981,ISPY2_442981,GSM5826290,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,1,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+446263,ISPY2_446263,GSM5826293,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,1,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+452703,ISPY2_452703,GSM5826296,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + Ganetespib,ComBat Adjust
+453596,ISPY2_453596,GSM5826297,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,1,Paclitaxel + Pertuzumab + Trastuzumab,ComBat Adjust
+454808,ISPY2_454808,GSM5826298,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganitumab,ComBat Adjust
+455828,ISPY2_455828,GSM5826299,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,1,Paclitaxel,ComBat Adjust
+456432,ISPY2_456432,GSM5826300,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganetespib,ComBat Adjust
+456506,ISPY2_456506,GSM5826301,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+458196,ISPY2_458196,GSM5826302,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,Linear Adjustment Factor
+459311,ISPY2_459311,GSM5826303,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + Ganetespib,ComBat Adjust
+460642,ISPY2_460642,GSM5826304,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganitumab,ComBat Adjust
+460812,ISPY2_460812,GSM5826306,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + Ganetespib,ComBat Adjust
+462581,ISPY2_462581,GSM5826308,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganetespib,ComBat Adjust
+462582,ISPY2_462582,GSM5826309,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+462605,ISPY2_462605,GSM5826310,GPL20078,Breast cancer biopsy (pre-treatment),0,1,1,1,Paclitaxel + Pertuzumab + Trastuzumab,ComBat Adjust
+464547,ISPY2_464547,GSM5826311,GPL20078,Breast cancer biopsy (pre-treatment),1,1,1,1,T-DM1 + Pertuzumab,ComBat Adjust
+465008,ISPY2_465008,GSM5826312,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + Ganitumab,ComBat Adjust
+466267,ISPY2_466267,GSM5826313,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Ganetespib,ComBat Adjust
+467622,ISPY2_467622,GSM5826314,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + Ganitumab,ComBat Adjust
+467686,ISPY2_467686,GSM5826315,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,1,Paclitaxel + Ganitumab,ComBat Adjust
+472799,ISPY2_472799,GSM5826316,GPL20078,Breast cancer biopsy (pre-treatment),0,1,1,1,Paclitaxel + Pertuzumab + Trastuzumab,ComBat Adjust
+473365,ISPY2_473365,GSM5826317,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+473468,ISPY2_473468,GSM5826318,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganetespib,ComBat Adjust
+473505,ISPY2_473505,GSM5826319,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+474874,ISPY2_474874,GSM5826320,GPL20078,Breast cancer biopsy (pre-treatment),0,1,0,1,Paclitaxel + Pertuzumab + Trastuzumab,ComBat Adjust
+477994,ISPY2_477994,GSM5826322,GPL20078,Breast cancer biopsy (pre-treatment),1,1,1,1,Paclitaxel + MK-2206 + Trastuzumab,ComBat Adjust
+478055,ISPY2_478055,GSM5826323,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,Linear Adjustment Factor
+478655,ISPY2_478655,GSM5826325,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+483667,ISPY2_483667,GSM5826327,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Pertuzumab + Trastuzumab,ComBat Adjust
+483910,ISPY2_483910,GSM5826328,GPL20078,Breast cancer biopsy (pre-treatment),0,0,0,0,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+484894,ISPY2_484894,GSM5826330,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,Linear Adjustment Factor
+485637,ISPY2_485637,GSM5826331,GPL20078,Breast cancer biopsy (pre-treatment),0,0,0,0,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+489194,ISPY2_489194,GSM5826332,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,1,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+490023,ISPY2_490023,GSM5826335,GPL20078,Breast cancer biopsy (pre-treatment),0,1,1,1,Paclitaxel + MK-2206 + Trastuzumab,ComBat Adjust
+490805,ISPY2_490805,GSM5826336,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,1,T-DM1 + Pertuzumab,ComBat Adjust
+491779,ISPY2_491779,GSM5826338,GPL20078,Breast cancer biopsy (pre-treatment),1,1,1,1,T-DM1 + Pertuzumab,ComBat Adjust
+492612,ISPY2_492612,GSM5826339,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,Linear Adjustment Factor
+493472,ISPY2_493472,GSM5826340,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganetespib,ComBat Adjust
+493519,ISPY2_493519,GSM5826341,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+493775,ISPY2_493775,GSM5826342,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Ganetespib,ComBat Adjust
+494022,ISPY2_494022,GSM5826343,GPL20078,Breast cancer biopsy (pre-treatment),0,1,1,0,T-DM1 + Pertuzumab,ComBat Adjust
+494296,ISPY2_494296,GSM5826344,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+494946,ISPY2_494946,GSM5826345,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+497010,ISPY2_497010,GSM5826348,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+498024,ISPY2_498024,GSM5826349,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganetespib,ComBat Adjust
+498985,ISPY2_498985,GSM5826350,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + AMG 386 + Trastuzumab,ComBat Adjust
+500826,ISPY2_500826,GSM5826351,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+501303,ISPY2_501303,GSM5826352,GPL20078,Breast cancer biopsy (pre-treatment),0,1,1,1,Paclitaxel + Trastuzumab,ComBat Adjust
+502486,ISPY2_502486,GSM5826353,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,Linear Adjustment Factor
+503034,ISPY2_503034,GSM5826354,GPL20078,Breast cancer biopsy (pre-treatment),0,1,0,0,Paclitaxel + Pertuzumab + Trastuzumab,ComBat Adjust
+504838,ISPY2_504838,GSM5826355,GPL20078,Breast cancer biopsy (pre-treatment),0,0,0,0,Paclitaxel,ComBat Adjust
+506623,ISPY2_506623,GSM5826356,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + MK-2206,ComBat Adjust
+507249,ISPY2_507249,GSM5826358,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Pertuzumab + Trastuzumab,ComBat Adjust
+509012,ISPY2_509012,GSM5826359,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Ganitumab,ComBat Adjust
+510543,ISPY2_510543,GSM5826360,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + Ganetespib,ComBat Adjust
+515281,ISPY2_515281,GSM5826364,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganitumab,ComBat Adjust
+515284,ISPY2_515284,GSM5826365,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganetespib,ComBat Adjust
+516763,ISPY2_516763,GSM5826367,GPL20078,Breast cancer biopsy (pre-treatment),0,1,1,1,Paclitaxel + AMG 386 + Trastuzumab,ComBat Adjust
+516834,ISPY2_516834,GSM5826368,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganitumab,ComBat Adjust
+517870,ISPY2_517870,GSM5826370,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,ComBat Adjust
+518000,ISPY2_518000,GSM5826371,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + MK-2206,ComBat Adjust
+518576,ISPY2_518576,GSM5826372,GPL20078,Breast cancer biopsy (pre-treatment),0,0,0,1,Paclitaxel + Ganetespib,ComBat Adjust
+520986,ISPY2_520986,GSM5826376,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,1,Paclitaxel + MK-2206,ComBat Adjust
+521860,ISPY2_521860,GSM5826377,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + AMG 386,ComBat Adjust
+522140,ISPY2_522140,GSM5826378,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+524170,ISPY2_524170,GSM5826379,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganitumab,ComBat Adjust
+527581,ISPY2_527581,GSM5826381,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Pertuzumab + Trastuzumab,ComBat Adjust
+528479,ISPY2_528479,GSM5826382,GPL20078,Breast cancer biopsy (pre-treatment),0,0,0,0,Paclitaxel + Ganetespib,ComBat Adjust
+528833,ISPY2_528833,GSM5826383,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,1,Paclitaxel + AMG 386 + Trastuzumab,ComBat Adjust
+530095,ISPY2_530095,GSM5826384,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+531988,ISPY2_531988,GSM5826386,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Ganitumab,ComBat Adjust
+532183,ISPY2_532183,GSM5826387,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,ComBat Adjust
+535415,ISPY2_535415,GSM5826388,GPL20078,Breast cancer biopsy (pre-treatment),0,1,0,1,Paclitaxel + MK-2206 + Trastuzumab,ComBat Adjust
+535569,ISPY2_535569,GSM5826389,GPL20078,Breast cancer biopsy (pre-treatment),0,1,1,0,T-DM1 + Pertuzumab,ComBat Adjust
+535779,ISPY2_535779,GSM5826390,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganitumab,ComBat Adjust
+536253,ISPY2_536253,GSM5826391,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,1,T-DM1 + Pertuzumab,ComBat Adjust
+539876,ISPY2_539876,GSM5826393,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganetespib,ComBat Adjust
+539904,ISPY2_539904,GSM5826394,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Trastuzumab,ComBat Adjust
+542392,ISPY2_542392,GSM5826397,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganitumab,ComBat Adjust
+543795,ISPY2_543795,GSM5826398,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+547405,ISPY2_547405,GSM5826399,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + MK-2206,ComBat Adjust
+547892,ISPY2_547892,GSM5826400,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganitumab,ComBat Adjust
+550157,ISPY2_550157,GSM5826402,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel,ComBat Adjust
+550421,ISPY2_550421,GSM5826403,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganetespib,ComBat Adjust
+551795,ISPY2_551795,GSM5826404,GPL20078,Breast cancer biopsy (pre-treatment),0,1,1,1,Paclitaxel + Pertuzumab + Trastuzumab,ComBat Adjust
+552549,ISPY2_552549,GSM5826406,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+553012,ISPY2_553012,GSM5826407,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+554577,ISPY2_554577,GSM5826409,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganetespib,ComBat Adjust
+555214,ISPY2_555214,GSM5826410,GPL20078,Breast cancer biopsy (pre-treatment),0,1,1,1,Paclitaxel + AMG 386 + Trastuzumab,ComBat Adjust
+559021,ISPY2_559021,GSM5826411,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,1,Paclitaxel + Ganitumab,ComBat Adjust
+559263,ISPY2_559263,GSM5826412,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,ComBat Adjust
+563681,ISPY2_563681,GSM5826413,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + Ganitumab,ComBat Adjust
+564701,ISPY2_564701,GSM5826416,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganitumab,ComBat Adjust
+567201,ISPY2_567201,GSM5826418,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Ganetespib,ComBat Adjust
+567907,ISPY2_567907,GSM5826419,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganitumab,ComBat Adjust
+568953,ISPY2_568953,GSM5826421,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+570685,ISPY2_570685,GSM5826424,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Pertuzumab + Trastuzumab,ComBat Adjust
+570966,ISPY2_570966,GSM5826425,GPL20078,Breast cancer biopsy (pre-treatment),1,1,1,0,Paclitaxel + AMG 386 + Trastuzumab,ComBat Adjust
+571276,ISPY2_571276,GSM5826426,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganetespib,ComBat Adjust
+571995,ISPY2_571995,GSM5826427,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + AMG 386,ComBat Adjust
+572016,ISPY2_572016,GSM5826428,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Ganetespib,ComBat Adjust
+572793,ISPY2_572793,GSM5826432,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + MK-2206,ComBat Adjust
+573605,ISPY2_573605,GSM5826434,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + MK-2206,ComBat Adjust
+574091,ISPY2_574091,GSM5826437,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+575457,ISPY2_575457,GSM5826439,GPL20078,Breast cancer biopsy (pre-treatment),0,1,1,1,Paclitaxel + Pertuzumab + Trastuzumab,ComBat Adjust
+580541,ISPY2_580541,GSM5826442,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+581180,ISPY2_581180,GSM5826444,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,Linear Adjustment Factor
+584561,ISPY2_584561,GSM5826446,GPL20078,Breast cancer biopsy (pre-treatment),0,1,1,1,Paclitaxel + Pertuzumab + Trastuzumab,ComBat Adjust
+586091,ISPY2_586091,GSM5826447,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,1,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+586207,ISPY2_586207,GSM5826448,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + AMG 386,ComBat Adjust
+587604,ISPY2_587604,GSM5826450,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,ComBat Adjust
+587691,ISPY2_587691,GSM5826451,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,1,T-DM1 + Pertuzumab,ComBat Adjust
+589502,ISPY2_589502,GSM5826452,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,1,Paclitaxel + Ganetespib,ComBat Adjust
+590299,ISPY2_590299,GSM5826454,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + AMG 386,ComBat Adjust
+591079,ISPY2_591079,GSM5826455,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Ganetespib,ComBat Adjust
+591810,ISPY2_591810,GSM5826457,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,1,Paclitaxel + MK-2206,ComBat Adjust
+597873,ISPY2_597873,GSM5826462,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+597907,ISPY2_597907,GSM5826463,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+598835,ISPY2_598835,GSM5826465,GPL20078,Breast cancer biopsy (pre-treatment),0,1,1,0,T-DM1 + Pertuzumab,ComBat Adjust
+601489,ISPY2_601489,GSM5826467,GPL20078,Breast cancer biopsy (pre-treatment),0,1,1,0,Paclitaxel + MK-2206 + Trastuzumab,ComBat Adjust
+602451,ISPY2_602451,GSM5826468,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + Ganetespib,ComBat Adjust
+604199,ISPY2_604199,GSM5826470,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + MK-2206,ComBat Adjust
+604326,ISPY2_604326,GSM5826471,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Pertuzumab + Trastuzumab,ComBat Adjust
+607843,ISPY2_607843,GSM5826475,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+609151,ISPY2_609151,GSM5826476,GPL20078,Breast cancer biopsy (pre-treatment),0,1,1,1,Paclitaxel + MK-2206 + Trastuzumab,ComBat Adjust
+609642,ISPY2_609642,GSM5826477,GPL20078,Breast cancer biopsy (pre-treatment),0,1,1,1,Paclitaxel + MK-2206 + Trastuzumab,ComBat Adjust
+613961,ISPY2_613961,GSM5826480,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Ganetespib,ComBat Adjust
+614434,ISPY2_614434,GSM5826482,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,1,Paclitaxel + MK-2206 + Trastuzumab,ComBat Adjust
+616994,ISPY2_616994,GSM5826484,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel,Linear Adjustment Factor
+618240,ISPY2_618240,GSM5826485,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + AMG 386,ComBat Adjust
+618717,ISPY2_618717,GSM5826486,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Pertuzumab + Trastuzumab,ComBat Adjust
+618860,ISPY2_618860,GSM5826487,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + Ganitumab,ComBat Adjust
+621179,ISPY2_621179,GSM5826488,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+622315,ISPY2_622315,GSM5826490,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + AMG 386,ComBat Adjust
+622688,ISPY2_622688,GSM5826491,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+623569,ISPY2_623569,GSM5826493,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Ganetespib,ComBat Adjust
+624777,ISPY2_624777,GSM5826494,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,0,T-DM1 + Pertuzumab,ComBat Adjust
+625854,ISPY2_625854,GSM5826496,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+628788,ISPY2_628788,GSM5826500,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganitumab,ComBat Adjust
+628823,ISPY2_628823,GSM5826501,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganitumab,ComBat Adjust
+629371,ISPY2_629371,GSM5826503,GPL20078,Breast cancer biopsy (pre-treatment),0,1,1,1,Paclitaxel + MK-2206 + Trastuzumab,ComBat Adjust
+629606,ISPY2_629606,GSM5826505; GSM5826504,GPL20078; GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganitumab,Linear Adjustment Factor
+631299,ISPY2_631299,GSM5826507,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganetespib,ComBat Adjust
+631337,ISPY2_631337,GSM5826508,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+635632,ISPY2_635632,GSM5826510,GPL20078,Breast cancer biopsy (pre-treatment),0,1,0,1,Paclitaxel + MK-2206 + Trastuzumab,ComBat Adjust
+636424,ISPY2_636424,GSM5826512,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,Linear Adjustment Factor
+637051,ISPY2_637051,GSM5826513,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganetespib,ComBat Adjust
+637566,ISPY2_637566,GSM5826514,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + MK-2206,ComBat Adjust
+639663,ISPY2_639663,GSM5826516,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + MK-2206,ComBat Adjust
+640043,ISPY2_640043,GSM5826517,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+641697,ISPY2_641697,GSM5826521,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + Ganetespib,ComBat Adjust
+641977,ISPY2_641977,GSM5826522,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+644186,ISPY2_644186,GSM5826523,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,Linear Adjustment Factor
+644609,ISPY2_644609,GSM5826524,GPL20078,Breast cancer biopsy (pre-treatment),0,1,1,1,Paclitaxel + Pertuzumab + Trastuzumab,ComBat Adjust
+646600,ISPY2_646600,GSM5826526,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + Ganetespib,ComBat Adjust
+649198,ISPY2_649198,GSM5826527,GPL20078,Breast cancer biopsy (pre-treatment),0,1,0,0,Paclitaxel + Pertuzumab + Trastuzumab,ComBat Adjust
+651145,ISPY2_651145,GSM5826529,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + MK-2206,ComBat Adjust
+651401,ISPY2_651401,GSM5826530,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+652480,ISPY2_652480,GSM5826532,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + AMG 386,ComBat Adjust
+653325,ISPY2_653325,GSM5826533,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+653927,ISPY2_653927,GSM5826534,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel,ComBat Adjust
+654021,ISPY2_654021,GSM5826535,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+654064,ISPY2_654064,GSM5826536,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + MK-2206,ComBat Adjust
+655128,ISPY2_655128,GSM5826538,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+655795,ISPY2_655795,GSM5826540,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,1,Paclitaxel,Linear Adjustment Factor
+658541,ISPY2_658541,GSM5826541,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel,Linear Adjustment Factor
+660534,ISPY2_660534,GSM5826542,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+661730,ISPY2_661730,GSM5826544,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + AMG 386,ComBat Adjust
+663144,ISPY2_663144,GSM5826545,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + Ganitumab,ComBat Adjust
+663197,ISPY2_663197,GSM5826546,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+664111,ISPY2_664111,GSM5826548,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + MK-2206,ComBat Adjust
+664658,ISPY2_664658,GSM5826549,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,1,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+666147,ISPY2_666147,GSM5826550,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganitumab,ComBat Adjust
+666715,ISPY2_666715,GSM5826552,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganetespib,ComBat Adjust
+668752,ISPY2_668752,GSM5826553,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+674897,ISPY2_674897,GSM5826555,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,ComBat Adjust
+676365,ISPY2_676365,GSM5826557,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganetespib,ComBat Adjust
+676630,ISPY2_676630,GSM5826558,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Ganitumab,ComBat Adjust
+677910,ISPY2_677910,GSM5826559,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + AMG 386,ComBat Adjust
+679787,ISPY2_679787,GSM5826561,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,ComBat Adjust
+683173,ISPY2_683173,GSM5826563,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,1,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+683457,ISPY2_683457,GSM5826565,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganitumab,ComBat Adjust
+683896,ISPY2_683896,GSM5826566,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+685182,ISPY2_685182,GSM5826567,GPL20078,Breast cancer biopsy (pre-treatment),1,1,1,1,Paclitaxel + Pertuzumab + Trastuzumab,ComBat Adjust
+685795,ISPY2_685795,GSM5826569,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + AMG 386 + Trastuzumab,ComBat Adjust
+687288,ISPY2_687288,GSM5826570,GPL20078,Breast cancer biopsy (pre-treatment),0,1,1,1,T-DM1 + Pertuzumab,ComBat Adjust
+687733,ISPY2_687733,GSM5826571,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganetespib,ComBat Adjust
+688291,ISPY2_688291,GSM5826572,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+688955,ISPY2_688955,GSM5826573,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel,ComBat Adjust
+689076,ISPY2_689076,GSM5826574,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+689188,ISPY2_689188,GSM5826575,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,1,Paclitaxel + Ganetespib,ComBat Adjust
+689452,ISPY2_689452,GSM5826576,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,ComBat Adjust
+689480,ISPY2_689480,GSM5826577,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+690089,ISPY2_690089,GSM5826578,GPL20078,Breast cancer biopsy (pre-treatment),0,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+690410,ISPY2_690410,GSM5826579,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganetespib,ComBat Adjust
+691753,ISPY2_691753,GSM5826580,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganitumab,ComBat Adjust
+692885,ISPY2_692885,GSM5826581,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+695521,ISPY2_695521,GSM5826582,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+700549,ISPY2_700549,GSM5826586,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + MK-2206,ComBat Adjust
+701790,ISPY2_701790,GSM5826587,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+703401,ISPY2_703401,GSM5826588,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,Linear Adjustment Factor
+703455,ISPY2_703455,GSM5826589,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganetespib,ComBat Adjust
+705381,ISPY2_705381,GSM5826590,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,1,T-DM1 + Pertuzumab,ComBat Adjust
+706169,ISPY2_706169,GSM5826591,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,ComBat Adjust
+706418,ISPY2_706418,GSM5826592,GPL20078,Breast cancer biopsy (pre-treatment),0,1,1,1,T-DM1 + Pertuzumab,ComBat Adjust
+706639,ISPY2_706639,GSM5826593,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,ComBat Adjust
+711476,ISPY2_711476,GSM5826597,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,1,Paclitaxel,ComBat Adjust
+712276,ISPY2_712276,GSM5826598,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,1,Paclitaxel + MK-2206,ComBat Adjust
+712785,ISPY2_712785,GSM5826599,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,ComBat Adjust
+712917,ISPY2_712917,GSM5826600,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Ganetespib,ComBat Adjust
+719713,ISPY2_719713,GSM5826602,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganetespib,ComBat Adjust
+721099,ISPY2_721099,GSM5826604,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Pertuzumab + Trastuzumab,ComBat Adjust
+724293,ISPY2_724293,GSM5826606,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,1,T-DM1 + Pertuzumab,ComBat Adjust
+724384,ISPY2_724384,GSM5826607,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+726940,ISPY2_726940,GSM5826611,GPL20078,Breast cancer biopsy (pre-treatment),0,0,0,0,Paclitaxel,ComBat Adjust
+727255,ISPY2_727255,GSM5826612,GPL20078,Breast cancer biopsy (pre-treatment),0,1,1,0,T-DM1 + Pertuzumab,ComBat Adjust
+727804,ISPY2_727804,GSM5826613,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + MK-2206,ComBat Adjust
+728149,ISPY2_728149,GSM5826614,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,0,T-DM1 + Pertuzumab,ComBat Adjust
+728287,ISPY2_728287,GSM5826616,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,1,Paclitaxel + AMG 386 + Trastuzumab,ComBat Adjust
+729732,ISPY2_729732,GSM5826619,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + MK-2206,ComBat Adjust
+732137,ISPY2_732137,GSM5826620,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + MK-2206,ComBat Adjust
+733276,ISPY2_733276,GSM5826621,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganetespib,ComBat Adjust
+734997,ISPY2_734997,GSM5826623,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel,ComBat Adjust
+735673,ISPY2_735673,GSM5826624,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,Linear Adjustment Factor
+736721,ISPY2_736721,GSM5826625,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + AMG 386,ComBat Adjust
+738041,ISPY2_738041,GSM5826626,GPL20078,Breast cancer biopsy (pre-treatment),1,1,1,1,Paclitaxel + Pertuzumab + Trastuzumab,ComBat Adjust
+741535,ISPY2_741535,GSM5826627,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+745633,ISPY2_745633,GSM5826629,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganitumab,ComBat Adjust
+748583,ISPY2_748583,GSM5826632,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + MK-2206,ComBat Adjust
+748611,ISPY2_748611,GSM5826633,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,1,Paclitaxel,ComBat Adjust
+752372,ISPY2_752372,GSM5826635,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+752469,ISPY2_752469,GSM5826636,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,ComBat Adjust
+753109,ISPY2_753109,GSM5826637,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + MK-2206,ComBat Adjust
+755914,ISPY2_755914,GSM5826638,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + MK-2206,ComBat Adjust
+759418,ISPY2_759418,GSM5826640,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganetespib,ComBat Adjust
+760011,ISPY2_760011,GSM5826641,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,1,T-DM1 + Pertuzumab,ComBat Adjust
+760901,ISPY2_760901,GSM5826642,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Ganitumab,ComBat Adjust
+765773,ISPY2_765773,GSM5826644,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Ganetespib,ComBat Adjust
+767081,ISPY2_767081,GSM5826647,GPL20078,Breast cancer biopsy (pre-treatment),0,1,0,1,T-DM1 + Pertuzumab,ComBat Adjust
+767934,ISPY2_767934,GSM5826648,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel,ComBat Adjust
+768214,ISPY2_768214,GSM5826649,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + AMG 386,ComBat Adjust
+769972,ISPY2_769972,GSM5826650,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganitumab,ComBat Adjust
+771151,ISPY2_771151,GSM5826651,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + AMG 386,ComBat Adjust
+774840,ISPY2_774840,GSM5826654,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Ganitumab,ComBat Adjust
+778527,ISPY2_778527,GSM5826657,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + MK-2206,ComBat Adjust
+779739,ISPY2_779739,GSM5826658,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,1,Paclitaxel + MK-2206 + Trastuzumab,ComBat Adjust
+780272,ISPY2_780272,GSM5826659,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganitumab,ComBat Adjust
+781642,ISPY2_781642,GSM5826661,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganetespib,ComBat Adjust
+783427,ISPY2_783427,GSM5826663,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,1,Paclitaxel,ComBat Adjust
+783764,ISPY2_783764,GSM5826665,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganitumab,ComBat Adjust
+783771,ISPY2_783771,GSM5826666,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel,Linear Adjustment Factor
+786003,ISPY2_786003,GSM5826667,GPL20078,Breast cancer biopsy (pre-treatment),1,1,1,1,T-DM1 + Pertuzumab,ComBat Adjust
+786480,ISPY2_786480,GSM5826668,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + Ganetespib,ComBat Adjust
+786753,ISPY2_786753,GSM5826669,GPL20078,Breast cancer biopsy (pre-treatment),0,1,0,0,Paclitaxel + MK-2206 + Trastuzumab,ComBat Adjust
+787415,ISPY2_787415,GSM5826670,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + AMG 386,ComBat Adjust
+788149,ISPY2_788149,GSM5826671,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,1,Paclitaxel + AMG 386 + Trastuzumab,ComBat Adjust
+790397,ISPY2_790397,GSM5826674,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,1,T-DM1 + Pertuzumab,ComBat Adjust
+791321,ISPY2_791321,GSM5826676,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + MK-2206,ComBat Adjust
+792181,ISPY2_792181,GSM5826678,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + AMG 386,ComBat Adjust
+792412,ISPY2_792412,GSM5826679,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+793155,ISPY2_793155,GSM5826680,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + MK-2206,ComBat Adjust
+793684,ISPY2_793684,GSM5826681,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganetespib,ComBat Adjust
+794128,ISPY2_794128,GSM5826682,GPL20078,Breast cancer biopsy (pre-treatment),0,0,0,0,Paclitaxel + Ganitumab,ComBat Adjust
+795996,ISPY2_795996,GSM5826684,GPL20078,Breast cancer biopsy (pre-treatment),1,1,1,1,Paclitaxel + Pertuzumab + Trastuzumab,ComBat Adjust
+796558,ISPY2_796558,GSM5826685,GPL20078,Breast cancer biopsy (pre-treatment),0,0,0,0,Paclitaxel,ComBat Adjust
+797499,ISPY2_797499,GSM5826687,GPL20078,Breast cancer biopsy (pre-treatment),0,1,1,1,T-DM1 + Pertuzumab,ComBat Adjust
+797639,ISPY2_797639,GSM5826688,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + MK-2206,ComBat Adjust
+798604,ISPY2_798604,GSM5826689,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Ganitumab,ComBat Adjust
+799149,ISPY2_799149,GSM5826690,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,1,Paclitaxel + Pertuzumab + Trastuzumab,ComBat Adjust
+800447,ISPY2_800447,GSM5826691,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Ganitumab,ComBat Adjust
+801641,ISPY2_801641,GSM5826693,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + MK-2206,ComBat Adjust
+802105,ISPY2_802105,GSM5826694,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+802308,ISPY2_802308,GSM5826695,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganitumab,ComBat Adjust
+803677,ISPY2_803677,GSM5826698,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + MK-2206,ComBat Adjust
+804233,ISPY2_804233,GSM5826699,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+804979,ISPY2_804979,GSM5826700,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganitumab,ComBat Adjust
+805136,ISPY2_805136,GSM5826701,GPL20078,Breast cancer biopsy (pre-treatment),0,1,1,0,Paclitaxel + AMG 386 + Trastuzumab,ComBat Adjust
+808714,ISPY2_808714,GSM5826702,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,ComBat Adjust
+810965,ISPY2_810965,GSM5826705,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Ganetespib,ComBat Adjust
+815493,ISPY2_815493,GSM5826709,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+820348,ISPY2_820348,GSM5826711,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel,ComBat Adjust
+820807,ISPY2_820807,GSM5826712,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,1,Paclitaxel + Ganitumab,ComBat Adjust
+823618,ISPY2_823618,GSM5826713,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+824234,ISPY2_824234,GSM5826714,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,1,Paclitaxel + Trastuzumab,ComBat Adjust
+824350,ISPY2_824350,GSM5826715,GPL20078,Breast cancer biopsy (pre-treatment),0,1,1,1,T-DM1 + Pertuzumab,ComBat Adjust
+824512,ISPY2_824512,GSM5826716,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganetespib,ComBat Adjust
+825363,ISPY2_825363,GSM5826717,GPL20078,Breast cancer biopsy (pre-treatment),0,1,1,1,Paclitaxel + Pertuzumab + Trastuzumab,ComBat Adjust
+829491,ISPY2_829491,GSM5826719,GPL20078,Breast cancer biopsy (pre-treatment),0,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+830486,ISPY2_830486,GSM5826720,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganetespib,ComBat Adjust
+830958,ISPY2_830958,GSM5826721,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+831702,ISPY2_831702,GSM5826722,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,0,T-DM1 + Pertuzumab,ComBat Adjust
+831848,ISPY2_831848,GSM5826723,GPL20078,Breast cancer biopsy (pre-treatment),0,1,1,1,T-DM1 + Pertuzumab,ComBat Adjust
+832056,ISPY2_832056,GSM5826724,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+834418,ISPY2_834418,GSM5826726,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+839274,ISPY2_839274,GSM5826731,GPL20078,Breast cancer biopsy (pre-treatment),1,1,1,0,Paclitaxel + MK-2206 + Trastuzumab,ComBat Adjust
+841336,ISPY2_841336,GSM5826733,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,Linear Adjustment Factor
+843554,ISPY2_843554,GSM5826734,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,ComBat Adjust
+845079,ISPY2_845079,GSM5826735,GPL20078,Breast cancer biopsy (pre-treatment),1,1,1,1,T-DM1 + Pertuzumab,ComBat Adjust
+845147,ISPY2_845147,GSM5826736,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + MK-2206,ComBat Adjust
+845783,ISPY2_845783,GSM5826738,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,1,Paclitaxel + AMG 386,ComBat Adjust
+846156,ISPY2_846156,GSM5826739,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganetespib,ComBat Adjust
+847272,ISPY2_847272,GSM5826740,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,ComBat Adjust
+847753,ISPY2_847753,GSM5826741,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,1,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+848003,ISPY2_848003,GSM5826742,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + AMG 386,ComBat Adjust
+848371,ISPY2_848371,GSM5826743,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+851223,ISPY2_851223,GSM5826746,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + AMG 386,ComBat Adjust
+851488,ISPY2_851488,GSM5826747,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganitumab,ComBat Adjust
+856159,ISPY2_856159,GSM5826748,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Trastuzumab,ComBat Adjust
+857165,ISPY2_857165,GSM5826749,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+860243,ISPY2_860243,GSM5826751,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + Ganetespib,ComBat Adjust
+860901,ISPY2_860901,GSM5826752,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + AMG 386,ComBat Adjust
+861745,ISPY2_861745,GSM5826753,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + MK-2206,ComBat Adjust
+862244,ISPY2_862244,GSM5826754,GPL20078,Breast cancer biopsy (pre-treatment),0,1,0,0,Paclitaxel + Pertuzumab + Trastuzumab,ComBat Adjust
+863161,ISPY2_863161,GSM5826755,GPL20078,Breast cancer biopsy (pre-treatment),0,1,0,1,Paclitaxel + MK-2206 + Trastuzumab,ComBat Adjust
+865416,ISPY2_865416,GSM5826756,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,0,T-DM1 + Pertuzumab,ComBat Adjust
+866660,ISPY2_866660,GSM5826757,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+870077,ISPY2_870077,GSM5826758,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganitumab,ComBat Adjust
+873686,ISPY2_873686,GSM5826760,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+875089,ISPY2_875089,GSM5826761,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganitumab,ComBat Adjust
+877463,ISPY2_877463,GSM5826763,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganetespib,ComBat Adjust
+879224,ISPY2_879224,GSM5826764,GPL20078,Breast cancer biopsy (pre-treatment),0,0,0,0,Paclitaxel,ComBat Adjust
+882538,ISPY2_882538,GSM5826765,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Ganitumab,ComBat Adjust
+882553,ISPY2_882553,GSM5826766,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+884011,ISPY2_884011,GSM5826769,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganitumab,ComBat Adjust
+884266,ISPY2_884266,GSM5826770,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganetespib,ComBat Adjust
+885871,ISPY2_885871,GSM5826772,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,ComBat Adjust
+887594,ISPY2_887594,GSM5826773,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + MK-2206,ComBat Adjust
+889721,ISPY2_889721,GSM5826776,GPL20078,Breast cancer biopsy (pre-treatment),0,1,1,1,T-DM1 + Pertuzumab,ComBat Adjust
+890372,ISPY2_890372,GSM5826777,GPL20078,Breast cancer biopsy (pre-treatment),0,0,0,0,Paclitaxel + Ganitumab,ComBat Adjust
+892390,ISPY2_892390,GSM5826780,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+893874,ISPY2_893874,GSM5826781,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Ganetespib,ComBat Adjust
+894673,ISPY2_894673,GSM5826784,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + MK-2206 + Trastuzumab,ComBat Adjust
+895653,ISPY2_895653,GSM5826785,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,1,Paclitaxel + Pertuzumab + Trastuzumab,ComBat Adjust
+896621,ISPY2_896621,GSM5826786,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+896852,ISPY2_896852,GSM5826787,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,0,T-DM1 + Pertuzumab,ComBat Adjust
+896939,ISPY2_896939,GSM5826788,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+898618,ISPY2_898618,GSM5826789,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganitumab,ComBat Adjust
+899381,ISPY2_899381,GSM5826790,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,1,Paclitaxel,Linear Adjustment Factor
+899692,ISPY2_899692,GSM5826791,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel,ComBat Adjust
+900959,ISPY2_900959,GSM5826792,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Pertuzumab + Trastuzumab,ComBat Adjust
+901705,ISPY2_901705,GSM5826793,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+901807,ISPY2_901807,GSM5826794,GPL20078,Breast cancer biopsy (pre-treatment),0,0,0,0,Paclitaxel,ComBat Adjust
+905264,ISPY2_905264,GSM5826797,GPL20078,Breast cancer biopsy (pre-treatment),0,1,0,0,Paclitaxel + MK-2206 + Trastuzumab,ComBat Adjust
+906795,ISPY2_906795,GSM5826799,GPL20078,Breast cancer biopsy (pre-treatment),1,1,1,0,Paclitaxel + Trastuzumab,ComBat Adjust
+910188,ISPY2_910188,GSM5826800,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganitumab,ComBat Adjust
+912836,ISPY2_912836,GSM5826802,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganetespib,ComBat Adjust
+913527,ISPY2_913527,GSM5826804,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,ComBat Adjust
+914968,ISPY2_914968,GSM5826805,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganetespib,ComBat Adjust
+916586,ISPY2_916586,GSM5826806,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganetespib,ComBat Adjust
+917762,ISPY2_917762,GSM5826808,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganitumab,ComBat Adjust
+918979,ISPY2_918979,GSM5826809,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganitumab,ComBat Adjust
+922872,ISPY2_922872,GSM5826812,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,Linear Adjustment Factor
+923968,ISPY2_923968,GSM5826813,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,1,Paclitaxel + AMG 386,ComBat Adjust
+924071,ISPY2_924071,GSM5826814,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+924868,ISPY2_924868,GSM5826816,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Ganetespib,ComBat Adjust
+924895,ISPY2_924895,GSM5826817,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganetespib,ComBat Adjust
+928170,ISPY2_928170,GSM5826819,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganitumab,ComBat Adjust
+928446,ISPY2_928446,GSM5826820,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganitumab,ComBat Adjust
+928815,ISPY2_928815,GSM5826821,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + AMG 386,ComBat Adjust
+929391,ISPY2_929391,GSM5826822,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,ComBat Adjust
+929980,ISPY2_929980,GSM5826823,GPL20078,Breast cancer biopsy (pre-treatment),0,1,1,1,Paclitaxel + MK-2206 + Trastuzumab,ComBat Adjust
+930903,ISPY2_930903,GSM5826826,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + Ganetespib,ComBat Adjust
+934906,ISPY2_934906,GSM5826829,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,Linear Adjustment Factor
+935460,ISPY2_935460,GSM5826830,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,Linear Adjustment Factor
+938719,ISPY2_938719,GSM5826831,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel,ComBat Adjust
+940186,ISPY2_940186,GSM5826832,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,1,Paclitaxel + Ganetespib,ComBat Adjust
+941926,ISPY2_941926,GSM5826834,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+943633,ISPY2_943633,GSM5826836,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + AMG 386,ComBat Adjust
+943879,ISPY2_943879,GSM5826837,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Ganetespib,ComBat Adjust
+947398,ISPY2_947398,GSM5826841,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,1,T-DM1 + Pertuzumab,ComBat Adjust
+949444,ISPY2_949444,GSM5826842,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + AMG 386,ComBat Adjust
+950131,ISPY2_950131,GSM5826843,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,1,Paclitaxel,Linear Adjustment Factor
+950742,ISPY2_950742,GSM5826844,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganitumab,ComBat Adjust
+953885,ISPY2_953885,GSM5826846,GPL20078,Breast cancer biopsy (pre-treatment),1,1,1,0,T-DM1 + Pertuzumab,ComBat Adjust
+955035,ISPY2_955035,GSM5826847,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganitumab,ComBat Adjust
+960029,ISPY2_960029,GSM5826851,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Pertuzumab + Trastuzumab,ComBat Adjust
+960490,ISPY2_960490,GSM5826852,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+962153,ISPY2_962153,GSM5826855,GPL20078,Breast cancer biopsy (pre-treatment),1,1,1,0,Paclitaxel + AMG 386 + Trastuzumab,ComBat Adjust
+962664,ISPY2_962664,GSM5826857,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel,Linear Adjustment Factor
+963303,ISPY2_963303,GSM5826859,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+963604,ISPY2_963604,GSM5826860,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+965265,ISPY2_965265,GSM5826861,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + AMG 386,ComBat Adjust
+966016,ISPY2_966016,GSM5826862,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,1,Paclitaxel + Ganitumab,ComBat Adjust
+970839,ISPY2_970839,GSM5826863,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel,ComBat Adjust
+971492,ISPY2_971492,GSM5826864,GPL20078,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + AMG 386,ComBat Adjust
+974181,ISPY2_974181,GSM5826867,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + AMG 386,ComBat Adjust
+981461,ISPY2_981461,GSM5826869,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,0,T-DM1 + Pertuzumab,ComBat Adjust
+981664,ISPY2_981664,GSM5826870,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,1,Paclitaxel + Pertuzumab + Trastuzumab,ComBat Adjust
+982086,ISPY2_982086,GSM5826871,GPL20078,Breast cancer biopsy (pre-treatment),0,1,1,1,Paclitaxel + Pertuzumab + Trastuzumab,ComBat Adjust
+982505,ISPY2_982505,GSM5826872,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Pertuzumab + Trastuzumab,ComBat Adjust
+983841,ISPY2_983841,GSM5826873,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Ganetespib,ComBat Adjust
+986734,ISPY2_986734,GSM5826874,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganetespib,ComBat Adjust
+987728,ISPY2_987728,GSM5826875,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Ganitumab,ComBat Adjust
+987914,ISPY2_987914,GSM5826876,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,ComBat Adjust
+987995,ISPY2_987995,GSM5826877,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+988665,ISPY2_988665,GSM5826879,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganetespib,ComBat Adjust
+990443,ISPY2_990443,GSM5826880,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Pembrolizumab,Linear Adjustment Factor
+991818,ISPY2_991818,GSM5826881,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,1,Paclitaxel + Pertuzumab + Trastuzumab,ComBat Adjust
+992609,ISPY2_992609,GSM5826882,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + AMG 386,ComBat Adjust
+995480,ISPY2_995480,GSM5826884,GPL20078,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Pertuzumab + Trastuzumab,ComBat Adjust
+999264,ISPY2_999264,GSM5826886,GPL20078,Breast cancer biopsy (pre-treatment),0,1,1,1,Paclitaxel + Pertuzumab + Trastuzumab,ComBat Adjust
+999733,ISPY2_999733,GSM5826887,GPL20078,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + MK-2206,ComBat Adjust
+107700,ISPY2_107700,GSM5825909,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + MK-2206 + Trastuzumab,ComBat Adjust
+108939,ISPY2_108939,GSM5825910,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,1,Paclitaxel + Neratinib,ComBat Adjust
+108969,ISPY2_108969,GSM5825911,GPL30493,Breast cancer biopsy (pre-treatment),0,1,0,1,Paclitaxel + Neratinib,ComBat Adjust
+109980,ISPY2_109980,GSM5825914,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,1,Paclitaxel + Neratinib,ComBat Adjust
+111038,ISPY2_111038,GSM5825916,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + AMG 386,ComBat Adjust
+111674,ISPY2_111674,GSM5825919,GPL30493,Breast cancer biopsy (pre-treatment),0,0,0,1,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+111881,ISPY2_111881,GSM5825920,GPL30493,Breast cancer biopsy (pre-treatment),1,1,1,1,Paclitaxel + Neratinib,ComBat Adjust
+112606,ISPY2_112606,GSM5825921,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Trastuzumab,ComBat Adjust
+117424,ISPY2_117424,GSM5825927,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Neratinib,ComBat Adjust
+120001,ISPY2_120001,GSM5825931,GPL30493,Breast cancer biopsy (pre-treatment),0,0,0,0,Paclitaxel + Neratinib,ComBat Adjust
+122795,ISPY2_122795,GSM5825935,GPL30493,Breast cancer biopsy (pre-treatment),0,0,0,0,Paclitaxel + Ganitumab,ComBat Adjust
+125385,ISPY2_125385,GSM5825938,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+127675,ISPY2_127675,GSM5825940,GPL30493,Breast cancer biopsy (pre-treatment),0,0,0,0,Paclitaxel + Neratinib,ComBat Adjust
+129837,ISPY2_129837,GSM5825944,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+129973,ISPY2_129973,GSM5825945,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+134526,ISPY2_134526,GSM5825952,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Neratinib,ComBat Adjust
+139137,ISPY2_139137,GSM5825956,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+139771,ISPY2_139771,GSM5825957,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Neratinib,ComBat Adjust
+141782,ISPY2_141782,GSM5825959,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Trastuzumab,ComBat Adjust
+145513,ISPY2_145513,GSM5825962,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + MK-2206 + Trastuzumab,ComBat Adjust
+151230,ISPY2_151230,GSM5825970,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Neratinib,ComBat Adjust
+151481,ISPY2_151481,GSM5825971,GPL30493,Breast cancer biopsy (pre-treatment),0,0,0,0,Paclitaxel,ComBat Adjust
+153880,ISPY2_153880,GSM5825976,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Trastuzumab,ComBat Adjust
+154293,ISPY2_154293,GSM5825977,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Neratinib,ComBat Adjust
+155171,ISPY2_155171,GSM5825978,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+157463,ISPY2_157463,GSM5825981,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+159352,ISPY2_159352,GSM5825983,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + MK-2206 + Trastuzumab,ComBat Adjust
+160120,ISPY2_160120,GSM5825984,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+166412,ISPY2_166412,GSM5825988,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Trastuzumab,ComBat Adjust
+166782,ISPY2_166782,GSM5825989,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Neratinib,ComBat Adjust
+169536,ISPY2_169536,GSM5825992,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Neratinib,ComBat Adjust
+172283,ISPY2_172283,GSM5825995,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Neratinib,ComBat Adjust
+174903,ISPY2_174903,GSM5825997,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+178649,ISPY2_178649,GSM5826000,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Neratinib,ComBat Adjust
+178815,ISPY2_178815,GSM5826001,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Neratinib,ComBat Adjust
+180027,ISPY2_180027,GSM5826004,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + AMG 386,ComBat Adjust
+181819,ISPY2_181819,GSM5826007,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,1,Paclitaxel,ComBat Adjust
+183831,ISPY2_183831,GSM5826009,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,1,Paclitaxel + MK-2206,ComBat Adjust
+188091,ISPY2_188091,GSM5826010,GPL30493,Breast cancer biopsy (pre-treatment),0,1,0,1,Paclitaxel + Neratinib,ComBat Adjust
+188511,ISPY2_188511,GSM5826011,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+190224,ISPY2_190224,GSM5826013,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+192548,ISPY2_192548,GSM5826014,GPL30493,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+197942,ISPY2_197942,GSM5826018,GPL30493,Breast cancer biopsy (pre-treatment),0,0,0,0,Paclitaxel,ComBat Adjust
+198891,ISPY2_198891,GSM5826019,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+201873,ISPY2_201873,GSM5826024,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,1,Paclitaxel + Neratinib,ComBat Adjust
+202539,ISPY2_202539,GSM5826026,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,1,Paclitaxel,ComBat Adjust
+202956,ISPY2_202956,GSM5826027,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Neratinib,ComBat Adjust
+203254,ISPY2_203254,GSM5826029,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + MK-2206,ComBat Adjust
+208265,ISPY2_208265,GSM5826031,GPL30493,Breast cancer biopsy (pre-treatment),0,0,0,1,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+211408,ISPY2_211408,GSM5826036,GPL30493,Breast cancer biopsy (pre-treatment),0,1,0,1,Paclitaxel + Neratinib,ComBat Adjust
+220664,ISPY2_220664,GSM5826046,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Neratinib,ComBat Adjust
+222135,ISPY2_222135,GSM5826050,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+223526,ISPY2_223526,GSM5826052,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Neratinib,ComBat Adjust
+225836,ISPY2_225836,GSM5826053,GPL30493,Breast cancer biopsy (pre-treatment),0,0,0,0,Paclitaxel + Neratinib,ComBat Adjust
+227832,ISPY2_227832,GSM5826055,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Neratinib,ComBat Adjust
+227881,ISPY2_227881,GSM5826056,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,1,Paclitaxel + Neratinib,ComBat Adjust
+228340,ISPY2_228340,GSM5826058,GPL30493,Breast cancer biopsy (pre-treatment),0,1,0,0,Paclitaxel + Neratinib,ComBat Adjust
+229144,ISPY2_229144,GSM5826059,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+229824,ISPY2_229824,GSM5826061,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+233832,ISPY2_233832,GSM5826064,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+233962,ISPY2_233962,GSM5826065,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Neratinib,ComBat Adjust
+234272,ISPY2_234272,GSM5826066,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Neratinib,ComBat Adjust
+234723,ISPY2_234723,GSM5826067,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + AMG 386,ComBat Adjust
+238790,ISPY2_238790,GSM5826071,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,ComBat Adjust
+239061,ISPY2_239061,GSM5826072,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganitumab,ComBat Adjust
+243836,ISPY2_243836,GSM5826080,GPL30493,Breast cancer biopsy (pre-treatment),1,0,1,1,Paclitaxel + Neratinib,ComBat Adjust
+245655,ISPY2_245655,GSM5826081,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Neratinib,ComBat Adjust
+246134,ISPY2_246134,GSM5826082,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Trastuzumab,ComBat Adjust
+248255,ISPY2_248255,GSM5826084,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganitumab,ComBat Adjust
+255078,ISPY2_255078,GSM5826090,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,ComBat Adjust
+255388,ISPY2_255388,GSM5826091,GPL30493,Breast cancer biopsy (pre-treatment),0,1,1,1,Paclitaxel + MK-2206 + Trastuzumab,ComBat Adjust
+255535,ISPY2_255535,GSM5826092,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Neratinib,ComBat Adjust
+259206,ISPY2_259206,GSM5826095,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+262131,ISPY2_262131,GSM5826098,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+264678,ISPY2_264678,GSM5826101,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+267306,ISPY2_267306,GSM5826104,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+273745,ISPY2_273745,GSM5826108,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+277848,ISPY2_277848,GSM5826111,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Neratinib,ComBat Adjust
+282082,ISPY2_282082,GSM5826115,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel,ComBat Adjust
+282644,ISPY2_282644,GSM5826116,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Neratinib,ComBat Adjust
+284355,ISPY2_284355,GSM5826119,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+284593,ISPY2_284593,GSM5826121,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + MK-2206,ComBat Adjust
+286984,ISPY2_286984,GSM5826123,GPL30493,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + MK-2206,ComBat Adjust
+287300,ISPY2_287300,GSM5826124,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,1,Paclitaxel + Neratinib,ComBat Adjust
+291515,ISPY2_291515,GSM5826129,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+294176,ISPY2_294176,GSM5826131,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Neratinib,ComBat Adjust
+298101,ISPY2_298101,GSM5826136,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + MK-2206 + Trastuzumab,ComBat Adjust
+299364,ISPY2_299364,GSM5826137,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,ComBat Adjust
+303947,ISPY2_303947,GSM5826145,GPL30493,Breast cancer biopsy (pre-treatment),0,1,1,1,Paclitaxel + Neratinib,ComBat Adjust
+306127,ISPY2_306127,GSM5826146,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+307659,ISPY2_307659,GSM5826148,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Neratinib,ComBat Adjust
+316996,ISPY2_316996,GSM5826154,GPL30493,Breast cancer biopsy (pre-treatment),0,1,0,0,Paclitaxel + Neratinib,ComBat Adjust
+318438,ISPY2_318438,GSM5826160,GPL30493,Breast cancer biopsy (pre-treatment),0,0,0,0,Paclitaxel,ComBat Adjust
+318569,ISPY2_318569,GSM5826161,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Neratinib,ComBat Adjust
+327133,ISPY2_327133,GSM5826168,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,ComBat Adjust
+327142,ISPY2_327142,GSM5826169,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Neratinib,ComBat Adjust
+331192,ISPY2_331192,GSM5826175,GPL30493,Breast cancer biopsy (pre-treatment),1,0,1,1,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+335091,ISPY2_335091,GSM5826178,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,1,Paclitaxel + Trastuzumab,ComBat Adjust
+340186,ISPY2_340186,GSM5826180,GPL30493,Breast cancer biopsy (pre-treatment),0,0,0,0,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+345574,ISPY2_345574,GSM5826188,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+348009,ISPY2_348009,GSM5826191,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+349225,ISPY2_349225,GSM5826192,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,ComBat Adjust
+349639,ISPY2_349639,GSM5826194,GPL30493,Breast cancer biopsy (pre-treatment),1,1,1,1,Paclitaxel + Neratinib,ComBat Adjust
+350331,ISPY2_350331,GSM5826195,GPL30493,Breast cancer biopsy (pre-treatment),0,1,0,0,Paclitaxel + Trastuzumab,ComBat Adjust
+357017,ISPY2_357017,GSM5826202,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+360937,ISPY2_360937,GSM5826204,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+362993,ISPY2_362993,GSM5826207,GPL30493,Breast cancer biopsy (pre-treatment),0,0,0,0,Paclitaxel,ComBat Adjust
+367682,ISPY2_367682,GSM5826210,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,ComBat Adjust
+373346,ISPY2_373346,GSM5826213,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+373672,ISPY2_373672,GSM5826214,GPL30493,Breast cancer biopsy (pre-treatment),0,0,0,0,Paclitaxel,ComBat Adjust
+374106,ISPY2_374106,GSM5826215,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Neratinib,ComBat Adjust
+374121,ISPY2_374121,GSM5826216,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+375455,ISPY2_375455,GSM5826218,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Trastuzumab,ComBat Adjust
+378401,ISPY2_378401,GSM5826222,GPL30493,Breast cancer biopsy (pre-treatment),0,0,0,1,Paclitaxel + AMG 386,ComBat Adjust
+380239,ISPY2_380239,GSM5826224,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Neratinib,ComBat Adjust
+380769,ISPY2_380769,GSM5826225,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+382853,ISPY2_382853,GSM5826227,GPL30493,Breast cancer biopsy (pre-treatment),0,1,0,1,Paclitaxel + Trastuzumab,ComBat Adjust
+386664,ISPY2_386664,GSM5826230,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+388581,ISPY2_388581,GSM5826231,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,1,Paclitaxel + Neratinib,ComBat Adjust
+395076,ISPY2_395076,GSM5826233,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel,ComBat Adjust
+395379,ISPY2_395379,GSM5826235,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+402265,ISPY2_402265,GSM5826240,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Trastuzumab,ComBat Adjust
+405717,ISPY2_405717,GSM5826242,GPL30493,Breast cancer biopsy (pre-treatment),0,0,0,0,Paclitaxel,ComBat Adjust
+406190,ISPY2_406190,GSM5826243,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Neratinib,ComBat Adjust
+411684,ISPY2_411684,GSM5826249,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+414286,ISPY2_414286,GSM5826256,GPL30493,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + MK-2206,ComBat Adjust
+415039,ISPY2_415039,GSM5826259,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Neratinib,ComBat Adjust
+417654,ISPY2_417654,GSM5826262,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Neratinib,ComBat Adjust
+420523,ISPY2_420523,GSM5826265,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Neratinib,ComBat Adjust
+422013,ISPY2_422013,GSM5826268,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Neratinib,ComBat Adjust
+422450,ISPY2_422450,GSM5826269,GPL30493,Breast cancer biopsy (pre-treatment),1,0,1,1,Paclitaxel + Neratinib,ComBat Adjust
+423619,ISPY2_423619,GSM5826271,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Neratinib,ComBat Adjust
+426106,ISPY2_426106,GSM5826275,GPL30493,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + MK-2206,ComBat Adjust
+427321,ISPY2_427321,GSM5826276,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,1,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+433144,ISPY2_433144,GSM5826281,GPL30493,Breast cancer biopsy (pre-treatment),0,0,0,1,Paclitaxel,ComBat Adjust
+435313,ISPY2_435313,GSM5826283,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+437968,ISPY2_437968,GSM5826286,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Neratinib,ComBat Adjust
+442637,ISPY2_442637,GSM5826288,GPL30493,Breast cancer biopsy (pre-treatment),0,1,0,0,Paclitaxel + Trastuzumab,ComBat Adjust
+443444,ISPY2_443444,GSM5826291,GPL30493,Breast cancer biopsy (pre-treatment),0,1,1,0,Paclitaxel + Neratinib,ComBat Adjust
+443708,ISPY2_443708,GSM5826292,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Neratinib,ComBat Adjust
+451482,ISPY2_451482,GSM5826294,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+451816,ISPY2_451816,GSM5826295,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+460776,ISPY2_460776,GSM5826305,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,1,Paclitaxel,ComBat Adjust
+461824,ISPY2_461824,GSM5826307,GPL30493,Breast cancer biopsy (pre-treatment),0,0,0,0,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+477816,ISPY2_477816,GSM5826321,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+478484,ISPY2_478484,GSM5826324,GPL30493,Breast cancer biopsy (pre-treatment),0,0,0,0,Paclitaxel + Neratinib,ComBat Adjust
+479417,ISPY2_479417,GSM5826326,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+484867,ISPY2_484867,GSM5826329,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Neratinib,ComBat Adjust
+489504,ISPY2_489504,GSM5826333,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel,ComBat Adjust
+489973,ISPY2_489973,GSM5826334,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + AMG 386,ComBat Adjust
+491526,ISPY2_491526,GSM5826337,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+495440,ISPY2_495440,GSM5826346,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+496205,ISPY2_496205,GSM5826347,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,1,Paclitaxel + AMG 386,ComBat Adjust
+507198,ISPY2_507198,GSM5826357,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,ComBat Adjust
+511851,ISPY2_511851,GSM5826361,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganitumab,ComBat Adjust
+515105,ISPY2_515105,GSM5826362,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Neratinib,ComBat Adjust
+515141,ISPY2_515141,GSM5826363,GPL30493,Breast cancer biopsy (pre-treatment),0,0,0,1,Paclitaxel + AMG 386,ComBat Adjust
+515565,ISPY2_515565,GSM5826366,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,ComBat Adjust
+517446,ISPY2_517446,GSM5826369,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+519738,ISPY2_519738,GSM5826373,GPL30493,Breast cancer biopsy (pre-treatment),0,1,0,1,Paclitaxel + Neratinib,ComBat Adjust
+520258,ISPY2_520258,GSM5826374,GPL30493,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel,ComBat Adjust
+520471,ISPY2_520471,GSM5826375,GPL30493,Breast cancer biopsy (pre-treatment),1,0,1,1,Paclitaxel + Ganitumab,ComBat Adjust
+527320,ISPY2_527320,GSM5826380,GPL30493,Breast cancer biopsy (pre-treatment),0,0,0,0,Paclitaxel,ComBat Adjust
+531672,ISPY2_531672,GSM5826385,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+539291,ISPY2_539291,GSM5826392,GPL30493,Breast cancer biopsy (pre-treatment),0,1,0,1,Paclitaxel + Neratinib,ComBat Adjust
+540539,ISPY2_540539,GSM5826395,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+541165,ISPY2_541165,GSM5826396,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Neratinib,ComBat Adjust
+549172,ISPY2_549172,GSM5826401,GPL30493,Breast cancer biopsy (pre-treatment),0,0,0,0,Paclitaxel,ComBat Adjust
+552313,ISPY2_552313,GSM5826405,GPL30493,Breast cancer biopsy (pre-treatment),0,1,1,1,Paclitaxel + Neratinib,ComBat Adjust
+553141,ISPY2_553141,GSM5826408,GPL30493,Breast cancer biopsy (pre-treatment),1,0,1,1,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+563856,ISPY2_563856,GSM5826414,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Neratinib,ComBat Adjust
+564234,ISPY2_564234,GSM5826415,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+566011,ISPY2_566011,GSM5826417,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Neratinib,ComBat Adjust
+568331,ISPY2_568331,GSM5826420,GPL30493,Breast cancer biopsy (pre-treatment),0,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+570148,ISPY2_570148,GSM5826422,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Neratinib,ComBat Adjust
+570380,ISPY2_570380,GSM5826423,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Neratinib,ComBat Adjust
+572235,ISPY2_572235,GSM5826429,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Neratinib,ComBat Adjust
+572444,ISPY2_572444,GSM5826430,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Neratinib,ComBat Adjust
+572731,ISPY2_572731,GSM5826431,GPL30493,Breast cancer biopsy (pre-treatment),1,0,1,1,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+573586,ISPY2_573586,GSM5826433,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Trastuzumab,ComBat Adjust
+573881,ISPY2_573881,GSM5826435,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Neratinib,ComBat Adjust
+573919,ISPY2_573919,GSM5826436,GPL30493,Breast cancer biopsy (pre-treatment),0,1,0,0,Paclitaxel + MK-2206 + Trastuzumab,ComBat Adjust
+575372,ISPY2_575372,GSM5826438,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+578975,ISPY2_578975,GSM5826440,GPL30493,Breast cancer biopsy (pre-treatment),0,0,0,1,Paclitaxel + MK-2206,ComBat Adjust
+579881,ISPY2_579881,GSM5826441,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+580632,ISPY2_580632,GSM5826443,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganitumab,ComBat Adjust
+581648,ISPY2_581648,GSM5826445,GPL30493,Breast cancer biopsy (pre-treatment),0,0,0,0,Paclitaxel,ComBat Adjust
+587388,ISPY2_587388,GSM5826449,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+590220,ISPY2_590220,GSM5826453,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + MK-2206,ComBat Adjust
+591180,ISPY2_591180,GSM5826456,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Neratinib,ComBat Adjust
+592535,ISPY2_592535,GSM5826458,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+596079,ISPY2_596079,GSM5826459,GPL30493,Breast cancer biopsy (pre-treatment),0,1,0,1,Paclitaxel + Trastuzumab,ComBat Adjust
+596458,ISPY2_596458,GSM5826460,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,1,Paclitaxel + Neratinib,ComBat Adjust
+597253,ISPY2_597253,GSM5826461,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+598798,ISPY2_598798,GSM5826464,GPL30493,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+600536,ISPY2_600536,GSM5826466,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + AMG 386,ComBat Adjust
+602943,ISPY2_602943,GSM5826469,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel,ComBat Adjust
+604380,ISPY2_604380,GSM5826472,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+605713,ISPY2_605713,GSM5826473,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+607047,ISPY2_607047,GSM5826474,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,1,Paclitaxel + AMG 386,ComBat Adjust
+611662,ISPY2_611662,GSM5826478,GPL30493,Breast cancer biopsy (pre-treatment),0,1,0,0,Paclitaxel + Neratinib,ComBat Adjust
+613188,ISPY2_613188,GSM5826479,GPL30493,Breast cancer biopsy (pre-treatment),0,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+614044,ISPY2_614044,GSM5826481,GPL30493,Breast cancer biopsy (pre-treatment),0,0,0,0,Paclitaxel,ComBat Adjust
+615873,ISPY2_615873,GSM5826483,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel,ComBat Adjust
+622078,ISPY2_622078,GSM5826489,GPL30493,Breast cancer biopsy (pre-treatment),0,1,1,0,Paclitaxel + Neratinib,ComBat Adjust
+623086,ISPY2_623086,GSM5826492,GPL30493,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + Neratinib,ComBat Adjust
+625800,ISPY2_625800,GSM5826495,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Neratinib,ComBat Adjust
+627118,ISPY2_627118,GSM5826497,GPL30493,Breast cancer biopsy (pre-treatment),0,1,0,0,Paclitaxel + Trastuzumab,ComBat Adjust
+627981,ISPY2_627981,GSM5826498,GPL30493,Breast cancer biopsy (pre-treatment),0,0,0,1,Paclitaxel,ComBat Adjust
+628692,ISPY2_628692,GSM5826499,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Neratinib,ComBat Adjust
+629210,ISPY2_629210,GSM5826502,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Neratinib,ComBat Adjust
+630758,ISPY2_630758,GSM5826506,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+632408,ISPY2_632408,GSM5826509,GPL30493,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + AMG 386,ComBat Adjust
+635862,ISPY2_635862,GSM5826511,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + AMG 386,ComBat Adjust
+637752,ISPY2_637752,GSM5826515,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + AMG 386,ComBat Adjust
+640463,ISPY2_640463,GSM5826518,GPL30493,Breast cancer biopsy (pre-treatment),1,0,1,1,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+640927,ISPY2_640927,GSM5826519,GPL30493,Breast cancer biopsy (pre-treatment),0,0,0,0,Paclitaxel + Neratinib,ComBat Adjust
+641246,ISPY2_641246,GSM5826520,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,1,Paclitaxel + Neratinib,ComBat Adjust
+646233,ISPY2_646233,GSM5826525,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+650589,ISPY2_650589,GSM5826528,GPL30493,Breast cancer biopsy (pre-treatment),0,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+651541,ISPY2_651541,GSM5826531,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Neratinib,ComBat Adjust
+654956,ISPY2_654956,GSM5826537,GPL30493,Breast cancer biopsy (pre-treatment),0,1,1,0,Paclitaxel + Neratinib,ComBat Adjust
+655703,ISPY2_655703,GSM5826539,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+660915,ISPY2_660915,GSM5826543,GPL30493,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + Neratinib,ComBat Adjust
+663467,ISPY2_663467,GSM5826547,GPL30493,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+666450,ISPY2_666450,GSM5826551,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Neratinib,ComBat Adjust
+672734,ISPY2_672734,GSM5826554,GPL30493,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + Ganitumab,ComBat Adjust
+676048,ISPY2_676048,GSM5826556,GPL30493,Breast cancer biopsy (pre-treatment),0,0,0,0,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+677915,ISPY2_677915,GSM5826560,GPL30493,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel,ComBat Adjust
+680881,ISPY2_680881,GSM5826562,GPL30493,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + MK-2206,ComBat Adjust
+683374,ISPY2_683374,GSM5826564,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Neratinib,ComBat Adjust
+685753,ISPY2_685753,GSM5826568,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+697098,ISPY2_697098,GSM5826583,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Neratinib,ComBat Adjust
+697871,ISPY2_697871,GSM5826584,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+698094,ISPY2_698094,GSM5826585,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+706943,ISPY2_706943,GSM5826594,GPL30493,Breast cancer biopsy (pre-treatment),0,1,1,0,Paclitaxel + Neratinib,ComBat Adjust
+708387,ISPY2_708387,GSM5826595,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+709559,ISPY2_709559,GSM5826596,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+714205,ISPY2_714205,GSM5826601,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+720065,ISPY2_720065,GSM5826603,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Trastuzumab,ComBat Adjust
+723918,ISPY2_723918,GSM5826605,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,1,Paclitaxel + Neratinib,ComBat Adjust
+725455,ISPY2_725455,GSM5826608,GPL30493,Breast cancer biopsy (pre-treatment),0,1,1,0,Paclitaxel + Trastuzumab,ComBat Adjust
+726091,ISPY2_726091,GSM5826609,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + Neratinib,ComBat Adjust
+726381,ISPY2_726381,GSM5826610,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Trastuzumab,ComBat Adjust
+728182,ISPY2_728182,GSM5826615,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+728714,ISPY2_728714,GSM5826617,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+729270,ISPY2_729270,GSM5826618,GPL30493,Breast cancer biopsy (pre-treatment),0,1,0,1,Paclitaxel + Neratinib,ComBat Adjust
+733962,ISPY2_733962,GSM5826622,GPL30493,Breast cancer biopsy (pre-treatment),0,1,0,1,Paclitaxel + Neratinib,ComBat Adjust
+742477,ISPY2_742477,GSM5826628,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Trastuzumab,ComBat Adjust
+746265,ISPY2_746265,GSM5826630,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Neratinib,ComBat Adjust
+746731,ISPY2_746731,GSM5826631,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+749097,ISPY2_749097,GSM5826634,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+756412,ISPY2_756412,GSM5826639,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+765671,ISPY2_765671,GSM5826643,GPL30493,Breast cancer biopsy (pre-treatment),0,0,0,1,Paclitaxel + AMG 386,ComBat Adjust
+766301,ISPY2_766301,GSM5826645,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+766967,ISPY2_766967,GSM5826646,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,1,Paclitaxel + Ganitumab,ComBat Adjust
+771443,ISPY2_771443,GSM5826652,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + MK-2206 + Trastuzumab,ComBat Adjust
+771813,ISPY2_771813,GSM5826653,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,ComBat Adjust
+775346,ISPY2_775346,GSM5826655,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+778020,ISPY2_778020,GSM5826656,GPL30493,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + Neratinib,ComBat Adjust
+781335,ISPY2_781335,GSM5826660,GPL30493,Breast cancer biopsy (pre-treatment),0,0,0,0,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+782334,ISPY2_782334,GSM5826662,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+783578,ISPY2_783578,GSM5826664,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+789497,ISPY2_789497,GSM5826672,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+790070,ISPY2_790070,GSM5826673,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Neratinib,ComBat Adjust
+790722,ISPY2_790722,GSM5826675,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+791944,ISPY2_791944,GSM5826677,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Neratinib,ComBat Adjust
+794428,ISPY2_794428,GSM5826683,GPL30493,Breast cancer biopsy (pre-treatment),0,0,0,0,Paclitaxel,ComBat Adjust
+797427,ISPY2_797427,GSM5826686,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Trastuzumab,ComBat Adjust
+800710,ISPY2_800710,GSM5826692,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel,ComBat Adjust
+802778,ISPY2_802778,GSM5826696,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+803514,ISPY2_803514,GSM5826697,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+809037,ISPY2_809037,GSM5826703,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+809649,ISPY2_809649,GSM5826704,GPL30493,Breast cancer biopsy (pre-treatment),0,1,0,1,Paclitaxel + Trastuzumab,ComBat Adjust
+812089,ISPY2_812089,GSM5826706,GPL30493,Breast cancer biopsy (pre-treatment),0,0,0,0,Paclitaxel + Neratinib,ComBat Adjust
+814299,ISPY2_814299,GSM5826707,GPL30493,Breast cancer biopsy (pre-treatment),0,1,0,1,Paclitaxel + Neratinib,ComBat Adjust
+815421,ISPY2_815421,GSM5826708,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Neratinib,ComBat Adjust
+819622,ISPY2_819622,GSM5826710,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+828199,ISPY2_828199,GSM5826718,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Neratinib,ComBat Adjust
+833536,ISPY2_833536,GSM5826725,GPL30493,Breast cancer biopsy (pre-treatment),0,0,0,1,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+835137,ISPY2_835137,GSM5826727,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + MK-2206 + Trastuzumab,ComBat Adjust
+835658,ISPY2_835658,GSM5826728,GPL30493,Breast cancer biopsy (pre-treatment),1,0,1,1,Paclitaxel + Neratinib,ComBat Adjust
+836114,ISPY2_836114,GSM5826729,GPL30493,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + AMG 386,ComBat Adjust
+836983,ISPY2_836983,GSM5826730,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,1,Paclitaxel + Neratinib,ComBat Adjust
+840501,ISPY2_840501,GSM5826732,GPL30493,Breast cancer biopsy (pre-treatment),0,0,0,1,Paclitaxel + AMG 386,ComBat Adjust
+845663,ISPY2_845663,GSM5826737,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+849605,ISPY2_849605,GSM5826744,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Neratinib,ComBat Adjust
+851180,ISPY2_851180,GSM5826745,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Neratinib,ComBat Adjust
+859699,ISPY2_859699,GSM5826750,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,1,Paclitaxel + Trastuzumab,ComBat Adjust
+872188,ISPY2_872188,GSM5826759,GPL30493,Breast cancer biopsy (pre-treatment),0,1,0,1,Paclitaxel + Neratinib,ComBat Adjust
+876511,ISPY2_876511,GSM5826762,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Neratinib,ComBat Adjust
+883696,ISPY2_883696,GSM5826767,GPL30493,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+883886,ISPY2_883886,GSM5826768,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Neratinib,ComBat Adjust
+885590,ISPY2_885590,GSM5826771,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+889049,ISPY2_889049,GSM5826774,GPL30493,Breast cancer biopsy (pre-treatment),0,1,0,0,Paclitaxel + Trastuzumab,ComBat Adjust
+889225,ISPY2_889225,GSM5826775,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+890414,ISPY2_890414,GSM5826778,GPL30493,Breast cancer biopsy (pre-treatment),0,0,0,1,Paclitaxel,ComBat Adjust
+891645,ISPY2_891645,GSM5826779,GPL30493,Breast cancer biopsy (pre-treatment),0,1,0,0,Paclitaxel + Neratinib,ComBat Adjust
+894128,ISPY2_894128,GSM5826782,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + AMG 386,ComBat Adjust
+894491,ISPY2_894491,GSM5826783,GPL30493,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+903880,ISPY2_903880,GSM5826795,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Neratinib,ComBat Adjust
+904269,ISPY2_904269,GSM5826796,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+906042,ISPY2_906042,GSM5826798,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel,ComBat Adjust
+910706,ISPY2_910706,GSM5826801,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+913225,ISPY2_913225,GSM5826803,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,1,Paclitaxel + Neratinib,ComBat Adjust
+916645,ISPY2_916645,GSM5826807,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,1,Paclitaxel,ComBat Adjust
+920479,ISPY2_920479,GSM5826810,GPL30493,Breast cancer biopsy (pre-treatment),0,1,0,0,Paclitaxel + Neratinib,ComBat Adjust
+922433,ISPY2_922433,GSM5826811,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+924812,ISPY2_924812,GSM5826815,GPL30493,Breast cancer biopsy (pre-treatment),0,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+925691,ISPY2_925691,GSM5826818,GPL30493,Breast cancer biopsy (pre-treatment),0,1,0,0,Paclitaxel + Neratinib,ComBat Adjust
+930172,ISPY2_930172,GSM5826824,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Neratinib,ComBat Adjust
+930853,ISPY2_930853,GSM5826825,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,1,Paclitaxel + AMG 386,ComBat Adjust
+932200,ISPY2_932200,GSM5826827,GPL30493,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel,ComBat Adjust
+934459,ISPY2_934459,GSM5826828,GPL30493,Breast cancer biopsy (pre-treatment),0,0,0,0,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+941191,ISPY2_941191,GSM5826833,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + Neratinib,ComBat Adjust
+942017,ISPY2_942017,GSM5826835,GPL30493,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel,ComBat Adjust
+944419,ISPY2_944419,GSM5826838,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+944536,ISPY2_944536,GSM5826839,GPL30493,Breast cancer biopsy (pre-treatment),0,1,0,1,Paclitaxel + Neratinib,ComBat Adjust
+946927,ISPY2_946927,GSM5826840,GPL30493,Breast cancer biopsy (pre-treatment),0,1,0,1,Paclitaxel + MK-2206 + Trastuzumab,ComBat Adjust
+953262,ISPY2_953262,GSM5826845,GPL30493,Breast cancer biopsy (pre-treatment),1,0,1,0,Paclitaxel + Neratinib,ComBat Adjust
+955953,ISPY2_955953,GSM5826848,GPL30493,Breast cancer biopsy (pre-treatment),0,1,0,1,Paclitaxel + MK-2206 + Trastuzumab,ComBat Adjust
+957408,ISPY2_957408,GSM5826849,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+959366,ISPY2_959366,GSM5826850,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+960963,ISPY2_960963,GSM5826853,GPL30493,Breast cancer biopsy (pre-treatment),1,1,0,0,Paclitaxel + MK-2206 + Trastuzumab,ComBat Adjust
+961350,ISPY2_961350,GSM5826854,GPL30493,Breast cancer biopsy (pre-treatment),0,1,0,1,Paclitaxel + Neratinib,ComBat Adjust
+962472,ISPY2_962472,GSM5826856,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + AMG 386,ComBat Adjust
+962827,ISPY2_962827,GSM5826858,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganitumab,ComBat Adjust
+972307,ISPY2_972307,GSM5826865,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+973837,ISPY2_973837,GSM5826866,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + Ganitumab,ComBat Adjust
+974618,ISPY2_974618,GSM5826868,GPL30493,Breast cancer biopsy (pre-treatment),0,0,0,1,Paclitaxel + AMG 386,ComBat Adjust
+988443,ISPY2_988443,GSM5826878,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+994987,ISPY2_994987,GSM5826883,GPL30493,Breast cancer biopsy (pre-treatment),1,0,0,0,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust
+997702,ISPY2_997702,GSM5826885,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,1,Paclitaxel + ABT 888 + Carboplatin,ComBat Adjust

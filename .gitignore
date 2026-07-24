@@ -599,4 +599,10 @@ yarn-error.log
 
 # End of https://www.toptal.com/developers/gitignore/api/python,node,vue,vuejs,matlab
 
+# Include only the submitted GSE194040 package provenance logs.
+!flask_backend/models/gse194040_pcr_expression_elastic_net/logs/
+flask_backend/models/gse194040_pcr_expression_elastic_net/logs/*
+!flask_backend/models/gse194040_pcr_expression_elastic_net/logs/gse194040_model_training_session_info.json
+!flask_backend/models/gse194040_pcr_expression_elastic_net/logs/gse194040_session_info.json
+
 

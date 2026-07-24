@@ -1,0 +1,26 @@
+variable,category,n,fraction
+pCR,non-pCR,668,0.6767983789260384
+pCR,pCR,319,0.3232016210739615
+HR,HR-,452,0.4579533941236069
+HR,HR+,535,0.5420466058763931
+HER2,HER2-,742,0.75177304964539
+HER2,HER2+,245,0.24822695035460993
+MP,MP1 high risk,504,0.5106382978723404
+MP,MP2 ultra/high risk,483,0.48936170212765956
+platform,GPL20078,653,0.6616008105369807
+platform,GPL20078; GPL30493,1,0.0010131712259371835
+platform,GPL30493,333,0.3373860182370821
+treatment_arm,Paclitaxel,179,0.18135764944275581
+treatment_arm,Paclitaxel + ABT 888 + Carboplatin,71,0.07193515704154002
+treatment_arm,Paclitaxel + AMG 386,114,0.11550151975683891
+treatment_arm,Paclitaxel + AMG 386 + Trastuzumab,19,0.019250253292806486
+treatment_arm,Paclitaxel + AMG-386,1,0.0010131712259371835
+treatment_arm,Paclitaxel + Ganetespib,93,0.09422492401215805
+treatment_arm,Paclitaxel + Ganitumab,106,0.10739614994934144
+treatment_arm,Paclitaxel + MK-2206,60,0.060790273556231005
+treatment_arm,Paclitaxel + MK-2206 + Trastuzumab,34,0.034447821681864235
+treatment_arm,Paclitaxel + Neratinib,114,0.11550151975683891
+treatment_arm,Paclitaxel + Pembrolizumab,69,0.06990881458966565
+treatment_arm,Paclitaxel + Pertuzumab + Trastuzumab,44,0.044579533941236066
+treatment_arm,Paclitaxel + Trastuzumab,31,0.031408308004052685
+treatment_arm,T-DM1 + Pertuzumab,52,0.05268490374873354

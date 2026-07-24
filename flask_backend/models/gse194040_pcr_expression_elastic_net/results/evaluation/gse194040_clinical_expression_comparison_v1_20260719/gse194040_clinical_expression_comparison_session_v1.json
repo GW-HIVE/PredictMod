@@ -1,0 +1,44 @@
+{
+  "timestamp": "2026-07-19T22:20:22",
+  "python": "3.12.13 (main, Mar  3 2026, 15:01:35) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "pandas": "3.0.1",
+  "numpy": "2.5.1",
+  "sklearn": "1.9.0",
+  "data_path": "data_processed/gse194040_ml_ready_pcr_expression.csv",
+  "split_path": "results/tables/gse194040_train_test_split.csv",
+  "expression_predictions_path": "results/evaluation/gse194040_locked_test_evaluation_v2_20260719/gse194040_locked_test_predictions_v2.csv",
+  "original_metrics_path": "results/tables/gse194040_final_test_metrics.csv",
+  "output_dir": "results/evaluation/gse194040_clinical_expression_comparison_v1_20260719",
+  "training_rows": 789,
+  "locked_test_rows": 198,
+  "expression_feature_count": 19134,
+  "clinical_variables": [
+    "HR",
+    "HER2",
+    "MP",
+    "treatment_arm"
+  ],
+  "cv_folds": 3,
+  "training_random_seed": 42,
+  "bootstrap_iterations": 2000,
+  "bootstrap_base_seed": 20260719,
+  "best_params": {
+    "clinical_baseline": {
+      "classifier__C": 0.01,
+      "classifier__penalty": "l2"
+    },
+    "clinical_plus_expression": {
+      "classifier__C": 0.03,
+      "classifier__l1_ratio": 0.8
+    }
+  },
+  "best_cv_roc_auc": {
+    "clinical_baseline": 0.7198281559814937,
+    "clinical_plus_expression": 0.7588014981273409
+  },
+  "locked_test_scored_once_after_selection": true,
+  "test_data_used_for_training_or_tuning": false,
+  "calibration_mapping_saved_or_applied": false,
+  "existing_expression_results_replaced": false
+}

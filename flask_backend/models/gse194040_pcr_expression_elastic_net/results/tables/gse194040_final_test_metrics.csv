@@ -1,0 +1,2 @@
+model,best_params,roc_auc,f1,sensitivity,specificity,precision,accuracy
+elastic_net_logistic,"{""classifier__C"": 0.03, ""classifier__l1_ratio"": 0.8}",0.7905783582089553,0.6301369863013698,0.71875,0.7313432835820896,0.5609756097560976,0.7272727272727273

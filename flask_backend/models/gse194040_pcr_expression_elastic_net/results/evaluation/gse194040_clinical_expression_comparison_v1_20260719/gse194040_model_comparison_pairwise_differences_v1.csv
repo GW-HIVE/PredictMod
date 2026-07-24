@@ -1,0 +1,7 @@
+model_a,model_b,metric,difference_a_minus_b,ci_lower_95,ci_upper_95,valid_replicates,bootstrap_iterations,bootstrap_random_seed,method
+clinical_baseline,expression_model_existing,roc_auc,-0.08541277985074636,-0.15972288108791902,-0.016502621359794342,2000,2000,2214216119,paired patient-level nonparametric percentile bootstrap
+clinical_baseline,expression_model_existing,pr_auc_average_precision,-0.09299519731754158,-0.2071653031010094,0.014434813359622907,2000,2000,2214216119,paired patient-level nonparametric percentile bootstrap
+clinical_plus_expression,expression_model_existing,roc_auc,-0.0013992537313433084,-0.00506498895854649,0.0019232253086420728,2000,2000,4057009265,paired patient-level nonparametric percentile bootstrap
+clinical_plus_expression,expression_model_existing,pr_auc_average_precision,-0.002379187553614881,-0.011520527628497848,0.004388682672851244,2000,2000,4057009265,paired patient-level nonparametric percentile bootstrap
+clinical_plus_expression,clinical_baseline,roc_auc,0.08401352611940305,0.015581448087081323,0.15831230393339754,2000,2000,1915188749,paired patient-level nonparametric percentile bootstrap
+clinical_plus_expression,clinical_baseline,pr_auc_average_precision,0.0906160097639267,-0.019855978969223975,0.19719997044906418,2000,2000,1915188749,paired patient-level nonparametric percentile bootstrap

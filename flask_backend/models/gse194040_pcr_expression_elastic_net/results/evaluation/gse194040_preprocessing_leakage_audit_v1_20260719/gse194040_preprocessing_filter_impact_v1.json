@@ -1,0 +1,52 @@
+{
+  "audit_date": "2026-07-19",
+  "dataset_path": "data_processed/gse194040_ml_ready_pcr_expression.csv",
+  "dataset_sha256": "4F00B3FDF4006129ED31835763DFC906245DA1C6D383546A7FE354D5069DE78A",
+  "split_path": "results/tables/gse194040_train_test_split.csv",
+  "split_sha256": "9FE0DCC93812713ADD7C993516061A52D755038879171CF96CE5D5CA87C50906",
+  "patients": 987,
+  "training_patients": 789,
+  "locked_test_patients": 198,
+  "expression_features": 19134,
+  "max_missing_rate_threshold": 0.2,
+  "variance_threshold": 1e-08,
+  "full_cohort": {
+    "features_removed_for_missingness": 0,
+    "features_removed_for_variance": 0,
+    "maximum_feature_missing_rate": 0.06281661600810537,
+    "minimum_feature_variance": 0.07492759070945083
+  },
+  "saved_training_set": {
+    "features_removed_for_missingness": 0,
+    "features_removed_for_variance": 0,
+    "maximum_feature_missing_rate": 0.058301647655259824,
+    "minimum_feature_variance": 0.07476682862788565
+  },
+  "training_cv_folds": [
+    {
+      "fold": 1,
+      "features_removed_for_missingness": 0,
+      "features_removed_for_variance": 0,
+      "maximum_feature_missing_rate": 0.051330798479087454,
+      "minimum_feature_variance": 0.07107608641050361
+    },
+    {
+      "fold": 2,
+      "features_removed_for_missingness": 0,
+      "features_removed_for_variance": 0,
+      "maximum_feature_missing_rate": 0.06273764258555133,
+      "minimum_feature_variance": 0.07739838853359164
+    },
+    {
+      "fold": 3,
+      "features_removed_for_missingness": 0,
+      "features_removed_for_variance": 0,
+      "maximum_feature_missing_rate": 0.06653992395437262,
+      "minimum_feature_variance": 0.07339491510919814
+    }
+  ],
+  "current_dataset_affected": false,
+  "retraining_required_to_correct_verified_results": false,
+  "locked_test_reused_for_retraining": false,
+  "conclusion": "The historical full-cohort filters retained all genes, and the corrected training-only filters retain all genes in the saved training set and every exact CV training fold. The filter placement did not affect the verified dataset or results."
+}
