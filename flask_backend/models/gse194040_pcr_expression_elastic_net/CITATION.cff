@@ -1,0 +1,37 @@
+cff-version: 1.2.0
+message: >-
+  If you use this package, cite this software record and the source
+  GSE194040 dataset.
+title: "GSE194040 exploratory pooled pCR expression-classifier pipeline"
+type: software
+authors:
+  - family-names: "Charles"
+    given-names: "Rhea"
+    affiliation: "George Washington University HIVE Lab"
+    email: "riocx1997@gmail.com"
+abstract: >-
+  A reproducible research package that prepares the public GSE194040/I-SPY2
+  gene-expression data and applies a frozen Elastic Net logistic-regression
+  pipeline to predict pathological complete response.
+keywords:
+  - GSE194040
+  - I-SPY2
+  - breast cancer
+  - gene expression
+  - elastic net
+  - machine learning
+references:
+  - type: data
+    title: "I-SPY2-990 mRNA/RPPA Data Resource: mRNA component"
+    authors:
+      - family-names: "Wolf"
+        given-names: "Denise"
+      - family-names: "Yau"
+        given-names: "Christina"
+      - family-names: "van 't Veer"
+        given-names: "Laura"
+    identifiers:
+      - type: other
+        value: "GSE194040"
+        description: "NCBI Gene Expression Omnibus accession"
+    url: "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE194040"

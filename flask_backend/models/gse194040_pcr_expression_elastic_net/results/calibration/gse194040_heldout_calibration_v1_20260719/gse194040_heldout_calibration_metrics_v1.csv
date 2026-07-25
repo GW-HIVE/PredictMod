@@ -1,0 +1,2 @@
+model,evaluation_split,n,observed_pCR_count,observed_pCR_rate,mean_predicted_pCR_score,brier_score,calibration_intercept,calibration_slope,calibration_bins
+elastic_net_logistic,heldout_test,198,64,0.32323232323232326,0.4481385483142154,0.18654523258134403,-0.6374151772729133,1.3352539203662048,10

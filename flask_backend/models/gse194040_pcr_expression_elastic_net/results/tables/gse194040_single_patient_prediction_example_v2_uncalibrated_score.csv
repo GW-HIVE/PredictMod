@@ -1,0 +1,2 @@
+sample_id,patient_id,predicted_pCR_class,predicted_pCR_score,predicted_non_pCR_score
+ISPY2_100899,100899,0,0.38543563388630275,0.6145643661136972

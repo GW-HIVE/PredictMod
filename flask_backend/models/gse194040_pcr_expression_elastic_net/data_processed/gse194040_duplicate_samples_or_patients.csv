@@ -1,0 +1,6 @@
+issue,sample_id,patient_id,gsm,platform,tissue,HR,HER2,MP,pCR,treatment_arm,adjustment_method,field,values
+duplicate_patient_metadata_row,ISPY2_629606-GPL20078,629606,GSM5826505,GPL20078,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganitumab,Linear Adjustment Factor,,
+duplicate_patient_metadata_row,ISPY2_629606-GPL16233,629606,GSM5826504,GPL30493,Breast cancer biopsy (pre-treatment),0,0,1,0,Paclitaxel + Ganitumab,Linear Adjustment Factor,,
+duplicate_patient_metadata_conflict,,629606,,,,,,,,,,sample_id,ISPY2_629606-GPL20078; ISPY2_629606-GPL16233
+duplicate_patient_metadata_conflict,,629606,,,,,,,,,,gsm,GSM5826505; GSM5826504
+duplicate_patient_metadata_conflict,,629606,,,,,,,,,,platform,GPL20078; GPL30493

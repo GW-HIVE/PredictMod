@@ -1,0 +1,21 @@
+{
+  "timestamp": "2026-07-19T21:46:26",
+  "python": "3.12.13 (main, Mar  3 2026, 15:01:35) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "pandas": "3.0.1",
+  "numpy": "2.5.1",
+  "predictions_path": "results/evaluation/gse194040_locked_test_evaluation_v2_20260719/gse194040_locked_test_predictions_v2.csv",
+  "data_path": "data_processed/gse194040_ml_ready_pcr_expression.csv",
+  "split_path": "results/tables/gse194040_train_test_split.csv",
+  "original_metrics_path": "results/tables/gse194040_final_test_metrics.csv",
+  "output_dir": "results/evaluation/gse194040_locked_test_subgroups_v1_20260719",
+  "locked_test_patients": 198,
+  "bootstrap_iterations": 2000,
+  "bootstrap_base_random_seed": 20260719,
+  "bootstrap_method": "paired patient-level nonparametric percentile bootstrap",
+  "minimum_treatment_n": 10,
+  "minimum_outcome_count": 3,
+  "exploratory_n": 30,
+  "model_loaded_or_refit": false,
+  "canonical_overall_metrics_verified": true
+}

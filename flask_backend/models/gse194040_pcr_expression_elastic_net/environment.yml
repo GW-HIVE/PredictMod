@@ -1,0 +1,8 @@
+name: gse194040-pcr
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12.13
+  - pip=25.0.1
+  - pip:
+      - -r requirements-lock.txt

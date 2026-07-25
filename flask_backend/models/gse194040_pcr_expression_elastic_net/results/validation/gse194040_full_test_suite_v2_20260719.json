@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "command": "python -m pytest -q",
+  "test_count": 41,
+  "passed": 41,
+  "failed": 0,
+  "errors": 0,
+  "duration_seconds": 145.42,
+  "exit_code": 0,
+  "python": "3.12.13",
+  "pytest": "9.1.1",
+  "dependency_source": "requirements-lock.txt via clean .venv site-packages",
+  "python_packages_on_sys_path": false,
+  "stdout_path": "results/validation/gse194040_full_test_suite_v2_20260719.txt",
+  "stdout_sha256": "151e20fe5a6a006701948b4bb34b85ace2c83ad1944183f7da043726fd970140"
+}

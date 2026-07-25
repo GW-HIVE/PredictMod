@@ -1,0 +1,15 @@
+{
+  "validation_timestamp_utc": "2026-07-24T23:21:09.727374+00:00",
+  "status": "valid",
+  "validator": "jsonschema 4.26.0",
+  "python": "3.12.13 (main, Mar  3 2026, 15:01:35) [MSC v.1944 64 bit (AMD64)]",
+  "operating_system": "Windows-11-10.0.26200-SP0",
+  "bco_path": "bco/gse194040_pcr_pipeline_bco_v1.json",
+  "bco_sha256": "9b3ccee59c3eb1fb5f7f5c6218da734e0f7170e91b970a5d155cddc2cb7092c3",
+  "schema_path": "schemas/ieee-2791-v1.4/2791object.json",
+  "schema_id": "https://w3id.org/ieee/ieee-2791-schema/2791object.json",
+  "schema_sha256": "29386c429aa50cab9ea817ec2f80526a1d7cd49a1a8cd81c2beffc929ded4094",
+  "schema_version": "IEEE 2791 v1.4 JSON Schema (Draft 7)",
+  "error_count": 0,
+  "errors": []
+}

@@ -1,0 +1,396 @@
+{
+  "object_id": "urn:uuid:3f7dd8d9-fba7-5ea6-a9f6-2bcf68a8f0d7",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/",
+  "etag": "ebd13c5ecad9c0b3e853b6c994a530e8d550bf8ae65473b6b5ce3184a1a59988",
+  "provenance_domain": {
+    "name": "GSE194040 exploratory pooled pCR expression-classifier pipeline",
+    "version": "1.0.0",
+    "created": "2026-07-20T03:30:00Z",
+    "modified": "2026-07-24T23:16:38Z",
+    "contributors": [
+      {
+        "name": "Rhea Charles",
+        "affiliation": "George Washington University HIVE Lab",
+        "email": "riocx1997@gmail.com",
+        "contribution": [
+          "contributedBy"
+        ]
+      }
+    ],
+    "license": "https://spdx.org/licenses/CC-BY-4.0.html"
+  },
+  "usability_domain": [
+    "Reproduce the GSE194040 pretreatment gene-expression workflow and its exploratory pooled binary classifier for pathological complete response (pCR).",
+    "Verify the frozen internal train/test evaluation and run validated single-patient research inference with the saved scikit-learn pipeline.",
+    "The historical processed dataset was produced under the preprocessing environment recorded in logs/gse194040_session_info.json (CPython 3.12.13, pandas 3.0.1, NumPy 2.3.5); it is intentionally excluded from the submission and can be recreated with the included download and preprocessing script. The current dependency lock (pandas 2.2.2, NumPy 2.5.1) is intended for prediction, validation, testing, and future versioned runs and did not produce the historical dataset.",
+    "Source-data attribution: NCBI Gene Expression Omnibus accession GSE194040, titled 'I-SPY2-990 mRNA/RPPA Data Resource: mRNA component'; the GEO record lists Denise Wolf, Christina Yau, and Laura van 't Veer as series contributors and PubMed identifiers 35623341 and 40905691. The downloaded GEO archives are intentionally excluded. Original source data remain governed by NCBI GEO and the original data submitters' terms.",
+    "Licence scopes are separate: PredictMod repository source code is MIT licensed; the submitted trained model is CC BY 4.0 under the PredictMod User Guide; this BCO is CC BY 4.0; and PredictMod database sets are CC BY 4.0 under the HIVE PredictMod website. None of those PredictMod licences is asserted to cover the original GSE194040 source data or the vendored IEEE 2791 schema snapshot.",
+    "The workflow is not a treatment-selection model, does not estimate treatment effects, and does not produce calibrated clinical probabilities or individualized clinical risk."
+  ],
+  "description_domain": {
+    "keywords": [
+      "GSE194040",
+      "I-SPY2",
+      "breast cancer",
+      "pathological complete response",
+      "gene expression",
+      "elastic net",
+      "exploratory classifier",
+      "machine learning"
+    ],
+    "xref": [
+      {
+        "namespace": "geo",
+        "name": "NCBI Gene Expression Omnibus",
+        "ids": [
+          "GSE194040"
+        ],
+        "access_time": "2026-07-20T03:30:00Z"
+      }
+    ],
+    "platform": [
+      "Windows 11 AMD64",
+      "CPython 3.12.13"
+    ],
+    "pipeline_steps": [
+      {
+        "step_number": 1,
+        "name": "preprocess_gse194040.py",
+        "description": "Parse the submitter-normalized GEO expression and series-matrix metadata, harmonize patient identifiers, collapse one duplicate patient across platforms, and write the patient-level table while retaining all gene columns for downstream training-only filtering. The existing submitted output was produced on CPython 3.12.13 with pandas 3.0.1 and NumPy 2.3.5, as recorded in logs/gse194040_session_info.json. It was not regenerated under the current prediction/testing lock, which specifies pandas 2.2.2 and NumPy 2.5.1 for future versioned runs.",
+        "version": "leakage-corrected-v1",
+        "prerequisite": [
+          {
+            "name": "Current dependency lock for future versioned preprocessing; not the historical artifact-producing environment",
+            "uri": {
+              "filename": "requirements-lock.txt",
+              "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/gse194040_pcr_expression_elastic_net/requirements-lock.txt",
+              "sha1_checksum": "d8858801843b2778ab8c745680875ac57374c838"
+            }
+          }
+        ],
+        "input_list": [
+          {
+            "filename": "GSE194040_ISPY2ResID_AgilentGeneExp_990_FrshFrzn_meanCol_geneLevel_n988.txt.gz",
+            "uri": "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE194nnn/GSE194040/suppl/GSE194040_ISPY2ResID_AgilentGeneExp_990_FrshFrzn_meanCol_geneLevel_n988.txt.gz",
+            "sha1_checksum": "f84873f85a5ba8ca4a357a414e0b847532ed74d6"
+          },
+          {
+            "filename": "GSE194040-GPL20078_series_matrix.txt.gz",
+            "uri": "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE194nnn/GSE194040/matrix/GSE194040-GPL20078_series_matrix.txt.gz",
+            "sha1_checksum": "6fdf48178aeb1a1394ae5718b1e13d026987ed86"
+          },
+          {
+            "filename": "GSE194040-GPL30493_series_matrix.txt.gz",
+            "uri": "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE194nnn/GSE194040/matrix/GSE194040-GPL30493_series_matrix.txt.gz",
+            "sha1_checksum": "27a7ad81e2e7ffa42b9f9382928f43ff39312069"
+          }
+        ],
+        "output_list": [
+          {
+            "filename": "gse194040_ml_ready_pcr_expression.csv",
+            "uri": "urn:sha1:714aacadbdbfecbc882662ad36f578afc398201c",
+            "sha1_checksum": "714aacadbdbfecbc882662ad36f578afc398201c"
+          }
+        ]
+      },
+      {
+        "step_number": 2,
+        "name": "train_gse194040_models.py",
+        "description": "The current script is the corrected implementation for future versioned retraining: it loads the immutable saved split and fits missingness filtering, median imputation, variance filtering, scaling, supervised feature selection or PCA, and each classifier inside training-only cross-validation pipelines. It did not produce the submitted historical binary. The submitted frozen sklearn Pipeline contains only imputer, scaler, and classifier steps and was preserved without retraining or replacement.",
+        "version": "leakage-corrected-v1",
+        "prerequisite": [
+          {
+            "name": "Exact Python dependency lock",
+            "uri": {
+              "filename": "requirements-lock.txt",
+              "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/gse194040_pcr_expression_elastic_net/requirements-lock.txt",
+              "sha1_checksum": "d8858801843b2778ab8c745680875ac57374c838"
+            }
+          }
+        ],
+        "input_list": [
+          {
+            "filename": "gse194040_ml_ready_pcr_expression.csv",
+            "uri": "urn:sha1:714aacadbdbfecbc882662ad36f578afc398201c",
+            "sha1_checksum": "714aacadbdbfecbc882662ad36f578afc398201c"
+          },
+          {
+            "filename": "gse194040_train_test_split.csv",
+            "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/gse194040_pcr_expression_elastic_net/results/tables/gse194040_train_test_split.csv",
+            "sha1_checksum": "aaad29d911ceb31fd7eade35433d0614c04df5c1"
+          }
+        ],
+        "output_list": [
+          {
+            "filename": "gse194040_best_model.joblib",
+            "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/gse194040_pcr_expression_elastic_net/models/gse194040_best_model.joblib",
+            "sha1_checksum": "9ff972ebb27831f24a8507e76b8bf0460ae46456"
+          },
+          {
+            "filename": "gse194040_final_test_metrics.csv",
+            "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/gse194040_pcr_expression_elastic_net/results/tables/gse194040_final_test_metrics.csv",
+            "sha1_checksum": "21a2d1a1d86187197a45e120210ec0bd65ab5374"
+          },
+          {
+            "filename": "gse194040_cv_model_comparison.csv",
+            "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/gse194040_pcr_expression_elastic_net/results/tables/gse194040_cv_model_comparison.csv",
+            "sha1_checksum": "fb5f169d3acfcc47b5f24e8d917eb6bf1987e75e"
+          }
+        ]
+      },
+      {
+        "step_number": 3,
+        "name": "predict_gse194040_single_patient.py",
+        "description": "Load the submitted historical three-step frozen sklearn Pipeline (imputer, scaler, classifier), validate and align a one-row CSV to its 19,134 required expression genes, reject invalid inputs without writing a prediction, and emit a predicted class plus explicitly uncalibrated pCR and non-pCR model scores without retraining.",
+        "version": "validated-score-schema-v2",
+        "prerequisite": [
+          {
+            "name": "Frozen selected model",
+            "uri": {
+              "filename": "gse194040_best_model.joblib",
+              "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/gse194040_pcr_expression_elastic_net/models/gse194040_best_model.joblib",
+              "sha1_checksum": "9ff972ebb27831f24a8507e76b8bf0460ae46456"
+            }
+          }
+        ],
+        "input_list": [
+          {
+            "filename": "gse194040_single_patient_input_example.csv",
+            "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/gse194040_pcr_expression_elastic_net/examples/gse194040_single_patient_input_example.csv",
+            "sha1_checksum": "3668f6809f7009313f98efe2b2ab57bc34636621"
+          }
+        ],
+        "output_list": [
+          {
+            "filename": "gse194040_single_patient_prediction_example_v2_uncalibrated_score.csv",
+            "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/gse194040_pcr_expression_elastic_net/results/tables/gse194040_single_patient_prediction_example_v2_uncalibrated_score.csv",
+            "sha1_checksum": "105f2196307d15f2626c246b42d93d02bdef87e9"
+          }
+        ]
+      }
+    ]
+  },
+  "execution_domain": {
+    "script": [
+      {
+        "uri": {
+          "filename": "preprocess_gse194040.py",
+          "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/gse194040_pcr_expression_elastic_net/scripts/preprocess_gse194040.py",
+          "sha1_checksum": "e39dbc5e325102b7581ba7c38326cc42d27d7ecb"
+        }
+      },
+      {
+        "uri": {
+          "filename": "train_gse194040_models.py",
+          "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/gse194040_pcr_expression_elastic_net/scripts/train_gse194040_models.py",
+          "sha1_checksum": "296ea3bb61732571a9496e702eacdf0ae5d65f29"
+        }
+      },
+      {
+        "uri": {
+          "filename": "predict_gse194040_single_patient.py",
+          "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/gse194040_pcr_expression_elastic_net/scripts/predict_gse194040_single_patient.py",
+          "sha1_checksum": "88e96c1627f86e801dc95751880f4c9452e27f9f"
+        }
+      }
+    ],
+    "script_driver": "CPython command-line interface",
+    "software_prerequisites": [
+      {
+        "name": "CPython",
+        "version": "3.12.13",
+        "uri": {
+          "uri": "https://www.python.org/downloads/release/python-31213/"
+        }
+      },
+      {
+        "name": "NumPy",
+        "version": "2.5.1",
+        "uri": {
+          "uri": "https://pypi.org/project/numpy/2.5.1/"
+        }
+      },
+      {
+        "name": "pandas",
+        "version": "2.2.2",
+        "uri": {
+          "uri": "https://pypi.org/project/pandas/2.2.2/"
+        }
+      },
+      {
+        "name": "SciPy",
+        "version": "1.18.0",
+        "uri": {
+          "uri": "https://pypi.org/project/scipy/1.18.0/"
+        }
+      },
+      {
+        "name": "scikit-learn",
+        "version": "1.9.0",
+        "uri": {
+          "uri": "https://pypi.org/project/scikit-learn/1.9.0/"
+        }
+      },
+      {
+        "name": "joblib",
+        "version": "1.5.3",
+        "uri": {
+          "uri": "https://pypi.org/project/joblib/1.5.3/"
+        }
+      },
+      {
+        "name": "matplotlib",
+        "version": "3.11.1",
+        "uri": {
+          "uri": "https://pypi.org/project/matplotlib/3.11.1/"
+        }
+      }
+    ],
+    "external_data_endpoints": [
+      {
+        "name": "NCBI GEO accession GSE194040",
+        "url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE194040"
+      }
+    ],
+    "environment_variables": {}
+  },
+  "parametric_domain": [
+    {
+      "param": "locked_split_path",
+      "value": "results/tables/gse194040_train_test_split.csv",
+      "step": "2"
+    },
+    {
+      "param": "random_state",
+      "value": "42",
+      "step": "2"
+    },
+    {
+      "param": "cv_folds",
+      "value": "3",
+      "step": "2"
+    },
+    {
+      "param": "n_jobs",
+      "value": "1",
+      "step": "2"
+    },
+    {
+      "param": "max_missing_rate",
+      "value": "0.20",
+      "step": "2,3"
+    },
+    {
+      "param": "variance_threshold",
+      "value": "1e-8",
+      "step": "2"
+    },
+    {
+      "param": "max_iter",
+      "value": "1500",
+      "step": "2"
+    },
+    {
+      "param": "best_classifier_C",
+      "value": "0.03",
+      "step": "2"
+    },
+    {
+      "param": "best_classifier_l1_ratio",
+      "value": "0.8",
+      "step": "2"
+    }
+  ],
+  "io_domain": {
+    "input_subdomain": [
+      {
+        "uri": {
+          "filename": "GSE194040_ISPY2ResID_AgilentGeneExp_990_FrshFrzn_meanCol_geneLevel_n988.txt.gz",
+          "uri": "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE194nnn/GSE194040/suppl/GSE194040_ISPY2ResID_AgilentGeneExp_990_FrshFrzn_meanCol_geneLevel_n988.txt.gz",
+          "sha1_checksum": "f84873f85a5ba8ca4a357a414e0b847532ed74d6"
+        }
+      },
+      {
+        "uri": {
+          "filename": "GSE194040-GPL20078_series_matrix.txt.gz",
+          "uri": "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE194nnn/GSE194040/matrix/GSE194040-GPL20078_series_matrix.txt.gz",
+          "sha1_checksum": "6fdf48178aeb1a1394ae5718b1e13d026987ed86"
+        }
+      },
+      {
+        "uri": {
+          "filename": "GSE194040-GPL30493_series_matrix.txt.gz",
+          "uri": "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE194nnn/GSE194040/matrix/GSE194040-GPL30493_series_matrix.txt.gz",
+          "sha1_checksum": "27a7ad81e2e7ffa42b9f9382928f43ff39312069"
+        }
+      },
+      {
+        "uri": {
+          "filename": "gse194040_train_test_split.csv",
+          "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/gse194040_pcr_expression_elastic_net/results/tables/gse194040_train_test_split.csv",
+          "sha1_checksum": "aaad29d911ceb31fd7eade35433d0614c04df5c1"
+        }
+      }
+    ],
+    "output_subdomain": [
+      {
+        "mediatype": "text/csv",
+        "uri": {
+          "filename": "gse194040_ml_ready_pcr_expression.csv",
+          "uri": "urn:sha1:714aacadbdbfecbc882662ad36f578afc398201c",
+          "sha1_checksum": "714aacadbdbfecbc882662ad36f578afc398201c"
+        }
+      },
+      {
+        "mediatype": "application/octet-stream",
+        "uri": {
+          "filename": "gse194040_best_model.joblib",
+          "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/gse194040_pcr_expression_elastic_net/models/gse194040_best_model.joblib",
+          "sha1_checksum": "9ff972ebb27831f24a8507e76b8bf0460ae46456"
+        }
+      },
+      {
+        "mediatype": "text/csv",
+        "uri": {
+          "filename": "gse194040_final_test_metrics.csv",
+          "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/gse194040_pcr_expression_elastic_net/results/tables/gse194040_final_test_metrics.csv",
+          "sha1_checksum": "21a2d1a1d86187197a45e120210ec0bd65ab5374"
+        }
+      },
+      {
+        "mediatype": "text/csv",
+        "uri": {
+          "filename": "gse194040_single_patient_prediction_example_v2_uncalibrated_score.csv",
+          "uri": "https://github.com/GW-HIVE/PredictMod/blob/main/flask_backend/models/gse194040_pcr_expression_elastic_net/results/tables/gse194040_single_patient_prediction_example_v2_uncalibrated_score.csv",
+          "sha1_checksum": "105f2196307d15f2626c246b42d93d02bdef87e9"
+        }
+      }
+    ]
+  },
+  "error_domain": {
+    "empirical_error": {
+      "evaluation_design": "One frozen internal stratified test set of 198 patients; no external validation.",
+      "locked_test_pCR_count": 64,
+      "locked_test_roc_auc": 0.7905783582089553,
+      "locked_test_roc_auc_bootstrap_95ci": [
+        0.7284913493798642,
+        0.8520469472341782
+      ],
+      "locked_test_pr_auc_average_precision": 0.5836372930923563,
+      "locked_test_accuracy": 0.7272727272727273,
+      "locked_test_sensitivity": 0.71875,
+      "locked_test_specificity": 0.7313432835820896,
+      "brier_score_diagnostic": 0.18654523258134403,
+      "calibration_intercept_diagnostic": -0.6374151772729133,
+      "calibration_slope_diagnostic": 1.3352539203662048,
+      "interpretation": "Performance is exploratory and internally validated only. Score calibration diagnostics were not used to refit or transform the model."
+    },
+    "algorithmic_error": {
+      "random_seed": 42,
+      "numerical_reproducibility": "Exact package versions and Python version are pinned. Small floating-point variation may still occur across hardware or BLAS implementations.",
+      "convergence_handling": "Convergence warnings are not globally suppressed. Future training runs save per-model fitted-iteration status.",
+      "high_dimensionality_risk": "The expression feature count greatly exceeds the patient count; regularization and training-only cross-validation reduce but do not eliminate overfitting risk.",
+      "clinical_scope": "Not a treatment-selection algorithm and not a calibrated clinical probability tool."
+    }
+  }
+}

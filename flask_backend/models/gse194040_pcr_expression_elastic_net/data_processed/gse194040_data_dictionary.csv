@@ -1,0 +1,11 @@
+column,type,description
+sample_id,string,ISPY2 sample identifier in the form ISPY2_<patient_id>.
+patient_id,string,Numeric I-SPY2 patient/sample identifier used to merge GEO metadata and expression.
+pCR,integer target,"Pathological complete response label; 1 = complete response, 0 = no complete response."
+HR,integer metadata,"Hormone receptor status; 1 = positive, 0 = negative."
+HER2,integer metadata,"HER2 status; 1 = positive, 0 = negative."
+MP,integer metadata,"MammaPrint risk; 0 = high risk 1 (MP1), 1 = ultra/high risk 2 (MP2)."
+treatment_arm,string metadata,Neoadjuvant I-SPY2 treatment arm from GEO sample characteristics.
+gsm,string metadata,GEO sample accession from the series matrix.
+platform,string metadata,"Agilent platform series matrix source, GPL20078 or GPL30493."
+expr_*,19134 numeric gene-expression features,Pretreatment normalized log2 Agilent gene-expression values; see gse194040_gene_feature_manifest.csv for feature-to-gene mapping.

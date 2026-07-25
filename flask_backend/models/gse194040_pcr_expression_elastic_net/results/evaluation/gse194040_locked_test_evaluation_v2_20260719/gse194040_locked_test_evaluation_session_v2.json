@@ -1,0 +1,20 @@
+{
+  "timestamp": "2026-07-19T21:36:13",
+  "python": "3.12.13 (main, Mar  3 2026, 15:01:35) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "pandas": "3.0.1",
+  "numpy": "2.5.1",
+  "model_path": "models/gse194040_best_model.joblib",
+  "data_path": "data_processed/gse194040_ml_ready_pcr_expression.csv",
+  "split_path": "results/tables/gse194040_train_test_split.csv",
+  "original_metrics_path": "results/tables/gse194040_final_test_metrics.csv",
+  "output_dir": "results/evaluation/gse194040_locked_test_evaluation_v2_20260719",
+  "n_bins_requested": 10,
+  "n_bins_created": 10,
+  "bootstrap_iterations": 2000,
+  "bootstrap_random_seed": 20260719,
+  "bootstrap_method": "paired patient-level nonparametric percentile bootstrap",
+  "pr_auc_definition": "average precision",
+  "canonical_metrics_verified": true,
+  "diagnostic_only_no_model_refit": true
+}

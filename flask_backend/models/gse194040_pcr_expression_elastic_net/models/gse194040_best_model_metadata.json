@@ -1,0 +1,38 @@
+{
+  "best_model": "elastic_net_logistic",
+  "best_params": {
+    "classifier__C": 0.03,
+    "classifier__l1_ratio": 0.8
+  },
+  "random_state": 42,
+  "test_size": 0.2,
+  "cv_folds": 3,
+  "feature_count": 19134,
+  "train_rows": 789,
+  "test_rows": 198,
+  "frozen_model": {
+    "artifact": "models/gse194040_best_model.joblib",
+    "sklearn_object_type": "sklearn.pipeline.Pipeline",
+    "pipeline_steps": [
+      "imputer",
+      "scaler",
+      "classifier"
+    ],
+    "input_feature_count": 19134,
+    "sha256": "e3bbccac97c4495dbb8e8c66a8f35921ca6ff20cbb9e0b0671aaf0a00504f9d4"
+  },
+  "provenance": {
+    "artifact_status": "historical submitted binary",
+    "current_training_script": "scripts/train_gse194040_models.py",
+    "current_training_script_pipeline_steps": [
+      "missingness",
+      "imputer",
+      "variance",
+      "scaler",
+      "classifier"
+    ],
+    "current_training_script_purpose": "corrected pipeline for future versioned retraining",
+    "current_training_script_produced_submitted_binary": false,
+    "submitted_model_retrained_or_replaced_after_script_correction": false
+  }
+}

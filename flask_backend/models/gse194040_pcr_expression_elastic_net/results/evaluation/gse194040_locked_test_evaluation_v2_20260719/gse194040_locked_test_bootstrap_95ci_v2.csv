@@ -1,0 +1,7 @@
+metric,point_estimate,ci_lower_95,ci_upper_95,bootstrap_iterations,valid_replicates,random_seed,method
+roc_auc,0.7905783582089553,0.7284913493798642,0.8520469472341782,2000,2000,20260719,paired patient-level nonparametric percentile bootstrap
+accuracy,0.7272727272727273,0.6666666666666666,0.7878787878787878,2000,2000,20260719,paired patient-level nonparametric percentile bootstrap
+sensitivity,0.71875,0.6129032258064516,0.8305084745762712,2000,2000,20260719,paired patient-level nonparametric percentile bootstrap
+specificity,0.7313432835820896,0.6538385826771653,0.805560551558753,2000,2000,20260719,paired patient-level nonparametric percentile bootstrap
+precision,0.5609756097560976,0.4583207831325301,0.6705918220946915,2000,2000,20260719,paired patient-level nonparametric percentile bootstrap
+f1,0.6301369863013698,0.5373134328358209,0.7169811320754716,2000,2000,20260719,paired patient-level nonparametric percentile bootstrap

@@ -1,0 +1,16 @@
+model,metric,point_estimate,ci_lower_95,ci_upper_95,valid_replicates,bootstrap_iterations,bootstrap_random_seed,method
+clinical_baseline,roc_auc,0.7051655783582089,0.6319562330073928,0.7790357642590618,2000,2000,1435302444,paired patient-level nonparametric percentile bootstrap
+clinical_baseline,pr_auc_average_precision,0.49064209577481477,0.3830280905681733,0.6225327150351523,2000,2000,1435302444,paired patient-level nonparametric percentile bootstrap
+clinical_baseline,brier_score,0.2184875202379157,0.20381045446090262,0.23230465916009135,2000,2000,1435302444,paired patient-level nonparametric percentile bootstrap
+clinical_baseline,calibration_intercept,-0.673467985465595,-1.0172173232995287,-0.3696281509687115,2000,2000,1435302444,paired patient-level nonparametric percentile bootstrap
+clinical_baseline,calibration_slope,1.6778760084542361,1.0713056917814532,2.502690116984468,2000,2000,1435302444,paired patient-level nonparametric percentile bootstrap
+expression_model_existing,roc_auc,0.7905783582089553,0.7243775838993849,0.8527096401451163,2000,2000,812230229,paired patient-level nonparametric percentile bootstrap
+expression_model_existing,pr_auc_average_precision,0.5836372930923563,0.47104415182170223,0.7153800826692543,2000,2000,812230229,paired patient-level nonparametric percentile bootstrap
+expression_model_existing,brier_score,0.18654523258134403,0.16540921261281263,0.20856577855753994,2000,2000,812230229,paired patient-level nonparametric percentile bootstrap
+expression_model_existing,calibration_intercept,-0.6374151772729132,-0.9918031522667814,-0.29216756133923205,2000,2000,812230229,paired patient-level nonparametric percentile bootstrap
+expression_model_existing,calibration_slope,1.3352539203662046,0.945557855852052,1.867040304990809,2000,2000,812230229,paired patient-level nonparametric percentile bootstrap
+clinical_plus_expression,roc_auc,0.789179104477612,0.7172521413626837,0.8518560629733398,2000,2000,1256110811,paired patient-level nonparametric percentile bootstrap
+clinical_plus_expression,pr_auc_average_precision,0.5812581055387415,0.46720358023275305,0.7128265554561128,2000,2000,1256110811,paired patient-level nonparametric percentile bootstrap
+clinical_plus_expression,brier_score,0.18695415498093326,0.16578875460240428,0.21137587315548373,2000,2000,1256110811,paired patient-level nonparametric percentile bootstrap
+clinical_plus_expression,calibration_intercept,-0.6350312090951589,-0.9907811790056135,-0.2925764706883078,2000,2000,1256110811,paired patient-level nonparametric percentile bootstrap
+clinical_plus_expression,calibration_slope,1.3241556950011812,0.9094983310310772,1.8640324758457443,2000,2000,1256110811,paired patient-level nonparametric percentile bootstrap

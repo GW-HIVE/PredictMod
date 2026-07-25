@@ -1,0 +1,16 @@
+.git
+.gitignore
+.venv
+venv
+env
+ENV
+__pycache__
+*.py[cod]
+.pytest_cache
+.coverage
+htmlcov
+tmp
+temp
+*.tmp
+*.pptx
+*.pdf
