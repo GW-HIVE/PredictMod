@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BRCA DFS Recurrence Risk Demo</title>
+<style>
+    body {
+        font-family: -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+        background: #f5f6f8;
+        color: #1f2430;
+        max-width: 780px;
+        margin: 0 auto;
+        padding: 32px 20px 60px;
+    }
+    h1 {
+        font-size: 1.5rem;
+        margin-bottom: 4px;
+    }
+    .subtitle {
+        color: #5a6270;
+        margin-top: 0;
+        margin-bottom: 24px;
+    }
+    .card {
+        background: #ffffff;
+        border: 1px solid #e2e5ea;
+        border-radius: 10px;
+        padding: 24px;
+        margin-bottom: 20px;
+    }
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+    }
+    label {
+        display: block;
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin-bottom: 4px;
+        color: #333;
+    }
+    input[type="number"], select {
+        width: 100%;
+        padding: 8px 10px;
+        border: 1px solid #ccd1d9;
+        border-radius: 6px;
+        font-size: 0.95rem;
+        box-sizing: border-box;
+    }
+    fieldset {
+        border: 1px solid #e2e5ea;
+        border-radius: 8px;
+        padding: 14px 16px;
+        margin: 0 0 16px 0;
+    }
+    legend {
+        font-weight: 600;
+        font-size: 0.9rem;
+        padding: 0 6px;
+    }
+    .gene-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+    }
+    .gene-grid label {
+        font-weight: 400;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 0;
+    }
+    button {
+        background: #2a5adb;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+    }
+    button:hover {
+        background: #1e46b8;
+    }
+    .result {
+        border-radius: 10px;
+        padding: 20px 24px;
+        margin-bottom: 20px;
+    }
+    .result.flagged {
+        background: #fff2f0;
+        border: 1px solid #f5c2c0;
+    }
+    .result.not-flagged {
+        background: #f0f8f1;
+        border: 1px solid #c3e3c7;
+    }
+    .prob {
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 4px 0 10px;
+    }
+    .threshold-row {
+        font-size: 0.9rem;
+        margin: 4px 0;
+    }
+    .flag-yes { color: #b3261e; font-weight: 600; }
+    .flag-no { color: #2e6b34; font-weight: 600; }
+    .disclaimer {
+        font-size: 0.8rem;
+        color: #6b7280;
+        border-top: 1px solid #e2e5ea;
+        margin-top: 28px;
+        padding-top: 16px;
+        line-height: 1.5;
+    }
+</style>
+</head>
+<body>
+
+<h1>BRCA Disease-Free Survival Recurrence Risk</h1>
+<p class="subtitle">A demo interface for the PredictMod volunteership model. Fill in one patient's details below.</p>
+
+{% if result %}
+<div class="result {{ 'flagged' if result.screening_flag else 'not-flagged' }}">
+    <div>Estimated probability of recurrence or progression</div>
+    <div class="prob">{{ result.probability_pct }}</div>
+    <div class="threshold-row">
+        Screening threshold (&ge; {{ result.screening_threshold_pct }}):
+        <span class="{{ 'flag-yes' if result.screening_flag else 'flag-no' }}">
+            {{ 'AT-RISK, flagged' if result.screening_flag else 'Not flagged' }}
+        </span>
+    </div>
+    <div class="threshold-row">
+        Balanced threshold (&ge; {{ result.balanced_threshold_pct }}):
+        <span class="{{ 'flag-yes' if result.balanced_flag else 'flag-no' }}">
+            {{ 'AT-RISK, flagged' if result.balanced_flag else 'Not flagged' }}
+        </span>
+    </div>
+</div>
+{% endif %}
+
+<form method="POST" action="/predict" class="card">
+
+    <fieldset>
+        <legend>Clinical</legend>
+        <div class="grid">
+            <div>
+                <label for="AGE">Age at diagnosis</label>
+                <input type="number" id="AGE" name="AGE" min="18" max="100" step="1"
+                       value="{{ submitted_values.get('AGE', 60) }}" required>
+            </div>
+            <div>
+                <label for="TMB_NONSYNONYMOUS">Tumor mutation burden (nonsynonymous)</label>
+                <input type="number" id="TMB_NONSYNONYMOUS" name="TMB_NONSYNONYMOUS" min="0" step="0.01"
+                       value="{{ submitted_values.get('TMB_NONSYNONYMOUS', 1.5) }}" required>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Tumor stage and receptor status</legend>
+        <div class="grid">
+            {% for field in ["AJCC_PATHOLOGIC_TUMOR_STAGE", "ER_STATUS_BY_IHC", "PR_STATUS_BY_IHC", "IHC_HER2", "CANCER_TYPE", "CANCER_TYPE_DETAILED"] %}
+            <div>
+                <label for="{{ field }}">{{ field.replace("_", " ").title() }}</label>
+                <select id="{{ field }}" name="{{ field }}">
+                    {% for option in category_options[field] %}
+                    <option value="{{ option }}" {{ "selected" if submitted_values.get(field) == option else "" }}>{{ option }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            {% endfor %}
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Gene mutation status (check if mutated)</legend>
+        <div class="gene-grid">
+            {% for gene in gene_features %}
+            <label>
+                <input type="checkbox" name="{{ gene }}" {{ "checked" if submitted_values.get(gene) == "on" else "" }}>
+                {{ gene }}
+            </label>
+            {% endfor %}
+        </div>
+    </fieldset>
+
+    <button type="submit">Predict recurrence risk</button>
+</form>
+
+<div class="disclaimer">
+    This is a research and educational demo built for the GWU HIVE Lab PredictMod
+    volunteership. The underlying model was trained on 895 TCGA-BRCA patients (97
+    recurrence events), reaches a held-out test ROC-AUC of about 0.68, and has not
+    been externally validated. It does not account for right-censored follow-up
+    time. This tool is not a diagnostic device and must not be used to guide real
+    patient care.
+</div>
+
+</body>
+</html>
