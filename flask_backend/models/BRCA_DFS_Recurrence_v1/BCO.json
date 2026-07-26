@@ -47,7 +47,8 @@
       "logistic regression",
       "SMOTE",
       "class imbalance",
-      "cBioPortal"
+      "cBioPortal",
+      "SVM"
     ],
     "xref": [
       {
