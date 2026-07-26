@@ -1,0 +1,21 @@
+{
+  "AGE": 61,
+  "TMB_NONSYNONYMOUS": 1.4,
+  "TP53": 1,
+  "PIK3CA": 0,
+  "GATA3": 0,
+  "CDH1": 0,
+  "PTEN": 0,
+  "MAP3K1": 0,
+  "MAP2K4": 0,
+  "KRAS": 0,
+  "ARID1A": 0,
+  "RUNX1": 0,
+  "ESR1": 0,
+  "AJCC_PATHOLOGIC_TUMOR_STAGE": "Stage IIB",
+  "ER_STATUS_BY_IHC": "Positive",
+  "PR_STATUS_BY_IHC": "Positive",
+  "IHC_HER2": "Negative",
+  "CANCER_TYPE": "Breast Cancer",
+  "CANCER_TYPE_DETAILED": "Breast Invasive Ductal Carcinoma"
+}

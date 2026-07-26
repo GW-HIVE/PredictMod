@@ -1,0 +1,63 @@
+{
+  "model_description": "Logistic Regression with SMOTE oversampling, predicting DFS recurrence/progression risk for TCGA-BRCA patients.",
+  "target_definition": "1 = Recurred/Progressed (DFS_STATUS), 0 = DiseaseFree",
+  "numeric_features": [
+    "AGE",
+    "TMB_NONSYNONYMOUS",
+    "TP53",
+    "PIK3CA",
+    "GATA3",
+    "CDH1",
+    "PTEN",
+    "MAP3K1",
+    "MAP2K4",
+    "KRAS",
+    "ARID1A",
+    "RUNX1",
+    "ESR1"
+  ],
+  "categorical_features": [
+    "AJCC_PATHOLOGIC_TUMOR_STAGE",
+    "ER_STATUS_BY_IHC",
+    "PR_STATUS_BY_IHC",
+    "IHC_HER2",
+    "CANCER_TYPE",
+    "CANCER_TYPE_DETAILED"
+  ],
+  "dropped_columns": [
+    "PATIENT_ID",
+    "SAMPLE_ID",
+    "DFS_STATUS",
+    "target",
+    "KMT2C"
+  ],
+  "n_patients_total": 895,
+  "n_recurrence_events": 97,
+  "random_state": 42,
+  "held_out_test_metrics": {
+    "roc_auc": 0.6836,
+    "average_precision": 0.3099
+  },
+  "cross_validated_metrics": {
+    "roc_auc_mean": 0.6367,
+    "roc_auc_std": 0.0594,
+    "n_folds": 5
+  },
+  "decision_thresholds": {
+    "screening": {
+      "value": 0.5,
+      "purpose": "Higher sensitivity, more false alarms. Meant for early triage, not diagnosis."
+    },
+    "balanced": {
+      "value": 0.7271,
+      "purpose": "F1-optimal threshold from cross-validated training predictions. Fewer false alarms, lower sensitivity."
+    }
+  },
+  "notes_and_limitations": [
+    "Trained on 895 TCGA-BRCA patients with only 97 recurrence/progression events, so estimates carry real uncertainty.",
+    "DFS_STATUS is treated as a binary label, but it is really a time-to-event outcome with right-censoring (see section 4). A proper survival model would handle this correctly; this classifier does not.",
+    "Gene panel is limited to 12 genes highlighted in the 2012 TCGA breast cancer paper and does not reflect the full mutation landscape.",
+    "The cohort technically includes a handful of patients whose CANCER_TYPE is Breast Sarcoma or Skin Cancer, Non-Melanoma rather than a breast carcinoma subtype (see section 3).",
+    "This model has not been externally validated on any cohort outside TCGA-BRCA and is a research/educational artifact, not a clinical decision tool."
+  ]
+}

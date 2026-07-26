@@ -1,0 +1,228 @@
+{
+  "object_id": "https://github.com/GW-HIVE/PredictMod/BCO/BRCA_DFS_LogReg_SMOTE/1.0",
+  "spec_version": "https://w3id.org/ieee/ieee-2791-schema/2791object.json",
+  "etag": "brca-dfs-logreg-smote-v1",
+  "provenance_domain": {
+    "name": "TCGA-BRCA Disease-Free Survival Recurrence Prediction Model",
+    "version": "1.0.0",
+    "review": [],
+    "contributors": [
+      {
+        "name": "Aryan Dhiren Jagani",
+        "affiliation": "The George Washington University, HIVE Lab",
+        "contribution": ["createdBy", "authoredBy"],
+        "email": "aryanjagani2024@gmail.com"
+      },
+      {
+        "name": "Lori Krammer",
+        "affiliation": "The George Washington University, HIVE Lab",
+        "contribution": ["fundedBy"],
+        "email": "lorikrammer@gwu.edu"
+      },
+      {
+        "name": "Pat McNeely",
+        "affiliation": "The George Washington University, HIVE Lab",
+        "contribution": ["fundedBy"]
+      }
+    ],
+    "license": "CC-BY-4.0",
+    "created": "2026-06-15T00:00:00Z",
+    "modified": "2026-07-26T00:00:00Z",
+    "derived_from": "https://github.com/GW-HIVE/PredictMod",
+    "obsolete_after": ""
+  },
+  "usability_domain": [
+    "Predicts disease-free survival (DFS) recurrence or progression risk for breast cancer patients using clinical variables (age, AJCC tumor stage, ER/PR/HER2 receptor status) and mutation status for 12 genes highlighted in the 2012 TCGA breast cancer study.",
+    "Intended as a research and educational demonstration of an ML modeling pipeline for the PredictMod volunteership project, not as a validated clinical decision support tool.",
+    "Trained on 895 patients from the TCGA-BRCA cohort (cBioPortal export) with 97 recurrence/progression events, so predictions carry meaningful statistical uncertainty and should not be used to guide real patient care.",
+    "The target label (DFS_STATUS) is a binary snapshot of outcome status, not a time-to-event variable, so the model does not account for right-censoring in patient follow-up (see Limitations below and section 4 of brca_dfs_model.ipynb)."
+  ],
+  "description_domain": {
+    "keywords": [
+      "breast cancer",
+      "TCGA-BRCA",
+      "disease-free survival",
+      "recurrence prediction",
+      "machine learning",
+      "logistic regression",
+      "SMOTE",
+      "class imbalance",
+      "cBioPortal"
+    ],
+    "xref": [
+      {
+        "namespace": "pubmed",
+        "name": "Comprehensive molecular portraits of human breast tumors",
+        "ids": ["23000897"]
+      },
+      {
+        "namespace": "cbioportal",
+        "name": "TCGA Breast Invasive Carcinoma (TCGA, PanCancer Atlas)",
+        "ids": ["brca_tcga"]
+      }
+    ],
+    "platform": ["scikit-learn", "imbalanced-learn"],
+    "pipeline_steps": [
+      {
+        "step_number": 1,
+        "name": "Data extraction and harmonization",
+        "description": "Merge TCGA-BRCA clinical patient data, clinical sample data, and mutation calls (data_clinical_patient.txt, data_clinical_sample.txt, data_mutations.txt) into one ML-ready table, keyed on PATIENT_ID, and encode a 12-gene binary mutation matrix.",
+        "input_list": [
+          {"uri": {"filename": "brca_tcga/data_clinical_patient.txt"}},
+          {"uri": {"filename": "brca_tcga/data_clinical_sample.txt"}},
+          {"uri": {"filename": "brca_tcga/data_mutations.txt"}}
+        ],
+        "output_list": [
+          {"uri": {"filename": "breast_cancer_ml_eda.csv"}}
+        ]
+      },
+      {
+        "step_number": 2,
+        "name": "Data quality review",
+        "description": "Check for missing values, zero-variance columns, and category-level anomalies (ambiguous tumor stage labels, non-breast-carcinoma CANCER_TYPE entries) before modeling.",
+        "input_list": [{"uri": {"filename": "breast_cancer_ml_eda.csv"}}],
+        "output_list": [{"uri": {"filename": "brca_dfs_model.ipynb"}}]
+      },
+      {
+        "step_number": 3,
+        "name": "Target construction",
+        "description": "Convert the text field DFS_STATUS into a binary target (1 = Recurred/Progressed, 0 = DiseaseFree).",
+        "input_list": [{"uri": {"filename": "breast_cancer_ml_eda.csv"}}],
+        "output_list": []
+      },
+      {
+        "step_number": 4,
+        "name": "Preprocessing",
+        "description": "Median-impute and standard-scale numeric features (age, tumor mutation burden, 11 binary gene flags); most-frequent-impute and one-hot-encode categorical features (tumor stage, ER/PR/HER2 status, cancer type).",
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 5,
+        "name": "Baseline model training",
+        "description": "Train Logistic Regression, Random Forest, and SVM classifiers with class_weight='balanced' on an 80/20 stratified train-test split.",
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 6,
+        "name": "Model improvement",
+        "description": "Apply SMOTE oversampling within cross-validation folds, add Gradient Boosting as an additional candidate, and attempt hyperparameter tuning via RandomizedSearchCV, optimizing 5-fold stratified cross-validated ROC-AUC.",
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 7,
+        "name": "Threshold selection",
+        "description": "Use cross-validated out-of-fold predicted probabilities on the training set only to choose an F1-optimal decision threshold, in addition to the default 0.5 threshold.",
+        "input_list": [],
+        "output_list": []
+      },
+      {
+        "step_number": 8,
+        "name": "Final model fit and save",
+        "description": "Refit the selected pipeline (Logistic Regression + SMOTE) on the full dataset and serialize it with joblib.",
+        "input_list": [{"uri": {"filename": "breast_cancer_ml_eda.csv"}}],
+        "output_list": [
+          {"uri": {"filename": "model/dfs_model.joblib"}},
+          {"uri": {"filename": "model/model_metadata.json"}}
+        ]
+      },
+      {
+        "step_number": 9,
+        "name": "Single-patient prediction",
+        "description": "Load the saved pipeline and score one new patient record, returning a recurrence probability and a risk flag at each saved decision threshold.",
+        "input_list": [
+          {"uri": {"filename": "model/dfs_model.joblib"}},
+          {"uri": {"filename": "example_patient.json"}}
+        ],
+        "output_list": []
+      }
+    ]
+  },
+  "execution_domain": {
+    "script": [
+      {"uri": {"filename": "train_model.py"}},
+      {"uri": {"filename": "predict_single_patient.py"}}
+    ],
+    "script_driver": "python",
+    "software_prerequisites": [
+      {"name": "Python", "version": "3.14"},
+      {"name": "pandas", "version": "2.3.3"},
+      {"name": "numpy", "version": "2.3.5"},
+      {"name": "scikit-learn", "version": "1.7.2"},
+      {"name": "imbalanced-learn", "version": "0.14.2"},
+      {"name": "joblib", "version": "1.5.2"},
+      {"name": "matplotlib", "version": "3.11.1"},
+      {"name": "seaborn", "version": "0.13.2"}
+    ],
+    "external_data_endpoints": [
+      {
+        "name": "cBioPortal TCGA-BRCA dataset",
+        "url": "https://www.cbioportal.org/study/summary?id=brca_tcga_pan_can_atlas_2018"
+      }
+    ],
+    "environment_variables": {}
+  },
+  "parametric_domain": [
+    {"param": "test_size", "value": "0.20", "step": "5"},
+    {"param": "random_state", "value": "42", "step": "5"},
+    {"param": "cv_n_splits", "value": "5", "step": "6"},
+    {"param": "classifier__C (LogisticRegression, default)", "value": "1.0", "step": "6"},
+    {"param": "smote_k_neighbors (default)", "value": "5", "step": "6"},
+    {"param": "decision_threshold_screening", "value": "0.50", "step": "7"},
+    {"param": "decision_threshold_balanced", "value": "0.7271", "step": "7"}
+  ],
+  "io_domain": {
+    "input_subdomain": [
+      {
+        "uri": {"filename": "breast_cancer_ml_eda.csv"},
+        "access_time": "2026-07-26T00:00:00Z"
+      }
+    ],
+    "output_subdomain": [
+      {
+        "mediatype": "application/octet-stream",
+        "uri": {"filename": "model/dfs_model.joblib"}
+      },
+      {
+        "mediatype": "application/json",
+        "uri": {"filename": "model/model_metadata.json"}
+      },
+      {
+        "mediatype": "application/x-ipynb+json",
+        "uri": {"filename": "brca_dfs_model.ipynb"}
+      }
+    ]
+  },
+  "error_domain": {
+    "empirical_error": {
+      "held_out_test_roc_auc": 0.6836,
+      "held_out_test_average_precision": 0.3099,
+      "cross_validated_roc_auc_mean": 0.6367,
+      "cross_validated_roc_auc_std": 0.0594,
+      "note": "Errors are reported on a single stratified 80/20 held-out split and via 5-fold stratified cross-validation on the full 895-patient cohort. With only 97 recurrence events, standard errors on these estimates are wide, and small differences between candidate models (see brca_dfs_model.ipynb, section 17) should not be over-interpreted."
+    },
+    "algorithmic_error": {
+      "known_limitations": [
+        "Binary target ignores right-censoring in follow-up time (see brca_dfs_model.ipynb section 4).",
+        "Gene panel limited to 12 genes from a 2012 publication; does not reflect current mutational landscape knowledge.",
+        "Cohort includes a small number of non-breast-carcinoma CANCER_TYPE entries retained under TCGA-BRCA barcodes.",
+        "Hyperparameter tuning via RandomizedSearchCV did not exceed untuned baseline performance on this dataset size, most likely due to limited event count.",
+        "No external validation cohort has been used; all performance figures are internal to TCGA-BRCA."
+      ]
+    }
+  },
+  "extension_domain": [
+    {
+      "extension_schema": "https://w3id.org/biocompute/extension_domain/1.4.0/scm/scm_extension.json",
+      "scm_extension": {
+        "scm_repository": "https://github.com/GW-HIVE/PredictMod",
+        "scm_type": "git",
+        "scm_commit": "",
+        "scm_path": "flask_backend/models/BRCA_DFS_Recurrence_v1",
+        "scm_preview": ""
+      }
+    }
+  ]
+}
