@@ -1,0 +1,764 @@
+{
+  "spec_version": "https://w3id.org/biocompute/1.3.0/",
+  "object_id": "urn:uuid:5a9b6074-33c1-4f91-a905-df32badf7da4",
+  "type": "machine_learning_model_training",
+  "etag": "51a5109732d4ebc2f1cd2230fc6662934389f607d8cc50c74148e1e9c7a4406a",
+  "provenance_domain": {
+    "name": "TCGA-LIHC tumor-status prediction workflow",
+    "version": "0.2.0-draft",
+    "review": [
+      {
+        "status": "unreviewed",
+        "reviewer": {
+          "name": "PredictMod mentor review pending",
+          "affiliation": "GW HIVE / PredictMod"
+        },
+        "date": "2026-07-21T16:29:44+00:00",
+        "comment": "Draft BCO prepared for volunteership review; not yet published or submitted as a GitHub pull request."
+      }
+    ],
+    "derived_from": [
+      "PMID:34975338",
+      "TCGA-LIHC clinical and RNA-seq data sources"
+    ],
+    "obsolete": null,
+    "embargo": {},
+    "created": "2026-07-21T16:29:44+00:00",
+    "modified": "2026-07-21T16:29:44+00:00",
+    "contributors": [
+      {
+        "name": "Sri Piramanayagam",
+        "affiliation": "GW HIVE / PredictMod Summer 2026 volunteership",
+        "contribution": [
+          "data curation",
+          "model training",
+          "workflow documentation"
+        ]
+      }
+    ],
+    "license": "Draft project documentation; source data remain governed by TCGA/GDC/UCSC Xena access and use terms. Training code/package license TBD."
+  },
+  "usability_domain": [
+    "Need: This BioCompute Object documents a draft PredictMod-style machine-learning workflow for hepatocellular carcinoma using the TCGA-LIHC cohort. The model task is binary prediction of follow-up tumor status, simplified to Tumor Free versus With Tumor, using clinical variables and RNA-seq gene-expression features.",
+    "Method: Public TCGA-LIHC clinical and biospecimen metadata were identified through the NCI Genomic Data Commons Data Portal, and normalized RNA-seq gene-expression data were obtained from the UCSC Xena GDC Hub. Patient/sample identifiers were harmonized into an ML-ready table. Patients with missing or unknown tumor-status labels were excluded. A stratified 80/20 train/test split was used; missing values were imputed; numeric features were scaled; categorical variables were one-hot encoded; Random Forest feature importance selected the top 15 features; Logistic Regression, Random Forest, XGBoost, Support Vector Machine, and Decision Tree classifiers were trained and compared.",
+    "Results and interpretation: The best model by AUROC was Random Forest with holdout accuracy 0.8028, AUROC 0.7984, F1 for With Tumor 0.7586, precision 0.7857, and recall 0.7333. This is a baseline tumor-status/prognosis model, not a clinically validated diagnostic tool and not a direct immunotherapy responder/non-responder model."
+  ],
+  "extension_domain": {},
+  "description_domain": {
+    "keywords": [
+      "TCGA-LIHC",
+      "hepatocellular carcinoma",
+      "liver cancer",
+      "RNA-seq",
+      "gene expression",
+      "machine learning",
+      "PredictMod",
+      "tumor status",
+      "Tumor Free",
+      "With Tumor",
+      "Random Forest",
+      "XGBoost",
+      "BioCompute Object"
+    ],
+    "xref": [
+      {
+        "namespace": "pubmed",
+        "name": "PubMed",
+        "ids": [
+          "34975338"
+        ],
+        "access_time": "2026-07-21T16:29:44+00:00"
+      },
+      {
+        "namespace": "nci.gdc.project",
+        "name": "NCI Genomic Data Commons Project",
+        "ids": [
+          "TCGA-LIHC"
+        ],
+        "access_time": "2026-07-21T16:29:44+00:00"
+      },
+      {
+        "namespace": "ucsc.xena.hub",
+        "name": "UCSC Xena GDC Hub",
+        "ids": [
+          "GDC TCGA Liver Cancer (LIHC)",
+          "TCGA-LIHC.star_fpkm-uq.tsv.gz"
+        ],
+        "access_time": "2026-07-21T16:29:44+00:00"
+      }
+    ],
+    "platform": [
+      "Python 3.11",
+      "scikit-learn",
+      "XGBoost",
+      "SHAP",
+      "UCSC Xena GDC Hub",
+      "NCI GDC Data Portal"
+    ],
+    "pipeline_steps": [
+      {
+        "step_number": 1,
+        "name": "select_dataset",
+        "description": "Selected PMID 34975338 and the public TCGA-LIHC hepatocellular carcinoma cohort as the source dataset for a PredictMod-style model.",
+        "version": "manual curation, 2026-07 draft",
+        "prerequisite": [
+          {
+            "name": "PredictMod recommended publications and TCGA-LIHC project page",
+            "uri": {
+              "uri": "https://portal.gdc.cancer.gov/projects/TCGA-LIHC",
+              "access_time": "2026-07-21T16:29:44+00:00"
+            }
+          }
+        ],
+        "input_list": [
+          {
+            "uri": "https://pubmed.ncbi.nlm.nih.gov/34975338/",
+            "access_time": "2026-07-21T16:29:44+00:00"
+          }
+        ],
+        "output_list": [
+          {
+            "uri": "file://PROJECT_ROOT/data_source_selection_notes",
+            "access_time": "2026-07-21T16:29:44+00:00"
+          }
+        ]
+      },
+      {
+        "step_number": 2,
+        "name": "extract_metadata",
+        "description": "Downloaded and inspected TCGA-LIHC clinical and biospecimen metadata. Clinical fields included age, sex, race, stage, grade, vital status, and follow-up tumor status; biospecimen metadata were used to confirm primary tumor sample availability.",
+        "version": "manual extraction, GDC download 2026-06-22",
+        "prerequisite": [
+          {
+            "name": "GDC Data Portal",
+            "uri": {
+              "uri": "https://portal.gdc.cancer.gov/",
+              "access_time": "2026-07-21T16:29:44+00:00"
+            }
+          }
+        ],
+        "input_list": [
+          {
+            "filename": "clinical.project-tcga-lihc.2026-06-22.tar.gz",
+            "uri": "file://PROJECT_ROOT/clinical.project-tcga-lihc.2026-06-22.tar.gz",
+            "access_time": "2026-07-21T16:29:44+00:00",
+            "sha1_checksum": "bd8a6d64c72ce7039c5c7c4fddc62011384ecf1f"
+          },
+          {
+            "filename": "biospecimen.project-tcga-lihc.2026-06-22.tar.gz",
+            "uri": "file://PROJECT_ROOT/biospecimen.project-tcga-lihc.2026-06-22.tar.gz",
+            "access_time": "2026-07-21T16:29:44+00:00",
+            "sha1_checksum": "88b20c3c7be6350e486d69a83c2496c8c333f294"
+          }
+        ],
+        "output_list": [
+          {
+            "uri": "file://PROJECT_ROOT/intermediate/patient_level_metadata",
+            "access_time": "2026-07-21T16:29:44+00:00"
+          }
+        ]
+      },
+      {
+        "step_number": 3,
+        "name": "extract_expression",
+        "description": "Downloaded normalized TCGA-LIHC RNA-seq gene-expression matrix from UCSC Xena/GDC Hub. Dataset selected: STAR FPKM-UQ, log2(fpkm-uq + 1), with 424 samples and 60,661 identifiers before filtering.",
+        "version": "UCSC Xena dataset version 05-09-2024",
+        "prerequisite": [
+          {
+            "name": "UCSC Xena GDC Hub",
+            "uri": {
+              "uri": "https://xena.ucsc.edu/",
+              "access_time": "2026-07-21T16:29:44+00:00"
+            }
+          }
+        ],
+        "input_list": [
+          {
+            "uri": "https://gdc-hub.s3.us-east-1.amazonaws.com/download/TCGA-LIHC.star_fpkm-uq.tsv.gz",
+            "access_time": "2026-07-21T16:29:44+00:00"
+          }
+        ],
+        "output_list": [
+          {
+            "filename": "TCGA-LIHC.star_fpkm-uq.tsv.gz",
+            "uri": "file://PROJECT_ROOT/TCGA-LIHC.star_fpkm-uq.tsv.gz",
+            "access_time": "2026-07-21T16:29:44+00:00",
+            "sha1_checksum": "99365d5814f1b2f25eedef58f5a1880575a62465"
+          }
+        ]
+      },
+      {
+        "step_number": 4,
+        "name": "harmonize_table",
+        "description": "Matched primary tumor RNA-seq samples to patient-level tumor-status labels. Tumor Free was coded 0 and With Tumor coded 1. Missing/unknown tumor-status labels were excluded. The resulting ML-ready table contained 352 matched primary tumor samples, 201 Tumor Free and 151 With Tumor.",
+        "version": "manual/Python-assisted harmonization, 2026-07 draft",
+        "prerequisite": [],
+        "input_list": [
+          {
+            "filename": "TCGA-LIHC.clinical.tsv.gz",
+            "uri": "file://PROJECT_ROOT/TCGA-LIHC.clinical.tsv.gz",
+            "access_time": "2026-07-21T16:29:45+00:00",
+            "sha1_checksum": "dab15d840d7e3efca6513e789a7d8ee6802a3c91"
+          },
+          {
+            "filename": "TCGA-LIHC.star_fpkm-uq.tsv.gz",
+            "uri": "file://PROJECT_ROOT/TCGA-LIHC.star_fpkm-uq.tsv.gz",
+            "access_time": "2026-07-21T16:29:45+00:00",
+            "sha1_checksum": "99365d5814f1b2f25eedef58f5a1880575a62465"
+          }
+        ],
+        "output_list": [
+          {
+            "filename": "data/tcga_lihc_tumor_status_ml_ready_top500_genes.csv.gz",
+            "uri": "file://PROJECT_ROOT/data/tcga_lihc_tumor_status_ml_ready_top500_genes.csv.gz",
+            "access_time": "2026-07-21T16:29:45+00:00",
+            "sha1_checksum": "69941db425a3a3e32c0cdb9b6fa0474228acae6f"
+          }
+        ]
+      },
+      {
+        "step_number": 5,
+        "name": "split_preprocess",
+        "description": "Loaded the ML-ready table, removed identifiers and label-related columns from predictors to reduce leakage risk, created X predictors and y labels, and performed a stratified 80/20 train/test split. Numeric values were median-imputed and standardized; categorical variables were mode-imputed and one-hot encoded.",
+        "version": "train_models.py v0.2.0-draft",
+        "prerequisite": [
+          {
+            "name": "training script",
+            "uri": {
+              "filename": "scripts/train_models.py",
+              "uri": "file://PROJECT_ROOT/scripts/train_models.py",
+              "access_time": "2026-07-21T16:29:45+00:00",
+              "sha1_checksum": "4b1b756a260cb1683dfee033356dfa9fb2f16e7f"
+            }
+          }
+        ],
+        "input_list": [
+          {
+            "filename": "data/tcga_lihc_tumor_status_ml_ready_top500_genes.csv.gz",
+            "uri": "file://PROJECT_ROOT/data/tcga_lihc_tumor_status_ml_ready_top500_genes.csv.gz",
+            "access_time": "2026-07-21T16:29:45+00:00",
+            "sha1_checksum": "69941db425a3a3e32c0cdb9b6fa0474228acae6f"
+          }
+        ],
+        "output_list": [
+          {
+            "uri": "file://PROJECT_ROOT/intermediate/X_train_X_test_y_train_y_test",
+            "access_time": "2026-07-21T16:29:44+00:00"
+          }
+        ]
+      },
+      {
+        "step_number": 6,
+        "name": "select_features",
+        "description": "Used Random Forest feature importance on the training set to rank preprocessed features and retain the top 15 features for downstream model comparison.",
+        "version": "scikit-learn RandomForestClassifier; n_estimators=100; class_weight=balanced; random_state=42",
+        "prerequisite": [
+          {
+            "name": "scikit-learn RandomForestClassifier",
+            "uri": {
+              "uri": "https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html",
+              "access_time": "2026-07-21T16:29:44+00:00"
+            }
+          }
+        ],
+        "input_list": [
+          {
+            "uri": "file://PROJECT_ROOT/intermediate/preprocessed_training_matrix",
+            "access_time": "2026-07-21T16:29:44+00:00"
+          }
+        ],
+        "output_list": [
+          {
+            "filename": "results/selected_top15_features.csv",
+            "uri": "file://PROJECT_ROOT/results/selected_top15_features.csv",
+            "access_time": "2026-07-21T16:29:45+00:00",
+            "sha1_checksum": "629a4fa8be2b964a6b6b624d2e39f7f6f0573fe6"
+          },
+          {
+            "filename": "results/rf_feature_importances_all_features.csv",
+            "uri": "file://PROJECT_ROOT/results/rf_feature_importances_all_features.csv",
+            "access_time": "2026-07-21T16:29:45+00:00",
+            "sha1_checksum": "7bab40fc4ab3310820e9b463e537be3d06b0e56c"
+          }
+        ]
+      },
+      {
+        "step_number": 7,
+        "name": "train_models",
+        "description": "Trained five binary classifiers on the same selected training features: Logistic Regression, Random Forest, XGBoost, Support Vector Machine, and Decision Tree.",
+        "version": "train_models.py v0.2.0-draft",
+        "prerequisite": [
+          {
+            "name": "Python model-training script",
+            "uri": {
+              "filename": "scripts/train_models.py",
+              "uri": "file://PROJECT_ROOT/scripts/train_models.py",
+              "access_time": "2026-07-21T16:29:45+00:00",
+              "sha1_checksum": "4b1b756a260cb1683dfee033356dfa9fb2f16e7f"
+            }
+          }
+        ],
+        "input_list": [
+          {
+            "uri": "file://PROJECT_ROOT/intermediate/selected_training_features",
+            "access_time": "2026-07-21T16:29:44+00:00"
+          }
+        ],
+        "output_list": [
+          {
+            "filename": "models/best_model_bundle.joblib",
+            "uri": "file://PROJECT_ROOT/models/best_model_bundle.joblib",
+            "access_time": "2026-07-21T16:29:45+00:00",
+            "sha1_checksum": "8834a24ecf6a755a795465542e21108eefea0a81"
+          }
+        ]
+      },
+      {
+        "step_number": 8,
+        "name": "evaluate_models",
+        "description": "Evaluated models on the held-out test set using accuracy, AUROC, F1, precision, recall, and confusion matrices. Random Forest was selected as best model by AUROC.",
+        "version": "scikit-learn metrics; SHAP summary generated with XGBoost explainer",
+        "prerequisite": [],
+        "input_list": [
+          {
+            "uri": "file://PROJECT_ROOT/intermediate/selected_test_features",
+            "access_time": "2026-07-21T16:29:44+00:00"
+          },
+          {
+            "filename": "models/best_model_bundle.joblib",
+            "uri": "file://PROJECT_ROOT/models/best_model_bundle.joblib",
+            "access_time": "2026-07-21T16:29:45+00:00",
+            "sha1_checksum": "8834a24ecf6a755a795465542e21108eefea0a81"
+          }
+        ],
+        "output_list": [
+          {
+            "filename": "results/model_metrics_comparison.csv",
+            "uri": "file://PROJECT_ROOT/results/model_metrics_comparison.csv",
+            "access_time": "2026-07-21T16:29:45+00:00",
+            "sha1_checksum": "f0778f2c874e6bf70860186d99c6d3cf3723ba2a"
+          },
+          {
+            "filename": "results/confusion_matrices.json",
+            "uri": "file://PROJECT_ROOT/results/confusion_matrices.json",
+            "access_time": "2026-07-21T16:29:45+00:00",
+            "sha1_checksum": "02ed7763e71d763032df0f3526c8756d07563d91"
+          },
+          {
+            "filename": "results/holdout_predictions_all_models.csv",
+            "uri": "file://PROJECT_ROOT/results/holdout_predictions_all_models.csv",
+            "access_time": "2026-07-21T16:29:45+00:00",
+            "sha1_checksum": "3be0808df891565b74a759320fcd0af5cbd7b4b3"
+          },
+          {
+            "filename": "figures/model_auroc_comparison.png",
+            "uri": "file://PROJECT_ROOT/figures/model_auroc_comparison.png",
+            "access_time": "2026-07-21T16:29:45+00:00",
+            "sha1_checksum": "a5a9609a27d1cb982ab71c8d3321f54691a28c01"
+          },
+          {
+            "filename": "figures/best_model_confusion_matrix.png",
+            "uri": "file://PROJECT_ROOT/figures/best_model_confusion_matrix.png",
+            "access_time": "2026-07-21T16:29:45+00:00",
+            "sha1_checksum": "3746c60144cc993365476654e0128fb8b5ceb7d7"
+          },
+          {
+            "filename": "figures/shap_summary_plot.png",
+            "uri": "file://PROJECT_ROOT/figures/shap_summary_plot.png",
+            "access_time": "2026-07-21T16:29:45+00:00",
+            "sha1_checksum": "a16a02b8d709f136ccef9cbb6e05820401105a85"
+          }
+        ]
+      },
+      {
+        "step_number": 9,
+        "name": "single_patient_prediction",
+        "description": "Created a separate script that loads the saved model bundle, checks for required columns, applies the saved preprocessing and feature-selection objects, and prints class prediction plus probability of With Tumor for one patient.",
+        "version": "single_patient_predict.py v0.2.0-draft",
+        "prerequisite": [
+          {
+            "name": "saved model bundle",
+            "uri": {
+              "filename": "models/best_model_bundle.joblib",
+              "uri": "file://PROJECT_ROOT/models/best_model_bundle.joblib",
+              "access_time": "2026-07-21T16:29:45+00:00",
+              "sha1_checksum": "8834a24ecf6a755a795465542e21108eefea0a81"
+            }
+          }
+        ],
+        "input_list": [
+          {
+            "filename": "data/example_single_patient_input.csv",
+            "uri": "file://PROJECT_ROOT/data/example_single_patient_input.csv",
+            "access_time": "2026-07-21T16:29:45+00:00",
+            "sha1_checksum": "57e0d441abe30d9200d52c6898c26df398e5869d"
+          }
+        ],
+        "output_list": [
+          {
+            "uri": "file://PROJECT_ROOT/stdout/single_patient_prediction_text",
+            "access_time": "2026-07-21T16:29:44+00:00"
+          }
+        ]
+      }
+    ]
+  },
+  "execution_domain": {
+    "script": [
+      {
+        "uri": {
+          "filename": "scripts/train_models.py",
+          "uri": "file://PROJECT_ROOT/scripts/train_models.py",
+          "access_time": "2026-07-21T16:29:45+00:00",
+          "sha1_checksum": "4b1b756a260cb1683dfee033356dfa9fb2f16e7f"
+        }
+      },
+      {
+        "uri": {
+          "filename": "scripts/single_patient_predict.py",
+          "uri": "file://PROJECT_ROOT/scripts/single_patient_predict.py",
+          "access_time": "2026-07-21T16:29:45+00:00",
+          "sha1_checksum": "62975022d48f2961395458ca19ed3a3faac2473a"
+        }
+      }
+    ],
+    "script_driver": "python",
+    "software_prerequisites": [
+      {
+        "name": "Python",
+        "version": "3.11 recommended",
+        "uri": {
+          "uri": "https://www.python.org/downloads/",
+          "access_time": "2026-07-21T16:29:44+00:00"
+        }
+      },
+      {
+        "name": "pandas",
+        "version": "2.2.3",
+        "uri": {
+          "uri": "https://pandas.pydata.org/",
+          "access_time": "2026-07-21T16:29:44+00:00"
+        }
+      },
+      {
+        "name": "numpy",
+        "version": "2.3.5",
+        "uri": {
+          "uri": "https://numpy.org/",
+          "access_time": "2026-07-21T16:29:44+00:00"
+        }
+      },
+      {
+        "name": "scikit-learn",
+        "version": "1.8.0",
+        "uri": {
+          "uri": "https://scikit-learn.org/",
+          "access_time": "2026-07-21T16:29:44+00:00"
+        }
+      },
+      {
+        "name": "matplotlib",
+        "version": "3.10.8",
+        "uri": {
+          "uri": "https://matplotlib.org/",
+          "access_time": "2026-07-21T16:29:44+00:00"
+        }
+      },
+      {
+        "name": "joblib",
+        "version": "1.5.3",
+        "uri": {
+          "uri": "https://joblib.readthedocs.io/",
+          "access_time": "2026-07-21T16:29:44+00:00"
+        }
+      },
+      {
+        "name": "xgboost",
+        "version": "3.1.3",
+        "uri": {
+          "uri": "https://xgboost.readthedocs.io/",
+          "access_time": "2026-07-21T16:29:44+00:00"
+        }
+      },
+      {
+        "name": "shap",
+        "version": "0.50.0",
+        "uri": {
+          "uri": "https://shap.readthedocs.io/",
+          "access_time": "2026-07-21T16:29:44+00:00"
+        }
+      },
+      {
+        "name": "seaborn",
+        "version": "0.13.2",
+        "uri": {
+          "uri": "https://seaborn.pydata.org/",
+          "access_time": "2026-07-21T16:29:44+00:00"
+        }
+      }
+    ],
+    "external_data_endpoints": [
+      {
+        "url": "https://portal.gdc.cancer.gov/",
+        "name": "NCI Genomic Data Commons Data Portal"
+      },
+      {
+        "url": "https://gdc.xenahubs.net/",
+        "name": "UCSC Xena GDC Hub"
+      },
+      {
+        "url": "https://pubmed.ncbi.nlm.nih.gov/",
+        "name": "PubMed"
+      }
+    ],
+    "environment_variables": {
+      "PROJECT_ROOT": "Path to local TCGA-LIHC model package directory",
+      "PYTHONPATH": "Optional; not required if scripts are run from package root"
+    }
+  },
+  "parametric_domain": [
+    {
+      "param": "outcome_label",
+      "value": "Tumor Free vs With Tumor; Tumor Free=0, With Tumor=1",
+      "step": "4"
+    },
+    {
+      "param": "missing_or_unknown_outcomes",
+      "value": "Excluded before training",
+      "step": "4"
+    },
+    {
+      "param": "initial_gene_feature_filter",
+      "value": "Top 500 most variable gene-expression features retained in ML-ready table",
+      "step": "4"
+    },
+    {
+      "param": "test_size",
+      "value": "0.20",
+      "step": "5"
+    },
+    {
+      "param": "split_strategy",
+      "value": "stratified train/test split on outcome_code",
+      "step": "5"
+    },
+    {
+      "param": "random_state",
+      "value": "42",
+      "step": "5"
+    },
+    {
+      "param": "numeric_imputation",
+      "value": "median",
+      "step": "5"
+    },
+    {
+      "param": "numeric_scaling",
+      "value": "StandardScaler",
+      "step": "5"
+    },
+    {
+      "param": "categorical_imputation",
+      "value": "most_frequent",
+      "step": "5"
+    },
+    {
+      "param": "categorical_encoding",
+      "value": "OneHotEncoder(handle_unknown=ignore)",
+      "step": "5"
+    },
+    {
+      "param": "feature_selection_model",
+      "value": "RandomForestClassifier(n_estimators=100, class_weight=balanced, random_state=42)",
+      "step": "6"
+    },
+    {
+      "param": "n_selected_features",
+      "value": "15",
+      "step": "6"
+    },
+    {
+      "param": "logistic_regression",
+      "value": "max_iter=3000; class_weight=balanced; random_state=42",
+      "step": "7"
+    },
+    {
+      "param": "random_forest",
+      "value": "n_estimators=120; min_samples_leaf=3; class_weight=balanced; random_state=42",
+      "step": "7"
+    },
+    {
+      "param": "xgboost",
+      "value": "n_estimators=80; max_depth=3; learning_rate=0.05; subsample=0.85; colsample_bytree=0.85; reg_lambda=1.0; objective=binary:logistic; eval_metric=logloss; tree_method=hist; random_state=42",
+      "step": "7"
+    },
+    {
+      "param": "svm",
+      "value": "kernel=rbf; probability=True; class_weight=balanced; random_state=42",
+      "step": "7"
+    },
+    {
+      "param": "decision_tree",
+      "value": "max_depth=4; min_samples_leaf=5; class_weight=balanced; random_state=42",
+      "step": "7"
+    },
+    {
+      "param": "model_selection_criterion",
+      "value": "Highest AUROC on held-out test set",
+      "step": "8"
+    },
+    {
+      "param": "shap_explainer",
+      "value": "TreeExplainer on trained XGBoost model using selected test features",
+      "step": "8"
+    }
+  ],
+  "io_domain": {
+    "input_subdomain": [
+      {
+        "uri": {
+          "filename": "PMID 34975338 PubMed record",
+          "uri": "https://pubmed.ncbi.nlm.nih.gov/34975338/",
+          "access_time": "2026-07-21T16:29:44+00:00"
+        }
+      },
+      {
+        "uri": {
+          "filename": "TCGA-LIHC GDC project",
+          "uri": "https://portal.gdc.cancer.gov/projects/TCGA-LIHC",
+          "access_time": "2026-07-21T16:29:44+00:00"
+        }
+      },
+      {
+        "uri": {
+          "filename": "TCGA-LIHC clinical metadata",
+          "uri": "file://PROJECT_ROOT/source/TCGA-LIHC.clinical.tsv.gz",
+          "access_time": "2026-07-21T16:29:44+00:00",
+          "sha1_checksum": "dab15d840d7e3efca6513e789a7d8ee6802a3c91"
+        }
+      },
+      {
+        "uri": {
+          "filename": "TCGA-LIHC RNA-seq STAR FPKM-UQ expression matrix",
+          "uri": "file://PROJECT_ROOT/source/TCGA-LIHC.star_fpkm-uq.tsv.gz",
+          "access_time": "2026-07-21T16:29:44+00:00",
+          "sha1_checksum": "99365d5814f1b2f25eedef58f5a1880575a62465"
+        }
+      },
+      {
+        "uri": {
+          "filename": "ML-ready training table derived from TCGA-LIHC clinical + RNA-seq data",
+          "uri": "file://PROJECT_ROOT/data/tcga_lihc_tumor_status_ml_ready_top500_genes.csv.gz",
+          "access_time": "2026-07-21T16:29:44+00:00",
+          "sha1_checksum": "69941db425a3a3e32c0cdb9b6fa0474228acae6f"
+        }
+      }
+    ],
+    "output_subdomain": [
+      {
+        "uri": {
+          "filename": "results/model_metrics_comparison.csv",
+          "uri": "file://PROJECT_ROOT/results/model_metrics_comparison.csv",
+          "access_time": "2026-07-21T16:29:45+00:00",
+          "sha1_checksum": "f0778f2c874e6bf70860186d99c6d3cf3723ba2a"
+        },
+        "mediatype": "text/csv"
+      },
+      {
+        "uri": {
+          "filename": "results/holdout_predictions_all_models.csv",
+          "uri": "file://PROJECT_ROOT/results/holdout_predictions_all_models.csv",
+          "access_time": "2026-07-21T16:29:45+00:00",
+          "sha1_checksum": "3be0808df891565b74a759320fcd0af5cbd7b4b3"
+        },
+        "mediatype": "text/csv"
+      },
+      {
+        "uri": {
+          "filename": "results/selected_top15_features.csv",
+          "uri": "file://PROJECT_ROOT/results/selected_top15_features.csv",
+          "access_time": "2026-07-21T16:29:45+00:00",
+          "sha1_checksum": "629a4fa8be2b964a6b6b624d2e39f7f6f0573fe6"
+        },
+        "mediatype": "text/csv"
+      },
+      {
+        "uri": {
+          "filename": "results/confusion_matrices.json",
+          "uri": "file://PROJECT_ROOT/results/confusion_matrices.json",
+          "access_time": "2026-07-21T16:29:45+00:00",
+          "sha1_checksum": "02ed7763e71d763032df0f3526c8756d07563d91"
+        },
+        "mediatype": "application/json"
+      },
+      {
+        "uri": {
+          "filename": "models/best_model_bundle.joblib",
+          "uri": "file://PROJECT_ROOT/models/best_model_bundle.joblib",
+          "access_time": "2026-07-21T16:29:45+00:00",
+          "sha1_checksum": "8834a24ecf6a755a795465542e21108eefea0a81"
+        },
+        "mediatype": "application/octet-stream"
+      },
+      {
+        "uri": {
+          "filename": "figures/model_auroc_comparison.png",
+          "uri": "file://PROJECT_ROOT/figures/model_auroc_comparison.png",
+          "access_time": "2026-07-21T16:29:45+00:00",
+          "sha1_checksum": "a5a9609a27d1cb982ab71c8d3321f54691a28c01"
+        },
+        "mediatype": "image/png"
+      },
+      {
+        "uri": {
+          "filename": "figures/best_model_confusion_matrix.png",
+          "uri": "file://PROJECT_ROOT/figures/best_model_confusion_matrix.png",
+          "access_time": "2026-07-21T16:29:45+00:00",
+          "sha1_checksum": "3746c60144cc993365476654e0128fb8b5ceb7d7"
+        },
+        "mediatype": "image/png"
+      },
+      {
+        "uri": {
+          "filename": "figures/shap_summary_plot.png",
+          "uri": "file://PROJECT_ROOT/figures/shap_summary_plot.png",
+          "access_time": "2026-07-21T16:29:45+00:00",
+          "sha1_checksum": "a16a02b8d709f136ccef9cbb6e05820401105a85"
+        },
+        "mediatype": "image/png"
+      },
+      {
+        "uri": {
+          "filename": "scripts/single_patient_predict.py",
+          "uri": "file://PROJECT_ROOT/scripts/single_patient_predict.py",
+          "access_time": "2026-07-21T16:29:45+00:00",
+          "sha1_checksum": "62975022d48f2961395458ca19ed3a3faac2473a"
+        },
+        "mediatype": "text/x-python"
+      }
+    ]
+  },
+  "error_domain": {
+    "empirical_error": {
+      "holdout_test_set_size": "71 patients/samples",
+      "best_model": "Random Forest selected by AUROC",
+      "accuracy": "0.8028169014",
+      "auroc": "0.7983739837",
+      "f1_with_tumor": "0.7586206897",
+      "precision_with_tumor": "0.7857142857",
+      "recall_with_tumor": "0.7333333333",
+      "confusion_matrix_labels": "[[Tumor Free, With Tumor], [Tumor Free, With Tumor]] for true rows and predicted columns",
+      "random_forest_confusion_matrix": "[[35, 6], [8, 22]]",
+      "external_validation": "Not performed in this draft workflow",
+      "class_distribution_used": "201 Tumor Free; 151 With Tumor; missing/unknown tumor-status labels excluded"
+    },
+    "algorithmic_error": {
+      "stochasticity_control": "random_state=42 used for split and supported estimators; results may vary if package versions, random seed, or selected features change",
+      "overfitting_risk": "Moderate due to high-dimensional RNA-seq features and only 352 matched labeled samples; top-15 feature selection reduces but does not eliminate this risk",
+      "label_limitation": "Tumor Free versus With Tumor is a follow-up tumor-status label, not a direct controlled immunotherapy responder/non-responder endpoint",
+      "data_integration_limitation": "Clinical follow-up labels may differ in timing/completeness across patients; missing/unknown labels were excluded, which may introduce selection bias",
+      "biological_validity_limitation": "Selected features require biological interpretation; model should be considered exploratory until independently validated",
+      "clinical_use_limitation": "Not intended for clinical decision-making; educational/research baseline only"
+    }
+  }
+}
