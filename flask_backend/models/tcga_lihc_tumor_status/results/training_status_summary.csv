@@ -1,0 +1,2 @@
+n_total_rows,n_tumor_free,n_with_tumor,n_train,n_test,best_model_by_auroc,best_model_auroc,best_model_accuracy,shap_plot
+352,201,151,281,71,Random Forest,0.7983739837398374,0.8028169014084507,Actual SHAP summary plot generated using XGBoost on selected features.
