@@ -28,7 +28,7 @@ def home():
 def predict(request: PredictRequest):
     try:
         # Convert incoming JSON dict to a pandas DataFrame with exact column ordering
-        input_df = pd.DataFrame([request.inputs])
+        input_df = pd.DataFrame([request.inputs])[expected_features]
         print("Received input: {input_df.to_dict(orient='records')[0]}")  # Log the received input
         # Ensure all required features are present in the incoming payload
         missing_cols = set(expected_features) - set(input_df.columns)

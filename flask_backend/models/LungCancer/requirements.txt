@@ -5,3 +5,6 @@ scikit-learn
 fastapi
 pydantic
 uvicorn
+joblib
+requests
+lifelines
