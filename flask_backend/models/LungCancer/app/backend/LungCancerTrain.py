@@ -9,13 +9,20 @@ from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.decomposition import PCA
+
+from pathlib import Path
+
+script_dir = Path(__file__).parent
+gene_expr_file_path = script_dir / "gene_expression_data.csv"
+clinical_data_file_path = script_dir / "valid_clinical_data.csv"
+
 print("Ready to Go")
 
 # ---------------------------------------------------------
 # Step 1: Load CSV Files
 # ---------------------------------------------------------
-expr_df = pd.read_csv("/Users/diyakb/Documents/GitHub/PredictMod/flask_backend/models/LungCancer/app/backend/gene_expression_data.csv", index_col=0)
-valid_clinical = pd.read_csv("/Users/diyakb/Documents/GitHub/PredictMod/flask_backend/models/LungCancer/app/backend/valid_clinical_data.csv", index_col=0)
+expr_df = pd.read_csv(gene_expr_file_path, index_col=0)
+valid_clinical = pd.read_csv(clinical_data_file_path, index_col=0)
 
 # Align samples
 common_gsm = expr_df.index.intersection(valid_clinical.index)
@@ -65,7 +72,9 @@ data = {
     'pca': pca,                  # <--- Save PCA object here!
     'features': list(X.columns)
 }
-joblib.dump(data, 'LungCancer_classifier_and_features.pickle')
+
+# Generate the pickle file in the same directory as this script
+joblib.dump(data, f"{script_dir}/LungCancer_classifier_and_features.pickle")
 print("Model and PCA pipeline successfully saved!")
 
 

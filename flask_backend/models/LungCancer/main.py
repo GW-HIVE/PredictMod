@@ -1,58 +1,46 @@
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
+from flask import Flask, request, jsonify
 import joblib
 import pandas as pd
-from typing import Dict, Any
 
-app = FastAPI(title = "Lung Cancer Prediction API")
+from app.backend.LungCancerPrediction import predict
 
-#load model file
+app = Flask(__name__)
+
+# Load model file
 data = joblib.load('LungCancer_classifier_and_features.pickle')
 
 # Unpack classifier and required feature column names
 model = data['classifier']
 expected_features = data['features']
 
-# Define flexible request payload (Dictionary matching feature names -> values)
-class PredictRequest(BaseModel):
-    inputs: Dict[str, Any]
 
-@app.get("/")
+@app.route("/", methods=["GET"])
 def home():
-    return {
-        "status": "online", 
-        "expected_features": expected_features
-    }
+    return jsonify({
+        "status": "online",
+        "expected_features": list(expected_features)
+    }), 200
 
-@app.post("/predict")
-def predict(request: PredictRequest):
+
+
+@app.route("/predict", methods=["POST"])
+def prediction_endpoint():
     try:
-        # Convert incoming JSON dict to a pandas DataFrame with exact column ordering
-        input_df = pd.DataFrame([request.inputs])[expected_features]
-        print("Received input: {input_df.to_dict(orient='records')[0]}")  # Log the received input
-        # Ensure all required features are present in the incoming payload
-        missing_cols = set(expected_features) - set(input_df.columns)
-        if missing_cols:
-            raise HTTPException(
-                status_code=400, 
-                detail=f"Missing feature columns: {list(missing_cols)}"
-            )
-        
-        # Reorder columns to strictly match X.columns from training
-        input_df = input_df[expected_features]
-        
-        # Predict using the extracted Random Forest model
-        prediction = model.predict(input_df)
-        
-        # Optional: Get prediction probabilities if classification
-        probability = None
-        if hasattr(model, "predict_proba"):
-            probability = model.predict_proba(input_df).tolist()
+        payload = request.get_json(silent=True)
+        if not payload or "filepath" not in payload:
+            return jsonify({"detail": "Missing required field 'filepath' in request body."}), 400
 
-        return {
-            "prediction": int(prediction[0]) if hasattr(prediction[0], 'item') else prediction[0],
-            "probabilities": probability
-        }
-        
+        filepath = payload["filepath"]
+
+        results = predict(filepath)
+
+        return jsonify({
+            "status": "success",
+            "predictions": results
+        }), 200
+
+    except FileNotFoundError as e:
+        return jsonify({"detail": str(e)}), 404
+
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        return jsonify({"detail": str(e)}), 500
