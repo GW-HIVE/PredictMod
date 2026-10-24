@@ -1,0 +1,17 @@
+pandas
+numpy
+matplotlib
+scikit-learn
+fastapi
+pydantic
+uvicorn
+joblib
+requests
+lifelines
+flask>=3.0.0
+pandas>=2.0.0
+joblib>=1.3.0
+scikit-learn>=1.3.0
+gunicorn>=21.2.0
+portalocker
+waitress

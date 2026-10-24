@@ -1,0 +1,108 @@
+GSM,tissue,tumor size(cm),pt,pn,pm,7th pstage,gender,age,smoking status,pack-year,relapse,days before relapse/censor,death,days before death/censor,mortality_target
+GSM1932967,lung squamous cell carcinoma,3,1b,0,0,IA,Male,57,Ever,56,not relapsed,3156,alive,3156,0
+GSM1932968,lung squamous cell carcinoma,6,2b,1,NA,IIB,Male,69,Current,52,relapsed,564,dead,754,1
+GSM1932969,lung squamous cell carcinoma,0.9,1a,1,0,IIA,Male,59,Current,38,not relapsed,1402,alive,1402,0
+GSM1932970,lung squamous cell carcinoma,2.5,3,0,0,IIB,Male,60,Current,44,not relapsed,1362,dead,1489,1
+GSM1932971,lung squamous cell carcinoma,4,2a,1,0,IIA,Female,66,Current,35,relapsed,1991,dead,2008,1
+GSM1932972,lung squamous cell carcinoma,3.3,2a,0,0,IB,Male,60,Current,100,not relapsed,3254,alive,3254,0
+GSM1932973,lung squamous cell carcinoma,3.5,2a,0,0,IB,Male,57,Ever,111,not relapsed,2043,alive,2043,0
+GSM1932974,lung squamous cell carcinoma,3.5,3,0,0,IIB,Male,67,Ever,23,relapsed,2419,dead,2585,1
+GSM1932975,lung squamous cell carcinoma,3.3,2a,0,0,IB,Male,65,Current,59,not relapsed,2018,alive,2018,0
+GSM1932976,lung squamous cell carcinoma,2.5,1b,0,0,IA,Male,63,Ever,45,not relapsed,4714,alive,4714,0
+GSM1932977,lung squamous cell carcinoma,2.8,2a,0,0,IB,Male,66,Ever,35,not relapsed,4250,alive,4250,0
+GSM1932978,lung squamous cell carcinoma,11,3,0,0,IIB,Male,63,Current,43,relapsed,315,dead,981,1
+GSM1932979,lung squamous cell carcinoma,6.5,2b,0,0,IIA,Male,67,Ever,32,not relapsed,3102,alive,3233,0
+GSM1932980,lung squamous cell carcinoma,8,3,0,0,IIB,Male,69,Ever,45,not relapsed,4110,alive,4110,0
+GSM1932981,lung squamous cell carcinoma,2.6,3,0,0,IIB,Male,54,Current,36,not relapsed,3807,alive,3807,0
+GSM1932982,lung squamous cell carcinoma,3.2,2a,0,0,IB,Female,75,Ever,24,not relapsed,2498,alive,2498,0
+GSM1932983,lung squamous cell carcinoma,2.8,2a,0,0,IB,Male,82,Ever,30,not relapsed,914,dead,914,1
+GSM1932984,lung squamous cell carcinoma,4.5,2a,0,0,IB,Male,67,Current,49,not relapsed,4169,alive,4169,0
+GSM1932985,lung squamous cell carcinoma,4.5,2a,1,0,IIA,Female,65,Ever,35,not relapsed,3587,alive,3587,0
+GSM1932986,lung squamous cell carcinoma,7,3,0,0,IIB,Male,64,Current,42,not relapsed,2876,alive,3724,0
+GSM1932987,lung squamous cell carcinoma,5,2a,1,0,IIA,Male,69,Ever,38,not relapsed,3725,alive,3725,0
+GSM1932988,lung squamous cell carcinoma,4,2a,1,0,IIA,Male,58,Ever,36,not relapsed,3621,alive,3621,0
+GSM1932989,lung squamous cell carcinoma,3.5,2a,1,0,IIA,Male,54,Current,34,not relapsed,3940,alive,3940,0
+GSM1932990,lung squamous cell carcinoma,3.3,2a,0,0,IB,Male,67,Ever,48,relapsed,2605,dead,2687,1
+GSM1932991,lung squamous cell carcinoma,2.2,1b,0,0,IA,Male,61,Ever,100,not relapsed,3391,alive,3391,0
+GSM1932992,lung squamous cell carcinoma,7.4,3,0,0,IIB,Female,52,Current,36,not relapsed,2463,alive,3862,0
+GSM1932993,lung squamous cell carcinoma,1.8,2a,0,0,IB,Male,62,Current,32,not relapsed,1889,alive,1889,0
+GSM1932994,lung squamous cell carcinoma,6.1,2b,1,0,IIB,Male,60,Current,41,not relapsed,3707,alive,3707,0
+GSM1932995,lung squamous cell carcinoma,5,2a,0,0,IB,Male,71,Current,84,not relapsed,1665,dead,1931,1
+GSM1932996,lung squamous cell carcinoma,5.4,2b,0,0,IIA,Male,65,Ever,42,relapsed,638,dead,947,1
+GSM1932997,lung squamous cell carcinoma,4.1,2a,0,0,IB,Male,62,Ever,62,relapsed,587,dead,1397,1
+GSM1932998,lung squamous cell carcinoma,6.4,2b,1,0,IIB,Male,58,Current,40,not relapsed,1889,dead,1889,1
+GSM1932999,lung squamous cell carcinoma,1.3,1a,NA,0,IA,Male,67,Ever,66,not relapsed,3191,alive,3191,0
+GSM1933000,lung squamous cell carcinoma,2.6,2a,0,0,IB,Male,59,Current,35,relapsed,760,dead,1245,1
+GSM1933001,lung squamous cell carcinoma,4,2a,1,0,IIA,Male,67,Current,50,not relapsed,1217,dead,1551,1
+GSM1933002,lung squamous cell carcinoma,6.7,2b,0,0,IIA,Male,69,Ever,42,relapsed,1493,dead,1717,1
+GSM1933003,lung squamous cell carcinoma,3.6,2a,0,0,IB,Male,68,Ever,47,not relapsed,1345,dead,1531,1
+GSM1933004,lung squamous cell carcinoma,2.2,2a,0,0,IB,Male,62,Ever,74,relapsed,349,dead,554,1
+GSM1933005,lung squamous cell carcinoma,1.5,1a,0,0,IA,Male,52,Ever,30,not relapsed,2829,alive,2829,0
+GSM1933006,lung squamous cell carcinoma,3.9,3,0,0,IIB,Male,64,Ever,40,not relapsed,3042,alive,3042,0
+GSM1933007,lung squamous cell carcinoma,7,2b,1,0,IIB,Male,63,Current,44,relapsed,174,dead,399,1
+GSM1933008,lung squamous cell carcinoma,3.8,2a,1,0,IIA,Male,64,Ever,25,not relapsed,1961,alive,1961,0
+GSM1933009,lung squamous cell carcinoma,3.8,2a,0,0,IB,Male,67,Current,71,not relapsed,951,dead,1897,1
+GSM1933010,lung squamous cell carcinoma,10,3,0,0,IIB,Male,53,Current,33,not relapsed,2080,alive,2080,0
+GSM1933011,lung squamous cell carcinoma,2.7,2a,0,0,IB,Male,67,Current,74,relapsed,463,dead,1264,1
+GSM1933012,lung squamous cell carcinoma,5,2a,1,0,IIA,Male,55,Current,35,not relapsed,1896,alive,1896,0
+GSM1933013,lung squamous cell carcinoma,3.8,3,0,0,IIB,Male,64,Ever,39,not relapsed,3083,alive,3083,0
+GSM1933014,lung squamous cell carcinoma,4.2,2a,1,0,IIA,Male,65,Ever,47,not relapsed,3095,alive,3095,0
+GSM1933015,lung squamous cell carcinoma,1.6,2a,0,0,IB,Male,64,Ever,35,not relapsed,1776,alive,1776,0
+GSM1933016,lung squamous cell carcinoma,3.5,2a,0,0,IB,Male,69,Ever,40,relapsed,367,dead,497,1
+GSM1933017,lung squamous cell carcinoma,4.5,2a,1,0,IIA,Male,59,Current,39,not relapsed,2605,alive,2605,0
+GSM1933018,lung squamous cell carcinoma,3.6,2a,0,0,IB,Male,69,Ever,28,not relapsed,920,alive,920,0
+GSM1933019,lung squamous cell carcinoma,5,2a,0,0,IB,Male,66,Current,41,relapsed,126,alive,126,0
+GSM1933020,lung squamous cell carcinoma,2.5,1b,0,0,IA,Male,62,Ever,41,not relapsed,1454,dead,2164,1
+GSM1933021,lung squamous cell carcinoma,2,1a,0,0,IA,Male,66,Ever,60,not relapsed,2605,alive,2605,0
+GSM1933022,lung squamous cell carcinoma,2,1a,0,0,IA,Male,68,Ever,44,not relapsed,1419,alive,1419,0
+GSM1933023,lung squamous cell carcinoma,4.2,2a,0,0,IB,Male,67,Ever,80,not relapsed,2131,alive,2131,0
+GSM1933024,lung squamous cell carcinoma,1.7,1a,0,0,IA,Male,59,Current,39,not relapsed,2158,alive,2158,0
+GSM1933025,lung squamous cell carcinoma,6.5,2b,1,0,IIB,Male,63,Current,43,not relapsed,1310,alive,1310,0
+GSM1933026,lung squamous cell carcinoma,3.2,2a,1,0,IIA,Female,67,Never,0,not relapsed,2241,alive,2241,0
+GSM1933027,lung squamous cell carcinoma,2,1a,0,0,IA,Female,62,Current,27,not relapsed,2280,alive,2280,0
+GSM1933028,lung squamous cell carcinoma,6.5,3,0,0,IIB,Male,72,Current,47,relapsed,433,dead,1156,1
+GSM1933029,lung squamous cell carcinoma,5.6,2b,0,0,IIA,Male,68,Current,51,not relapsed,2241,alive,2241,0
+GSM1933030,lung squamous cell carcinoma,4.7,2a,0,0,IB,Male,67,Current,47,not relapsed,2378,alive,2378,0
+GSM1933031,lung squamous cell carcinoma,5.4,3,0,0,IIB,Male,52,Current,33,relapsed,415,alive,2422,0
+GSM1933032,lung squamous cell carcinoma,6.3,2b,1,0,IIB,Male,67,Ever,45,not relapsed,2190,alive,2190,0
+GSM1933033,lung squamous cell carcinoma,2.6,2a,0,0,IB,Male,56,Ever,72,not relapsed,2033,alive,2033,0
+GSM1933034,lung squamous cell carcinoma,2.7,1b,0,0,IA,Female,56,Current,60,not relapsed,1973,alive,1973,0
+GSM1933035,lung squamous cell carcinoma,2.8,1b,0,0,IA,Male,69,Ever,130,relapsed,728,alive,1309,0
+GSM1933036,lung squamous cell carcinoma,4.5,2a,1,0,IIA,Male,61,Current,41,not relapsed,1817,alive,1817,0
+GSM1933037,lung squamous cell carcinoma,5.5,2b,1,0,IIB,Male,66,Current,46,relapsed,377,dead,718,1
+GSM1933038,lung squamous cell carcinoma,6,2b,1,0,IIB,Male,78,Current,60,relapsed,828,dead,912,1
+GSM1933039,lung squamous cell carcinoma,4.5,2a,1,0,IIA,Female,72,Ever,20,not relapsed,2536,alive,5028,0
+GSM1933040,lung squamous cell carcinoma,3.7,2a,1,0,IIA,Male,58,Ever,34,not relapsed,1049,dead,1049,1
+GSM1933041,lung squamous cell carcinoma,2.5,1b,0,0,IA,Male,83,Ever,42,relapsed,3007,alive,3185,0
+GSM1933042,lung squamous cell carcinoma,3,1b,0,0,IA,Male,66,Current,92,not relapsed,4507,dead,4615,1
+GSM1933043,lung squamous cell carcinoma,3,1b,0,0,IA,Male,74,Current,43,not relapsed,2716,alive,3195,0
+GSM1933044,lung squamous cell carcinoma,6,3,0,0,IIB,Male,78,Ever,20,relapsed,163,dead,248,1
+GSM1933045,lung squamous cell carcinoma,5,2a,0,0,IB,Female,73,Never,0,not relapsed,3588,alive,3588,0
+GSM1933046,lung squamous cell carcinoma,5,3,0,0,IIB,Male,70,Ever,47,relapsed,1994,dead,3031,1
+GSM1933047,lung squamous cell carcinoma,3.5,2a,1,0,IIA,Male,56,Current,36,relapsed,475,dead,965,1
+GSM1933048,lung squamous cell carcinoma,5,2a,0,0,IB,Male,64,Current,161,not relapsed,2192,dead,2903,1
+GSM1933049,lung squamous cell carcinoma,3,1b,1,0,IIA,Male,59,Current,39,not relapsed,1983,alive,1983,0
+GSM1933050,lung squamous cell carcinoma,3.2,2a,0,0,IB,Male,70,Ever,38,not relapsed,782,alive,782,0
+GSM1933051,lung squamous cell carcinoma,7,3,0,0,IIB,Male,69,Never,0,not relapsed,2919,alive,2919,0
+GSM1933052,lung squamous cell carcinoma,4,2a,0,0,IB,Male,60,Current,53,not relapsed,2922,dead,3087,1
+GSM1933053,lung squamous cell carcinoma,3.5,2a,1,0,IIA,Female,72,Ever,52,not relapsed,1778,dead,3848,1
+GSM1933054,lung squamous cell carcinoma,4.5,2a,0,0,IB,Male,62,Current,28,not relapsed,792,dead,1706,1
+GSM1933055,lung squamous cell carcinoma,1.8,1a,0,0,IA,Male,66,Ever,60,not relapsed,3148,alive,3148,0
+GSM1933056,lung squamous cell carcinoma,7,2b,1,0,IIB,Male,64,Current,44,not relapsed,2010,alive,2010,0
+GSM1933057,lung squamous cell carcinoma,1.8,1a,0,0,IA,Female,72,Current,21,not relapsed,2293,alive,2293,0
+GSM1933058,lung squamous cell carcinoma,3.2,2a,1,0,IIA,Male,61,Current,45,relapsed,687,dead,832,1
+GSM1933059,lung squamous cell carcinoma,3.1,2a,0,0,IB,Male,77,Current,52,not relapsed,2969,alive,2969,0
+GSM1933060,lung squamous cell carcinoma,6.5,3,0,0,IIB,Male,49,Current,29,not relapsed,822,dead,1428,1
+GSM1933061,lung squamous cell carcinoma,2.8,1b,NA,0,IA,Male,73,Current,89,not relapsed,1715,dead,1787,1
+GSM1933062,lung squamous cell carcinoma,3.5,2a,1,0,IIA,Male,56,Current,33,not relapsed,4649,alive,4649,0
+GSM1933063,lung squamous cell carcinoma,5,2a,0,0,IB,Male,60,Ever,36,not relapsed,2671,alive,2671,0
+GSM1933064,lung squamous cell carcinoma,4.8,2a,1,0,IIA,Male,61,Ever,21,relapsed,265,dead,491,1
+GSM1933065,lung squamous cell carcinoma,2.3,1b,1,0,IIA,Male,66,Ever,39,not relapsed,4127,alive,4127,0
+GSM1933066,lung squamous cell carcinoma,2,1a,0,0,IA,Male,50,Current,64,not relapsed,2368,alive,2368,0
+GSM1933067,lung squamous cell carcinoma,2.8,1b,0,0,IA,Male,75,Ever,52,relapsed,1758,dead,1842,1
+GSM1933068,lung squamous cell carcinoma,5,2a,1,0,IIA,Male,52,Ever,29,relapsed,123,dead,357,1
+GSM1933069,lung squamous cell carcinoma,1.9,1a,0,0,IA,Male,65,Ever,27,not relapsed,4640,alive,4640,0
+GSM1933070,lung squamous cell carcinoma,2,1a,0,0,IA,Male,67,Current,47,not relapsed,1836,dead,4075,1
+GSM1933071,lung squamous cell carcinoma,3.9,2a,0,0,IB,Male,70,Current,77,not relapsed,2543,dead,3038,1
+GSM1933072,lung squamous cell carcinoma,2.2,2a,1,0,IIA,Male,63,Current,43,relapsed,232,dead,274,1
+GSM1933073,lung squamous cell carcinoma,3,1b,0,0,IA,Male,80,Ever,50,not relapsed,2821,alive,2821,0
